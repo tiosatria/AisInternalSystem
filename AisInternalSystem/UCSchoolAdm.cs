@@ -3770,6 +3770,16 @@ WHERE medicalofstud = @medicalofstud;
 
         private void guna2Button5_Click(object sender, EventArgs e)
         {
+            bool stat = panelExportOptionStud.Visible;
+            switch (stat)
+            {
+                case true:
+                    panelExportOptionStud.Visible = false;
+                    break;
+                case false:
+                    panelExportOptionStud.Visible = true;
+                    break;
+            }
             //Future Function
             msg.Alert("This will be available soon :)", frmAlert.AlertType.Info);
         }

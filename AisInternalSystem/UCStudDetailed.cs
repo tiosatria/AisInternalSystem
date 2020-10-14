@@ -27,13 +27,13 @@ namespace AisInternalSystem
 
         public void FillRelationshipPanelData()
         {
-            
+
         }
 
         public UCStudDetailed()
         {
             InitializeComponent();
-
+            UIState(UIStateStudDetailed.Relationship);
         }
 
         public void LoadStudentData(int i)
@@ -99,13 +99,13 @@ namespace AisInternalSystem
                 MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(cmd);
                 DataTable dataTable = new DataTable();
                 mySqlDataAdapter.Fill(dataTable);
-                if(dataTable.Rows.Count > 1)
+                if (dataTable.Rows.Count > 1)
                 {
                     flowRelationshipPanel.Controls.Clear();
                     PanelMSqlCommand[] panelRelatUC = new PanelMSqlCommand[dataTable.Rows.Count];
                     flowRelationshipPanel.Visible = true;
                     NA.Hide();
-                    for(i = 0; i < dataTable.Rows.Count; i++)
+                    for (i = 0; i < dataTable.Rows.Count; i++)
                     {
                         panelRelatUC[i] = new PanelMSqlCommand();
                         var _title = dataTable.Rows[i][2];
@@ -149,36 +149,352 @@ namespace AisInternalSystem
         public enum UIStateStudDetailed
         {
             Student,
-            Relationship1,
-            Relationship2,
-            Relationship3,
-            Sibling,
-            SchoolInfo,
+            Academic,
+            Personal,
+            Relationship,
             MedicalInfo,
             Documents
         }
+
+        public enum UIStateAcademic
+        {
+            General,
+            ClassHistory,
+            Grade,
+            PreviousSchool
+        };
+
+        public enum UIStatePersonal
+        {
+            General, Contact
+        }
+
+        public enum UIStateRelationship
+        {
+            Mainmenu, General,
+            Contact
+        };
+
+        private UIStateAcademic _StateAcademic;
         private UIStateStudDetailed _StudState;
+        private UIStatePersonal _uIStatePersonal;
+        private UIStateRelationship _StateRelationship;
+
+        public void RelationshipSwitcher(UIStateRelationship _state)
+        {
+            _StateRelationship = _state;
+            switch (_StateRelationship)
+            {
+                case UIStateRelationship.Mainmenu:
+                    BtnRelationshipContact.Visible = false;
+                    BtnRelationshipGeneral.Visible = false;
+                    PanelStudRelationship.BringToFront();
+                    break;
+                case UIStateRelationship.General:
+                    BtnRelationshipContact.Visible = true;
+                    BtnRelationshipGeneral.Visible = true;
+                    BtnRelationshipContact.FillColor = Color.LightCoral;
+                    BtnRelationshipContact.ForeColor = Color.Black;
+                    BtnRelationshipGeneral.FillColor = Color.Red;
+                    BtnRelationshipGeneral.ForeColor = Color.White;
+                    PanelStudentRelationship.BringToFront();
+                    break;
+                case UIStateRelationship.Contact:
+                    BtnRelationshipContact.Visible = true;
+                    BtnRelationshipGeneral.Visible = true;
+                    BtnRelationshipContact.FillColor = Color.Red;
+                    BtnRelationshipContact.ForeColor = Color.White;
+                    BtnRelationshipGeneral.FillColor = Color.LightCoral;
+                    BtnRelationshipGeneral.ForeColor = Color.Black;
+                    PanelRelationshipContact.BringToFront();
+                    break;
+                default:
+                    BtnRelationshipContact.Visible = false;
+                    BtnRelationshipGeneral.Visible = false;
+                    PanelStudRelationship.BringToFront();
+                    break;
+            }
+        }
+
+        public void PersonalSwitcher(UIStatePersonal _state)
+        {
+            _uIStatePersonal = _state;
+            switch (_uIStatePersonal)
+            {
+                case UIStatePersonal.General:
+                    PanelStudentPersonalInformation.BringToFront();
+                    btnStudPersonalContact.FillColor = Color.Red;
+                    btnStudPersonalContact.ForeColor = Color.White;
+                    btnStudPersonalContactt.FillColor = Color.LightCoral;
+                    btnStudPersonalContactt.ForeColor = Color.Black;
+                    break;
+                case UIStatePersonal.Contact:
+                    PanelStudentContactinformation.BringToFront();
+                    btnStudPersonalContact.FillColor = Color.LightCoral;
+                    btnStudPersonalContact.ForeColor = Color.Black;
+                    btnStudPersonalContactt.FillColor = Color.Red;
+                    btnStudPersonalContactt.ForeColor = Color.White;
+                    break;
+                default:
+                    PanelStudentPersonalInformation.BringToFront();
+                    btnStudPersonalContact.FillColor = Color.Red;
+                    btnStudPersonalContact.ForeColor = Color.White;
+                    btnStudPersonalContactt.FillColor = Color.LightCoral;
+                    btnStudPersonalContactt.ForeColor = Color.Black;
+                    break;
+            }
+        }
+
+        public void AcademicSwitcher(UIStateAcademic _state)
+        {
+            _StateAcademic = _state;
+            switch (_StateAcademic)
+            {
+                case UIStateAcademic.General:
+                    PanelAcademicGeneral.BringToFront();
+                    AcademicButtonSwitcher(BtnAcademicGeneral);
+                    break;
+                case UIStateAcademic.ClassHistory:
+                    PanelAcademicClassHistory.BringToFront();
+                    AcademicButtonSwitcher(BtnAcademicClassHistory);
+                    break;
+                case UIStateAcademic.Grade:
+                    PanelAcademicStudentGrade.BringToFront();
+                    AcademicButtonSwitcher(BtnAcademicGrade);
+                    break;
+                case UIStateAcademic.PreviousSchool:
+                    PanelPreviousSchool.BringToFront();
+                    AcademicButtonSwitcher(BtnAcademicPrevSchool);
+                    break;
+            }
+        }
+
+        private void AcademicButtonSwitcher(Guna2Button button)
+        {
+            BtnAcademicGeneral.ForeColor = Color.Black;
+            BtnAcademicGeneral.FillColor = Color.LightCoral;
+            BtnAcademicClassHistory.FillColor = Color.LightCoral;
+            BtnAcademicClassHistory.ForeColor = Color.Black;
+            BtnAcademicGrade.FillColor = Color.LightCoral;
+            BtnAcademicGrade.ForeColor = Color.Black;
+            BtnAcademicPrevSchool.FillColor = Color.LightCoral;
+            BtnAcademicPrevSchool.ForeColor = Color.Black;
+            button.FillColor = Color.Red;
+            button.ForeColor = Color.White;
+        }
 
         public void UIState(UIStateStudDetailed state)
         {
             _StudState = state;
             switch (_StudState)
             {
-                
+                case UIStateStudDetailed.Academic:
+                    switch (_StateAcademic)
+                    {
+                        case UIStateAcademic.General:
+                            PanelAcademicGeneral.BringToFront();
+                            AcademicButtonSwitcher(BtnAcademicGeneral);
+                            break;
+                        case UIStateAcademic.ClassHistory:
+                            PanelAcademicClassHistory.BringToFront();
+                            AcademicButtonSwitcher(BtnAcademicClassHistory);
+                            break;
+                        case UIStateAcademic.Grade:
+                            PanelAcademicStudentGrade.BringToFront();
+                            AcademicButtonSwitcher(BtnAcademicGrade);
+                            break;
+                        case UIStateAcademic.PreviousSchool:
+                            PanelPreviousSchool.BringToFront();
+                            AcademicButtonSwitcher(BtnAcademicPrevSchool);
+                            break;
+                        default:
+                            PanelAcademicGeneral.BringToFront();
+                            AcademicButtonSwitcher(BtnAcademicGeneral);
+                            break;
+                    }
+                    FocusedButton(btnAcademic);
+                    ShowButton();
+                    break;
+                case UIStateStudDetailed.Personal:
+                    switch (_uIStatePersonal)
+                    {
+                        case UIStatePersonal.General:
+                            PanelStudentPersonalInformation.BringToFront();
+                            btnStudPersonalContact.FillColor = Color.Red;
+                            btnStudPersonalContact.ForeColor = Color.White;
+                            btnStudPersonalContactt.FillColor = Color.LightCoral;
+                            btnStudPersonalContactt.ForeColor = Color.Black;
+                            break;
+                        case UIStatePersonal.Contact:
+                            PanelStudentContactinformation.BringToFront();
+                            btnStudPersonalContact.FillColor = Color.LightCoral;
+                            btnStudPersonalContact.ForeColor = Color.Black;
+                            btnStudPersonalContactt.FillColor = Color.Red;
+                            btnStudPersonalContactt.ForeColor = Color.White;
+                            break;
+                        default:
+                            PanelStudentPersonalInformation.BringToFront();
+                            btnStudPersonalContact.FillColor = Color.Red;
+                            btnStudPersonalContact.ForeColor = Color.White;
+                            btnStudPersonalContactt.FillColor = Color.LightCoral;
+                            btnStudPersonalContactt.ForeColor = Color.Black;
+                            break;
+                    }
+                    FocusedButton(btnPersonal);
+                    ShowButton();
+                    break;
+                case UIStateStudDetailed.Relationship:
+                    ShowButton();
+                    FocusedButton(btnRelationship);
+                    switch (_StateRelationship)
+                    {
+                        case UIStateRelationship.Mainmenu:
+                            BtnRelationshipContact.Visible = false;
+                            BtnRelationshipGeneral.Visible = false;
+                            PanelStudRelationship.BringToFront();
+                            break;
+                        case UIStateRelationship.General:
+                            BtnRelationshipContact.Visible = true;
+                            BtnRelationshipGeneral.Visible = true;
+                            BtnRelationshipContact.FillColor = Color.LightCoral;
+                            BtnRelationshipContact.ForeColor = Color.Black;
+                            BtnRelationshipGeneral.FillColor = Color.Red;
+                            BtnRelationshipGeneral.ForeColor = Color.White;
+                            PanelStudentRelationship.BringToFront();
+                            break;
+                        case UIStateRelationship.Contact:
+                            BtnRelationshipContact.Visible = true;
+                            BtnRelationshipGeneral.Visible = true;
+                            BtnRelationshipContact.FillColor = Color.Red;
+                            BtnRelationshipContact.ForeColor = Color.White;
+                            BtnRelationshipGeneral.FillColor = Color.LightCoral;
+                            BtnRelationshipGeneral.ForeColor = Color.Black;
+                            PanelRelationshipContact.BringToFront();
+                            break;
+                        default:
+                            BtnRelationshipContact.Visible = false;
+                            BtnRelationshipGeneral.Visible = false;
+                            PanelStudRelationship.BringToFront();
+                            break;
+                    }
+                    break;
+                case UIStateStudDetailed.MedicalInfo:
+                    ShowButton();
+                    FocusedButton(btnMedical);
+                    PanelStudentMedicalInformation.BringToFront();
+                    break;
+                case UIStateStudDetailed.Documents:
+                    ShowButton();
+                    FocusedButton(btnDocs);
+                    PanelStudentDocuments.BringToFront();
+                    break;
+
+                default:
+                    ShowButton();
+                    FocusedButton(btnRelationship);
+                    switch (_StateRelationship)
+                    {
+                        case UIStateRelationship.Mainmenu:
+                            BtnRelationshipContact.Visible = false;
+                            BtnRelationshipGeneral.Visible = false;
+                            PanelStudRelationship.BringToFront();
+                            break;
+                        case UIStateRelationship.General:
+                            BtnRelationshipContact.Visible = true;
+                            BtnRelationshipGeneral.Visible = true;
+                            BtnRelationshipContact.FillColor = Color.LightCoral;
+                            BtnRelationshipContact.ForeColor = Color.Black;
+                            BtnRelationshipGeneral.FillColor = Color.Red;
+                            BtnRelationshipGeneral.ForeColor = Color.White;
+                            PanelStudentRelationship.BringToFront();
+                            break;
+                        case UIStateRelationship.Contact:
+                            BtnRelationshipContact.Visible = true;
+                            BtnRelationshipGeneral.Visible = true;
+                            BtnRelationshipContact.FillColor = Color.Red;
+                            BtnRelationshipContact.ForeColor = Color.White;
+                            BtnRelationshipGeneral.FillColor = Color.LightCoral;
+                            BtnRelationshipGeneral.ForeColor = Color.Black;
+                            PanelRelationshipContact.BringToFront();
+                            break;
+                        default:
+                            BtnRelationshipContact.Visible = false;
+                            BtnRelationshipGeneral.Visible = false;
+                            PanelStudRelationship.BringToFront();
+                            break;
+                    }
+                    break;
             }
         } 
+
+        void ShowButton()
+        {
+            switch (_StudState)
+            {
+                case UIStateStudDetailed.Academic:
+                    BtnAcademicClassHistory.Visible = true;
+                    BtnAcademicGeneral.Visible = true;
+                    BtnAcademicGrade.Visible = true;
+                    BtnAcademicPrevSchool.Visible = true;
+                    BtnRelationshipContact.Visible = false;
+                    BtnRelationshipGeneral.Visible = false;
+                    btnStudPersonalContact.Visible = false;
+                    btnStudPersonalContactt.Visible = false;
+                    break;
+                case UIStateStudDetailed.Personal:
+                    BtnAcademicClassHistory.Visible = false;
+                    BtnAcademicGeneral.Visible = false;
+                    BtnAcademicGrade.Visible = false;
+                    BtnAcademicPrevSchool.Visible = false;
+                    BtnRelationshipContact.Visible = false;
+                    BtnRelationshipGeneral.Visible = false;
+                    btnStudPersonalContact.Visible = true;
+                    btnStudPersonalContactt.Visible = true;
+                    break;
+                case UIStateStudDetailed.Relationship:
+                    BtnAcademicClassHistory.Visible = false;
+                    BtnAcademicGeneral.Visible = false;
+                    BtnAcademicGrade.Visible = false;
+                    BtnAcademicPrevSchool.Visible = false;
+                    BtnRelationshipContact.Visible = true;
+                    BtnRelationshipGeneral.Visible = true;
+                    btnStudPersonalContact.Visible = false;
+                    btnStudPersonalContactt.Visible = false;
+                    break;
+                case UIStateStudDetailed.MedicalInfo:
+                    BtnAcademicClassHistory.Visible = false;
+                    BtnAcademicGeneral.Visible = false;
+                    BtnAcademicGrade.Visible = false;
+                    BtnAcademicPrevSchool.Visible = false;
+                    BtnRelationshipContact.Visible = false;
+                    BtnRelationshipGeneral.Visible = false;
+                    btnStudPersonalContact.Visible = false;
+                    btnStudPersonalContactt.Visible = false;
+                    break;
+                case UIStateStudDetailed.Documents:
+                    BtnAcademicClassHistory.Visible = false;
+                    BtnAcademicGeneral.Visible = false;
+                    BtnAcademicGrade.Visible = false;
+                    BtnAcademicPrevSchool.Visible = false;
+                    BtnRelationshipContact.Visible = false;
+                    BtnRelationshipGeneral.Visible = false;
+                    btnStudPersonalContact.Visible = false;
+                    btnStudPersonalContactt.Visible = false;
+                    break;
+            }
+        }
 
         void FocusedButton(Guna2Button btn)
         {
             //set all button to not focus
-            btnRoles.FillColor = Color.LightGray;
-            btnRoles.ForeColor = Color.Black;
+            btnAcademic.FillColor = Color.LightGray;
+            btnAcademic.ForeColor = Color.Black;
             btnPersonal.FillColor = Color.LightGray;
             btnPersonal.ForeColor = Color.Black;
             btnRelationship.FillColor = Color.LightGray;
             btnRelationship.ForeColor = Color.Black;
-            btnEducation.FillColor = Color.LightGray;
-            btnEducation.ForeColor = Color.Black;
+            btnMedical.FillColor = Color.LightGray;
+            btnMedical.ForeColor = Color.Black;
             btnDocs.FillColor = Color.LightGray;
             btnDocs.ForeColor = Color.Black;
 
@@ -189,27 +505,27 @@ namespace AisInternalSystem
 
         private void btnRoles_Click(object sender, EventArgs e)
         {
-            //UIState(UIStateEmployeeDetailed.Role);
+            UIState(UIStateStudDetailed.Academic);
         }
 
         private void btnPersonal_Click(object sender, EventArgs e)
         {
-            //UIState(UIStateEmployeeDetailed.Personal);
+            UIState(UIStateStudDetailed.Personal);
         }
 
         private void btnRelationship_Click(object sender, EventArgs e)
         {
-            //UIState(UIStateEmployeeDetailed.Relationship);
+            UIState(UIStateStudDetailed.Relationship);
         }
 
         private void btnEducation_Click(object sender, EventArgs e)
         {
-            //UIState(UIStateEmployeeDetailed.Education);
+            UIState(UIStateStudDetailed.MedicalInfo);
         }
 
         private void btnDocs_Click(object sender, EventArgs e)
         {
-            //UIState(UIStateEmployeeDetailed.Documents);
+            UIState(UIStateStudDetailed.Documents);
         }
 
         private void btnBackEmpDir_Click(object sender, EventArgs e)
@@ -220,6 +536,46 @@ namespace AisInternalSystem
         private void UCEmployeeDetailed_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void BtnAcademicGeneral_Click(object sender, EventArgs e)
+        {
+            AcademicSwitcher(UIStateAcademic.General);
+        }
+
+        private void BtnAcademicPrevSchool_Click(object sender, EventArgs e)
+        {
+            AcademicSwitcher(UIStateAcademic.PreviousSchool);
+        }
+
+        private void BtnAcademicGrade_Click(object sender, EventArgs e)
+        {
+            AcademicSwitcher(UIStateAcademic.Grade);
+        }
+
+        private void BtnAcademicClassHistory_Click(object sender, EventArgs e)
+        {
+            AcademicSwitcher(UIStateAcademic.ClassHistory);
+        }
+
+        private void btnStudPersonalContact_Click(object sender, EventArgs e)
+        {
+            PersonalSwitcher(UIStatePersonal.General);
+        }
+
+        private void btnStudPersonalContactt_Click(object sender, EventArgs e)
+        {
+            PersonalSwitcher(UIStatePersonal.Contact);
+        }
+
+        private void BtnRelationshipContact_Click(object sender, EventArgs e)
+        {
+            RelationshipSwitcher(UIStateRelationship.Contact);
+        }
+
+        private void BtnRelationshipGeneral_Click(object sender, EventArgs e)
+        {
+            RelationshipSwitcher(UIStateRelationship.General);
         }
     }
 }

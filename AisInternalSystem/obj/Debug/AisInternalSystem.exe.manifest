@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AisInternalSystem.exe" size="2365872">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AisInternalSystem.exe" size="2372528">
       <assemblyIdentity name="AisInternalSystem" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>S4qXlGNsionvhyjcujk+hfRWT0IvTfHzKmrVP/4L/vs=</dsig:DigestValue>
+        <dsig:DigestValue>lUc9ZBs7bN72IromEp/pS/gYDG2thbnsqnJCdw/fV2Y=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

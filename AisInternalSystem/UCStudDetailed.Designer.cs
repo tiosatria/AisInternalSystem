@@ -37,6 +37,7 @@
             this.label66 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSTUDIDBRIEF = new Guna.UI2.WinForms.Guna2TextBox();
+            this.studBriefPic = new System.Windows.Forms.PictureBox();
             this.txtSDCertificateName = new Guna.UI2.WinForms.Guna2TextBox();
             this.label72 = new System.Windows.Forms.Label();
             this.label132 = new System.Windows.Forms.Label();
@@ -44,10 +45,10 @@
             this.txtFatherContact = new Guna.UI2.WinForms.Guna2TextBox();
             this.label131 = new System.Windows.Forms.Label();
             this.txtBriefNationality = new Guna.UI2.WinForms.Guna2TextBox();
-            this.btnRoles = new Guna.UI2.WinForms.Guna2Button();
+            this.btnAcademic = new Guna.UI2.WinForms.Guna2Button();
             this.btnPersonal = new Guna.UI2.WinForms.Guna2Button();
             this.btnRelationship = new Guna.UI2.WinForms.Guna2Button();
-            this.btnEducation = new Guna.UI2.WinForms.Guna2Button();
+            this.btnMedical = new Guna.UI2.WinForms.Guna2Button();
             this.PanelAcademicGeneral = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.txtACurrClass = new Guna.UI2.WinForms.Guna2TextBox();
             this.label77 = new System.Windows.Forms.Label();
@@ -131,6 +132,7 @@
             this.PanelAcademicClassHistory = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.label83 = new System.Windows.Forms.Label();
             this.PanelStudentRelationship = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.picRPhoto = new System.Windows.Forms.PictureBox();
             this.txtRAusAbor = new Guna.UI2.WinForms.Guna2TextBox();
             this.label92 = new System.Windows.Forms.Label();
             this.txtrAusRes = new Guna.UI2.WinForms.Guna2TextBox();
@@ -209,24 +211,22 @@
             this.PanelStudentDocuments = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.FlowPanelDocumentStudent = new System.Windows.Forms.FlowLayoutPanel();
             this.label112 = new System.Windows.Forms.Label();
-            this.studBriefPic = new System.Windows.Forms.PictureBox();
-            this.picRPhoto = new System.Windows.Forms.PictureBox();
             this.panelNotAvailable1 = new AisInternalSystem.PanelNotAvailable();
             this.panelNotAvailable3 = new AisInternalSystem.PanelNotAvailable();
             this.guna2ShadowPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.studBriefPic)).BeginInit();
             this.PanelAcademicGeneral.SuspendLayout();
             this.PanelStudentPersonalInformation.SuspendLayout();
             this.PanelStudentContactinformation.SuspendLayout();
             this.PanelAcademicClassHistory.SuspendLayout();
             this.PanelStudentRelationship.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picRPhoto)).BeginInit();
             this.PanelAcademicStudentGrade.SuspendLayout();
             this.PanelPreviousSchool.SuspendLayout();
             this.PanelStudRelationship.SuspendLayout();
             this.PanelRelationshipContact.SuspendLayout();
             this.PanelStudentMedicalInformation.SuspendLayout();
             this.PanelStudentDocuments.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.studBriefPic)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picRPhoto)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBackEmpDir
@@ -405,6 +405,16 @@
             this.txtSTUDIDBRIEF.TabIndex = 83;
             this.txtSTUDIDBRIEF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // studBriefPic
+            // 
+            this.studBriefPic.Image = global::AisInternalSystem.Properties.Resources.icons8_male_user_100;
+            this.studBriefPic.Location = new System.Drawing.Point(103, 12);
+            this.studBriefPic.Name = "studBriefPic";
+            this.studBriefPic.Size = new System.Drawing.Size(154, 161);
+            this.studBriefPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.studBriefPic.TabIndex = 63;
+            this.studBriefPic.TabStop = false;
+            // 
             // txtSDCertificateName
             // 
             this.txtSDCertificateName.Animated = true;
@@ -549,25 +559,25 @@
             this.txtBriefNationality.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             this.txtBriefNationality.TabIndex = 69;
             // 
-            // btnRoles
+            // btnAcademic
             // 
-            this.btnRoles.Animated = true;
-            this.btnRoles.BorderRadius = 6;
-            this.btnRoles.CheckedState.Parent = this.btnRoles;
-            this.btnRoles.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRoles.CustomImages.Parent = this.btnRoles;
-            this.btnRoles.FillColor = System.Drawing.Color.LightGray;
-            this.btnRoles.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRoles.ForeColor = System.Drawing.Color.Black;
-            this.btnRoles.HoverState.FillColor = System.Drawing.Color.Coral;
-            this.btnRoles.HoverState.Parent = this.btnRoles;
-            this.btnRoles.Location = new System.Drawing.Point(494, 3);
-            this.btnRoles.Name = "btnRoles";
-            this.btnRoles.ShadowDecoration.Parent = this.btnRoles;
-            this.btnRoles.Size = new System.Drawing.Size(129, 30);
-            this.btnRoles.TabIndex = 82;
-            this.btnRoles.Text = "Academic";
-            this.btnRoles.Click += new System.EventHandler(this.btnRoles_Click);
+            this.btnAcademic.Animated = true;
+            this.btnAcademic.BorderRadius = 6;
+            this.btnAcademic.CheckedState.Parent = this.btnAcademic;
+            this.btnAcademic.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAcademic.CustomImages.Parent = this.btnAcademic;
+            this.btnAcademic.FillColor = System.Drawing.Color.LightGray;
+            this.btnAcademic.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAcademic.ForeColor = System.Drawing.Color.Black;
+            this.btnAcademic.HoverState.FillColor = System.Drawing.Color.Coral;
+            this.btnAcademic.HoverState.Parent = this.btnAcademic;
+            this.btnAcademic.Location = new System.Drawing.Point(494, 3);
+            this.btnAcademic.Name = "btnAcademic";
+            this.btnAcademic.ShadowDecoration.Parent = this.btnAcademic;
+            this.btnAcademic.Size = new System.Drawing.Size(129, 30);
+            this.btnAcademic.TabIndex = 82;
+            this.btnAcademic.Text = "Academic";
+            this.btnAcademic.Click += new System.EventHandler(this.btnRoles_Click);
             // 
             // btnPersonal
             // 
@@ -609,25 +619,25 @@
             this.btnRelationship.Text = "Relationship";
             this.btnRelationship.Click += new System.EventHandler(this.btnRelationship_Click);
             // 
-            // btnEducation
+            // btnMedical
             // 
-            this.btnEducation.Animated = true;
-            this.btnEducation.BorderRadius = 6;
-            this.btnEducation.CheckedState.Parent = this.btnEducation;
-            this.btnEducation.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEducation.CustomImages.Parent = this.btnEducation;
-            this.btnEducation.FillColor = System.Drawing.Color.LightGray;
-            this.btnEducation.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEducation.ForeColor = System.Drawing.Color.Black;
-            this.btnEducation.HoverState.FillColor = System.Drawing.Color.Coral;
-            this.btnEducation.HoverState.Parent = this.btnEducation;
-            this.btnEducation.Location = new System.Drawing.Point(899, 3);
-            this.btnEducation.Name = "btnEducation";
-            this.btnEducation.ShadowDecoration.Parent = this.btnEducation;
-            this.btnEducation.Size = new System.Drawing.Size(129, 30);
-            this.btnEducation.TabIndex = 85;
-            this.btnEducation.Text = "Medical";
-            this.btnEducation.Click += new System.EventHandler(this.btnEducation_Click);
+            this.btnMedical.Animated = true;
+            this.btnMedical.BorderRadius = 6;
+            this.btnMedical.CheckedState.Parent = this.btnMedical;
+            this.btnMedical.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMedical.CustomImages.Parent = this.btnMedical;
+            this.btnMedical.FillColor = System.Drawing.Color.LightGray;
+            this.btnMedical.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMedical.ForeColor = System.Drawing.Color.Black;
+            this.btnMedical.HoverState.FillColor = System.Drawing.Color.Coral;
+            this.btnMedical.HoverState.Parent = this.btnMedical;
+            this.btnMedical.Location = new System.Drawing.Point(899, 3);
+            this.btnMedical.Name = "btnMedical";
+            this.btnMedical.ShadowDecoration.Parent = this.btnMedical;
+            this.btnMedical.Size = new System.Drawing.Size(129, 30);
+            this.btnMedical.TabIndex = 85;
+            this.btnMedical.Text = "Medical";
+            this.btnMedical.Click += new System.EventHandler(this.btnEducation_Click);
             // 
             // PanelAcademicGeneral
             // 
@@ -1511,6 +1521,7 @@
             this.btnStudPersonalContact.TabIndex = 94;
             this.btnStudPersonalContact.Text = "General";
             this.btnStudPersonalContact.Visible = false;
+            this.btnStudPersonalContact.Click += new System.EventHandler(this.btnStudPersonalContact_Click);
             // 
             // btnStudPersonalContactt
             // 
@@ -1532,6 +1543,7 @@
             this.btnStudPersonalContactt.TabIndex = 98;
             this.btnStudPersonalContactt.Text = "Contact";
             this.btnStudPersonalContactt.Visible = false;
+            this.btnStudPersonalContactt.Click += new System.EventHandler(this.btnStudPersonalContactt_Click);
             // 
             // PanelStudentContactinformation
             // 
@@ -2118,6 +2130,7 @@
             this.BtnAcademicGeneral.TabIndex = 99;
             this.BtnAcademicGeneral.Text = "General";
             this.BtnAcademicGeneral.Visible = false;
+            this.BtnAcademicGeneral.Click += new System.EventHandler(this.BtnAcademicGeneral_Click);
             // 
             // BtnAcademicClassHistory
             // 
@@ -2139,6 +2152,7 @@
             this.BtnAcademicClassHistory.TabIndex = 100;
             this.BtnAcademicClassHistory.Text = "Class History";
             this.BtnAcademicClassHistory.Visible = false;
+            this.BtnAcademicClassHistory.Click += new System.EventHandler(this.BtnAcademicClassHistory_Click);
             // 
             // BtnAcademicGrade
             // 
@@ -2160,6 +2174,7 @@
             this.BtnAcademicGrade.TabIndex = 101;
             this.BtnAcademicGrade.Text = "Grade Info";
             this.BtnAcademicGrade.Visible = false;
+            this.BtnAcademicGrade.Click += new System.EventHandler(this.BtnAcademicGrade_Click);
             // 
             // BtnAcademicPrevSchool
             // 
@@ -2181,6 +2196,7 @@
             this.BtnAcademicPrevSchool.TabIndex = 102;
             this.BtnAcademicPrevSchool.Text = "Previous School";
             this.BtnAcademicPrevSchool.Visible = false;
+            this.BtnAcademicPrevSchool.Click += new System.EventHandler(this.BtnAcademicPrevSchool_Click);
             // 
             // PanelAcademicClassHistory
             // 
@@ -2240,6 +2256,16 @@
             this.PanelStudentRelationship.ShadowColor = System.Drawing.Color.Black;
             this.PanelStudentRelationship.Size = new System.Drawing.Size(857, 533);
             this.PanelStudentRelationship.TabIndex = 88;
+            // 
+            // picRPhoto
+            // 
+            this.picRPhoto.Image = global::AisInternalSystem.Properties.Resources.icons8_male_user_100;
+            this.picRPhoto.Location = new System.Drawing.Point(528, 314);
+            this.picRPhoto.Name = "picRPhoto";
+            this.picRPhoto.Size = new System.Drawing.Size(189, 199);
+            this.picRPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picRPhoto.TabIndex = 98;
+            this.picRPhoto.TabStop = false;
             // 
             // txtRAusAbor
             // 
@@ -2752,13 +2778,14 @@
             this.BtnRelationshipContact.ForeColor = System.Drawing.Color.Black;
             this.BtnRelationshipContact.HoverState.FillColor = System.Drawing.Color.Coral;
             this.BtnRelationshipContact.HoverState.Parent = this.BtnRelationshipContact;
-            this.BtnRelationshipContact.Location = new System.Drawing.Point(811, 36);
+            this.BtnRelationshipContact.Location = new System.Drawing.Point(817, 36);
             this.BtnRelationshipContact.Name = "BtnRelationshipContact";
             this.BtnRelationshipContact.ShadowDecoration.Parent = this.BtnRelationshipContact;
             this.BtnRelationshipContact.Size = new System.Drawing.Size(116, 32);
             this.BtnRelationshipContact.TabIndex = 104;
             this.BtnRelationshipContact.Text = "Contact";
             this.BtnRelationshipContact.Visible = false;
+            this.BtnRelationshipContact.Click += new System.EventHandler(this.BtnRelationshipContact_Click);
             // 
             // BtnRelationshipGeneral
             // 
@@ -2773,13 +2800,14 @@
             this.BtnRelationshipGeneral.ForeColor = System.Drawing.Color.Black;
             this.BtnRelationshipGeneral.HoverState.FillColor = System.Drawing.Color.Coral;
             this.BtnRelationshipGeneral.HoverState.Parent = this.BtnRelationshipGeneral;
-            this.BtnRelationshipGeneral.Location = new System.Drawing.Point(689, 36);
+            this.BtnRelationshipGeneral.Location = new System.Drawing.Point(694, 37);
             this.BtnRelationshipGeneral.Name = "BtnRelationshipGeneral";
             this.BtnRelationshipGeneral.ShadowDecoration.Parent = this.BtnRelationshipGeneral;
             this.BtnRelationshipGeneral.Size = new System.Drawing.Size(116, 32);
             this.BtnRelationshipGeneral.TabIndex = 103;
             this.BtnRelationshipGeneral.Text = "General";
             this.BtnRelationshipGeneral.Visible = false;
+            this.BtnRelationshipGeneral.Click += new System.EventHandler(this.BtnRelationshipGeneral_Click);
             // 
             // PanelRelationshipContact
             // 
@@ -3648,26 +3676,6 @@
             this.label112.TabIndex = 68;
             this.label112.Text = "Student Documents";
             // 
-            // studBriefPic
-            // 
-            this.studBriefPic.Image = global::AisInternalSystem.Properties.Resources.icons8_male_user_100;
-            this.studBriefPic.Location = new System.Drawing.Point(103, 12);
-            this.studBriefPic.Name = "studBriefPic";
-            this.studBriefPic.Size = new System.Drawing.Size(154, 161);
-            this.studBriefPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.studBriefPic.TabIndex = 63;
-            this.studBriefPic.TabStop = false;
-            // 
-            // picRPhoto
-            // 
-            this.picRPhoto.Image = global::AisInternalSystem.Properties.Resources.icons8_male_user_100;
-            this.picRPhoto.Location = new System.Drawing.Point(528, 314);
-            this.picRPhoto.Name = "picRPhoto";
-            this.picRPhoto.Size = new System.Drawing.Size(189, 199);
-            this.picRPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picRPhoto.TabIndex = 98;
-            this.picRPhoto.TabStop = false;
-            // 
             // panelNotAvailable1
             // 
             this.panelNotAvailable1.BackColor = System.Drawing.Color.Gainsboro;
@@ -3698,10 +3706,10 @@
             this.Controls.Add(this.btnStudPersonalContact);
             this.Controls.Add(this.guna2VSeparator1);
             this.Controls.Add(this.btnDocs);
-            this.Controls.Add(this.btnEducation);
+            this.Controls.Add(this.btnMedical);
             this.Controls.Add(this.btnRelationship);
             this.Controls.Add(this.btnPersonal);
-            this.Controls.Add(this.btnRoles);
+            this.Controls.Add(this.btnAcademic);
             this.Controls.Add(this.label131);
             this.Controls.Add(this.guna2ShadowPanel3);
             this.Controls.Add(this.txtBriefNationality);
@@ -3723,6 +3731,7 @@
             this.Load += new System.EventHandler(this.UCEmployeeDetailed_Load);
             this.guna2ShadowPanel3.ResumeLayout(false);
             this.guna2ShadowPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.studBriefPic)).EndInit();
             this.PanelAcademicGeneral.ResumeLayout(false);
             this.PanelAcademicGeneral.PerformLayout();
             this.PanelStudentPersonalInformation.ResumeLayout(false);
@@ -3733,6 +3742,7 @@
             this.PanelAcademicClassHistory.PerformLayout();
             this.PanelStudentRelationship.ResumeLayout(false);
             this.PanelStudentRelationship.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picRPhoto)).EndInit();
             this.PanelAcademicStudentGrade.ResumeLayout(false);
             this.PanelAcademicStudentGrade.PerformLayout();
             this.PanelPreviousSchool.ResumeLayout(false);
@@ -3745,8 +3755,6 @@
             this.PanelStudentMedicalInformation.PerformLayout();
             this.PanelStudentDocuments.ResumeLayout(false);
             this.PanelStudentDocuments.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.studBriefPic)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picRPhoto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3766,10 +3774,10 @@
         private Guna.UI2.WinForms.Guna2TextBox txtSDCertificateName;
         private System.Windows.Forms.PictureBox studBriefPic;
         public System.Windows.Forms.Label label1;
-        private Guna.UI2.WinForms.Guna2Button btnRoles;
+        private Guna.UI2.WinForms.Guna2Button btnAcademic;
         private Guna.UI2.WinForms.Guna2Button btnPersonal;
         private Guna.UI2.WinForms.Guna2Button btnRelationship;
-        private Guna.UI2.WinForms.Guna2Button btnEducation;
+        private Guna.UI2.WinForms.Guna2Button btnMedical;
         private Guna.UI2.WinForms.Guna2ShadowPanel PanelAcademicGeneral;
         private Guna.UI2.WinForms.Guna2Button btnDocs;
         private Guna.UI2.WinForms.Guna2VSeparator guna2VSeparator1;
