@@ -104,7 +104,6 @@ namespace AisInternalSystem
                     flowRelationshipPanel.Controls.Clear();
                     PanelMSqlCommand[] panelRelatUC = new PanelMSqlCommand[dataTable.Rows.Count];
                     flowRelationshipPanel.Visible = true;
-                    NA.Hide();
                     for (i = 0; i < dataTable.Rows.Count; i++)
                     {
                         panelRelatUC[i] = new PanelMSqlCommand();
@@ -127,11 +126,31 @@ namespace AisInternalSystem
                 else
                 {
                     flowRelationshipPanel.Visible = false;
-                    PanelStudentRelationship.Controls[PanelStudentRelationship.Controls.IndexOf(NA)].BringToFront();
-                    NA.BringToFront();
-                    NA.Location = NAPos;
+                    ShowNotAvailable();
                 }
+                ReadDocuments();
+                ReadPrevSchool();
+                //medical
+                cmd = new MySqlCommand("SELECT * FROM aisdb.stud_medical_info where medicalofstud = @aisid", db.get_connection());
+                cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
+                reader = cmd.ExecuteReader();
+                if(reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        txtMHealthCondition.Text = reader.GetString("healthcondition");
+                        txtMallergies.Text = reader.GetString("allergies");
+                        txtMForAllergies.Text = reader.GetString("medication_for_allergies");
+                        txtMRegularMeds.Text = reader.GetString("regularmedication");
+                        txtMREgularMedsDetails.Text = reader.GetString("regularmedicationdetails");
+                    }
 
+                }
+                else
+                {
+
+                }
+                reader.Close();
                 db.close_connection();
             }
             catch (MySqlException ex)
@@ -139,6 +158,100 @@ namespace AisInternalSystem
                 msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
 
+        }
+
+        public void ShowNotAvailable()
+        {
+            panelNotAvailable2.Visible = true;
+            panelNotAvailable2.BringToFront();
+        }
+
+        public void ReadPrevSchool()
+        {
+            //prevschoolinfo
+            cmd = new MySqlCommand("SELECT name_of_school, country, grade, dateattended, language_of_instruction, extra_support, curriculum FROM student_previous_school_info where of_student = @aisid", db.get_connection());
+            cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
+            MySqlDataAdapter daSchool = new MySqlDataAdapter(cmd);
+            DataTable dtSchool = new DataTable();
+            daSchool.Fill(dtSchool);
+            flowPreviousSchool.Controls.Clear();
+            if (dtSchool.Rows.Count >= 1)
+            {
+                PanelSchoolInfo[] school = new PanelSchoolInfo[dtSchool.Rows.Count];
+                flowPreviousSchool.Visible = true;
+                flowPreviousSchool.BringToFront();
+                for (int i = 0; i < dtSchool.Rows.Count; i++)
+                {
+                    var _schoolname = dtSchool.Rows[i][0];
+                    var _curriculum = dtSchool.Rows[i][6];
+                    var _dateattend = dtSchool.Rows[i][3];
+                    var _grade = dtSchool.Rows[i][2];
+                    var _extrasupport = dtSchool.Rows[i][5];
+                    var _country = dtSchool.Rows[i][1];
+                    if (_curriculum.ToString() == "")
+                    {
+                        _curriculum = "Not Specified";
+                    }
+                    school[i] = new PanelSchoolInfo();
+                    school[i].SchoolName = _schoolname.ToString();
+                    school[i].Curriculum = "Curriculum: " + _curriculum.ToString();
+                    school[i].DateAttended = "Date attended: " + _dateattend.ToString();
+                    school[i].Grade = "Grade: " + _grade.ToString();
+                    school[i].ExtraSupport = "With Extra Support: " + _extrasupport.ToString();
+                    school[i].Country = _country.ToString();
+                    school[i].SchooLLogo();
+                    flowPreviousSchool.Controls.Add(school[i]);
+                }
+            }
+            else
+            {
+                flowPreviousSchool.Visible = false;
+                PanelNoPrevSchool.Visible = true;
+                PanelNoPrevSchool.BringToFront();
+            }
+        }
+
+        public void ReadDocuments()
+        {
+            //read documents
+            cmd = new MySqlCommand("select docsname, docspath, docstype, docsdesc from document_students where owner_id = @owner_id", db.get_connection());
+            cmd.Parameters.Add("@owner_id", MySqlDbType.Int32).Value = aisid;
+            MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            dataAdapter.Fill(dt);
+            if (dt.Rows.Count >= 1)
+            {
+                FlowPanelDocumentStudent.Controls.Clear();
+                FlowPanelDocumentStudent.Visible = true;
+                panelNotAvailable2.Visible = false;
+                UCDocsList[] documents = new UCDocsList[dt.Rows.Count];
+                for (int i = 0; i < documents.Length; i++)
+                {
+                    FlowPanelDocumentStudent.Visible = true;
+                    FlowPanelDocumentStudent.BringToFront();
+                    documents[i] = new UCDocsList();
+                    var title = dt.Rows[i][0];
+                    var subtitle = dt.Rows[i][3];
+                    var appPath = dt.Rows[i][1];
+                    var docstype = dt.Rows[i][2];
+                    documents[i].Title = title.ToString();
+                    if (subtitle == "")
+                    {
+                        subtitle = "No description";
+                    }
+                    documents[i].Subtitle = subtitle.ToString();
+                    documents[i].Pic = Resources.icons8_question_mark_480px;
+                    documents[i].AppPath = appPath.ToString();
+                    documents[i].Doctype = docstype.ToString();
+                    documents[i].Appearance();
+                    FlowPanelDocumentStudent.Controls.Add(documents[i]);
+                }
+            }
+            else
+            {
+                FlowPanelDocumentStudent.Visible = false;
+                ShowNotAvailable();
+            }
         }
 
         public void RelationshipPanelClicked()

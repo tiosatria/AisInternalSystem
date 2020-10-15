@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AisInternalSystem.exe" size="2372528">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AisInternalSystem.exe" size="2777520">
       <assemblyIdentity name="AisInternalSystem" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>lUc9ZBs7bN72IromEp/pS/gYDG2thbnsqnJCdw/fV2Y=</dsig:DigestValue>
+        <dsig:DigestValue>TEKSGj3FJgsBcDHD2yACnlGvdjCdUpKiGRjwHudmMBc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -63,42 +63,6 @@
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
         <dsig:DigestValue>SikSNsUBe/37MPrUw9tNBhTDYsS1NAnGELEtSD17JuY=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Bunifu.Core.dll" size="2662384">
-      <assemblyIdentity name="Bunifu.Core" version="1.11.5.1" publicKeyToken="E8E24CCD28363FE9" language="neutral" processorArchitecture="msil" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>X3JlD206Spt3vN10FZKC/PckvTSvuYnfa24HXqHda8M=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Bunifu.UI.WinForm.BunifuShadowPanel.dll" size="41968">
-      <assemblyIdentity name="Bunifu.UI.WinForm.BunifuShadowPanel" version="1.11.5.1" publicKeyToken="E8E24CCD28363FE9" language="neutral" processorArchitecture="msil" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Ur0H3RY4+EijNgOd3z5PFXl01q725JGfip8fCUhak+4=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Bunifu_UI_v1.5.3.dll" size="399856">
-      <assemblyIdentity name="Bunifu_UI_v1.5.3" version="1.5.3.0" publicKeyToken="E8E24CCD28363FE9" language="neutral" processorArchitecture="msil" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>EQjAEZEN3hoMtlKKUV7JFhERO4PQICuzBewXLibwLVc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -138,13 +102,61 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="AisInternalSystem.exe.config" size="526">
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Telerik.WinControls.dll" size="4483584">
+      <assemblyIdentity name="Telerik.WinControls" version="2020.1.113.40" publicKeyToken="5BB2A467CBEC794E" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>s4J2Cc1JJWM6JTR6kRvPYqU9bhVfBklHJ7PkZgyP+NA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Telerik.WinControls.Themes.FluentDark.dll" size="230912">
+      <assemblyIdentity name="Telerik.WinControls.Themes.FluentDark" version="2020.1.113.40" publicKeyToken="5BB2A467CBEC794E" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>dtxb2diQ1pTMoAjYFvrN1S7kRGckoVHZ2xwIg7urJsA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Telerik.WinControls.UI.dll" size="6446080">
+      <assemblyIdentity name="Telerik.WinControls.UI" version="2020.1.113.40" publicKeyToken="5BB2A467CBEC794E" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>ZqPZZLav74Lm+b4+373//GtHuuzuA5+3v5UrulChXhQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TelerikCommon.dll" size="350720">
+      <assemblyIdentity name="TelerikCommon" version="2020.1.113.40" publicKeyToken="5BB2A467CBEC794E" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>Agusytw5KMnjqlRn/NGe4ji3ljT1k+RCLA/5vHmoQs0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="AisInternalSystem.exe.config" size="187">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>/opqICYWxbmn86Q2Tk0FT6iUADy/y32kIzkw+vMLL0M=</dsig:DigestValue>
+      <dsig:DigestValue>ibSJhBWt6kT1jcg30WbAXCZJOzy699/zUdgGnXs5g9w=</dsig:DigestValue>
     </hash>
   </file>
   <file name="favicon-2.ico" size="164554">

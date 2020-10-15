@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCStudDetailed));
             this.btnBackEmpDir = new Guna.UI2.WinForms.Guna2Button();
             this.guna2ShadowPanel3 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.label67 = new System.Windows.Forms.Label();
@@ -211,8 +212,14 @@
             this.PanelStudentDocuments = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.FlowPanelDocumentStudent = new System.Windows.Forms.FlowLayoutPanel();
             this.label112 = new System.Windows.Forms.Label();
+            this.PanelNoPrevSchool = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.Picschool = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.panelNotAvailable1 = new AisInternalSystem.PanelNotAvailable();
             this.panelNotAvailable3 = new AisInternalSystem.PanelNotAvailable();
+            this.panelNotAvailable2 = new AisInternalSystem.PanelNotAvailable();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2ShadowPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.studBriefPic)).BeginInit();
             this.PanelAcademicGeneral.SuspendLayout();
@@ -227,6 +234,8 @@
             this.PanelRelationshipContact.SuspendLayout();
             this.PanelStudentMedicalInformation.SuspendLayout();
             this.PanelStudentDocuments.SuspendLayout();
+            this.PanelNoPrevSchool.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Picschool)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBackEmpDir
@@ -407,7 +416,7 @@
             // 
             // studBriefPic
             // 
-            this.studBriefPic.Image = global::AisInternalSystem.Properties.Resources.icons8_male_user_100;
+            this.studBriefPic.Image = ((System.Drawing.Image)(resources.GetObject("studBriefPic.Image")));
             this.studBriefPic.Location = new System.Drawing.Point(103, 12);
             this.studBriefPic.Name = "studBriefPic";
             this.studBriefPic.Size = new System.Drawing.Size(154, 161);
@@ -2201,6 +2210,7 @@
             // PanelAcademicClassHistory
             // 
             this.PanelAcademicClassHistory.BackColor = System.Drawing.Color.Transparent;
+            this.PanelAcademicClassHistory.Controls.Add(this.flowLayoutPanel1);
             this.PanelAcademicClassHistory.Controls.Add(this.panelNotAvailable1);
             this.PanelAcademicClassHistory.Controls.Add(this.label83);
             this.PanelAcademicClassHistory.FillColor = System.Drawing.Color.White;
@@ -2259,7 +2269,7 @@
             // 
             // picRPhoto
             // 
-            this.picRPhoto.Image = global::AisInternalSystem.Properties.Resources.icons8_male_user_100;
+            this.picRPhoto.Image = ((System.Drawing.Image)(resources.GetObject("picRPhoto.Image")));
             this.picRPhoto.Location = new System.Drawing.Point(528, 314);
             this.picRPhoto.Name = "picRPhoto";
             this.picRPhoto.Size = new System.Drawing.Size(189, 199);
@@ -2705,6 +2715,7 @@
             // 
             this.PanelPreviousSchool.BackColor = System.Drawing.Color.Transparent;
             this.PanelPreviousSchool.Controls.Add(this.flowPreviousSchool);
+            this.PanelPreviousSchool.Controls.Add(this.PanelNoPrevSchool);
             this.PanelPreviousSchool.Controls.Add(this.label80);
             this.PanelPreviousSchool.FillColor = System.Drawing.Color.White;
             this.PanelPreviousSchool.Location = new System.Drawing.Point(408, 70);
@@ -2716,7 +2727,7 @@
             // 
             // flowPreviousSchool
             // 
-            this.flowPreviousSchool.Location = new System.Drawing.Point(26, 49);
+            this.flowPreviousSchool.Location = new System.Drawing.Point(25, 43);
             this.flowPreviousSchool.Name = "flowPreviousSchool";
             this.flowPreviousSchool.Size = new System.Drawing.Size(804, 462);
             this.flowPreviousSchool.TabIndex = 69;
@@ -3648,6 +3659,7 @@
             // 
             this.PanelStudentDocuments.BackColor = System.Drawing.Color.Transparent;
             this.PanelStudentDocuments.Controls.Add(this.FlowPanelDocumentStudent);
+            this.PanelStudentDocuments.Controls.Add(this.panelNotAvailable2);
             this.PanelStudentDocuments.Controls.Add(this.label112);
             this.PanelStudentDocuments.FillColor = System.Drawing.Color.White;
             this.PanelStudentDocuments.Location = new System.Drawing.Point(406, 71);
@@ -3659,9 +3671,10 @@
             // 
             // FlowPanelDocumentStudent
             // 
-            this.FlowPanelDocumentStudent.Location = new System.Drawing.Point(24, 45);
+            this.FlowPanelDocumentStudent.AutoScroll = true;
+            this.FlowPanelDocumentStudent.Location = new System.Drawing.Point(15, 44);
             this.FlowPanelDocumentStudent.Name = "FlowPanelDocumentStudent";
-            this.FlowPanelDocumentStudent.Size = new System.Drawing.Size(805, 465);
+            this.FlowPanelDocumentStudent.Size = new System.Drawing.Size(827, 465);
             this.FlowPanelDocumentStudent.TabIndex = 69;
             // 
             // label112
@@ -3675,6 +3688,57 @@
             this.label112.Size = new System.Drawing.Size(189, 25);
             this.label112.TabIndex = 68;
             this.label112.Text = "Student Documents";
+            // 
+            // PanelNoPrevSchool
+            // 
+            this.PanelNoPrevSchool.BackColor = System.Drawing.Color.Transparent;
+            this.PanelNoPrevSchool.Controls.Add(this.Picschool);
+            this.PanelNoPrevSchool.Controls.Add(this.label24);
+            this.PanelNoPrevSchool.Controls.Add(this.label23);
+            this.PanelNoPrevSchool.FillColor = System.Drawing.Color.White;
+            this.PanelNoPrevSchool.Location = new System.Drawing.Point(134, 117);
+            this.PanelNoPrevSchool.Name = "PanelNoPrevSchool";
+            this.PanelNoPrevSchool.Radius = 6;
+            this.PanelNoPrevSchool.ShadowColor = System.Drawing.Color.Black;
+            this.PanelNoPrevSchool.Size = new System.Drawing.Size(570, 280);
+            this.PanelNoPrevSchool.TabIndex = 90;
+            this.PanelNoPrevSchool.Visible = false;
+            // 
+            // label23
+            // 
+            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(147, 14);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(267, 25);
+            this.label23.TabIndex = 68;
+            this.label23.Text = "Previous School Information";
+            // 
+            // label24
+            // 
+            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(118, 220);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(368, 25);
+            this.label24.TabIndex = 69;
+            this.label24.Text = "This student has no previous school info";
+            // 
+            // Picschool
+            // 
+            this.Picschool.Image = global::AisInternalSystem.Properties.Resources.icons8_school_96px;
+            this.Picschool.Location = new System.Drawing.Point(222, 73);
+            this.Picschool.Name = "Picschool";
+            this.Picschool.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.Picschool.ShadowDecoration.Parent = this.Picschool;
+            this.Picschool.Size = new System.Drawing.Size(129, 124);
+            this.Picschool.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Picschool.TabIndex = 70;
+            this.Picschool.TabStop = false;
             // 
             // panelNotAvailable1
             // 
@@ -3691,6 +3755,22 @@
             this.panelNotAvailable3.Name = "panelNotAvailable3";
             this.panelNotAvailable3.Size = new System.Drawing.Size(346, 294);
             this.panelNotAvailable3.TabIndex = 69;
+            // 
+            // panelNotAvailable2
+            // 
+            this.panelNotAvailable2.BackColor = System.Drawing.Color.Gainsboro;
+            this.panelNotAvailable2.Location = new System.Drawing.Point(276, 94);
+            this.panelNotAvailable2.Name = "panelNotAvailable2";
+            this.panelNotAvailable2.Size = new System.Drawing.Size(346, 294);
+            this.panelNotAvailable2.TabIndex = 0;
+            this.panelNotAvailable2.Visible = false;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(27, 64);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(801, 436);
+            this.flowLayoutPanel1.TabIndex = 70;
             // 
             // UCStudDetailed
             // 
@@ -3714,6 +3794,8 @@
             this.Controls.Add(this.guna2ShadowPanel3);
             this.Controls.Add(this.txtBriefNationality);
             this.Controls.Add(this.btnBackEmpDir);
+            this.Controls.Add(this.PanelAcademicClassHistory);
+            this.Controls.Add(this.PanelAcademicStudentGrade);
             this.Controls.Add(this.PanelStudRelationship);
             this.Controls.Add(this.PanelAcademicGeneral);
             this.Controls.Add(this.PanelStudentContactinformation);
@@ -3723,8 +3805,6 @@
             this.Controls.Add(this.PanelRelationshipContact);
             this.Controls.Add(this.PanelStudentRelationship);
             this.Controls.Add(this.PanelPreviousSchool);
-            this.Controls.Add(this.PanelAcademicClassHistory);
-            this.Controls.Add(this.PanelAcademicStudentGrade);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "UCStudDetailed";
             this.Size = new System.Drawing.Size(1280, 611);
@@ -3755,6 +3835,9 @@
             this.PanelStudentMedicalInformation.PerformLayout();
             this.PanelStudentDocuments.ResumeLayout(false);
             this.PanelStudentDocuments.PerformLayout();
+            this.PanelNoPrevSchool.ResumeLayout(false);
+            this.PanelNoPrevSchool.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Picschool)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3947,5 +4030,11 @@
         private System.Windows.Forms.FlowLayoutPanel FlowPanelDocumentStudent;
         public System.Windows.Forms.Label label112;
         private System.Windows.Forms.PictureBox picRPhoto;
+        private PanelNotAvailable panelNotAvailable2;
+        private Guna.UI2.WinForms.Guna2ShadowPanel PanelNoPrevSchool;
+        public System.Windows.Forms.Label label24;
+        public System.Windows.Forms.Label label23;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox Picschool;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

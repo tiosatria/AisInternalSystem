@@ -67,12 +67,6 @@
     <ApplicationIcon>favicon-2.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bunifu.UI.WinForm.BunifuShadowPanel">
-      <HintPath>..\..\..\..\Downloads\Compressed\Bunifu-UI-WinForms-1.11.5.1_ShareAppsCrack.com\Bunifu UI WinForms 1.11.5.1\Bunifu.UI.WinForm.BunifuShadowPanel.dll</HintPath>
-    </Reference>
-    <Reference Include="Bunifu_UI_v1.5.3">
-      <HintPath>..\..\..\..\Downloads\Compressed\Bunifu-UI-WinForms-1.11.5.1_ShareAppsCrack.com\Bunifu UI WinForms 1.11.5.1\Bunifu_UI_v1.5.3.dll</HintPath>
-    </Reference>
     <Reference Include="Guna.UI2">
       <HintPath>..\..\.net 4.0\Guna.UI2.dll</HintPath>
     </Reference>
@@ -93,6 +87,10 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Telerik.WinControls, Version=2020.1.113.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="Telerik.WinControls.Themes.FluentDark, Version=2020.1.113.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.WinControls.UI, Version=2020.1.113.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
+    <Reference Include="TelerikCommon, Version=2020.1.113.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DashboardUC.cs">
@@ -145,6 +143,12 @@
     </Compile>
     <Compile Include="PanelNotAvailable.Designer.cs">
       <DependentUpon>PanelNotAvailable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelSchoolInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelSchoolInfo.Designer.cs">
+      <DependentUpon>PanelSchoolInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="PleaseWait.cs">
       <SubType>Form</SubType>
@@ -226,9 +230,13 @@
     <EmbeddedResource Include="PanelNotAvailable.resx">
       <DependentUpon>PanelNotAvailable.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PanelSchoolInfo.resx">
+      <DependentUpon>PanelSchoolInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PleaseWait.resx">
       <DependentUpon>PleaseWait.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -407,6 +415,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon-2.ico" />
+    <None Include="Resources\Yos sudarso.jpg" />
+    <None Include="Resources\Tabqha.png" />
+    <None Include="Resources\Monte Sienna.png" />
+    <None Include="Resources\Mondial.png" />
+    <None Include="Resources\Maitreyawira.jpg" />
+    <None Include="Resources\Kallista.jpg" />
+    <None Include="Resources\icons8_school_96px.png" />
+    <None Include="Resources\Global.png" />
+    <None Include="Resources\Djuwita.jpg" />
+    <None Include="Resources\Avava.jpg" />
+    <None Include="Resources\Ansvin.jpg" />
     <None Include="Resources\icons8_window_search_100px.png" />
     <None Include="Resources\icons8_certificate_80px.png" />
     <None Include="Resources\icons8_reply_all_arrow_50px.png" />

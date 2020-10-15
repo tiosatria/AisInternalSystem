@@ -277,4 +277,37 @@
   <data name="icons8_window_search_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8_window_search_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Ansvin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ansvin.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Avava" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Avava.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Djuwita" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Djuwita.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Global" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Global.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_school_96px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8_school_96px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Kallista" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Kallista.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Maitreyawira" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Maitreyawira.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Mondial" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Mondial.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Monte_Sienna" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Monte Sienna.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tabqha" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tabqha.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Yos_sudarso" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Yos sudarso.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
