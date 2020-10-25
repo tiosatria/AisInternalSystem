@@ -19,7 +19,6 @@ namespace AisInternalSystem
     {
         int ClassID = 0 ;
         Int64 empId = 0;
-        Dialog msg = new Dialog();
         ModuleInProgress indevelopment = new ModuleInProgress();
         UCEmployeeDetailed openemployee = new UCEmployeeDetailed();
         MySqlCommand command;

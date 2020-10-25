@@ -25,7 +25,6 @@ namespace AisInternalSystem
         int RelationshipCount = 0, aisid = 0, siblingid = 0, schoolId = 0, docsSelected = 0, careTeacher = 0;
         int? AssTeacher, StudCAID, ClassId, GradeID, aisidCA;
         Data collection = new Data();
-        Dialog msg = new Dialog();
         StudSummary summarystud = new StudSummary();
         bool StudIsSaved = false, addRelatIsClicked = false, fatherIsSaved = false, motheriIsSaved = false, guardianIsSaved = false, stepFatherIsSaved = false, stepMotherIsSaved = false,
             medsIsSaved = false;
@@ -107,7 +106,7 @@ namespace AisInternalSystem
             label33.Text = ProgressCopy.Value.ToString();
             if (ProgressCopy.Value == 100)
             {
-                msg.Alert("File uploaded succesfully", frmAlert.AlertType.Info);
+                Msg.Alert("File uploaded succesfully", frmAlert.AlertType.Info);
                 btnUploadRecord.Enabled = true;
                 label8.Visible = false;
                 ProgressCopy.Visible = false;
@@ -671,7 +670,7 @@ namespace AisInternalSystem
 
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 
@@ -1300,7 +1299,7 @@ VALUES
                     cmd.Parameters.Add("@proposedgrade", MySqlDbType.VarChar).Value = dropPropGrade.SelectedValue.ToString();
                     if (cmd.ExecuteNonQuery() == 1)
                     {
-                        msg.Alert("Student data saved!", frmAlert.AlertType.Info);
+                        Msg.Alert("Student data saved!", frmAlert.AlertType.Info);
                         StudIsSaved = true;
                         txtais.Enabled = false;
                         ShowPanel(panelStud2);
@@ -1308,13 +1307,13 @@ VALUES
                     }
                     else
                     {
-                        msg.Alert("Something is wrong \nBut we couldn't figure it out :(", frmAlert.AlertType.Error);
+                        Msg.Alert("Something is wrong \nBut we couldn't figure it out :(", frmAlert.AlertType.Error);
                     }
                     Db.close_connection();
                 }
                 catch (MySqlException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
             }
             else
@@ -1399,20 +1398,20 @@ WHERE aisid = @aisid", Db.get_connection());
                     cmd.Parameters.Add("@proposedgrade", MySqlDbType.VarChar).Value = dropPropGrade.SelectedValue.ToString();
                     if (cmd.ExecuteNonQuery() == 1)
                     {
-                        msg.Alert("Student data updated!", frmAlert.AlertType.Info);
+                        Msg.Alert("Student data updated!", frmAlert.AlertType.Info);
                         StudIsSaved = true;
                         ShowPanel(panelStud2);
                         aisid = Convert.ToInt32(txtais.Text);
                     }
                     else
                     {
-                        msg.Alert("Something is wrong \nBut we couldn't figure it out :(", frmAlert.AlertType.Error);
+                        Msg.Alert("Something is wrong \nBut we couldn't figure it out :(", frmAlert.AlertType.Error);
                     }
                     Db.close_connection();
                 }
                 catch (MySqlException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
             }
         }
@@ -1422,15 +1421,15 @@ WHERE aisid = @aisid", Db.get_connection());
 
             if (txtais.Text == "")
             {
-                msg.Alert("Oops, the student AISID is blank...", frmAlert.AlertType.Error);
+                Msg.Alert("Oops, the student AISID is blank...", frmAlert.AlertType.Error);
             }
             else if (txtCertificateName.Text == "")
             {
-                msg.Alert("Oops, the student doesn't have a name.", frmAlert.AlertType.Error);
+                Msg.Alert("Oops, the student doesn't have a name.", frmAlert.AlertType.Error);
             }
             else if (txtCertificateName.Text == "")
             {
-                msg.Alert("Oops. the student doesn't have nationality.", frmAlert.AlertType.Error);
+                Msg.Alert("Oops. the student doesn't have nationality.", frmAlert.AlertType.Error);
             }
             else
             {
@@ -1451,7 +1450,7 @@ WHERE aisid = @aisid", Db.get_connection());
         {
             if (!StudIsSaved)
             {
-                msg.Alert("Oops, you haven't enter any student information\nWe don't know where to upload it :(", frmAlert.AlertType.Error);
+                Msg.Alert("Oops, you haven't enter any student information\nWe don't know where to upload it :(", frmAlert.AlertType.Error);
             }
             else
             {
@@ -1471,11 +1470,11 @@ WHERE aisid = @aisid", Db.get_connection());
         {
             if (txtDocsPath.Text == "")
             {
-                msg.Alert("Nothing to upload here :(", frmAlert.AlertType.Error);
+                Msg.Alert("Nothing to upload here :(", frmAlert.AlertType.Error);
             }
             else if (txtDocsName.Text == "")
             {
-                msg.Alert("You forgot to type document name", frmAlert.AlertType.Warning);
+                Msg.Alert("You forgot to type document name", frmAlert.AlertType.Warning);
             }
             else
             {
@@ -1512,13 +1511,13 @@ WHERE aisid = @aisid", Db.get_connection());
                     }
                     catch (System.IO.IOException ex)
                     {
-                        msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                        Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                     }
                 }
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 
@@ -1553,7 +1552,7 @@ WHERE aisid = @aisid", Db.get_connection());
         {
             if (RelationshipCount >= 4)
             {
-                msg.Alert("A Student can only have 4 or less relationship", frmAlert.AlertType.Info);
+                Msg.Alert("A Student can only have 4 or less relationship", frmAlert.AlertType.Info);
             }
             else
             {
@@ -1921,12 +1920,12 @@ WHERE aisid = @aisid", Db.get_connection());
                 }
                 catch (IOException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
             }
             else
             {
-                msg.Alert("No changes were made father", frmAlert.AlertType.Warning);
+                Msg.Alert("No changes were made father", frmAlert.AlertType.Warning);
             }
             opf.Dispose();
         }
@@ -1969,7 +1968,7 @@ WHERE aisid = @aisid", Db.get_connection());
         {
             if (RelationshipCount >= 4)
             {
-                msg.Alert("A Student can only have 4 or less relationship", frmAlert.AlertType.Info);
+                Msg.Alert("A Student can only have 4 or less relationship", frmAlert.AlertType.Info);
             }
             else
             {
@@ -2000,7 +1999,7 @@ WHERE aisid = @aisid", Db.get_connection());
         {
             if (!StudIsSaved)
             {
-                msg.Alert("Please save student information first!", frmAlert.AlertType.Info);
+                Msg.Alert("Please save student information first!", frmAlert.AlertType.Info);
             }
             else
             {
@@ -2026,12 +2025,12 @@ WHERE aisid = @aisid", Db.get_connection());
                 }
                 catch (IOException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
             }
             else
             {
-                msg.Alert("No changes were made stepmother", frmAlert.AlertType.Warning);
+                Msg.Alert("No changes were made stepmother", frmAlert.AlertType.Warning);
             }
             opf.Dispose();
         }
@@ -2050,7 +2049,7 @@ WHERE aisid = @aisid", Db.get_connection());
         {
             if (!StudIsSaved)
             {
-                msg.Alert("Please save the student information first!", frmAlert.AlertType.Warning);
+                Msg.Alert("Please save the student information first!", frmAlert.AlertType.Warning);
             }
             else
             {
@@ -2076,12 +2075,12 @@ WHERE aisid = @aisid", Db.get_connection());
                 }
                 catch (IOException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
             }
             else
             {
-                msg.Alert("No changes were made guardian", frmAlert.AlertType.Warning);
+                Msg.Alert("No changes were made guardian", frmAlert.AlertType.Warning);
             }
             opf.Dispose();
         }
@@ -2113,12 +2112,12 @@ WHERE aisid = @aisid", Db.get_connection());
                 }
                 catch (IOException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
             }
             else
             {
-                msg.Alert("No changes were made stepfather", frmAlert.AlertType.Warning);
+                Msg.Alert("No changes were made stepfather", frmAlert.AlertType.Warning);
             }
             opf.Dispose();
         }
@@ -2132,7 +2131,7 @@ WHERE aisid = @aisid", Db.get_connection());
         {
             if (!StudIsSaved)
             {
-                msg.Alert("Save student information first!", frmAlert.AlertType.Warning);
+                Msg.Alert("Save student information first!", frmAlert.AlertType.Warning);
             }
             else
             {
@@ -2312,7 +2311,7 @@ WHERE aisid = @aisid", Db.get_connection());
         {
             if (!StudIsSaved)
             {
-                msg.Alert("Please save student information first", frmAlert.AlertType.Warning);
+                Msg.Alert("Please save student information first", frmAlert.AlertType.Warning);
             }
             else
             {
@@ -2538,7 +2537,7 @@ WHERE aisid = @aisid", Db.get_connection());
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 
@@ -2585,7 +2584,7 @@ WHERE aisid = @aisid", Db.get_connection());
             string medsdetails, allergies, medication, regularmedication, regularmedsdetails;
             if (!StudIsSaved)
             {
-                msg.Alert("Please save student information first!", frmAlert.AlertType.Error);
+                Msg.Alert("Please save student information first!", frmAlert.AlertType.Error);
             }
             else
             {
@@ -2668,18 +2667,18 @@ VALUES
                             cmd.Parameters.Add("@doc", MySqlDbType.Timestamp).Value = DateTime.Now.ToString(timeStamping);
                             if (cmd.ExecuteNonQuery() == 1)
                             {
-                                msg.Alert("Medication info recorded succesfully!", frmAlert.AlertType.Success);
+                                Msg.Alert("Medication info recorded succesfully!", frmAlert.AlertType.Success);
                             }
                             else
                             {
-                                msg.Alert("Something is wrong", frmAlert.AlertType.Success);
+                                Msg.Alert("Something is wrong", frmAlert.AlertType.Success);
 
                             }
                             Db.close_connection();
                         }
                         catch (MySqlException ex)
                         {
-                            msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                            Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                             throw;
                         }
                     }
@@ -2751,24 +2750,24 @@ WHERE medicalofstud = @medicalofstud;
                             cmd.Parameters.Add("@doc", MySqlDbType.Timestamp).Value = DateTime.Now.ToString(timeStamping);
                             if (cmd.ExecuteNonQuery() == 1)
                             {
-                                msg.Alert("Medication info recorded succesfully!", frmAlert.AlertType.Success);
+                                Msg.Alert("Medication info recorded succesfully!", frmAlert.AlertType.Success);
                             }
                             else
                             {
-                                msg.Alert("Something is wrong", frmAlert.AlertType.Success);
+                                Msg.Alert("Something is wrong", frmAlert.AlertType.Success);
 
                             }
                             Db.close_connection();
                         }
                         catch (MySqlException ex)
                         {
-                            msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                            Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                         }
                     }
                 }
                 catch (MySqlException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
             }
 
@@ -2795,17 +2794,17 @@ WHERE medicalofstud = @medicalofstud;
                 cmd.Parameters.Add("@id", MySqlDbType.Int32).Value = schoolId;
                 if (cmd.ExecuteNonQuery() == 1)
                 {
-                    msg.Alert("Selected school info deleted succesfully", frmAlert.AlertType.Success);
+                    Msg.Alert("Selected school info deleted succesfully", frmAlert.AlertType.Success);
                     PrevSchoolHandler();
                 }
                 else
                 {
-                    msg.Alert("Failed to delete data", frmAlert.AlertType.Error);
+                    Msg.Alert("Failed to delete data", frmAlert.AlertType.Error);
                 }
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 
@@ -2839,17 +2838,17 @@ WHERE medicalofstud = @medicalofstud;
                 cmd.Parameters.Add("@curriculum", MySqlDbType.VarChar).Value = txtCurriculum.Text;
                 if (cmd.ExecuteNonQuery() == 1)
                 {
-                    msg.Alert("School Info Added!", frmAlert.AlertType.Success);
+                    Msg.Alert("School Info Added!", frmAlert.AlertType.Success);
                     PrevSchoolHandler();
                 }
                 else
                 {
-                    msg.Alert("Failed to add school info", frmAlert.AlertType.Error);
+                    Msg.Alert("Failed to add school info", frmAlert.AlertType.Error);
                 }
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 
@@ -2900,7 +2899,7 @@ WHERE medicalofstud = @medicalofstud;
                         }
                         catch (System.InvalidOperationException ex)
                         {
-                            msg.Alert("There is nothing to open!", frmAlert.AlertType.Error); ;
+                            Msg.Alert("There is nothing to open!", frmAlert.AlertType.Error); ;
                         }
                     }
                     catch (MySqlException ex)
@@ -2910,14 +2909,14 @@ WHERE medicalofstud = @medicalofstud;
                 }
                 catch (System.NullReferenceException ex)
                 {
-                    msg.Alert("There is nothing to open!", frmAlert.AlertType.Error); ;
+                    Msg.Alert("There is nothing to open!", frmAlert.AlertType.Error); ;
 
                 }
                 Db.close_connection();
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 
@@ -2955,7 +2954,7 @@ WHERE medicalofstud = @medicalofstud;
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
 
         }
@@ -3146,7 +3145,7 @@ WHERE medicalofstud = @medicalofstud;
 
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
             Db.close_connection();
             btnDCExpand.Visible = true;
@@ -3485,7 +3484,7 @@ WHERE medicalofstud = @medicalofstud;
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
             if (formDC == true & ktp == true & kitas == true & studphotoDC == true & parentsphotoDC == true & passportDC == true)
             {
@@ -3529,7 +3528,7 @@ WHERE medicalofstud = @medicalofstud;
                     }
                     catch (MySqlException ex)
                     {
-                        msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                        Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                     }
                     break;
                 case Searchby.ID:
@@ -3545,7 +3544,7 @@ WHERE medicalofstud = @medicalofstud;
                         dgStudList.DataSource = bd;
                         if (dgStudList.Rows.Count < 1)
                         {
-                            msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
+                            Msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                         }
                         rightPanelDataReader();
                         Db.close_connection();
@@ -3560,7 +3559,7 @@ WHERE medicalofstud = @medicalofstud;
                     }
                     catch (MySqlException ex)
                     {
-                        msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                        Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                     }
                     break;
                 case Searchby.Gender:
@@ -3576,11 +3575,11 @@ WHERE medicalofstud = @medicalofstud;
                         dgStudList.DataSource = bd;
                         if (dgStudList.Rows.Count < 1)
                         {
-                            msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
+                            Msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                         }
                         else
                         {
-                            msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
+                            Msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                         }
                         rightPanelDataReader();
                         Db.close_connection();
@@ -3595,7 +3594,7 @@ WHERE medicalofstud = @medicalofstud;
                     }
                     catch (MySqlException ex)
                     {
-                        msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                        Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                     }
                     break;
                 case Searchby.Origin:
@@ -3611,11 +3610,11 @@ WHERE medicalofstud = @medicalofstud;
                         dgStudList.DataSource = bd;
                         if (dgStudList.Rows.Count < 1)
                         {
-                            msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
+                            Msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                         }
                         else
                         {
-                            msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
+                            Msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                         }
                         rightPanelDataReader();
                         Db.close_connection();
@@ -3630,7 +3629,7 @@ WHERE medicalofstud = @medicalofstud;
                     }
                     catch (MySqlException ex)
                     {
-                        msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                        Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                     }
                     break;
                 case Searchby.Revised:
@@ -3648,11 +3647,11 @@ WHERE medicalofstud = @medicalofstud;
                             dgStudList.DataSource = bd;
                             if (dgStudList.Rows.Count < 1)
                             {
-                                msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
+                                Msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                             }
                             else
                             {
-                                msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
+                                Msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                             }
                             rightPanelDataReader();
                             Db.close_connection();
@@ -3667,7 +3666,7 @@ WHERE medicalofstud = @medicalofstud;
                         }
                         catch (MySqlException ex)
                         {
-                            msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                            Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                         }
                     }
                     else
@@ -3684,11 +3683,11 @@ WHERE medicalofstud = @medicalofstud;
                             dgStudList.DataSource = bd;
                             if (dgStudList.Rows.Count < 1)
                             {
-                                msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
+                                Msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                             }
                             else
                             {
-                                msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
+                                Msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                             }
                             rightPanelDataReader();
                             Db.close_connection();
@@ -3703,12 +3702,12 @@ WHERE medicalofstud = @medicalofstud;
                         }
                         catch (MySqlException ex)
                         {
-                            msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                            Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                         }
                     }
                     break;
                 default:
-                    msg.Alert("No search criteria was specified", frmAlert.AlertType.Info);
+                    Msg.Alert("No search criteria was specified", frmAlert.AlertType.Info);
                     break;
             }
         }
@@ -3797,7 +3796,7 @@ WHERE medicalofstud = @medicalofstud;
                     break;
             }
             //Future Function
-            msg.Alert("This will be available soon :)", frmAlert.AlertType.Info);
+            Msg.Alert("This will be available soon :)", frmAlert.AlertType.Info);
         }
 
         private void dgStudList_RowLeave(object sender, DataGridViewCellEventArgs e)
@@ -3827,7 +3826,7 @@ WHERE medicalofstud = @medicalofstud;
         {
             if (txtBriefStudName.Text == "")
             {
-                msg.Alert("Oops, you didn't select any student", frmAlert.AlertType.Warning);
+                Msg.Alert("Oops, you didn't select any student", frmAlert.AlertType.Warning);
             }
             else
             {
@@ -3851,7 +3850,7 @@ WHERE medicalofstud = @medicalofstud;
             // }
             //else
             //  {
-            // msg.Alert("Please provide more information!", frmAlert.AlertType.Warning);
+            // Msg.Alert("Please provide more information!", frmAlert.AlertType.Warning);
             // }
         }
 
@@ -3919,7 +3918,7 @@ WHERE medicalofstud = @medicalofstud;
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 
@@ -3950,7 +3949,7 @@ WHERE medicalofstud = @medicalofstud;
                     }
                     catch (MySqlException ex)
                     {
-                        msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                        Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                     }
                     break;
 
@@ -4067,7 +4066,7 @@ WHERE medicalofstud = @medicalofstud;
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 
@@ -4087,7 +4086,7 @@ WHERE medicalofstud = @medicalofstud;
                 cmd.Parameters.Add("@class_capacity", MySqlDbType.Int32).Value = txtClassCapacity.Text;
                 if(cmd.ExecuteNonQuery() == 1)
                 {
-                    msg.Alert("Yay! you've succesfully created class\nnow please add some class member :)", frmAlert.AlertType.Success);
+                    Msg.Alert("Yay! you've succesfully created class\nnow please add some class member :)", frmAlert.AlertType.Success);
                     ClearPropertyClass();
                     ClassLoader();
                 }
@@ -4095,7 +4094,7 @@ WHERE medicalofstud = @medicalofstud;
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 
@@ -4157,7 +4156,7 @@ WHERE medicalofstud = @medicalofstud;
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 
@@ -4243,7 +4242,7 @@ WHERE medicalofstud = @medicalofstud;
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 
@@ -4277,7 +4276,7 @@ WHERE medicalofstud = @medicalofstud;
                     }
                     catch (MySqlException ex)
                     {
-                        msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                        Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                     }
                     break;
                 case Searchby.ID:
@@ -4293,7 +4292,7 @@ WHERE medicalofstud = @medicalofstud;
                         dgClassStudList.DataSource = bd;
                         if (dgClassStudList.Rows.Count < 1)
                         {
-                            msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
+                            Msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                         }
                         rightPanelDataReader();
                         Db.close_connection();
@@ -4310,7 +4309,7 @@ WHERE medicalofstud = @medicalofstud;
                     }
                     catch (MySqlException ex)
                     {
-                        msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                        Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                     }
                     break;
             }
@@ -4330,17 +4329,17 @@ WHERE medicalofstud = @medicalofstud;
                 cmd.Parameters.Add("@id", MySqlDbType.Int32).Value = ClassId;
                 if(cmd.ExecuteNonQuery() == 1)
                 {
-                    msg.Alert("Class has been deleted!", frmAlert.AlertType.Error);
+                    Msg.Alert("Class has been deleted!", frmAlert.AlertType.Error);
                 }
                 else
                 {
-                    msg.Alert("Unknown error occured", frmAlert.AlertType.Warning);
+                    Msg.Alert("Unknown error occured", frmAlert.AlertType.Warning);
                 }
                 Db.close_connection();
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 
@@ -4484,7 +4483,7 @@ WHERE medicalofstud = @medicalofstud;
                     cmd.Parameters.Add("@class_id", MySqlDbType.Int32).Value = ClassId;
                     if(cmd.ExecuteNonQuery() == 1)
                     {
-                        msg.Alert("Student has been removed succesfully!", frmAlert.AlertType.Success);
+                        Msg.Alert("Student has been removed succesfully!", frmAlert.AlertType.Success);
                         ClassMemberLoad();
                         ClassLoader();
                         switch (_searcby)
@@ -4499,7 +4498,7 @@ WHERE medicalofstud = @medicalofstud;
                     }
                     else
                     {
-                        msg.Alert("Unknown Error", frmAlert.AlertType.Error);
+                        Msg.Alert("Unknown Error", frmAlert.AlertType.Error);
                     }
                 }
                 //add capacity
@@ -4507,7 +4506,7 @@ WHERE medicalofstud = @medicalofstud;
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 
@@ -4515,23 +4514,23 @@ WHERE medicalofstud = @medicalofstud;
         {
             if (dropChooseGrade.SelectedValue.ToString() == "NOT ASSIGNED")
             {
-                msg.Alert("You cannot assign the student to this grade/level", frmAlert.AlertType.Warning);
+                Msg.Alert("You cannot assign the student to this grade/level", frmAlert.AlertType.Warning);
             }
             else if (dgClassList.Rows.Count < 1)
             {
-                msg.Alert("No Class choosed, please select the class first!", frmAlert.AlertType.Warning);
+                Msg.Alert("No Class choosed, please select the class first!", frmAlert.AlertType.Warning);
             }
             else if (classCapacity < 1)
             {
-                msg.Alert("This class section is full, please create another section", frmAlert.AlertType.Error);
+                Msg.Alert("This class section is full, please create another section", frmAlert.AlertType.Error);
             }
             else if (aisid == 0 || aisid == null)
             {
-                msg.Alert("Please select student first!", frmAlert.AlertType.Warning);
+                Msg.Alert("Please select student first!", frmAlert.AlertType.Warning);
             }
             else if(dgClassStudList.Rows.Count < 1)
             {
-                msg.Alert("Please select student first!", frmAlert.AlertType.Warning);
+                Msg.Alert("Please select student first!", frmAlert.AlertType.Warning);
             }
             else
             {
@@ -4571,7 +4570,7 @@ WHERE medicalofstud = @medicalofstud;
                         cmd.Parameters.Add("@class_id", MySqlDbType.Int32).Value = ClassId;
                         if(cmd.ExecuteNonQuery() == 1)
                         {
-                            msg.Alert(lblCAStudName.Text + "\nHas Been Assigned to\n" + lblClassName.Text, frmAlert.AlertType.Info);
+                            Msg.Alert(lblCAStudName.Text + "\nHas Been Assigned to\n" + lblClassName.Text, frmAlert.AlertType.Info);
                             ClassMemberLoad();
                             ClassLoader();
                             switch (_searcby)
@@ -4587,14 +4586,14 @@ WHERE medicalofstud = @medicalofstud;
                     }
                     else
                     {
-                        msg.Alert("Something is wrong", frmAlert.AlertType.Error);
+                        Msg.Alert("Something is wrong", frmAlert.AlertType.Error);
                     }
                 }
                 Db.close_connection();
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 
@@ -4650,20 +4649,20 @@ WHERE medicalofstud = @medicalofstud;
             //validate before can insert
             if(txtClassName.Text == "")
             {
-                msg.Alert("We don't know the class name/section\nPlease specify", frmAlert.AlertType.Warning);
+                Msg.Alert("We don't know the class name/section\nPlease specify", frmAlert.AlertType.Warning);
             }
 
             else if(txtClassCapacity.Text == "")
             {
-                msg.Alert("Class capacity cannot be empty!", frmAlert.AlertType.Warning);
+                Msg.Alert("Class capacity cannot be empty!", frmAlert.AlertType.Warning);
             }
             else if(dropClassGradeGrade.SelectedValue == "NOT ASSIGNED")
             {
-                msg.Alert("You cannot create class on this grade", frmAlert.AlertType.Warning);
+                Msg.Alert("You cannot create class on this grade", frmAlert.AlertType.Warning);
             }
             else if(careTeacher == null)
             {
-                msg.Alert("We don't know who's the careteacher", frmAlert.AlertType.Warning);
+                Msg.Alert("We don't know who's the careteacher", frmAlert.AlertType.Warning);
             }
             else
             {
@@ -4709,22 +4708,22 @@ WHERE medicalofstud = @medicalofstud;
                     cmd.Parameters.Add("@iddocs", MySqlDbType.Int32).Value = docsSelected;
                     if (cmd.ExecuteNonQuery() == 1)
                     {
-                        msg.Alert("Document deleted succesfully!", frmAlert.AlertType.Success);
+                        Msg.Alert("Document deleted succesfully!", frmAlert.AlertType.Success);
                         loadListDocs();
                     }
                     else
                     {
-                        msg.Alert("Failed to delete record, check your connection!", frmAlert.AlertType.Error);
+                        Msg.Alert("Failed to delete record, check your connection!", frmAlert.AlertType.Error);
                     }
                 }
                 catch (MySqlException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
             }
             catch (System.NullReferenceException ex)
             {
-                msg.Alert("There is nothing to delete!", frmAlert.AlertType.Error);
+                Msg.Alert("There is nothing to delete!", frmAlert.AlertType.Error);
             }
             Db.close_connection();
         }
@@ -4746,7 +4745,7 @@ WHERE medicalofstud = @medicalofstud;
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
 
             }
         }
@@ -4781,22 +4780,22 @@ WHERE medicalofstud = @medicalofstud;
                     cmd.Parameters.Add("@id", MySqlDbType.Int32).Value = siblingid;
                     if (cmd.ExecuteNonQuery() == 1)
                     {
-                        msg.Alert("Sibling info deleted succesfully", frmAlert.AlertType.Success);
+                        Msg.Alert("Sibling info deleted succesfully", frmAlert.AlertType.Success);
                         siblingHandler();
                     }
                     else
                     {
-                        msg.Alert("Failed to delete data", frmAlert.AlertType.Error);
+                        Msg.Alert("Failed to delete data", frmAlert.AlertType.Error);
                     }
                 }
                 catch (Exception ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
 
         }
@@ -4823,7 +4822,7 @@ WHERE medicalofstud = @medicalofstud;
             }
             else
             {
-                msg.Alert("No changes were made mother", frmAlert.AlertType.Warning);
+                Msg.Alert("No changes were made mother", frmAlert.AlertType.Warning);
             }
             opf.Dispose();
         }
@@ -4857,7 +4856,7 @@ WHERE medicalofstud = @medicalofstud;
             // }
             //else
             //  {
-            // msg.Alert("Please provide more information!", frmAlert.AlertType.Warning);
+            // Msg.Alert("Please provide more information!", frmAlert.AlertType.Warning);
             // }
 
         }
@@ -4866,7 +4865,7 @@ WHERE medicalofstud = @medicalofstud;
         {
             if (RelationshipCount >= 4)
             {
-                msg.Alert("A Student can only have 4 or less relationship", frmAlert.AlertType.Info);
+                Msg.Alert("A Student can only have 4 or less relationship", frmAlert.AlertType.Info);
             }
             else
             {
@@ -4897,7 +4896,7 @@ WHERE medicalofstud = @medicalofstud;
         {
             if (RelationshipCount >= 4)
             {
-                msg.Alert("A Student can only have 4 or less relationship", frmAlert.AlertType.Info);
+                Msg.Alert("A Student can only have 4 or less relationship", frmAlert.AlertType.Info);
             }
             else
             {
@@ -4928,7 +4927,7 @@ WHERE medicalofstud = @medicalofstud;
         {
             if (RelationshipCount >= 4)
             {
-                msg.Alert("A Student can only have 4 or less relationship", frmAlert.AlertType.Info);
+                Msg.Alert("A Student can only have 4 or less relationship", frmAlert.AlertType.Info);
             }
             else
             {
@@ -4959,7 +4958,7 @@ WHERE medicalofstud = @medicalofstud;
         {
             if (RelationshipCount >= 4)
             {
-                msg.Alert("A Student can only have 4 or less relationship", frmAlert.AlertType.Info);
+                Msg.Alert("A Student can only have 4 or less relationship", frmAlert.AlertType.Info);
             }
             else
             {
@@ -5095,14 +5094,14 @@ VALUES
                     cmd.Parameters.Add("@maker", MySqlDbType.VarChar).Value = Dashboard.ownerId;
                     if (cmd.ExecuteNonQuery() == 1)
                     {
-                        msg.Alert("Mother information saved succesfully!", frmAlert.AlertType.Success);
+                        Msg.Alert("Mother information saved succesfully!", frmAlert.AlertType.Success);
                         motheriIsSaved = true;
                     }
                     Db.close_connection();
                 }
                 catch (MySqlException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
             }
             else
@@ -5176,16 +5175,16 @@ WHERE relationshiptostud = @relationshiptostud and relationship = 'Mother'
                     cmd.Parameters.Add("@maker", MySqlDbType.VarChar).Value = Dashboard.ownerId;
                     if (cmd.ExecuteNonQuery() == 1)
                     {
-                        msg.Alert("Mother information updated succesfully", frmAlert.AlertType.Info);
+                        Msg.Alert("Mother information updated succesfully", frmAlert.AlertType.Info);
                     }
                     else
                     {
-                        msg.Alert("Cannot update information", frmAlert.AlertType.Warning);
+                        Msg.Alert("Cannot update information", frmAlert.AlertType.Warning);
                     }
                 }
                 catch (MySqlException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
                 Db.close_connection();
             }
@@ -5290,14 +5289,14 @@ VALUES
                     cmd.Parameters.Add("@maker", MySqlDbType.VarChar).Value = Dashboard.ownerId;
                     if (cmd.ExecuteNonQuery() == 1)
                     {
-                        msg.Alert("Step Father information saved succesfully!", frmAlert.AlertType.Success);
+                        Msg.Alert("Step Father information saved succesfully!", frmAlert.AlertType.Success);
                         stepFatherIsSaved = true;
                     }
                     Db.close_connection();
                 }
                 catch (MySqlException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
             }
             else
@@ -5371,16 +5370,16 @@ WHERE relationshiptostud = @relationshiptostud and relationship = 'Step Father'
                     cmd.Parameters.Add("@maker", MySqlDbType.VarChar).Value = Dashboard.ownerId;
                     if (cmd.ExecuteNonQuery() == 1)
                     {
-                        msg.Alert("Mother information updated succesfully", frmAlert.AlertType.Info);
+                        Msg.Alert("Mother information updated succesfully", frmAlert.AlertType.Info);
                     }
                     else
                     {
-                        msg.Alert("Cannot update information", frmAlert.AlertType.Error);
+                        Msg.Alert("Cannot update information", frmAlert.AlertType.Error);
                     }
                 }
                 catch (MySqlException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
                 Db.close_connection();
             }
@@ -5485,14 +5484,14 @@ VALUES
                     cmd.Parameters.Add("@maker", MySqlDbType.VarChar).Value = Dashboard.ownerId;
                     if (cmd.ExecuteNonQuery() == 1)
                     {
-                        msg.Alert("Step Mother information saved succesfully!", frmAlert.AlertType.Success);
+                        Msg.Alert("Step Mother information saved succesfully!", frmAlert.AlertType.Success);
                         stepMotherIsSaved = true;
                     }
                     Db.close_connection();
                 }
                 catch (MySqlException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
             }
             else
@@ -5567,16 +5566,16 @@ WHERE relationshiptostud = @relationshiptostud and relationship = 'Step Mother'
                     cmd.Parameters.Add("@maker", MySqlDbType.VarChar).Value = Dashboard.ownerId;
                     if (cmd.ExecuteNonQuery() == 1)
                     {
-                        msg.Alert("Mother information updated succesfully", frmAlert.AlertType.Info);
+                        Msg.Alert("Mother information updated succesfully", frmAlert.AlertType.Info);
                     }
                     else
                     {
-                        msg.Alert("Cannot update information", frmAlert.AlertType.Error);
+                        Msg.Alert("Cannot update information", frmAlert.AlertType.Error);
                     }
                 }
                 catch (MySqlException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
                 Db.close_connection();
             }
@@ -5681,14 +5680,14 @@ VALUES
                     cmd.Parameters.Add("@maker", MySqlDbType.VarChar).Value = Dashboard.ownerId;
                     if (cmd.ExecuteNonQuery() == 1)
                     {
-                        msg.Alert(txtGRelationshipChild.Text + "information saved succesfully!", frmAlert.AlertType.Success);
+                        Msg.Alert(txtGRelationshipChild.Text + "information saved succesfully!", frmAlert.AlertType.Success);
                         guardianIsSaved = true;
                     }
                     Db.close_connection();
                 }
                 catch (MySqlException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
             }
             else
@@ -5763,16 +5762,16 @@ WHERE relationshiptostud = @relationshiptostud and relationship = @relationship
                     cmd.Parameters.Add("@maker", MySqlDbType.VarChar).Value = Dashboard.ownerId;
                     if (cmd.ExecuteNonQuery() == 1)
                     {
-                        msg.Alert("Mother information updated succesfully", frmAlert.AlertType.Info);
+                        Msg.Alert("Mother information updated succesfully", frmAlert.AlertType.Info);
                     }
                     else
                     {
-                        msg.Alert("Cannot update information", frmAlert.AlertType.Error);
+                        Msg.Alert("Cannot update information", frmAlert.AlertType.Error);
                     }
                 }
                 catch (MySqlException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
                 Db.close_connection();
             }
@@ -5879,14 +5878,14 @@ VALUES
                     cmd.Parameters.Add("@maker", MySqlDbType.VarChar).Value = Dashboard.ownerId;
                     if (cmd.ExecuteNonQuery() == 1)
                     {
-                        msg.Alert("Father information saved succesfully!", frmAlert.AlertType.Success);
+                        Msg.Alert("Father information saved succesfully!", frmAlert.AlertType.Success);
                         fatherIsSaved = true;
                     }
                     Db.close_connection();
                 }
                 catch (MySqlException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
             }
             else
@@ -5958,16 +5957,16 @@ WHERE relationshiptostud = @relationshiptostud and relationship = @relationship
                     cmd.Parameters.Add("@maker", MySqlDbType.VarChar).Value = Dashboard.ownerId;
                     if (cmd.ExecuteNonQuery() == 1)
                     {
-                        msg.Alert("Father information updated succesfully", frmAlert.AlertType.Info);
+                        Msg.Alert("Father information updated succesfully", frmAlert.AlertType.Info);
                     }
                     else
                     {
-                        msg.Alert("Cannot update information", frmAlert.AlertType.Error);
+                        Msg.Alert("Cannot update information", frmAlert.AlertType.Error);
                     }
                 }
                 catch (MySqlException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
                 Db.close_connection();
             }
@@ -5978,7 +5977,7 @@ WHERE relationshiptostud = @relationshiptostud and relationship = @relationship
         {
             if (!StudIsSaved)
             {
-                msg.Alert("Please save student information first!", frmAlert.AlertType.Info);
+                Msg.Alert("Please save student information first!", frmAlert.AlertType.Info);
             }
             else
             {
@@ -6004,7 +6003,7 @@ WHERE relationshiptostud = @relationshiptostud and relationship = @relationship
                     }
                     catch (IOException ex)
                     {
-                        msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                        Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                     }
             }
             else

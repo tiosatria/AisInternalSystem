@@ -15,7 +15,6 @@ namespace AisInternalSystem
     {
 
         DialogControl confirmation = new DialogControl();
-        Dialog msg = new Dialog();
 
         public DashboardUC()
         {
@@ -31,7 +30,7 @@ namespace AisInternalSystem
         private void BtnAddTodo_Click(object sender, EventArgs e)
         {
             //add in future
-            msg.Alert("We're still working on finishing it!", frmAlert.AlertType.Info);
+            Msg.Alert("We're still working on finishing it!", frmAlert.AlertType.Info);
         }
     }
 }

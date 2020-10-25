@@ -19,7 +19,6 @@ namespace AisInternalSystem
 {
     public partial class UCEmployee : UserControl
     {
-        Dialog msg = new Dialog();
         Size defaultUcSize = new Size(1280, 611);
         BackgroundWorker worker = new BackgroundWorker();
         Size panelMainMenu = new Size(640, 305);
@@ -314,7 +313,7 @@ namespace AisInternalSystem
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 
@@ -449,7 +448,7 @@ namespace AisInternalSystem
                     }
                     catch (MySqlException ex)
                     {
-                        msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                        Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                     }
                     break;
                 case Searchby.ID:
@@ -465,7 +464,7 @@ namespace AisInternalSystem
                         dgEmployeeList.DataSource = bd;
                         if (dgEmployeeList.Rows.Count < 1)
                         {
-                            msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
+                            Msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                         }
                         RightPanelDataReader();
                         Db.close_connection();
@@ -480,7 +479,7 @@ namespace AisInternalSystem
                     }
                     catch (MySqlException ex)
                     {
-                        msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                        Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                     }
                     break;
                 case Searchby.Gender:
@@ -498,14 +497,14 @@ namespace AisInternalSystem
                             dgEmployeeList.DataSource = bd;
                             if (dgEmployeeList.Rows.Count < 1)
                             {
-                                msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
+                                Msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                                 lblItsEmpty.Visible = true;
                                 dgEmployeeList.Visible = false;
 
                             }
                             else
                             {
-                                msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
+                                Msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                                 lblItsEmpty.Visible = false;
                                 dgEmployeeList.Visible = true;
 
@@ -514,20 +513,20 @@ namespace AisInternalSystem
                             Db.close_connection();
                             if (dgEmployeeList.Rows.Count < 1)
                             {
-                                msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
+                                Msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                                 lblItsEmpty.Visible = true;
                                 dgEmployeeList.Visible = false;
                             }
                             else
                             {
-                                msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
+                                Msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                                 lblItsEmpty.Visible = false;
                                 dgEmployeeList.Visible = true;
                             }
                         }
                         catch (MySqlException ex)
                         {
-                            msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                            Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                         }
                     }
                     else
@@ -546,20 +545,20 @@ namespace AisInternalSystem
                             {
                                 dgEmployeeList.Visible = false;
                                 panelEmpty.Visible = false;
-                                msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
+                                Msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                             }
                             else
                             {
                                 panelEmpty.Visible = false;
                                 dgEmployeeList.Visible = true;
-                                msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
+                                Msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                             }
                             RightPanelDataReader();
                             Db.close_connection();
                         }
                         catch (MySqlException ex)
                         {
-                            msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                            Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                         }
                     }
                     
@@ -579,7 +578,7 @@ namespace AisInternalSystem
                             dgEmployeeList.DataSource = bd;
                             if (dgEmployeeList.Rows.Count < 1)
                             {
-                                msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
+                                Msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                                 panelEmpty.Visible = true;
                                 dgEmployeeList.Visible = false;
                             }
@@ -587,14 +586,14 @@ namespace AisInternalSystem
                             {
                                 panelEmpty.Visible = false;
                                 dgEmployeeList.Visible = true;
-                                msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
+                                Msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                             }
                             RightPanelDataReader();
                             Db.close_connection();
                         }
                         catch (MySqlException ex)
                         {
-                            msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                            Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                         }
                     }
                     else
@@ -611,13 +610,13 @@ namespace AisInternalSystem
                             dgEmployeeList.DataSource = bd;
                             if (dgEmployeeList.Rows.Count < 1)
                             {
-                                msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
+                                Msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                                 panelEmpty.Visible = true;
                                 dgEmployeeList.Visible = false;
                             }
                             else
                             {
-                                msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
+                                Msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                                 panelEmpty.Visible = false;
                                 dgEmployeeList.Visible = true;
                             }
@@ -626,7 +625,7 @@ namespace AisInternalSystem
                         }
                         catch (MySqlException ex)
                         {
-                            msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                            Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                         }
                     }
                     
@@ -646,13 +645,13 @@ namespace AisInternalSystem
                             dgEmployeeList.DataSource = bd;
                             if (dgEmployeeList.Rows.Count < 1)
                             {
-                                msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
+                                Msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                                 dgEmployeeList.Visible = false;
                                 panelEmpty.Visible = true;
                             }
                             else
                             {
-                                msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
+                                Msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                                 dgEmployeeList.Visible = true;
                                 panelEmpty.Visible = false;
                             }
@@ -661,7 +660,7 @@ namespace AisInternalSystem
                         }
                         catch (MySqlException ex)
                         {
-                            msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                            Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                         }
                     }
                    if(where == "Magister")
@@ -678,13 +677,13 @@ namespace AisInternalSystem
                             dgEmployeeList.DataSource = bd;
                             if (dgEmployeeList.Rows.Count < 1)
                             {
-                                msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
+                                Msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                                 dgEmployeeList.Visible = false;
                                 panelEmpty.Visible = true;
                             }
                             else
                             {
-                                msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
+                                Msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                                 dgEmployeeList.Visible = true;
                                 panelEmpty.Visible = false;
                             }
@@ -693,7 +692,7 @@ namespace AisInternalSystem
                         }
                         catch (MySqlException ex)
                         {
-                            msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                            Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                         }
                     }
                     if(where == "Higher Secondary")
@@ -710,13 +709,13 @@ namespace AisInternalSystem
                             dgEmployeeList.DataSource = bd;
                             if (dgEmployeeList.Rows.Count < 1)
                             {
-                                msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
+                                Msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                                 dgEmployeeList.Visible = false;
                                 panelEmpty.Visible = true;
                             }
                             else
                             {
-                                msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
+                                Msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                                 dgEmployeeList.Visible = true;
                                 panelEmpty.Visible = false;
                             }
@@ -725,7 +724,7 @@ namespace AisInternalSystem
                         }
                         catch (MySqlException ex)
                         {
-                            msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                            Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                         }
                     }
                     if(where == "Pursuing Degree")
@@ -742,13 +741,13 @@ namespace AisInternalSystem
                             dgEmployeeList.DataSource = bd;
                             if (dgEmployeeList.Rows.Count < 1)
                             {
-                                msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
+                                Msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                                 dgEmployeeList.Visible = false;
                                 panelEmpty.Visible = true;
                             }
                             else
                             {
-                                msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
+                                Msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                                 dgEmployeeList.Visible = true;
                                 panelEmpty.Visible = false;
                             }
@@ -757,12 +756,12 @@ namespace AisInternalSystem
                         }
                         catch (MySqlException ex)
                         {
-                            msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                            Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                         }
                     }
                     break;
                 default:
-                    msg.Alert("No search criteria was specified", frmAlert.AlertType.Info);
+                    Msg.Alert("No search criteria was specified", frmAlert.AlertType.Info);
                     break;
             }
         }

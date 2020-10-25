@@ -19,7 +19,6 @@ namespace AisInternalSystem
 {
     public partial class UCEmployeeDetailed : UserControl
     {
-        Dialog msg = new Dialog();
         MySqlCommand cmd = new MySqlCommand();
 
         public Int64 empID;
@@ -144,7 +143,7 @@ namespace AisInternalSystem
                                 }
                                 catch (Exception)
                                 {
-                                    msg.Alert("Error Occured", frmAlert.AlertType.Warning);
+                                    Msg.Alert("Error Occured", frmAlert.AlertType.Warning);
                                 }
                             }
                             else
@@ -155,7 +154,7 @@ namespace AisInternalSystem
                         }
                         catch (Exception)
                         {
-                            msg.Alert("Error occured", frmAlert.AlertType.Warning);
+                            Msg.Alert("Error occured", frmAlert.AlertType.Warning);
                         }
                     }
                 }
@@ -166,7 +165,7 @@ namespace AisInternalSystem
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 

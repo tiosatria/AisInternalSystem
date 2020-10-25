@@ -44,7 +44,6 @@ namespace AisInternalSystem
         PleaseWait waitform = new PleaseWait();
         LoginFrm loginfrm = new LoginFrm();
         public UCSchoolAdm UCSchoolAdm = new UCSchoolAdm();
-        Dialog msg = new Dialog();
 
         public Dashboard()
         {
@@ -77,8 +76,8 @@ namespace AisInternalSystem
                 else
                 {
                     loaded = true;
-                    msg.Alert("Succesfully connected to AIS SERVER", frmAlert.AlertType.Info);
-                    msg.Alert("Please introduce yourself to continue :)", frmAlert.AlertType.Info);
+                    Msg.Alert("Succesfully connected to AIS SERVER", frmAlert.AlertType.Info);
+                    Msg.Alert("Please introduce yourself to continue :)", frmAlert.AlertType.Info);
                 }
                 waitform.Close();
                 this.BringToFront();
@@ -86,8 +85,7 @@ namespace AisInternalSystem
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
-                throw;
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 
@@ -252,7 +250,7 @@ namespace AisInternalSystem
 
         private void BtnInventoryAdmin_Click(object sender, EventArgs e)
         {
-            msg.Alert("This Feature will arrive soon!", frmAlert.AlertType.Info);
+            Msg.Alert("This Feature will arrive soon!", frmAlert.AlertType.Info);
             //NavSwitcher(NavigationState.Inventory);
 
         }
@@ -270,7 +268,7 @@ namespace AisInternalSystem
 
         private void picThumbUser_Click(object sender, EventArgs e)
         {
-            msg.Alert("You look really good today! :)", frmAlert.AlertType.Info);
+            Msg.Alert("You look really good today! :)", frmAlert.AlertType.Info);
         }
 
         private void guna2CirclePictureBox1_Click(object sender, EventArgs e)
@@ -334,12 +332,12 @@ namespace AisInternalSystem
 
         private void Btn_Notif_Click(object sender, EventArgs e)
         {
-            msg.Alert("This feature will come soon!", frmAlert.AlertType.Info);
+            Msg.Alert("This feature will come soon!", frmAlert.AlertType.Info);
         }
 
         private void btnMsg_Click(object sender, EventArgs e)
         {
-            msg.Alert("This feature will come soon!", frmAlert.AlertType.Info);
+            Msg.Alert("This feature will come soon!", frmAlert.AlertType.Info);
 
         }
 

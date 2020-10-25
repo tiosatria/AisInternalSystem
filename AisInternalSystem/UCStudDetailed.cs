@@ -19,7 +19,6 @@ namespace AisInternalSystem
 {
     public partial class UCStudDetailed : UserControl
     {
-        Dialog msg = new Dialog();
         MySqlCommand cmd = new MySqlCommand();
         PanelNotAvailable NA = new PanelNotAvailable();
         Point NAPos = new Point(248, 100);
@@ -161,7 +160,7 @@ namespace AisInternalSystem
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
 
         }

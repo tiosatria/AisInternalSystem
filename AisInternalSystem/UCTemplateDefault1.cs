@@ -16,9 +16,6 @@ namespace AisInternalSystem
     public partial class UCFeeDback : UserControl
     {
 
-        Dialog msg = new Dialog();
-
-
         public UCFeeDback()
         {
             InitializeComponent();
@@ -56,7 +53,7 @@ namespace AisInternalSystem
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);   
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);   
             }
         }
 
@@ -74,23 +71,23 @@ namespace AisInternalSystem
                     cmd.Parameters.Add("@stat", MySqlDbType.VarChar).Value = "Input Received";
                     if (cmd.ExecuteNonQuery() == 1)
                     {
-                        msg.Alert("Thank you for your feeDback!\nWe'll get back to you soon! :)", frmAlert.AlertType.Info);
+                        Msg.Alert("Thank you for your feeDback!\nWe'll get back to you soon! :)", frmAlert.AlertType.Info);
                         LoadFeeDback();
                     }
                     else
                     {
-                        msg.Alert("We're sorry we're having some trouble", frmAlert.AlertType.Error);
+                        Msg.Alert("We're sorry we're having some trouble", frmAlert.AlertType.Error);
                     }
                     Db.close_connection();
                 }
                 catch (MySqlException ex)
                 {
-                    msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                    Msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
             }
             else
             {
-                msg.Alert("Please tell us something...", frmAlert.AlertType.Warning);
+                Msg.Alert("Please tell us something...", frmAlert.AlertType.Warning);
             }
         }
 

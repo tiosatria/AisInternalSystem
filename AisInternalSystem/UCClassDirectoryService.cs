@@ -17,7 +17,6 @@ namespace AisInternalSystem
     {
         MySqlCommand command;
         MySqlDataReader reader;
-        Dialog msg = new Dialog();
         Data collection = new Data();
         public UCClassDirectoryService()
         {
@@ -89,7 +88,7 @@ namespace AisInternalSystem
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
         void Load_teacher()
@@ -121,7 +120,7 @@ namespace AisInternalSystem
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
         void Load_assistantTeacher()
@@ -157,7 +156,7 @@ namespace AisInternalSystem
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
         public void LoadInfo()
@@ -236,7 +235,7 @@ namespace AisInternalSystem
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
         public void InitClassList()
@@ -256,7 +255,7 @@ namespace AisInternalSystem
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 
@@ -313,17 +312,17 @@ namespace AisInternalSystem
                 command.Parameters.Add("@classid", MySqlDbType.Int32).Value = Convert.ToInt32(Dashboard.SelectedString);
                 if (command.ExecuteNonQuery() == 1)
                 {
-                    msg.Alert("Class revised succesfully!", frmAlert.AlertType.Success);
+                    Msg.Alert("Class revised succesfully!", frmAlert.AlertType.Success);
                 }
                 else
                 {
-                    msg.Alert("Error Occured", frmAlert.AlertType.Error);
+                    Msg.Alert("Error Occured", frmAlert.AlertType.Error);
                 }
                 Db.close_connection();
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
         void Revise_Without_Ass()
@@ -339,17 +338,17 @@ namespace AisInternalSystem
                 command.Parameters.Add("@classid", MySqlDbType.Int32).Value = Convert.ToInt32(Dashboard.SelectedString);
                 if (command.ExecuteNonQuery() == 1)
                 {
-                    msg.Alert("Class revised succesfully!", frmAlert.AlertType.Success);
+                    Msg.Alert("Class revised succesfully!", frmAlert.AlertType.Success);
                 }
                 else
                 {
-                    msg.Alert("Error Occured", frmAlert.AlertType.Error);
+                    Msg.Alert("Error Occured", frmAlert.AlertType.Error);
                 }
                 Db.close_connection();
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
 
         }

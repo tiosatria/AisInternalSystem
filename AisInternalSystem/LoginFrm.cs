@@ -13,12 +13,12 @@ using System.Net.Sockets;
 using System.Net;
 using System.Threading;
 using Microsoft.VisualBasic;
+using AisInternalSystem.Properties;
 
 namespace AisInternalSystem
 {
     public partial class LoginFrm : UserControl
     {
-        Dialog dialog = new Dialog();
 
         public LoginFrm()
         {
@@ -43,7 +43,7 @@ namespace AisInternalSystem
             }
             catch (MySqlException ex)
             {
-                dialog.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
 
         }
@@ -116,36 +116,45 @@ namespace AisInternalSystem
                                     Dashboard.userPhotoPath = erader2.GetString("employee_pic");
                                     Dashboard.ownerName = erader2.GetString("emp_fullname");
                                 }
-                                dialog.Alert("Hello, welcome back " + Dashboard.ownerName + "!" + "\nWe missed you!", frmAlert.AlertType.Info);
-                                dialog.Alert("You have been logged in successfully!", frmAlert.AlertType.Success);
+                                Msg.Alert("Hello, welcome back " + Dashboard.ownerName + "!" + "\nWe missed you!", frmAlert.AlertType.Info);
+                                Msg.Alert("You have been logged in successfully!", frmAlert.AlertType.Success);
                                 Dashboard mainform;
                                 mainform = (Dashboard)this.FindForm();
                                 mainform.RoleSwitcher(Dashboard.RoleState.Administration);
-                                mainform.picThumbUser.Image = Image.FromFile(Dashboard.userPhotoPath);
+                                try
+                                {
+                                    mainform.picThumbUser.Image = Image.FromFile(Dashboard.userPhotoPath);
+
+                                }
+                                catch (Exception)
+                                {
+                                    mainform.picThumbUser.Image = Resources.icons8_student_male_80px ;
+
+                                }
                                 mainform.init();
                                 mainform.isLoggedIn = true;
                                 break;
 
                             default:
-                                dialog.Alert("We've successfully logged you in \n but we don't know your roles :(", frmAlert.AlertType.Info);
+                                Msg.Alert("We've successfully logged you in \n but we don't know your roles :(", frmAlert.AlertType.Info);
                                 break;
                         }
                     }
                     else
                     {
-                        dialog.Alert("Something is wrong", frmAlert.AlertType.Error);
+                        Msg.Alert("Something is wrong", frmAlert.AlertType.Error);
                     }
                 }
                 else
                 {
-                    dialog.Alert("Oopss.. We don't recognise you \nMind to reintroduce yourself again?", frmAlert.AlertType.Error);
+                    Msg.Alert("Oopss.. We don't recognise you \nMind to reintroduce yourself again?", frmAlert.AlertType.Error);
                 }
                 Db.close_connection();
 
             }
             catch (MySqlException ex)
             {
-                dialog.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 

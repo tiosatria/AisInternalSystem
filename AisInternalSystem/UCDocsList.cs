@@ -16,7 +16,6 @@ namespace AisInternalSystem
 {
     public partial class UCDocsList : UserControl
     {
-        Dialog msg = new Dialog();
         public UCDocsList()
         {
             InitializeComponent();
@@ -107,7 +106,7 @@ namespace AisInternalSystem
 
         void OpenDocument()
         {
-            msg.Alert("Please wait\nWe're looking for the document you clicked.", frmAlert.AlertType.Success);
+            Msg.Alert("Please wait\nWe're looking for the document you clicked.", frmAlert.AlertType.Success);
             System.Diagnostics.Process.Start(AppPath);
         }
 

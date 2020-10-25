@@ -12,7 +12,6 @@ namespace AisInternalSystem.Module
 {
     class Data
     {
-        Dialog msg = new Dialog();
 
         public StringCollection Religion = new StringCollection()
         {"CHRISTIAN",
@@ -194,7 +193,7 @@ namespace AisInternalSystem.Module
             }
             catch (MySqlException ex)
             {
-                msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
         }
 
