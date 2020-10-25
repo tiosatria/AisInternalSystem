@@ -1,0 +1,1243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="aisdbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="academic_feedback">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ref" Type="int" />
+    <Property Name="feedback" Type="varchar" MaxLength="120" />
+    <Property Name="maker" Type="bigint" />
+    <Property Name="submitted" Type="timestamp" Precision="0" />
+  </EntityType>
+  <EntityType Name="academic_year">
+    <Key>
+      <PropertyRef Name="IDAyear" />
+      <PropertyRef Name="AYCode" />
+    </Key>
+    <Property Name="IDAyear" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AYCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AcademicYear" Type="varchar" MaxLength="50" />
+    <Property Name="TermsAcademicYear" Type="int" />
+    <Property Name="StatusAY" Type="enum" />
+  </EntityType>
+  <EntityType Name="accounting_enrollment">
+    <Key>
+      <PropertyRef Name="idenrollment" />
+    </Key>
+    <Property Name="idenrollment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="aisid" Type="int" />
+    <Property Name="appfee" Type="decimal" Precision="15" Scale="2" />
+    <Property Name="schoolfee" Type="decimal" Precision="15" Scale="2" />
+    <Property Name="uniformfee" Type="decimal" Precision="15" Scale="2" />
+    <Property Name="materialfee" Type="decimal" Precision="15" Scale="2" />
+    <Property Name="formfee" Type="decimal" Precision="15" Scale="2" />
+    <Property Name="totalfee" Type="decimal" Precision="15" Scale="2" />
+    <Property Name="doc" Type="timestamp" Precision="0" />
+    <Property Name="maker" Type="int" />
+    <Property Name="payment_plan" Type="longtext" />
+    <Property Name="notes" Type="longtext" />
+    <Property Name="intake" Type="date" />
+    <Property Name="enq_id" Type="int" />
+  </EntityType>
+  <EntityType Name="app_ver">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="ver" Type="double" Nullable="false" />
+    <Property Name="released" Type="timestamp" Precision="0" Nullable="false" />
+    <Property Name="release_note" Type="longtext" Nullable="false" />
+    <Property Name="dbver" Type="double" Nullable="false" />
+    <Property Name="path" Type="varchar" MaxLength="100" />
+    <Property Name="app_maintenance" Type="enum" />
+  </EntityType>
+  <EntityType Name="class">
+    <Key>
+      <PropertyRef Name="class_id" />
+    </Key>
+    <Property Name="class_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="classname" Type="varchar" MaxLength="40" />
+    <Property Name="grade" Type="varchar" MaxLength="50" />
+    <Property Name="careteacher" Type="int" />
+    <Property Name="assistant" Type="int" />
+    <Property Name="class_start" Type="date" />
+    <Property Name="class_end" Type="date" />
+    <Property Name="class_stat" Type="enum" />
+    <Property Name="class_capacity" Type="int" />
+    <Property Name="AYCODE" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="class_history">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="stud_id" Type="int" />
+    <Property Name="class_id" Type="int" />
+    <Property Name="class_status" Type="enum" />
+    <Property Name="DESC" Type="text" />
+    <Property Name="assigned_date" Type="timestamp" Precision="0" />
+    <Property Name="assignedby" Type="int" />
+  </EntityType>
+  <EntityType Name="class_media">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="media_name" Type="varchar" MaxLength="50" />
+    <Property Name="media_description" Type="text" />
+    <Property Name="media_location" Type="varchar" MaxLength="100" />
+    <Property Name="media_uploader" Type="varchar" MaxLength="50" />
+    <Property Name="visibility" Type="enum" />
+    <Property Name="media_class" Type="int" />
+  </EntityType>
+  <EntityType Name="department">
+    <Key>
+      <PropertyRef Name="iddepartment" />
+      <PropertyRef Name="dept_name" />
+    </Key>
+    <Property Name="iddepartment" Type="int" Nullable="false" />
+    <Property Name="dept_name" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="supervisor" Type="int" />
+  </EntityType>
+  <EntityType Name="document_employee">
+    <Key>
+      <PropertyRef Name="id_Docs" />
+    </Key>
+    <Property Name="id_Docs" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="docsname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="docspath" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="maker" Type="int" />
+    <Property Name="doc" Type="timestamp" Precision="0" />
+    <Property Name="docstype" Type="enum" />
+    <Property Name="docsdesc" Type="longtext" />
+    <Property Name="owner_id" Type="int" />
+  </EntityType>
+  <EntityType Name="document_students">
+    <Key>
+      <PropertyRef Name="id_Docs" />
+    </Key>
+    <Property Name="id_Docs" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="docsname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="docspath" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="maker" Type="int" />
+    <Property Name="doc" Type="timestamp" Precision="0" />
+    <Property Name="docstype" Type="enum" />
+    <Property Name="docsdesc" Type="longtext" />
+    <Property Name="owner_id" Type="int" />
+  </EntityType>
+  <EntityType Name="employee_data">
+    <Key>
+      <PropertyRef Name="employeeid" />
+    </Key>
+    <Property Name="created_on" Type="timestamp" Precision="0" />
+    <Property Name="emp_id" Type="bigint" />
+    <Property Name="employeeid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emp_department" Type="enum" />
+    <Property Name="emp_roles" Type="enum" />
+    <Property Name="emp_joindate" Type="date" />
+    <Property Name="emp_fullname" Type="varchar" MaxLength="40" />
+    <Property Name="emp_gender" Type="varchar" MaxLength="45" />
+    <Property Name="emp_religion" Type="varchar" MaxLength="45" />
+    <Property Name="emp_pob" Type="varchar" MaxLength="40" />
+    <Property Name="emp_nationality" Type="varchar" MaxLength="40" />
+    <Property Name="emp_dob" Type="date" />
+    <Property Name="emp_address" Type="text" />
+    <Property Name="emp_homephone" Type="varchar" MaxLength="45" />
+    <Property Name="emp_hometown_address" Type="text" />
+    <Property Name="emp_hometown_number" Type="varchar" MaxLength="45" />
+    <Property Name="emp_mobile" Type="varchar" MaxLength="20" />
+    <Property Name="emp_whatsapp" Type="varchar" MaxLength="20" />
+    <Property Name="emp_personal_email" Type="varchar" MaxLength="45" />
+    <Property Name="emp_npwp" Type="varchar" MaxLength="45" />
+    <Property Name="emp_nik" Type="varchar" MaxLength="50" />
+    <Property Name="emp_bpjs_kes" Type="varchar" MaxLength="45" />
+    <Property Name="emp_bpjs_tk" Type="varchar" MaxLength="45" />
+    <Property Name="emp_marital_stat" Type="enum" />
+    <Property Name="emp_spouse_name" Type="varchar" MaxLength="45" />
+    <Property Name="emp_spouse_phone" Type="varchar" MaxLength="45" />
+    <Property Name="emp_no_dependant" Type="varchar" MaxLength="45" />
+    <Property Name="emp_emergencycontactname" Type="varchar" MaxLength="45" />
+    <Property Name="emp_emergencyrelationship" Type="varchar" MaxLength="45" />
+    <Property Name="emp_emergencycontactaddress" Type="text" />
+    <Property Name="emp_emergencycontactphone" Type="varchar" MaxLength="45" />
+    <Property Name="employee_pic" Type="varchar" MaxLength="150" />
+    <Property Name="emp_nonsch1" Type="varchar" MaxLength="45" />
+    <Property Name="emp_nonsch1_designation" Type="varchar" MaxLength="60" />
+    <Property Name="emp_nonsch1_institution" Type="text" />
+    <Property Name="emp_nonsch1_year" Type="varchar" MaxLength="45" />
+    <Property Name="emp_nonsch2" Type="varchar" MaxLength="45" />
+    <Property Name="emp_nonsch2_designation" Type="varchar" MaxLength="60" />
+    <Property Name="emp_nonsch2_year" Type="varchar" MaxLength="45" />
+    <Property Name="emp_nonsch2_institution" Type="text" />
+    <Property Name="emp_schedu" Type="varchar" MaxLength="45" />
+    <Property Name="emp_schedu_name" Type="text" />
+    <Property Name="emp_schedu_graduated" Type="varchar" MaxLength="45" />
+    <Property Name="emp_ispursuingdegree" Type="enum" />
+    <Property Name="emp_ispursuingdegree_institution" Type="text" />
+    <Property Name="emp_ispursuingdegree_duration" Type="varchar" MaxLength="45" />
+    <Property Name="emp_ispursuingdegree_startemployee" Type="varchar" MaxLength="45" />
+    <Property Name="emp_ispursuingdegree_degree" Type="text" />
+    <Property Name="emp_passport_no" Type="varchar" MaxLength="30" />
+    <Property Name="emp_status" Type="enum" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="date_of_creation" Type="timestamp" Precision="0" />
+  </EntityType>
+  <EntityType Name="employee_database">
+    <Key>
+      <PropertyRef Name="emp_id" />
+    </Key>
+    <Property Name="created_on" Type="timestamp" Precision="0" />
+    <Property Name="emp_id" Type="bigint" Nullable="false" />
+    <Property Name="employeeid" Type="int" />
+    <Property Name="emp_dept" Type="enum" />
+    <Property Name="emp_role" Type="enum" />
+    <Property Name="join_date" Type="date" />
+    <Property Name="emp_fullname" Type="varchar" MaxLength="50" />
+    <Property Name="emp_gender" Type="enum" />
+    <Property Name="emp_religion" Type="varchar" MaxLength="59" />
+    <Property Name="emp_pob" Type="varchar" MaxLength="50" />
+    <Property Name="emp_nationality" Type="varchar" MaxLength="50" />
+    <Property Name="emp_dob" Type="date" />
+    <Property Name="emp_address" Type="text" />
+    <Property Name="emp_homephone" Type="varchar" MaxLength="20" />
+    <Property Name="emp_hometown_address" Type="text" />
+    <Property Name="emp_hometown_number" Type="varchar" MaxLength="20" />
+    <Property Name="emp_mobilenumber" Type="varchar" MaxLength="20" />
+    <Property Name="emp_whatsapp" Type="varchar" MaxLength="20" />
+    <Property Name="emp_personal_email" Type="varchar" MaxLength="50" />
+    <Property Name="emp_npwp" Type="varchar" MaxLength="20" />
+    <Property Name="emp_nik" Type="varchar" MaxLength="20" />
+    <Property Name="emp_bpjs_kes" Type="varchar" MaxLength="20" />
+    <Property Name="emp_bpjs_tk" Type="varchar" MaxLength="20" />
+    <Property Name="emp_marital" Type="enum" />
+    <Property Name="emp_spouse_name" Type="varchar" MaxLength="50" />
+    <Property Name="emp_spouse_phone" Type="varchar" MaxLength="20" />
+    <Property Name="emp_no_dependant" Type="text" />
+    <Property Name="emp_emergency_name" Type="varchar" MaxLength="50" />
+    <Property Name="emp_emergency_relationship" Type="varchar" MaxLength="50" />
+    <Property Name="emp_emergency_address" Type="text" />
+    <Property Name="emp_emergency_phone" Type="varchar" MaxLength="20" />
+    <Property Name="employeepic" Type="varchar" MaxLength="45" />
+    <Property Name="emp_nonsch1" Type="varchar" MaxLength="50" />
+    <Property Name="emp_nonsch1_designation" Type="text" />
+    <Property Name="emp_nonsch1_institution" Type="text" />
+    <Property Name="emp_nonsch1_year" Type="text" />
+    <Property Name="emp_nonsch2" Type="varchar" MaxLength="50" />
+    <Property Name="emp_nonsch2_designation" Type="text" />
+    <Property Name="emp_nonsch2_year" Type="text" />
+    <Property Name="emp_nonsch2_institution" Type="varchar" MaxLength="50" />
+    <Property Name="emp_schedu" Type="text" />
+    <Property Name="emp_schedu_name" Type="text" />
+    <Property Name="emp_schedu_graduated" Type="text" />
+    <Property Name="emp_ispursuingdegree" Type="text" />
+    <Property Name="emp_ispursuingdegree_institution" Type="text" />
+    <Property Name="emp_ispursuingdegree_duration" Type="text" />
+    <Property Name="emp_ispursuingdegree_start" Type="varchar" MaxLength="20" />
+    <Property Name="emp_ispursuingdegree_degree" Type="text" />
+    <Property Name="emp_passport" Type="varchar" MaxLength="50" />
+    <Property Name="emp_status" Type="enum" />
+    <Property Name="maker" Type="int" />
+    <Property Name="doc" Type="timestamp" Precision="0" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'def.aisdb.employeedatar' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="employeedatar">
+          <Property Name="Timestamp" Type="text" />
+          <Property Name="Department" Type="text" />
+          <Property Name="ROLE" Type="text" />
+          <Property Name="JoinDate" Type="text" />
+          <Property Name="FullName" Type="text" />
+          <Property Name="Gender" Type="text" />
+          <Property Name="Religion" Type="text" />
+          <Property Name="PlaceofBirth" Type="text" />
+          <Property Name="Nationality" Type="text" />
+          <Property Name="DateofBirth" Type="text" />
+          <Property Name="CurrentResidentialAddress" Type="text" />
+          <Property Name="CurrentHomePhoneNumber" Type="text" />
+          <Property Name="HometownAddress" Type="text" />
+          <Property Name="HometownPhoneNo." Type="text" />
+          <Property Name="MobileNumber" Type="text" />
+          <Property Name="WhatsappNumber" Type="text" />
+          <Property Name="EmailAddress" Type="text" />
+          <Property Name="NPWP" Type="text" />
+          <Property Name="NIK" Type="text" />
+          <Property Name="BPJSKes" Type="text" />
+          <Property Name="BPJSTk" Type="text" />
+          <Property Name="MaritalStatus" Type="text" />
+          <Property Name="SpouseName" Type="text" />
+          <Property Name="SpousePhoneNo" Type="text" />
+          <Property Name="NoDependant" Type="text" />
+          <Property Name="EmergencyContactName" Type="text" />
+          <Property Name="Relationship" Type="text" />
+          <Property Name="ContactAddress" Type="text" />
+          <Property Name="PhoneNumber" Type="text" />
+          <Property Name="NonSchoolEducation1" Type="text" />
+          <Property Name="Degree1" Type="text" />
+          <Property Name="Designationawarded1" Type="text" />
+          <Property Name="InstitutionName1" Type="text" />
+          <Property Name="NonSchoolEducation2" Type="text" />
+          <Property Name="Degree2" Type="text" />
+          <Property Name="Designationawarded2" Type="text" />
+          <Property Name="InstitutionName2" Type="text" />
+          <Property Name="EduCertificate" Type="text" />
+          <Property Name="SchoolEducation" Type="text" />
+          <Property Name="SchoolName" Type="text" />
+          <Property Name="GraduatedYear" Type="text" />
+          <Property Name="EduCertificate2" Type="text" />
+          <Property Name="isPursuingStudy" Type="text" />
+          <Property Name="PInstitutionName" Type="text" />
+          <Property Name="PDurationofstudy" Type="text" />
+          <Property Name="PDesignationtobeobtained:" Type="text" />
+          <Property Name="DOCSKTP" Type="text" />
+          <Property Name="FamilyCard" Type="text" />
+          <Property Name="PassportDocs" Type="text" />
+          <Property Name="CurriculumVitaeDocs" Type="text" />
+          <Property Name="Otherdocumentsthatyouwanttoincludedocs" Type="text" />
+        </EntityType>-->
+  <EntityType Name="enq_cancel">
+    <Key>
+      <PropertyRef Name="idcancellation" />
+    </Key>
+    <Property Name="idcancellation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="enq_id" Type="int" />
+    <Property Name="reason" Type="longtext" />
+    <Property Name="timest" Type="timestamp" Precision="0" />
+    <Property Name="maker" Type="int" />
+  </EntityType>
+  <EntityType Name="enq_test">
+    <Key>
+      <PropertyRef Name="test_id" />
+    </Key>
+    <Property Name="test_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="enq_id" Type="int" />
+    <Property Name="math" Type="int" />
+    <Property Name="english" Type="int" />
+    <Property Name="science" Type="int" />
+    <Property Name="additional" Type="int" />
+    <Property Name="additional_name" Type="varchar" MaxLength="40" />
+    <Property Name="timest" Type="timestamp" Precision="0" />
+    <Property Name="maker" Type="int" />
+    <Property Name="remarks" Type="longtext" />
+  </EntityType>
+  <EntityType Name="enquiries">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="studname" Type="varchar" MaxLength="40" />
+    <Property Name="pob" Type="varchar" MaxLength="40" />
+    <Property Name="dob" Type="date" />
+    <Property Name="presentschool" Type="varchar" MaxLength="40" />
+    <Property Name="levels" Type="varchar" MaxLength="50" />
+    <Property Name="parentsname" Type="varchar" MaxLength="40" />
+    <Property Name="parentstype" Type="enum" />
+    <Property Name="phonenumb" Type="varchar" MaxLength="20" />
+    <Property Name="whatsappnumb" Type="varchar" MaxLength="20" />
+    <Property Name="address" Type="longtext" />
+    <Property Name="remarks" Type="longtext" />
+    <Property Name="maker" Type="int" />
+    <Property Name="doc" Type="timestamp" Precision="0" />
+    <Property Name="current_procedure" Type="int" />
+    <Property Name="test_date" Type="datetime" Precision="0" />
+    <Property Name="skiptest" Type="enum" />
+    <Property Name="decidedclass" Type="int" />
+    <Property Name="advanced" Type="enum" />
+    <Property Name="aisid" Type="int" />
+  </EntityType>
+  <EntityType Name="enquiries_process">
+    <Key>
+      <PropertyRef Name="proc_id" />
+    </Key>
+    <Property Name="proc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="proc_numb" Type="int" />
+    <Property Name="procedure_name" Type="varchar" MaxLength="40" />
+    <Property Name="enq_id" Type="int" />
+    <Property Name="timest" Type="timestamp" Precision="0" />
+    <Property Name="maker" Type="int" />
+  </EntityType>
+  <EntityType Name="feedback">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="maker" Type="int" Nullable="false" />
+    <Property Name="feedback" Type="text" />
+    <Property Name="doc" Type="timestamp" Precision="0" />
+    <Property Name="stat" Type="enum" />
+  </EntityType>
+  <EntityType Name="grade">
+    <Key>
+      <PropertyRef Name="gname" />
+      <PropertyRef Name="glevel" />
+    </Key>
+    <Property Name="gname" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="glevel" Type="int" Nullable="false" />
+    <Property Name="dept" Type="enum" Nullable="false" />
+    <Property Name="desc" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="loginhistory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emp_id" Type="int" />
+    <Property Name="times" Type="timestamp" Precision="0" />
+    <Property Name="publicip" Type="varchar" MaxLength="40" />
+    <Property Name="localip" Type="varchar" MaxLength="40" />
+  </EntityType>
+  <EntityType Name="stud_father_information">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="relationship" Type="varchar" MaxLength="50" />
+    <Property Name="fatherofstud" Type="int" />
+    <Property Name="fname" Type="varchar" MaxLength="50" />
+    <Property Name="fnationality" Type="varchar" MaxLength="50" />
+    <Property Name="faustralianresidence" Type="varchar" MaxLength="50" />
+    <Property Name="fauabortorres" Type="varchar" MaxLength="50" />
+    <Property Name="fschooleducation" Type="varchar" MaxLength="50" />
+    <Property Name="fnonschooleducation" Type="varchar" MaxLength="50" />
+    <Property Name="foccupation" Type="varchar" MaxLength="50" />
+    <Property Name="fhomeaddress" Type="longtext" />
+    <Property Name="fhomestate" Type="varchar" MaxLength="50" />
+    <Property Name="fhomecountry" Type="varchar" MaxLength="50" />
+    <Property Name="fsuburb" Type="varchar" MaxLength="50" />
+    <Property Name="fpostcode" Type="varchar" MaxLength="5" />
+    <Property Name="fpostaladdress" Type="varchar" MaxLength="50" />
+    <Property Name="fpostalstate" Type="varchar" MaxLength="50" />
+    <Property Name="fpostalsuburb" Type="varchar" MaxLength="50" />
+    <Property Name="fpostalcode" Type="varchar" MaxLength="5" />
+    <Property Name="fpostalcountry" Type="varchar" MaxLength="50" />
+    <Property Name="fhomephoneno" Type="varchar" MaxLength="15" />
+    <Property Name="fmobilenumb" Type="varchar" MaxLength="15" />
+    <Property Name="ffaxnumb" Type="varchar" MaxLength="15" />
+    <Property Name="femailaddress" Type="varchar" MaxLength="50" />
+    <Property Name="fwhatsapp" Type="varchar" MaxLength="15" />
+    <Property Name="fmainlang" Type="varchar" MaxLength="50" />
+    <Property Name="fotherthanenglish" Type="varchar" MaxLength="45" />
+    <Property Name="doc" Type="timestamp" Precision="0" />
+    <Property Name="photo" Type="varchar" MaxLength="100" />
+    <Property Name="maker" Type="int" />
+  </EntityType>
+  <EntityType Name="stud_guardian_information">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="guardianofstud" Type="int" />
+    <Property Name="gname" Type="varchar" MaxLength="50" />
+    <Property Name="gnationality" Type="varchar" MaxLength="50" />
+    <Property Name="gaustralianresidence" Type="varchar" MaxLength="50" />
+    <Property Name="gauabortorres" Type="varchar" MaxLength="50" />
+    <Property Name="gschooleducation" Type="varchar" MaxLength="50" />
+    <Property Name="gnonschooleducation" Type="varchar" MaxLength="50" />
+    <Property Name="goccupation" Type="varchar" MaxLength="50" />
+    <Property Name="ghomeaddress" Type="longtext" />
+    <Property Name="ghomestate" Type="varchar" MaxLength="50" />
+    <Property Name="ghomecountry" Type="varchar" MaxLength="50" />
+    <Property Name="gsuburb" Type="varchar" MaxLength="50" />
+    <Property Name="gpostcode" Type="varchar" MaxLength="5" />
+    <Property Name="gpostaladdress" Type="varchar" MaxLength="50" />
+    <Property Name="gpostalstate" Type="varchar" MaxLength="50" />
+    <Property Name="gpostalsuburb" Type="varchar" MaxLength="50" />
+    <Property Name="gpostalcode" Type="varchar" MaxLength="5" />
+    <Property Name="gpostalcountry" Type="varchar" MaxLength="50" />
+    <Property Name="ghomephoneno" Type="varchar" MaxLength="15" />
+    <Property Name="gmobilenumb" Type="varchar" MaxLength="15" />
+    <Property Name="gfaxnumb" Type="varchar" MaxLength="15" />
+    <Property Name="gemailaddress" Type="varchar" MaxLength="50" />
+    <Property Name="gwhatsapp" Type="varchar" MaxLength="15" />
+    <Property Name="doc" Type="timestamp" Precision="0" />
+    <Property Name="grelationshiptochild" Type="varchar" MaxLength="50" />
+    <Property Name="maker" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="stud_medical_info">
+    <Key>
+      <PropertyRef Name="idmedical" />
+    </Key>
+    <Property Name="idmedical" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="medicalofstud" Type="int" />
+    <Property Name="healthcondition" Type="varchar" MaxLength="120" />
+    <Property Name="allergies" Type="varchar" MaxLength="120" />
+    <Property Name="medication_for_allergies" Type="varchar" MaxLength="120" />
+    <Property Name="regularmedication" Type="enum" />
+    <Property Name="regularmedicationdetails" Type="varchar" MaxLength="120" />
+    <Property Name="maker" Type="int" />
+    <Property Name="doc" Type="timestamp" Precision="0" />
+    <Property Name="revised" Type="int" />
+  </EntityType>
+  <EntityType Name="stud_mother_information">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="relationship" Type="varchar" MaxLength="50" />
+    <Property Name="motherofstud" Type="int" />
+    <Property Name="mname" Type="varchar" MaxLength="50" />
+    <Property Name="mnationality" Type="varchar" MaxLength="50" />
+    <Property Name="maustralianresidence" Type="varchar" MaxLength="50" />
+    <Property Name="mauabortorres" Type="varchar" MaxLength="50" />
+    <Property Name="mschooleducation" Type="varchar" MaxLength="50" />
+    <Property Name="mnonschooleducation" Type="varchar" MaxLength="50" />
+    <Property Name="moccupation" Type="varchar" MaxLength="50" />
+    <Property Name="mhomeaddress" Type="longtext" />
+    <Property Name="mhomestate" Type="varchar" MaxLength="50" />
+    <Property Name="mhomecountry" Type="varchar" MaxLength="50" />
+    <Property Name="msuburb" Type="varchar" MaxLength="50" />
+    <Property Name="mpostcode" Type="varchar" MaxLength="5" />
+    <Property Name="mpostaladdress" Type="varchar" MaxLength="50" />
+    <Property Name="mpostalstate" Type="varchar" MaxLength="50" />
+    <Property Name="mpostalsuburb" Type="varchar" MaxLength="50" />
+    <Property Name="mpostalcode" Type="varchar" MaxLength="5" />
+    <Property Name="mpostalcountry" Type="varchar" MaxLength="50" />
+    <Property Name="mhomephoneno" Type="varchar" MaxLength="15" />
+    <Property Name="mmobilenumb" Type="varchar" MaxLength="15" />
+    <Property Name="mfaxnumb" Type="varchar" MaxLength="15" />
+    <Property Name="memailaddress" Type="varchar" MaxLength="50" />
+    <Property Name="mwhatsapp" Type="varchar" MaxLength="15" />
+    <Property Name="mmainlang" Type="varchar" MaxLength="50" />
+    <Property Name="motherthanenglish" Type="varchar" MaxLength="45" />
+    <Property Name="doc" Type="timestamp" Precision="0" />
+    <Property Name="photo" Type="varchar" MaxLength="100" />
+    <Property Name="maker" Type="int" />
+  </EntityType>
+  <EntityType Name="stud_relationship">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="relationship" Type="varchar" MaxLength="50" />
+    <Property Name="relationshiptostud" Type="int" />
+    <Property Name="name" Type="text" />
+    <Property Name="nationality" Type="varchar" MaxLength="50" />
+    <Property Name="australianresidence" Type="varchar" MaxLength="50" />
+    <Property Name="auabortorres" Type="varchar" MaxLength="50" />
+    <Property Name="schooleducation" Type="varchar" MaxLength="50" />
+    <Property Name="nonschooleducation" Type="varchar" MaxLength="50" />
+    <Property Name="occupation" Type="varchar" MaxLength="50" />
+    <Property Name="homeaddress" Type="longtext" />
+    <Property Name="homestate" Type="varchar" MaxLength="50" />
+    <Property Name="homecountry" Type="varchar" MaxLength="50" />
+    <Property Name="suburb" Type="varchar" MaxLength="50" />
+    <Property Name="postcode" Type="varchar" MaxLength="5" />
+    <Property Name="postaladdress" Type="varchar" MaxLength="50" />
+    <Property Name="postalstate" Type="varchar" MaxLength="50" />
+    <Property Name="postalsuburb" Type="varchar" MaxLength="50" />
+    <Property Name="postalcode" Type="varchar" MaxLength="5" />
+    <Property Name="postalcountry" Type="varchar" MaxLength="50" />
+    <Property Name="homephoneno" Type="varchar" MaxLength="15" />
+    <Property Name="mobilenumb" Type="varchar" MaxLength="15" />
+    <Property Name="faxnumb" Type="varchar" MaxLength="15" />
+    <Property Name="emailaddress" Type="varchar" MaxLength="50" />
+    <Property Name="whatsapp" Type="varchar" MaxLength="15" />
+    <Property Name="mainlang" Type="varchar" MaxLength="50" />
+    <Property Name="otherthanenglish" Type="varchar" MaxLength="45" />
+    <Property Name="doc" Type="timestamp" Precision="0" />
+    <Property Name="photo" Type="varchar" MaxLength="100" />
+    <Property Name="maker" Type="int" />
+  </EntityType>
+  <EntityType Name="stud_sibling_info">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="siblingofstud" Type="int" />
+    <Property Name="siblingfname" Type="varchar" MaxLength="50" />
+    <Property Name="siblinglname" Type="varchar" MaxLength="50" />
+    <Property Name="currentschoolsibling" Type="varchar" MaxLength="50" />
+    <Property Name="dob" Type="date" />
+    <Property Name="gender" Type="enum" />
+    <Property Name="maker" Type="int" />
+    <Property Name="revised" Type="int" />
+    <Property Name="doc" Type="timestamp" Precision="0" />
+  </EntityType>
+  <EntityType Name="student">
+    <Key>
+      <PropertyRef Name="idstudent" />
+    </Key>
+    <Property Name="idstudent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="aisid" Type="int" />
+    <Property Name="nis" Type="int" />
+    <Property Name="waid" Type="int" />
+    <Property Name="currentclass" Type="int" />
+    <Property Name="joined" Type="date" />
+    <Property Name="certificatename" Type="varchar" MaxLength="70" Nullable="false" />
+    <Property Name="dob" Type="date" />
+    <Property Name="pob" Type="varchar" MaxLength="45" />
+    <Property Name="gender" Type="enum" Nullable="false" />
+    <Property Name="religion" Type="enum" />
+    <Property Name="nationality" Type="varchar" MaxLength="50" />
+    <Property Name="homeaddress" Type="text" />
+    <Property Name="homephone" Type="varchar" MaxLength="45" />
+    <Property Name="mobile" Type="varchar" MaxLength="45" />
+    <Property Name="emailaddress" Type="varchar" MaxLength="45" />
+    <Property Name="fname" Type="varchar" MaxLength="45" />
+    <Property Name="fwhatsapp" Type="varchar" MaxLength="45" />
+    <Property Name="fmobile" Type="varchar" MaxLength="45" />
+    <Property Name="femail" Type="varchar" MaxLength="45" />
+    <Property Name="faddress" Type="text" />
+    <Property Name="mname" Type="varchar" MaxLength="45" />
+    <Property Name="mwhatsapp" Type="varchar" MaxLength="45" />
+    <Property Name="mmobile" Type="varchar" MaxLength="45" />
+    <Property Name="memail" Type="varchar" MaxLength="45" />
+    <Property Name="maddress" Type="text" />
+    <Property Name="foreigner" Type="enum" />
+  </EntityType>
+  <EntityType Name="student_data">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="aisid" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="aisid" Type="int" Nullable="false" />
+    <Property Name="nis" Type="varchar" MaxLength="11" />
+    <Property Name="ausid" Type="varchar" MaxLength="11" />
+    <Property Name="intake" Type="date" />
+    <Property Name="familyname" Type="varchar" MaxLength="40" />
+    <Property Name="givenname" Type="varchar" MaxLength="40" />
+    <Property Name="middlename" Type="varchar" MaxLength="40" />
+    <Property Name="certificatename" Type="varchar" MaxLength="40" />
+    <Property Name="dob" Type="date" />
+    <Property Name="pob" Type="varchar" MaxLength="40" />
+    <Property Name="cob" Type="varchar" MaxLength="40" />
+    <Property Name="gender" Type="enum" />
+    <Property Name="religion" Type="enum" />
+    <Property Name="nationality" Type="varchar" MaxLength="40" />
+    <Property Name="homeaddress" Type="varchar" MaxLength="100" />
+    <Property Name="homestate" Type="varchar" MaxLength="40" />
+    <Property Name="suburb" Type="varchar" MaxLength="40" />
+    <Property Name="postcode" Type="varchar" MaxLength="20" />
+    <Property Name="homecountry" Type="varchar" MaxLength="40" />
+    <Property Name="postaladdress" Type="varchar" MaxLength="100" />
+    <Property Name="postalstate" Type="varchar" MaxLength="20" />
+    <Property Name="postalsuburb" Type="varchar" MaxLength="20" />
+    <Property Name="postalcode" Type="varchar" MaxLength="20" />
+    <Property Name="postalcountry" Type="varchar" MaxLength="20" />
+    <Property Name="homephone" Type="varchar" MaxLength="20" />
+    <Property Name="mobilenumb" Type="varchar" MaxLength="13" />
+    <Property Name="faxnumb" Type="varchar" MaxLength="13" />
+    <Property Name="langspoken" Type="varchar" MaxLength="40" />
+    <Property Name="englishproficiency" Type="enum" />
+    <Property Name="studstat" Type="enum" />
+    <Property Name="studentimg" Type="varchar" MaxLength="80" />
+    <Property Name="currclass" Type="int" />
+    <Property Name="doc" Type="timestamp" Precision="0" />
+    <Property Name="maker" Type="int" />
+    <Property Name="current_grade" Type="int" />
+    <Property Name="proposedgrade" Type="varchar" MaxLength="50" />
+    <Property Name="revised" Type="int" />
+    <Property Name="localforeign" Type="enum" />
+  </EntityType>
+  <EntityType Name="student_previous_school_info">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="of_student" Type="int" />
+    <Property Name="name_of_school" Type="varchar" MaxLength="50" />
+    <Property Name="country" Type="varchar" MaxLength="50" />
+    <Property Name="grade" Type="varchar" MaxLength="50" />
+    <Property Name="dateattended" Type="varchar" MaxLength="9" />
+    <Property Name="language_of_instruction" Type="varchar" MaxLength="50" />
+    <Property Name="extra_support" Type="enum" />
+    <Property Name="curriculum" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="student_transaction">
+    <Key>
+      <PropertyRef Name="id_trans" />
+    </Key>
+    <Property Name="id_trans" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="aisid" Type="int" />
+    <Property Name="trans_time" Type="timestamp" Precision="0" />
+    <Property Name="trans_date" Type="date" />
+    <Property Name="payment_method" Type="enum" />
+    <Property Name="bank_ref" Type="varchar" MaxLength="50" />
+    <Property Name="remarks" Type="varchar" MaxLength="150" />
+    <Property Name="amount" Type="decimal" Precision="15" Scale="2" />
+    <Property Name="pay_for" Type="varchar" MaxLength="150" />
+    <Property Name="digi_sign" Type="blob" />
+    <Property Name="maker" Type="int" />
+  </EntityType>
+  <EntityType Name="subjects">
+    <Key>
+      <PropertyRef Name="SubjectID" />
+    </Key>
+    <Property Name="SubjectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubjectName" Type="varchar" MaxLength="50" />
+    <Property Name="SubjectGrade" Type="varchar" MaxLength="50" />
+    <Property Name="SubjectTeacher" Type="int" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedOn" Type="timestamp" Precision="0" />
+  </EntityType>
+  <EntityType Name="timetable">
+    <Key>
+      <PropertyRef Name="TimetableID" />
+    </Key>
+    <Property Name="TimetableID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AcademicYear" Type="year" />
+    <Property Name="Semester" Type="int" />
+    <Property Name="days" Type="enum" />
+    <Property Name="period" Type="int" />
+    <Property Name="periodTime" Type="time" Precision="0" />
+    <Property Name="SubjectID" Type="int" />
+  </EntityType>
+  <EntityType Name="user_account">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user" Type="varchar" MaxLength="43" />
+    <Property Name="password" Type="varchar" MaxLength="43" />
+    <Property Name="role" Type="enum" />
+    <Property Name="owner_id" Type="bigint" />
+  </EntityType>
+  <Association Name="academic_feedback_ibfk_1">
+    <End Role="enquiries" Type="Self.enquiries" Multiplicity="0..1" />
+    <End Role="academic_feedback" Type="Self.academic_feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="enquiries">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="academic_feedback">
+        <PropertyRef Name="ref" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="accounting_enrollment_ibfk_2">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="accounting_enrollment" Type="Self.accounting_enrollment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="accounting_enrollment">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="accounting_enrollment_ibfk_3">
+    <End Role="enquiries" Type="Self.enquiries" Multiplicity="0..1" />
+    <End Role="accounting_enrollment" Type="Self.accounting_enrollment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="enquiries">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="accounting_enrollment">
+        <PropertyRef Name="enq_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'class_history_ibfk_1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="class_history_ibfk_1" />-->
+  <Association Name="class_ibfk_1">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="class" Type="Self.class" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="class">
+        <PropertyRef Name="careteacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="class_ibfk_2">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="class" Type="Self.class" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="class">
+        <PropertyRef Name="assistant" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'class_ibfk_3' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="class_ibfk_3" />-->
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'class_ibfk_4' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="class_ibfk_4" />-->
+  <Association Name="class_media_ibfk_1">
+    <End Role="class" Type="Self.class" Multiplicity="0..1" />
+    <End Role="class_media" Type="Self.class_media" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="class">
+        <PropertyRef Name="class_id" />
+      </Principal>
+      <Dependent Role="class_media">
+        <PropertyRef Name="media_class" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="document_employee_ibfk_1">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="document_employee" Type="Self.document_employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="document_employee">
+        <PropertyRef Name="owner_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="document_students_ibfk_1">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="document_students" Type="Self.document_students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="document_students">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'document_students_ibfk_2' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="document_students_ibfk_2" />-->
+  <Association Name="enq_cancel_ibfk_1">
+    <End Role="enquiries" Type="Self.enquiries" Multiplicity="0..1" />
+    <End Role="enq_cancel" Type="Self.enq_cancel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="enquiries">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="enq_cancel">
+        <PropertyRef Name="enq_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="enq_cancel_ibfk_2">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="enq_cancel" Type="Self.enq_cancel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="enq_cancel">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="enq_test_ibfk_1">
+    <End Role="enquiries" Type="Self.enquiries" Multiplicity="0..1" />
+    <End Role="enq_test" Type="Self.enq_test" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="enquiries">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="enq_test">
+        <PropertyRef Name="enq_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="enq_test_ibfk_2">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="enq_test" Type="Self.enq_test" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="enq_test">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="enquiries_ibfk_1">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="enquiries" Type="Self.enquiries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="enquiries">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'enquiries_ibfk_2' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="enquiries_ibfk_2" />-->
+  <Association Name="enquiries_ibfk_3">
+    <End Role="class" Type="Self.class" Multiplicity="0..1" />
+    <End Role="enquiries" Type="Self.enquiries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="class">
+        <PropertyRef Name="class_id" />
+      </Principal>
+      <Dependent Role="enquiries">
+        <PropertyRef Name="decidedclass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="enquiries_process_ibfk_1">
+    <End Role="enquiries" Type="Self.enquiries" Multiplicity="0..1" />
+    <End Role="enquiries_process" Type="Self.enquiries_process" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="enquiries">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="enquiries_process">
+        <PropertyRef Name="enq_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="enquiries_process_ibfk_2">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="enquiries_process" Type="Self.enquiries_process" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="enquiries_process">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="feedback_ibfk_1">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="1" />
+    <End Role="feedback" Type="Self.feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="feedback">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="loginhistory_ibfk_1">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="loginhistory" Type="Self.loginhistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="loginhistory">
+        <PropertyRef Name="emp_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'stud_father_information_ibfk_1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="stud_father_information_ibfk_1" />-->
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'stud_guardian_information_ibfk_1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="stud_guardian_information_ibfk_1" />-->
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'stud_medical_info_ibfk_1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="stud_medical_info_ibfk_1" />-->
+  <Association Name="stud_medical_info_ibfk_2">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="stud_medical_info" Type="Self.stud_medical_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="stud_medical_info">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="stud_medical_info_ibfk_3">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="stud_medical_info" Type="Self.stud_medical_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="stud_medical_info">
+        <PropertyRef Name="revised" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'stud_mother_information_ibfk_1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="stud_mother_information_ibfk_1" />-->
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'stud_relationship_ibfk_1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="stud_relationship_ibfk_1" />-->
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'stud_sibling_info_ibfk_1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="stud_sibling_info_ibfk_1" />-->
+  <Association Name="stud_sibling_info_ibfk_2">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="stud_sibling_info" Type="Self.stud_sibling_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="stud_sibling_info">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="stud_sibling_info_ibfk_3">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="stud_sibling_info" Type="Self.stud_sibling_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="stud_sibling_info">
+        <PropertyRef Name="revised" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="student_data_ibfk_1">
+    <End Role="class" Type="Self.class" Multiplicity="0..1" />
+    <End Role="student_data" Type="Self.student_data" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="class">
+        <PropertyRef Name="class_id" />
+      </Principal>
+      <Dependent Role="student_data">
+        <PropertyRef Name="currclass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="student_data_ibfk_2">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="student_data" Type="Self.student_data" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="student_data">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'student_data_ibfk_3' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="student_data_ibfk_3" />-->
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'student_data_ibfk_4' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="student_data_ibfk_4" />-->
+  <Association Name="student_data_ibfk_5">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="student_data" Type="Self.student_data" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="student_data">
+        <PropertyRef Name="revised" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'student_previous_school_info_ibfk_1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="student_previous_school_info_ibfk_1" />-->
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'student_transaction_ibfk_1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="student_transaction_ibfk_1" />-->
+  <Association Name="student_transaction_ibfk_2">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="student_transaction" Type="Self.student_transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="student_transaction">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="subjects_ibfk_1">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="subjects" Type="Self.subjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="subjects">
+        <PropertyRef Name="SubjectTeacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'subjects_ibfk_2' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="subjects_ibfk_2" />-->
+  <Association Name="subjects_ibfk_3">
+    <End Role="employee_data" Type="Self.employee_data" Multiplicity="0..1" />
+    <End Role="subjects" Type="Self.subjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="subjects">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="timetable_ibfk_1">
+    <End Role="subjects" Type="Self.subjects" Multiplicity="0..1" />
+    <End Role="timetable" Type="Self.timetable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subjects">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="timetable">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="getStudstat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aisdb" />
+  <EntityContainer Name="aisdbModelStoreContainer">
+    <EntitySet Name="academic_feedback" EntityType="Self.academic_feedback" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="academic_year" EntityType="Self.academic_year" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="accounting_enrollment" EntityType="Self.accounting_enrollment" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="app_ver" EntityType="Self.app_ver" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="class" EntityType="Self.class" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="class_history" EntityType="Self.class_history" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="class_media" EntityType="Self.class_media" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="department" EntityType="Self.department" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="document_employee" EntityType="Self.document_employee" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="document_students" EntityType="Self.document_students" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="employee_data" EntityType="Self.employee_data" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="employee_database" EntityType="Self.employee_database" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="enq_cancel" EntityType="Self.enq_cancel" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="enq_test" EntityType="Self.enq_test" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="enquiries" EntityType="Self.enquiries" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="enquiries_process" EntityType="Self.enquiries_process" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="feedback" EntityType="Self.feedback" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="grade" EntityType="Self.grade" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="loginhistory" EntityType="Self.loginhistory" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="stud_father_information" EntityType="Self.stud_father_information" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="stud_guardian_information" EntityType="Self.stud_guardian_information" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="stud_medical_info" EntityType="Self.stud_medical_info" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="stud_mother_information" EntityType="Self.stud_mother_information" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="stud_relationship" EntityType="Self.stud_relationship" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="stud_sibling_info" EntityType="Self.stud_sibling_info" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="student" EntityType="Self.student" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="student_data" EntityType="Self.student_data" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="student_previous_school_info" EntityType="Self.student_previous_school_info" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="student_transaction" EntityType="Self.student_transaction" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="subjects" EntityType="Self.subjects" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="timetable" EntityType="Self.timetable" Schema="aisdb" store:Type="Tables" />
+    <EntitySet Name="user_account" EntityType="Self.user_account" Schema="aisdb" store:Type="Tables" />
+    <AssociationSet Name="academic_feedback_ibfk_1" Association="Self.academic_feedback_ibfk_1">
+      <End Role="enquiries" EntitySet="enquiries" />
+      <End Role="academic_feedback" EntitySet="academic_feedback" />
+    </AssociationSet>
+    <AssociationSet Name="accounting_enrollment_ibfk_2" Association="Self.accounting_enrollment_ibfk_2">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="accounting_enrollment" EntitySet="accounting_enrollment" />
+    </AssociationSet>
+    <AssociationSet Name="accounting_enrollment_ibfk_3" Association="Self.accounting_enrollment_ibfk_3">
+      <End Role="enquiries" EntitySet="enquiries" />
+      <End Role="accounting_enrollment" EntitySet="accounting_enrollment" />
+    </AssociationSet>
+    <AssociationSet Name="class_ibfk_1" Association="Self.class_ibfk_1">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="class" EntitySet="class" />
+    </AssociationSet>
+    <AssociationSet Name="class_ibfk_2" Association="Self.class_ibfk_2">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="class" EntitySet="class" />
+    </AssociationSet>
+    <AssociationSet Name="class_media_ibfk_1" Association="Self.class_media_ibfk_1">
+      <End Role="class" EntitySet="class" />
+      <End Role="class_media" EntitySet="class_media" />
+    </AssociationSet>
+    <AssociationSet Name="document_employee_ibfk_1" Association="Self.document_employee_ibfk_1">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="document_employee" EntitySet="document_employee" />
+    </AssociationSet>
+    <AssociationSet Name="document_students_ibfk_1" Association="Self.document_students_ibfk_1">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="document_students" EntitySet="document_students" />
+    </AssociationSet>
+    <AssociationSet Name="enq_cancel_ibfk_1" Association="Self.enq_cancel_ibfk_1">
+      <End Role="enquiries" EntitySet="enquiries" />
+      <End Role="enq_cancel" EntitySet="enq_cancel" />
+    </AssociationSet>
+    <AssociationSet Name="enq_cancel_ibfk_2" Association="Self.enq_cancel_ibfk_2">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="enq_cancel" EntitySet="enq_cancel" />
+    </AssociationSet>
+    <AssociationSet Name="enq_test_ibfk_1" Association="Self.enq_test_ibfk_1">
+      <End Role="enquiries" EntitySet="enquiries" />
+      <End Role="enq_test" EntitySet="enq_test" />
+    </AssociationSet>
+    <AssociationSet Name="enq_test_ibfk_2" Association="Self.enq_test_ibfk_2">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="enq_test" EntitySet="enq_test" />
+    </AssociationSet>
+    <AssociationSet Name="enquiries_ibfk_1" Association="Self.enquiries_ibfk_1">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="enquiries" EntitySet="enquiries" />
+    </AssociationSet>
+    <AssociationSet Name="enquiries_ibfk_3" Association="Self.enquiries_ibfk_3">
+      <End Role="class" EntitySet="class" />
+      <End Role="enquiries" EntitySet="enquiries" />
+    </AssociationSet>
+    <AssociationSet Name="enquiries_process_ibfk_1" Association="Self.enquiries_process_ibfk_1">
+      <End Role="enquiries" EntitySet="enquiries" />
+      <End Role="enquiries_process" EntitySet="enquiries_process" />
+    </AssociationSet>
+    <AssociationSet Name="enquiries_process_ibfk_2" Association="Self.enquiries_process_ibfk_2">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="enquiries_process" EntitySet="enquiries_process" />
+    </AssociationSet>
+    <AssociationSet Name="feedback_ibfk_1" Association="Self.feedback_ibfk_1">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="feedback" EntitySet="feedback" />
+    </AssociationSet>
+    <AssociationSet Name="loginhistory_ibfk_1" Association="Self.loginhistory_ibfk_1">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="loginhistory" EntitySet="loginhistory" />
+    </AssociationSet>
+    <AssociationSet Name="stud_medical_info_ibfk_2" Association="Self.stud_medical_info_ibfk_2">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="stud_medical_info" EntitySet="stud_medical_info" />
+    </AssociationSet>
+    <AssociationSet Name="stud_medical_info_ibfk_3" Association="Self.stud_medical_info_ibfk_3">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="stud_medical_info" EntitySet="stud_medical_info" />
+    </AssociationSet>
+    <AssociationSet Name="stud_sibling_info_ibfk_2" Association="Self.stud_sibling_info_ibfk_2">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="stud_sibling_info" EntitySet="stud_sibling_info" />
+    </AssociationSet>
+    <AssociationSet Name="stud_sibling_info_ibfk_3" Association="Self.stud_sibling_info_ibfk_3">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="stud_sibling_info" EntitySet="stud_sibling_info" />
+    </AssociationSet>
+    <AssociationSet Name="student_data_ibfk_1" Association="Self.student_data_ibfk_1">
+      <End Role="class" EntitySet="class" />
+      <End Role="student_data" EntitySet="student_data" />
+    </AssociationSet>
+    <AssociationSet Name="student_data_ibfk_2" Association="Self.student_data_ibfk_2">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="student_data" EntitySet="student_data" />
+    </AssociationSet>
+    <AssociationSet Name="student_data_ibfk_5" Association="Self.student_data_ibfk_5">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="student_data" EntitySet="student_data" />
+    </AssociationSet>
+    <AssociationSet Name="student_transaction_ibfk_2" Association="Self.student_transaction_ibfk_2">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="student_transaction" EntitySet="student_transaction" />
+    </AssociationSet>
+    <AssociationSet Name="subjects_ibfk_1" Association="Self.subjects_ibfk_1">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="subjects" EntitySet="subjects" />
+    </AssociationSet>
+    <AssociationSet Name="subjects_ibfk_3" Association="Self.subjects_ibfk_3">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="subjects" EntitySet="subjects" />
+    </AssociationSet>
+    <AssociationSet Name="timetable_ibfk_1" Association="Self.timetable_ibfk_1">
+      <End Role="subjects" EntitySet="subjects" />
+      <End Role="timetable" EntitySet="timetable" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

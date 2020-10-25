@@ -13,7 +13,6 @@ namespace AisInternalSystem.Module
     class Data
     {
         Dialog msg = new Dialog();
-        Db db = new Db();
 
         public StringCollection Religion = new StringCollection()
         {"CHRISTIAN",
@@ -75,7 +74,8 @@ namespace AisInternalSystem.Module
         public AutoCompleteStringCollection schooledu = new AutoCompleteStringCollection();
         public StringCollection EmpidTeacherEmpid = new StringCollection();
         public StringCollection EmpidAssistantTeacherEmpid = new StringCollection();
-
+        public StringCollection EmpTeacherName = new StringCollection();
+        public StringCollection EmpAssistantTeacherName = new StringCollection();
 
         public void AutoCompleteLoad()
         {
@@ -171,8 +171,8 @@ namespace AisInternalSystem.Module
             suburb.Add("Sekupang");
             try
             {
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("select * from student_data", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("select * from student_data", Db.get_connection());
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -184,7 +184,7 @@ namespace AisInternalSystem.Module
                     homecountry.Add(reader.GetString("nationality"));
                 }
                 reader.Close();
-                cmd = new MySqlCommand("SELECT name_of_school FROM aisdb.student_previous_school_info", db.get_connection());
+                cmd = new MySqlCommand("SELECT name_of_school FROM aisDb.student_previous_school_info", Db.get_connection());
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {

@@ -14,34 +14,37 @@ using Guna.UI2.AnimatorNS;
 using AisInternalSystem.Properties;
 using System.Runtime.Remoting.Channels;
 using Microsoft.VisualBasic;
+using MySqlX.XDevAPI;
+using Telerik.WinControls.UI;
 
 namespace AisInternalSystem
 {
     public partial class Dashboard : Form
     {
-        double appVer = 2.3, appVerDb;
+        double appVer = 2.5, appVerDb;
         bool isExit, loaded = false;
         public static int ownerId;
         public static string ownerName, username, role, userPhotoPath;
         public bool isLoggedIn;
-
+        public static string SelectedString;
+        public static string[] DropDownListAy, Classname;
         public enum RoleState
         {
             Administration,
             Accounting,
             Management
         }
-
-        Db db = new Db();
+        MySqlCommand command;
+        public static DataTable ClassList;
         DialogControl confirmation = new DialogControl();
         DashboardUC ucDashboard = new DashboardUC();                                                                                            
         UCInventory UCInventory = new UCInventory();
         UCEmployee UCEmployee = new UCEmployee();
-        UCFeedback UCFeedback = new UCFeedback();
+        UCFeeDback UCFeedback = new UCFeeDback();
         PleaseWait waitform = new PleaseWait();
         LoginFrm loginfrm = new LoginFrm();
         public UCSchoolAdm UCSchoolAdm = new UCSchoolAdm();
-        public Dialog msg = new Dialog();
+        Dialog msg = new Dialog();
 
         public Dashboard()
         {
@@ -56,8 +59,8 @@ namespace AisInternalSystem
         {
             try
             {
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("select max(ver) as 'ver' from app_ver", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("select max(ver) as 'ver' from app_ver", Db.get_connection());
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -133,6 +136,10 @@ namespace AisInternalSystem
                     break;
             }
         }
+
+
+        
+
 
         private NavigationState Navigation;
 

@@ -22,17 +22,17 @@ namespace AisInternalSystem
     public partial class UCSchoolAdm : UserControl
     {
         OpenFileDialog opf = new OpenFileDialog();
-        Db db = new Db();
         int RelationshipCount = 0, aisid = 0, siblingid = 0, schoolId = 0, docsSelected = 0, careTeacher = 0;
         int? AssTeacher, StudCAID, ClassId, GradeID, aisidCA;
         Data collection = new Data();
         Dialog msg = new Dialog();
+        StudSummary summarystud = new StudSummary();
         bool StudIsSaved = false, addRelatIsClicked = false, fatherIsSaved = false, motheriIsSaved = false, guardianIsSaved = false, stepFatherIsSaved = false, stepMotherIsSaved = false,
             medsIsSaved = false;
         string lblExpktp = "No explanation", lblExpKitas = "", lblExpform = "", lblexpParentsPhoto = "", lblExpPassport = "", gender = "Male", siblingGender = "Male", studentPhoto = null,
             fatherPhoto = null, motherPhoto = null, stepFatherPhoto = null, stepMotherPhoto = null,
             careTeacherName, AssistantTeacherName,
-            guardianPhoto = null, timeStamping = "yyyy-MM-dd HH:mm:ss", docspath = null, docspathDB = null, docstype = null, docsname = null, extension = null, medsdose = "No Details";
+            guardianPhoto = null, timeStamping = "yyyy-MM-dd HH:mm:ss", docspath = null, docspathDb = null, docstype = null, docsname = null, extension = null, medsdose = "No Details";
         Point defaultPanelLocation = new Point(16, 33);
         Size defaultPanelSize = new Size(674, 572);
         Size defaultUcSize = new Size(1280, 611);
@@ -44,6 +44,7 @@ namespace AisInternalSystem
         Size DownRightSidePanelSize = new Size(549, 160);
         BackgroundWorker worker = new BackgroundWorker();
         UCStudDetailed PanelStudDetailed = new UCStudDetailed();
+        UCClassDirectoryService ClassDirectory = new UCClassDirectoryService();
         //MainMenu Size And Location
         Size panelMainMenu = new Size(640, 305);
         Point Panel1 = new Point(0, 0);
@@ -84,11 +85,11 @@ namespace AisInternalSystem
             FileStream fsOut = new FileStream(des, FileMode.Create);
             FileStream fsIn = new FileStream(source, FileMode.Open);
             byte[] bt = new byte[10000];
-            int readByte;
+            int reaDbyte;
 
-            while ((readByte = fsIn.Read(bt, 0, bt.Length)) > 0)
+            while ((reaDbyte = fsIn.Read(bt, 0, bt.Length)) > 0)
             {
-                fsOut.Write(bt, 0, readByte);
+                fsOut.Write(bt, 0, reaDbyte);
                 worker.ReportProgress((int)(fsIn.Position * 100 / fsIn.Length));
             }
             fsIn.Close();
@@ -97,7 +98,7 @@ namespace AisInternalSystem
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            CopyFile(docspath, docspathDB);
+            CopyFile(docspath, docspathDb);
         }
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -140,7 +141,8 @@ namespace AisInternalSystem
             EditStudentData,
             StudentDirectory,
             ClassAssignment,
-            DetailedStudent
+            DetailedStudent,
+            ClassDirectory
             //add more here
         }
 
@@ -222,6 +224,12 @@ namespace AisInternalSystem
                     PanelClassAssignment.BringToFront();
                     PanelClassAssignment.Dock = DockStyle.Fill;
                     break;
+                case UIStateEnum.ClassDirectory:
+                    this.Controls.Add(ClassDirectory);
+                    ClassDirectory.BringToFront();
+                    ClassDirectory.InitClassList();
+                    ClassDirectory.Dock = DockStyle.Fill;
+                    break;
                 case UIStateEnum.DetailedStudent:
                     hideMenu();
                     this.Controls.Add(PanelStudDetailed);
@@ -243,8 +251,8 @@ namespace AisInternalSystem
             //student
             try
             {
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("select * from student_data where aisid = @aisid", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("select * from student_data where aisid = @aisid", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -278,6 +286,10 @@ namespace AisInternalSystem
                     txtPostCode.Text = reader.GetString("postcode");
                     txtPostalCountry.Text = reader.GetString("postalcountry");
                     txtHomePhone.Text = reader.GetString("homephone");
+                    if(txtHomePhone.Text == "" | txtHomePhone.Text == null)
+                    {
+                        reader.GetString("mobilenumb");
+                    }
                     txtMobileNumber.Text = reader.GetString("mobilenumb");
                     txtFaxNumber.Text = reader.GetString("faxnumb");
                     txtLangSpoken.Text = reader.GetString("langspoken");
@@ -296,7 +308,7 @@ namespace AisInternalSystem
                 }
                 reader.Close();
                 //medical
-                cmd = new MySqlCommand("select * from stud_medical_info where medicalofstud = @medicalofstud", db.get_connection());
+                cmd = new MySqlCommand("select * from stud_medical_info where medicalofstud = @medicalofstud", Db.get_connection());
                 cmd.Parameters.Add("@medicalofstud", MySqlDbType.Int32).Value = aisid;
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -333,8 +345,8 @@ namespace AisInternalSystem
 
                 //check student relationship
                 //father
-                db.open_connection();
-                cmd = new MySqlCommand("select * from stud_relationship where relationshiptostud = @aisid and relationship = @relationship", db.get_connection());
+                Db.open_connection();
+                cmd = new MySqlCommand("select * from stud_relationship where relationshiptostud = @aisid and relationship = @relationship", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 cmd.Parameters.Add("@relationship", MySqlDbType.VarChar).Value = "Father";
                 reader = cmd.ExecuteReader();
@@ -399,7 +411,7 @@ namespace AisInternalSystem
                 }
                 reader.Close();
                 //stepfather
-                cmd = new MySqlCommand("select * from stud_relationship where relationshiptostud = @aisid and relationship = @relationship", db.get_connection());
+                cmd = new MySqlCommand("select * from stud_relationship where relationshiptostud = @aisid and relationship = @relationship", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 cmd.Parameters.Add("@relationship", MySqlDbType.VarChar).Value = "Step Father";
                 reader = cmd.ExecuteReader();
@@ -464,7 +476,7 @@ namespace AisInternalSystem
                 }
                 reader.Close();
                 //mother
-                cmd = new MySqlCommand("select * from stud_relationship where relationshiptostud = @aisid and relationship = @relationship", db.get_connection());
+                cmd = new MySqlCommand("select * from stud_relationship where relationshiptostud = @aisid and relationship = @relationship", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 cmd.Parameters.Add("@relationship", MySqlDbType.VarChar).Value = "Mother";
                 reader = cmd.ExecuteReader();
@@ -528,7 +540,7 @@ namespace AisInternalSystem
                 }
                 reader.Close();
                 //stepmother
-                cmd = new MySqlCommand("select * from stud_relationship where relationshiptostud = @aisid and relationship = @relationship", db.get_connection());
+                cmd = new MySqlCommand("select * from stud_relationship where relationshiptostud = @aisid and relationship = @relationship", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 cmd.Parameters.Add("@relationship", MySqlDbType.VarChar).Value = "Step Mother";
                 reader = cmd.ExecuteReader();
@@ -593,7 +605,7 @@ namespace AisInternalSystem
                 reader.Close();
 
                 //guardian
-                cmd = new MySqlCommand("SELECT * FROM aisdb.stud_relationship where relationshiptostud = @aisid and relationship != 'father' and relationship != 'mother';", db.get_connection());
+                cmd = new MySqlCommand("SELECT * FROM aisDb.stud_relationship where relationshiptostud = @aisid and relationship != 'father' and relationship != 'mother';", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 reader = cmd.ExecuteReader();
                 if (reader.HasRows)
@@ -1175,8 +1187,8 @@ namespace AisInternalSystem
                 //save
                 try
                 {
-                    db.open_connection();
-                    MySqlCommand cmd = new MySqlCommand(@"INSERT INTO aisdb.student_data
+                    Db.open_connection();
+                    MySqlCommand cmd = new MySqlCommand(@"INSERT INTO aisDb.student_data
 (aisid,
 nis,
 ausid,
@@ -1249,7 +1261,7 @@ VALUES
 @doc,
 @maker,
 @current_grade,
-@proposedgrade)", db.get_connection());
+@proposedgrade)", Db.get_connection());
                     cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = txtais.Text;
                     cmd.Parameters.Add("@nis", MySqlDbType.VarChar).Value = txtNisn.Text;
                     cmd.Parameters.Add("@ausid", MySqlDbType.VarChar).Value = txtAsn.Text;
@@ -1298,7 +1310,7 @@ VALUES
                     {
                         msg.Alert("Something is wrong \nBut we couldn't figure it out :(", frmAlert.AlertType.Error);
                     }
-                    db.close_connection();
+                    Db.close_connection();
                 }
                 catch (MySqlException ex)
                 {
@@ -1310,8 +1322,8 @@ VALUES
                 //pullrevise command
                 try
                 {
-                    db.open_connection();
-                    MySqlCommand cmd = new MySqlCommand(@"UPDATE aisdb.student_data
+                    Db.open_connection();
+                    MySqlCommand cmd = new MySqlCommand(@"UPDATE aisDb.student_data
 SET
 nis = @nis,
 ausid = @ausid,
@@ -1348,7 +1360,7 @@ doc = @doc,
 current_grade = @current_grade,
 proposedgrade = @proposedgrade,
 revised = @revised
-WHERE aisid = @aisid", db.get_connection());
+WHERE aisid = @aisid", Db.get_connection());
                     cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                     cmd.Parameters.Add("@nis", MySqlDbType.VarChar).Value = txtNisn.Text;
                     cmd.Parameters.Add("@ausid", MySqlDbType.VarChar).Value = txtAsn.Text;
@@ -1396,7 +1408,7 @@ WHERE aisid = @aisid", db.get_connection());
                     {
                         msg.Alert("Something is wrong \nBut we couldn't figure it out :(", frmAlert.AlertType.Error);
                     }
-                    db.close_connection();
+                    Db.close_connection();
                 }
                 catch (MySqlException ex)
                 {
@@ -1450,7 +1462,7 @@ WHERE aisid = @aisid", db.get_connection());
                     extension = System.IO.Path.GetExtension(opf.FileName);
                     docspath = opf.FileName.ToString();
                     txtDocsPath.Text = docspath;
-                    docspathDB = @"\\192.168.30.100\SysInternal\Docs\StudDocs\" + aisid + docstype + docsname + extension;
+                    docspathDb = @"\\192.168.30.100\SysInternal\Docs\StudDocs\" + aisid + docstype + docsname + extension;
                 }
             }
         }
@@ -1475,7 +1487,7 @@ WHERE aisid = @aisid", db.get_connection());
         {
             docsname = txtDocsName.Text + dropDocsType.SelectedValue.ToString();
             docstype = dropDocsType.SelectedValue.ToString();
-            docspathDB = @"\\192.168.30.100\SysInternal\Docs\StudDocs\" + aisid + docstype + docsname + extension;
+            docspathDb = @"\\192.168.30.100\SysInternal\Docs\StudDocs\" + aisid + docstype + docsname + extension;
 
             btnUploadRecord.Enabled = false;
             label8.Visible = true;
@@ -1483,10 +1495,10 @@ WHERE aisid = @aisid", db.get_connection());
             label33.Visible = true;
             try
             {
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO aisdb.document_students (docsname, docspath, maker, doc, docstype, docsdesc, owner_id) VALUES (@docsname, @docspath, @maker, @doc, @docstype, @docsdesc, @owner_id)", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO aisDb.document_students (docsname, docspath, maker, doc, docstype, docsdesc, owner_id) VALUES (@docsname, @docspath, @maker, @doc, @docstype, @docsdesc, @owner_id)", Db.get_connection());
                 cmd.Parameters.Add("@docsname", MySqlDbType.VarChar).Value = docsname;
-                cmd.Parameters.Add("@docspath", MySqlDbType.VarChar).Value = docspathDB;
+                cmd.Parameters.Add("@docspath", MySqlDbType.VarChar).Value = docspathDb;
                 cmd.Parameters.Add("@maker", MySqlDbType.Int32).Value = Dashboard.ownerId;
                 cmd.Parameters.Add("@doc", MySqlDbType.VarChar).Value = DateTime.Now.ToString(timeStamping);
                 cmd.Parameters.Add("@docstype", MySqlDbType.VarChar).Value = docstype;
@@ -2508,8 +2520,8 @@ WHERE aisid = @aisid", db.get_connection());
         {
             try
             {
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO aisdb.stud_sibling_info (siblingofstud, siblingfname, siblinglname, currentschoolsibling, dob, gender, doc, maker) values (@siblingofstud, @siblingfname, @siblinglname, @currentschoolsibling, @dob, @gender, @doc, @maker)", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO aisDb.stud_sibling_info (siblingofstud, siblingfname, siblinglname, currentschoolsibling, dob, gender, doc, maker) values (@siblingofstud, @siblingfname, @siblinglname, @currentschoolsibling, @dob, @gender, @doc, @maker)", Db.get_connection());
                 cmd.Parameters.Add("@siblingofstud", MySqlDbType.Int32).Value = aisid;
                 cmd.Parameters.Add("@siblingfname", MySqlDbType.VarChar).Value = txtSiblingFirstname.Text;
                 cmd.Parameters.Add("@siblinglname", MySqlDbType.VarChar).Value = txtSiblinglastname.Text;
@@ -2534,8 +2546,8 @@ WHERE aisid = @aisid", db.get_connection());
         {
             try
             {
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("select id, concat(ifnull(siblingfname, ''), ' ', ifnull(siblinglname, '')) as 'Sibling Fullname', currentschoolsibling as 'Current School', dob as 'Date of Birth', gender as 'Gender' from stud_sibling_info where siblingofstud = @aisid", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("select id, concat(ifnull(siblingfname, ''), ' ', ifnull(siblinglname, '')) as 'Sibling Fullname', currentschoolsibling as 'Current School', dob as 'Date of Birth', gender as 'Gender' from stud_sibling_info where siblingofstud = @aisid", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -2584,9 +2596,9 @@ WHERE aisid = @aisid", db.get_connection());
                         //insert
                         try
                         {
-                            db.open_connection();
+                            Db.open_connection();
 
-                            MySqlCommand cmd = new MySqlCommand(@"INSERT INTO aisdb.stud_medical_info
+                            MySqlCommand cmd = new MySqlCommand(@"INSERT INTO aisDb.stud_medical_info
 (medicalofstud,
 healthcondition,
 allergies,
@@ -2604,7 +2616,7 @@ VALUES
 @maker,
 @doc);
 
-", db.get_connection());
+", Db.get_connection());
                             if (txtMedsDetails.Text == "")
                             {
                                 medsdetails = "No serious Health History";
@@ -2663,7 +2675,7 @@ VALUES
                                 msg.Alert("Something is wrong", frmAlert.AlertType.Success);
 
                             }
-                            db.close_connection();
+                            Db.close_connection();
                         }
                         catch (MySqlException ex)
                         {
@@ -2676,8 +2688,8 @@ VALUES
                         //revise
                         try
                         {
-                            db.open_connection();
-                            MySqlCommand cmd = new MySqlCommand(@"UPDATE aisdb.stud_medical_info
+                            Db.open_connection();
+                            MySqlCommand cmd = new MySqlCommand(@"UPDATE aisDb.stud_medical_info
 SET
 healthcondition = @healthcondition,
 allergies = @allergies,
@@ -2687,7 +2699,7 @@ regularmedicationdetails = @regularmedicationdetails,
 doc = @doc,
 revised = @revised
 WHERE medicalofstud = @medicalofstud;
-", db.get_connection());
+", Db.get_connection());
                             if (txtMedsDetails.Text == "")
                             {
                                 medsdetails = "No serious Health History";
@@ -2746,7 +2758,7 @@ WHERE medicalofstud = @medicalofstud;
                                 msg.Alert("Something is wrong", frmAlert.AlertType.Success);
 
                             }
-                            db.close_connection();
+                            Db.close_connection();
                         }
                         catch (MySqlException ex)
                         {
@@ -2778,8 +2790,8 @@ WHERE medicalofstud = @medicalofstud;
         {
             try
             {
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("delete from student_previous_school_info where id = @id", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("delete from student_previous_school_info where id = @id", Db.get_connection());
                 cmd.Parameters.Add("@id", MySqlDbType.Int32).Value = schoolId;
                 if (cmd.ExecuteNonQuery() == 1)
                 {
@@ -2815,8 +2827,8 @@ WHERE medicalofstud = @medicalofstud;
             }
             try
             {
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("insert into student_previous_school_info (of_student, name_of_school, country, grade, dateattended, language_of_instruction, extra_support, curriculum) values (@of_student, @name_of_school, @country, @grade, @dateattended, @language_of_instruction, @extra_support, @curriculum)", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("insert into student_previous_school_info (of_student, name_of_school, country, grade, dateattended, language_of_instruction, extra_support, curriculum) values (@of_student, @name_of_school, @country, @grade, @dateattended, @language_of_instruction, @extra_support, @curriculum)", Db.get_connection());
                 cmd.Parameters.Add("@of_student", MySqlDbType.Int32).Value = aisid;
                 cmd.Parameters.Add("@name_of_school", MySqlDbType.VarChar).Value = txtNameOfSchool.Text;
                 cmd.Parameters.Add("@country", MySqlDbType.VarChar).Value = txtSchoolCountry.Text;
@@ -2860,7 +2872,7 @@ WHERE medicalofstud = @medicalofstud;
         {
             try
             {
-                db.open_connection();
+                Db.open_connection();
                 try
                 {
                     if (dgDocs.SelectedCells.Count > 0)
@@ -2872,8 +2884,8 @@ WHERE medicalofstud = @medicalofstud;
                     }
                     try
                     {
-                        db.open_connection();
-                        MySqlCommand cmd = new MySqlCommand("select * FROM aisdb.document_students WHERE id_Docs = @iddocs", db.get_connection());
+                        Db.open_connection();
+                        MySqlCommand cmd = new MySqlCommand("select * FROM aisDb.document_students WHERE id_Docs = @iddocs", Db.get_connection());
                         cmd.Parameters.Add("iddocs", MySqlDbType.Int32).Value = docsSelected;
                         MySqlDataReader readerdocs = cmd.ExecuteReader();
                         while (readerdocs.Read())
@@ -2901,7 +2913,7 @@ WHERE medicalofstud = @medicalofstud;
                     msg.Alert("There is nothing to open!", frmAlert.AlertType.Error); ;
 
                 }
-                db.close_connection();
+                Db.close_connection();
             }
             catch (MySqlException ex)
             {
@@ -2930,8 +2942,8 @@ WHERE medicalofstud = @medicalofstud;
         {
             try
             {
-                db.open_connection();
-                MySqlCommand cmdDocs = new MySqlCommand("select id_Docs as 'ID', docsname as 'Document Name', doc as 'Date of Creation', docstype as 'Document Type' from document_students where owner_id = @owner", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmdDocs = new MySqlCommand("select id_Docs as 'ID', docsname as 'Document Name', doc as 'Date of Creation', docstype as 'Document Type' from document_students where owner_id = @owner", Db.get_connection());
                 cmdDocs.Parameters.Add("@owner", MySqlDbType.Int32).Value = aisid;
                 MySqlDataAdapter da = new MySqlDataAdapter(cmdDocs);
                 DataTable dt = new DataTable();
@@ -2939,7 +2951,7 @@ WHERE medicalofstud = @medicalofstud;
                 BindingSource bindingSource = new BindingSource();
                 bindingSource.DataSource = dt;
                 dgDocs.DataSource = bindingSource;
-                db.close_connection();
+                Db.close_connection();
             }
             catch (MySqlException ex)
             {
@@ -3044,8 +3056,8 @@ WHERE medicalofstud = @medicalofstud;
             try
             {
                 //student
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("select aisid, certificatename, dob, intake, nationality, homeaddress, maker, revised, doc, studentimg, currclass, classname, employeeid, emp_fullname from student_data join employee_data on student_data.maker = employee_data.employeeid join class on student_data.currclass = class.class_id where aisid = @aisid", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("select aisid, certificatename, dob, intake, nationality, homeaddress, maker, revised, doc, studentimg, currclass, classname, employeeid, emp_fullname from student_data join employee_data on student_data.maker = employee_data.employeeid join class on student_data.currclass = class.class_id where aisid = @aisid", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -3085,7 +3097,7 @@ WHERE medicalofstud = @medicalofstud;
                 reader.Close();
 
                 //father mobile
-                cmd = new MySqlCommand("select mobilenumb from stud_relationship where relationshiptostud = @aisid and relationship = 'Father'", db.get_connection());
+                cmd = new MySqlCommand("select mobilenumb from stud_relationship where relationshiptostud = @aisid and relationship = 'Father'", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 reader = cmd.ExecuteReader();
                 if (reader.HasRows)
@@ -3099,7 +3111,7 @@ WHERE medicalofstud = @medicalofstud;
                 reader.Dispose();
 
                 //mother mobile
-                cmd = new MySqlCommand("select mobilenumb from stud_relationship where relationshiptostud = @aisid and relationship = 'Mother'", db.get_connection());
+                cmd = new MySqlCommand("select mobilenumb from stud_relationship where relationshiptostud = @aisid and relationship = 'Mother'", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 reader = cmd.ExecuteReader();
                 if (reader.HasRows)
@@ -3118,7 +3130,7 @@ WHERE medicalofstud = @medicalofstud;
                 }
                 else
                 {
-                    cmd = new MySqlCommand("select emp_fullname from employee_data where employeeid = @reviser", db.get_connection());
+                    cmd = new MySqlCommand("select emp_fullname from employee_data where employeeid = @reviser", Db.get_connection());
                     cmd.Parameters.Add("@reviser", MySqlDbType.Int32).Value = reviser;
                     reader = cmd.ExecuteReader();
                     if (reader.HasRows)
@@ -3136,7 +3148,7 @@ WHERE medicalofstud = @medicalofstud;
             {
                 msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
-            db.close_connection();
+            Db.close_connection();
             btnDCExpand.Visible = true;
             if(aisid != null || aisid != 0)
             {
@@ -3156,8 +3168,8 @@ WHERE medicalofstud = @medicalofstud;
             try
             {
                 //student form
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("select certificatename, religion, nationality, homeaddress, homestate, suburb, postcode, homecountry, homephone, mobilenumb from student_data where aisid = @aisid", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("select certificatename, religion, nationality, homeaddress, homestate, suburb, postcode, homecountry, homephone, mobilenumb from student_data where aisid = @aisid", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -3172,6 +3184,10 @@ WHERE medicalofstud = @medicalofstud;
                     postcode = reader.GetString("postcode");
                     homecountry = reader.GetString("homecountry");
                     homephone = reader.GetString("homephone");
+                    if(homephone == "" | homephone == null)
+                    {
+                        homephone = reader.GetString("mobilenumb");
+                    }
                     mobilenumb = reader.GetString("mobilenumb");
                 }
                 reader.Close();
@@ -3295,7 +3311,7 @@ WHERE medicalofstud = @medicalofstud;
                 //parents ktp
                 if (nat.Contains("Indonesia") || nat.Contains("Indonesian"))
                 {
-                    cmd = new MySqlCommand("select docsname, docstype from document_students where owner_id = @owner and docstype = 'Photocopy Parents ID (KTP)'", db.get_connection());
+                    cmd = new MySqlCommand("select docsname, docstype from document_students where owner_id = @owner and docstype = 'Photocopy Parents ID (KTP)'", Db.get_connection());
                     cmd.Parameters.Add("@owner", MySqlDbType.Int32).Value = aisid;
                     MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
                     DataTable dat = new DataTable();
@@ -3335,7 +3351,7 @@ WHERE medicalofstud = @medicalofstud;
                 }
                 else
                 {
-                    cmd = new MySqlCommand("select docsname, docstype from document_students where owner_id = @owner and docstype = 'KITAS'", db.get_connection());
+                    cmd = new MySqlCommand("select docsname, docstype from document_students where owner_id = @owner and docstype = 'KITAS'", Db.get_connection());
                     MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
                     DataTable data2 = new DataTable();
                     dataAdapter.Fill(data2);
@@ -3365,7 +3381,7 @@ WHERE medicalofstud = @medicalofstud;
                 }
                 string dcFatherPhoto = null, dcMotherPhoto = null, father = null, mother = null;
                 //parentsphoto - father
-                cmd = new MySqlCommand("select photo from stud_relationship where relationshiptostud = @aisid and relationship = 'Father'", db.get_connection());
+                cmd = new MySqlCommand("select photo from stud_relationship where relationshiptostud = @aisid and relationship = 'Father'", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -3381,7 +3397,7 @@ WHERE medicalofstud = @medicalofstud;
                     father = dcFatherPhoto;
                 }
                 reader.Close();
-                cmd = new MySqlCommand("select photo from stud_relationship where relationshiptostud = @aisid and relationship = 'Mother'", db.get_connection());
+                cmd = new MySqlCommand("select photo from stud_relationship where relationshiptostud = @aisid and relationship = 'Mother'", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -3444,7 +3460,7 @@ WHERE medicalofstud = @medicalofstud;
                     studphotoDC = true;
                 }
                 //passport
-                cmd = new MySqlCommand("select docsname, docstype from document_students where owner_id = @aisid and docstype = 'Passport'", db.get_connection());
+                cmd = new MySqlCommand("select docsname, docstype from document_students where owner_id = @aisid and docstype = 'Passport'", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -3465,7 +3481,7 @@ WHERE medicalofstud = @medicalofstud;
                     passportDC = true;
                 }
                 da.Dispose();
-                db.close_connection();       
+                Db.close_connection();       
             }
             catch (MySqlException ex)
             {
@@ -3490,8 +3506,8 @@ WHERE medicalofstud = @medicalofstud;
                 case Searchby.Name:
                     try
                     {
-                        db.open_connection();
-                        MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', student_data.aisid as 'AIS ID', student_data.certificatename as 'Name', student_data.dob as 'Birthdate', class.classname as 'Class' from student_data join aisdb.class on student_data.currclass = class.class_id where certificatename like '%" + where + "%' order by 'No.' ", db.get_connection());
+                        Db.open_connection();
+                        MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', student_data.aisid as 'AIS ID', student_data.certificatename as 'Name', student_data.dob as 'Birthdate', class.classname as 'Class' from student_data left join aisDb.class on student_data.currclass = class.class_id where certificatename like '%" + where + "%' order by 'No.' ", Db.get_connection());
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
                         da.Fill(dt);
@@ -3499,7 +3515,7 @@ WHERE medicalofstud = @medicalofstud;
                         bd.DataSource = dt;
                         dgStudList.DataSource = bd;
                         rightPanelDataReader();
-                        db.close_connection();
+                        Db.close_connection();
                         if (dgStudList.Rows.Count < 1)
                         {
                             panelEmpty.Visible = true;
@@ -3519,8 +3535,8 @@ WHERE medicalofstud = @medicalofstud;
                 case Searchby.ID:
                     try
                     {
-                        db.open_connection();
-                        MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', student_data.aisid as 'AIS ID', student_data.certificatename as 'Name', student_data.dob as 'Birthdate', class.classname as 'Class' from student_data join aisdb.class on student_data.currclass = class.class_id where aisid like '%" + where + "%' order by 'No.' ", db.get_connection());
+                        Db.open_connection();
+                        MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', student_data.aisid as 'AIS ID', student_data.certificatename as 'Name', student_data.dob as 'Birthdate', class.classname as 'Class' from student_data join aisDb.class on student_data.currclass = class.class_id where aisid like '%" + where + "%' order by 'No.' ", Db.get_connection());
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
                         da.Fill(dt);
@@ -3532,7 +3548,7 @@ WHERE medicalofstud = @medicalofstud;
                             msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                         }
                         rightPanelDataReader();
-                        db.close_connection();
+                        Db.close_connection();
                         if (dgStudList.Rows.Count < 1)
                         {
                             panelEmpty.Visible = true;
@@ -3550,8 +3566,8 @@ WHERE medicalofstud = @medicalofstud;
                 case Searchby.Gender:
                     try
                     {
-                        db.open_connection();
-                        MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', student_data.aisid as 'AIS ID', student_data.certificatename as 'Name', student_data.dob as 'Birthdate', class.classname as 'Class' from student_data join aisdb.class on student_data.currclass = class.class_id where gender ='" + where + "' order by 'No.' ", db.get_connection());
+                        Db.open_connection();
+                        MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', student_data.aisid as 'AIS ID', student_data.certificatename as 'Name', student_data.dob as 'Birthdate', class.classname as 'Class' from student_data join aisDb.class on student_data.currclass = class.class_id where gender ='" + where + "' order by 'No.' ", Db.get_connection());
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
                         da.Fill(dt);
@@ -3567,7 +3583,7 @@ WHERE medicalofstud = @medicalofstud;
                             msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                         }
                         rightPanelDataReader();
-                        db.close_connection();
+                        Db.close_connection();
                         if (dgStudList.Rows.Count < 1)
                         {
                             panelEmpty.Visible = true;
@@ -3585,8 +3601,8 @@ WHERE medicalofstud = @medicalofstud;
                 case Searchby.Origin:
                     try
                     {
-                        db.open_connection();
-                        MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', student_data.aisid as 'AIS ID', student_data.certificatename as 'Name', student_data.dob as 'Birthdate', class.classname as 'Class' from student_data join aisdb.class on student_data.currclass = class.class_id where localforeign ='" + where + "' order by 'No.' ", db.get_connection());
+                        Db.open_connection();
+                        MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', student_data.aisid as 'AIS ID', student_data.certificatename as 'Name', student_data.dob as 'Birthdate', class.classname as 'Class' from student_data join aisDb.class on student_data.currclass = class.class_id where localforeign ='" + where + "' order by 'No.' ", Db.get_connection());
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
                         da.Fill(dt);
@@ -3602,7 +3618,7 @@ WHERE medicalofstud = @medicalofstud;
                             msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                         }
                         rightPanelDataReader();
-                        db.close_connection();
+                        Db.close_connection();
                         if (dgStudList.Rows.Count < 1)
                         {
                             panelEmpty.Visible = true;
@@ -3622,8 +3638,8 @@ WHERE medicalofstud = @medicalofstud;
                     {
                         try
                         {
-                            db.open_connection();
-                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', student_data.aisid as 'AIS ID', student_data.certificatename as 'Name', student_data.dob as 'Birthdate', class.classname as 'Class' from student_data join aisdb.class on student_data.currclass = class.class_id where revised is not null order by 'No.'", db.get_connection());
+                            Db.open_connection();
+                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', student_data.aisid as 'AIS ID', student_data.certificatename as 'Name', student_data.dob as 'Birthdate', class.classname as 'Class' from student_data join aisDb.class on student_data.currclass = class.class_id where revised is not null order by 'No.'", Db.get_connection());
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                             DataTable dt = new DataTable();
                             da.Fill(dt);
@@ -3639,7 +3655,7 @@ WHERE medicalofstud = @medicalofstud;
                                 msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                             }
                             rightPanelDataReader();
-                            db.close_connection();
+                            Db.close_connection();
                             if (dgStudList.Rows.Count < 1)
                             {
                                 panelEmpty.Visible = true;
@@ -3658,8 +3674,8 @@ WHERE medicalofstud = @medicalofstud;
                     {
                         try
                         {
-                            db.open_connection();
-                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', student_data.aisid as 'AIS ID', student_data.certificatename as 'Name', student_data.dob as 'Birthdate', class.classname as 'Class' from student_data join aisdb.class on student_data.currclass = class.class_id where revised is null order by 'No.' ", db.get_connection());
+                            Db.open_connection();
+                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', student_data.aisid as 'AIS ID', student_data.certificatename as 'Name', student_data.dob as 'Birthdate', class.classname as 'Class' from student_data join aisDb.class on student_data.currclass = class.class_id where revised is null order by 'No.' ", Db.get_connection());
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                             DataTable dt = new DataTable();
                             da.Fill(dt);
@@ -3675,7 +3691,7 @@ WHERE medicalofstud = @medicalofstud;
                                 msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                             }
                             rightPanelDataReader();
-                            db.close_connection();
+                            Db.close_connection();
                             if (dgStudList.Rows.Count < 1)
                             {
                                 panelEmpty.Visible = true;
@@ -3854,8 +3870,7 @@ WHERE medicalofstud = @medicalofstud;
 
         private void PanelClassAssignment3_Click(object sender, EventArgs e)
         {
-            CASwitcher(EnumClassLeftPanel.Class);
-            UIState(UIStateEnum.ClassAssignment);
+            UIState(UIStateEnum.ClassDirectory);
         }
 
         private void btnBackEmpDir_Click(object sender, EventArgs e)
@@ -3871,9 +3886,11 @@ WHERE medicalofstud = @medicalofstud;
             collection.EmpidTeacherEmpid.Clear();
             try
             {
-                db.open_connection();
+                Db.open_connection();
                 //careteacher
-                MySqlCommand cmd = new MySqlCommand("select emp_fullname, employeeid from employee_data left join class on class.careteacher = employeeid where emp_roles = 'Teacher' and emp_status = 'Active' and class.careteacher is null", db.get_connection());
+                MySqlCommand cmd = new MySqlCommand("fetch_teacher_assign_class", Db.get_connection());
+                cmd.Parameters.Add("@teacher", MySqlDbType.VarChar).Value = "Teacher";
+                cmd.CommandType = CommandType.StoredProcedure;
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -3884,7 +3901,9 @@ WHERE medicalofstud = @medicalofstud;
                     }
                 }
                 reader.Close();
-                cmd = new MySqlCommand("select emp_fullname, employeeid from employee_data left join class on class.assistant = employeeid where emp_roles = 'Assistant Teacher' and emp_status = 'Active' and class.assistant is null", db.get_connection());
+                cmd = new MySqlCommand("fetch_teacher_assign_class", Db.get_connection());
+                cmd.Parameters.Add("@teacher", MySqlDbType.VarChar).Value = "Assistant Teacher";
+                cmd.CommandType = CommandType.StoredProcedure;
                 reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -3895,7 +3914,7 @@ WHERE medicalofstud = @medicalofstud;
                     }
                 }
                 reader.Close();
-                db.close_connection();
+                Db.close_connection();
                 ClassLoader();
             }
             catch (MySqlException ex)
@@ -3924,10 +3943,10 @@ WHERE medicalofstud = @medicalofstud;
                 case "Preschool":
                     try
                     {
-                        db.open_connection();
+                        Db.open_connection();
 
 
-                        db.close_connection();
+                        Db.close_connection();
                     }
                     catch (MySqlException ex)
                     {
@@ -4022,8 +4041,8 @@ WHERE medicalofstud = @medicalofstud;
         {
             try
             {
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("select class_id as 'Class ID', grade as 'Level', classname as 'Class Section', class_capacity as 'Capacity', emp_fullname as 'Care Teacher' from aisdb.class join employee_data on employeeid = careteacher where grade = @grade and class_stat = 'ONGOING';", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("select class_id as 'Class ID', grade as 'Level', classname as 'Class Section', class_capacity as 'Available Seat', emp_fullname as 'Care Teacher' from aisDb.class join employee_data on employeeid = careteacher where grade = @grade and class_stat = 'ONGOING';", Db.get_connection());
                 cmd.Parameters.Add("@grade", MySqlDbType.VarChar).Value = dropChooseGrade.SelectedValue.ToString();
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dataTable = new DataTable();
@@ -4038,11 +4057,13 @@ WHERE medicalofstud = @medicalofstud;
                 }
                 else
                 {
+                    dgClassList.Columns[0].Visible = false;
+                    dgClassList.Columns[1].Visible = false;
                     dgClassList.Visible = true;
                     panelClassIsEmpty.Visible = false;
 
                 }
-                db.close_connection();
+                Db.close_connection();
             }
             catch (MySqlException ex)
             {
@@ -4055,8 +4076,8 @@ WHERE medicalofstud = @medicalofstud;
             try
             {
                 
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("insert into aisdb.class (classname, grade, careteacher, assistant, class_start, class_stat, class_capacity) values (@classname, @grade, @careteacher, @assistant, @class_start, @class_stat, @class_capacity)", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("insert into aisDb.class (classname, grade, careteacher, assistant, class_start, class_stat, class_capacity) values (@classname, @grade, @careteacher, @assistant, @class_start, @class_stat, @class_capacity)", Db.get_connection());
                 cmd.Parameters.Add("@classname", MySqlDbType.VarChar).Value = dropClassGradeGrade.SelectedValue.ToString() + " " + txtClassName.Text;
                 cmd.Parameters.Add("@grade", MySqlDbType.VarChar).Value = dropClassGradeGrade.SelectedValue.ToString();
                 cmd.Parameters.Add("@careteacher", MySqlDbType.VarChar).Value = careTeacher;
@@ -4070,7 +4091,7 @@ WHERE medicalofstud = @medicalofstud;
                     ClearPropertyClass();
                     ClassLoader();
                 }
-                db.close_connection();
+                Db.close_connection();
             }
             catch (MySqlException ex)
             {
@@ -4088,8 +4109,8 @@ WHERE medicalofstud = @medicalofstud;
 
             try
             {
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("select grade, classname, class_id as 'Class ID', aisid as 'AIS ID', certificatename as 'Name', gender as 'Gender', religion as 'Religion' from class join student_data on currclass = class_id where class_id = @class_id", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("select grade, classname, class_id as 'Class ID', aisid as 'AIS ID', certificatename as 'Name', gender as 'Gender', religion as 'Religion' from class join student_data on currclass = class_id where class_id = @class_id order by certificatename", Db.get_connection());
                 cmd.Parameters.Add("@class_id", MySqlDbType.Int32).Value = ClassId;
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -4099,6 +4120,8 @@ WHERE medicalofstud = @medicalofstud;
                 dgClassMember.DataSource = bs;
                 dgClassMember.Columns[0].Visible = false;
                 dgClassMember.Columns[1].Visible = false;
+                dgClassMember.Columns[2].Visible = false;
+                dgClassMember.Columns[3].Visible = false;
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if(reader.HasRows)
                 {
@@ -4108,7 +4131,7 @@ WHERE medicalofstud = @medicalofstud;
                     }
                 }
                 reader.Close();
-                MySqlCommand cmd1 = new MySqlCommand("select grade, classname, class_capacity from class where class_id = @class_id2", db.get_connection());
+                MySqlCommand cmd1 = new MySqlCommand("select grade, classname, class_capacity from class where class_id = @class_id2", Db.get_connection());
                 cmd1.Parameters.Add("@class_id2", MySqlDbType.Int32).Value = ClassId;
                 MySqlDataReader reader1 = cmd1.ExecuteReader();
                 while (reader1.Read())
@@ -4118,7 +4141,7 @@ WHERE medicalofstud = @medicalofstud;
                 }
                 cmd1.Parameters.Add("@class_id", MySqlDbType.Int32).Value = ClassId;
                 reader1.Close();
-                db.close_connection();
+                Db.close_connection();
                 if(dgClassMember.Rows.Count < 1)
                 {
                     //hide dglist
@@ -4178,8 +4201,8 @@ WHERE medicalofstud = @medicalofstud;
         {
             try
             {
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("select certificatename, religion, gender, studentimg from student_data where aisid = @aisid", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("select certificatename, religion, gender, studentimg from student_data where aisid = @aisid", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if(reader.HasRows)
@@ -4216,7 +4239,7 @@ WHERE medicalofstud = @medicalofstud;
                     lblPleaseAssignStud.Visible = true;
                 }
                 reader.Close();
-                db.close_connection(); 
+                Db.close_connection(); 
             }
             catch (MySqlException ex)
             {
@@ -4231,8 +4254,8 @@ WHERE medicalofstud = @medicalofstud;
                 case Searchby.Name:
                     try
                     {
-                        db.open_connection();
-                        MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', student_data.aisid as 'AIS ID', student_data.certificatename as 'Name', student_data.dob as 'Birthdate', class.classname as 'Class' from student_data join aisdb.class on student_data.currclass = class.class_id where certificatename like '%" + where + "%' and currclass = '0' order by 'No.' ", db.get_connection());
+                        Db.open_connection();
+                        MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', student_data.aisid as 'AIS ID', student_data.certificatename as 'Name', student_data.dob as 'Birthdate', class.classname as 'Class' from student_data join aisDb.class on student_data.currclass = class.class_id where certificatename like '%" + where + "%' and currclass = '0' order by 'No.' ", Db.get_connection());
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
                         da.Fill(dt);
@@ -4240,7 +4263,7 @@ WHERE medicalofstud = @medicalofstud;
                         bd.DataSource = dt;
                         dgClassStudList.DataSource = bd;
                         rightPanelDataReader();
-                        db.close_connection();
+                        Db.close_connection();
                         if (dgClassStudList.Rows.Count < 1)
                         {
                             guna2ShadowPanel7.Visible = true;
@@ -4260,8 +4283,8 @@ WHERE medicalofstud = @medicalofstud;
                 case Searchby.ID:
                     try
                     {
-                        db.open_connection();
-                        MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', student_data.aisid as 'AIS ID', student_data.certificatename as 'Name', student_data.dob as 'Birthdate', class.classname as 'Class' from student_data join aisdb.class on student_data.currclass = class.class_id where aisid like '%" + where + "%' and currclass = '0' order by 'No.' ", db.get_connection());
+                        Db.open_connection();
+                        MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', student_data.aisid as 'AIS ID', student_data.certificatename as 'Name', student_data.dob as 'Birthdate', class.classname as 'Class' from student_data join aisDb.class on student_data.currclass = class.class_id where aisid like '%" + where + "%' and currclass = '0' order by 'No.' ", Db.get_connection());
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
                         da.Fill(dt);
@@ -4273,7 +4296,7 @@ WHERE medicalofstud = @medicalofstud;
                             msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                         }
                         rightPanelDataReader();
-                        db.close_connection();
+                        Db.close_connection();
                         if (dgClassStudList.Rows.Count < 1)
                         {
                             panelEmpty.Visible = true;
@@ -4302,8 +4325,8 @@ WHERE medicalofstud = @medicalofstud;
         {
             try
             {
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("delete from class where class_id = @id", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("delete from class where class_id = @id", Db.get_connection());
                 cmd.Parameters.Add("@id", MySqlDbType.Int32).Value = ClassId;
                 if(cmd.ExecuteNonQuery() == 1)
                 {
@@ -4313,7 +4336,7 @@ WHERE medicalofstud = @medicalofstud;
                 {
                     msg.Alert("Unknown error occured", frmAlert.AlertType.Warning);
                 }
-                db.close_connection();
+                Db.close_connection();
             }
             catch (MySqlException ex)
             {
@@ -4376,7 +4399,7 @@ WHERE medicalofstud = @medicalofstud;
                 int selectedrowindex = dgClassList.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = dgClassList.Rows[selectedrowindex];
                 string classchoosed = Convert.ToString(selectedRow.Cells["Class ID"].Value);
-                string capacity = Convert.ToString(selectedRow.Cells["Capacity"].Value);
+                string capacity = Convert.ToString(selectedRow.Cells["Available Seat"].Value);
                 ClassId = Convert.ToInt32(classchoosed);
                 classCapacity = Convert.ToInt32(capacity);
                 ClassMemberLoad();
@@ -4435,17 +4458,29 @@ WHERE medicalofstud = @medicalofstud;
             UIState(UIStateEnum.DetailedStudent);
         }
 
+        private void guna2Button3_Click(object sender, EventArgs e)
+        {
+            this.Controls.Add(summarystud);
+            this.Controls[this.Controls.IndexOf(summarystud)].Dock = DockStyle.Fill;
+            this.Controls[this.Controls.IndexOf(summarystud)].BringToFront();
+        }
+
+        private void PanelClassAssignment3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void guna2Button10_Click(object sender, EventArgs e)
         {
             try
             {
                 //update student
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("update student_data set currclass = 0 where aisid = @aisid", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("update student_data set currclass = 0 where aisid = @aisid", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisidCA;
                 if(cmd.ExecuteNonQuery() == 1)
                 {
-                    cmd = new MySqlCommand("update class set class_capacity = class_capacity + 1 where class_id = @class_id", db.get_connection());
+                    cmd = new MySqlCommand("update class set class_capacity = class_capacity + 1 where class_id = @class_id", Db.get_connection());
                     cmd.Parameters.Add("@class_id", MySqlDbType.Int32).Value = ClassId;
                     if(cmd.ExecuteNonQuery() == 1)
                     {
@@ -4468,7 +4503,7 @@ WHERE medicalofstud = @medicalofstud;
                     }
                 }
                 //add capacity
-                db.close_connection();
+                Db.close_connection();
             }
             catch (MySqlException ex)
             {
@@ -4509,8 +4544,8 @@ WHERE medicalofstud = @medicalofstud;
         {
             try
             {
-                db.open_connection();
-                MySqlCommand fetchGrade = new MySqlCommand("select glevel from grade where gname = @gname", db.get_connection());
+                Db.open_connection();
+                MySqlCommand fetchGrade = new MySqlCommand("select glevel from grade where gname = @gname", Db.get_connection());
                 fetchGrade.Parameters.Add("@gname", MySqlDbType.VarChar).Value = dropChooseGrade.SelectedValue.ToString();
                 MySqlDataReader readerFetch = fetchGrade.ExecuteReader();
                 while (readerFetch.Read())
@@ -4518,21 +4553,21 @@ WHERE medicalofstud = @medicalofstud;
                     GradeID = readerFetch.GetInt32("glevel");
                 }
                 readerFetch.Close();
-                MySqlCommand cmd = new MySqlCommand("update student_data set current_grade = @grade, currclass = @currclass where aisid = @aisid", db.get_connection());
+                MySqlCommand cmd = new MySqlCommand("update student_data set current_grade = @grade, currclass = @currclass where aisid = @aisid", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 cmd.Parameters.Add("@grade", MySqlDbType.Int32).Value = GradeID;
                 cmd.Parameters.Add("@currclass", MySqlDbType.Int32).Value = ClassId;
                 if(cmd.ExecuteNonQuery() == 1)
                 {
-                    MySqlCommand cmdClassHistory = new MySqlCommand("insert into class_history (stud_id, class_id, assigned_date, assignedby, status) values (@stud_id, @class_id, @assigned_date, @assignedby, @status)", db.get_connection());
+                    MySqlCommand cmdClassHistory = new MySqlCommand("insert into class_history (stud_id, class_id, assigned_date, assigneDby, class_status) values (@stud_id, @class_id, @assigned_date, @assigneDby, @status)", Db.get_connection());
                     cmdClassHistory.Parameters.Add("@stud_id", MySqlDbType.Int32).Value = aisid;
                     cmdClassHistory.Parameters.Add("@class_id", MySqlDbType.Int32).Value = ClassId;
                     cmdClassHistory.Parameters.Add("@assigned_date", MySqlDbType.Timestamp).Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    cmdClassHistory.Parameters.Add("@assignedby", MySqlDbType.Int32).Value = Dashboard.ownerId;
+                    cmdClassHistory.Parameters.Add("@assigneDby", MySqlDbType.Int32).Value = Dashboard.ownerId;
                     cmdClassHistory.Parameters.Add("@status", MySqlDbType.VarChar).Value = "ASSIGNED";
                     if(cmdClassHistory.ExecuteNonQuery() == 1)
                     {
-                        cmd = new MySqlCommand("update class set class_capacity = class_capacity - 1 where class_id = @class_id", db.get_connection());
+                        cmd = new MySqlCommand("update class set class_capacity = class_capacity - 1 where class_id = @class_id", Db.get_connection());
                         cmd.Parameters.Add("@class_id", MySqlDbType.Int32).Value = ClassId;
                         if(cmd.ExecuteNonQuery() == 1)
                         {
@@ -4555,7 +4590,7 @@ WHERE medicalofstud = @medicalofstud;
                         msg.Alert("Something is wrong", frmAlert.AlertType.Error);
                     }
                 }
-                db.close_connection();
+                Db.close_connection();
             }
             catch (MySqlException ex)
             {
@@ -4669,8 +4704,8 @@ WHERE medicalofstud = @medicalofstud;
 
                 try
                 {
-                    db.open_connection();
-                    MySqlCommand cmd = new MySqlCommand("DELETE FROM aisdb.document_students WHERE id_Docs = @iddocs", db.get_connection());
+                    Db.open_connection();
+                    MySqlCommand cmd = new MySqlCommand("DELETE FROM aisDb.document_students WHERE id_Docs = @iddocs", Db.get_connection());
                     cmd.Parameters.Add("@iddocs", MySqlDbType.Int32).Value = docsSelected;
                     if (cmd.ExecuteNonQuery() == 1)
                     {
@@ -4691,15 +4726,15 @@ WHERE medicalofstud = @medicalofstud;
             {
                 msg.Alert("There is nothing to delete!", frmAlert.AlertType.Error);
             }
-            db.close_connection();
+            Db.close_connection();
         }
 
         void PrevSchoolHandler()
         {
             try
             {
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("select id as 'ID', name_of_school as 'Name of School', country as 'Country', grade as 'Grade', dateattended as 'Date Attended', extra_support as 'Extra Support' from student_previous_school_info where of_student = @aisid", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("select id as 'ID', name_of_school as 'Name of School', country as 'Country', grade as 'Grade', dateattended as 'Date Attended', extra_support as 'Extra Support' from student_previous_school_info where of_student = @aisid", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -4707,7 +4742,7 @@ WHERE medicalofstud = @medicalofstud;
                 BindingSource bindingSource = new BindingSource();
                 bindingSource.DataSource = dt;
                 dgSchoolInfo.DataSource = bindingSource;
-                db.close_connection();
+                Db.close_connection();
             }
             catch (MySqlException ex)
             {
@@ -4738,10 +4773,10 @@ WHERE medicalofstud = @medicalofstud;
         {
             try
             {
-                db.open_connection();
+                Db.open_connection();
                 try
                 {
-                    MySqlCommand cmd = new MySqlCommand("delete from stud_sibling_info where siblingofstud = @aisid and id = @id", db.get_connection());
+                    MySqlCommand cmd = new MySqlCommand("delete from stud_sibling_info where siblingofstud = @aisid and id = @id", Db.get_connection());
                     cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                     cmd.Parameters.Add("@id", MySqlDbType.Int32).Value = siblingid;
                     if (cmd.ExecuteNonQuery() == 1)
@@ -4951,7 +4986,7 @@ WHERE medicalofstud = @medicalofstud;
             }
         }
 
-        private void btnStudBack_Click(object sender, EventArgs e)
+        private void btnStuDback_Click(object sender, EventArgs e)
         {
             ShowPanel(panelStud1);
         }
@@ -4968,8 +5003,8 @@ WHERE medicalofstud = @medicalofstud;
                 //pull save
                 try
                 {
-                    db.open_connection();
-                    MySqlCommand cmd = new MySqlCommand(@"INSERT INTO aisdb.stud_relationship
+                    Db.open_connection();
+                    MySqlCommand cmd = new MySqlCommand(@"INSERT INTO aisDb.stud_relationship
 (relationship,
 relationshiptostud,
 name,
@@ -5028,7 +5063,7 @@ VALUES
 @otherthanenglish,
 @doc,
 @photo,
-@maker)", db.get_connection());
+@maker)", Db.get_connection());
                     cmd.Parameters.Add("@relationship", MySqlDbType.VarChar).Value = "Mother";
                     cmd.Parameters.Add("@relationshiptostud", MySqlDbType.VarChar).Value = aisid;
                     cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = txtMName.Text;
@@ -5063,7 +5098,7 @@ VALUES
                         msg.Alert("Mother information saved succesfully!", frmAlert.AlertType.Success);
                         motheriIsSaved = true;
                     }
-                    db.close_connection();
+                    Db.close_connection();
                 }
                 catch (MySqlException ex)
                 {
@@ -5075,9 +5110,9 @@ VALUES
                 //revise
                 try
                 {
-                    db.open_connection();
+                    Db.open_connection();
 
-                    MySqlCommand cmd = new MySqlCommand(@"UPDATE aisdb.stud_relationship
+                    MySqlCommand cmd = new MySqlCommand(@"UPDATE aisDb.stud_relationship
 SET
 relationship = @relationship,
 relationshiptostud = @relationshiptostud,
@@ -5109,7 +5144,7 @@ doc = @doc,
 photo = @photo,
 maker = @maker
 WHERE relationshiptostud = @relationshiptostud and relationship = 'Mother'
-", db.get_connection());
+", Db.get_connection());
                     cmd.Parameters.Add("@relationship", MySqlDbType.VarChar).Value = "Mother";
                     cmd.Parameters.Add("@relationshiptostud", MySqlDbType.VarChar).Value = aisid;
                     cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = txtMName.Text;
@@ -5152,7 +5187,7 @@ WHERE relationshiptostud = @relationshiptostud and relationship = 'Mother'
                 {
                     msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
-                db.close_connection();
+                Db.close_connection();
             }
         }
 
@@ -5163,8 +5198,8 @@ WHERE relationshiptostud = @relationshiptostud and relationship = 'Mother'
                 //pull save
                 try
                 {
-                    db.open_connection();
-                    MySqlCommand cmd = new MySqlCommand(@"INSERT INTO aisdb.stud_relationship
+                    Db.open_connection();
+                    MySqlCommand cmd = new MySqlCommand(@"INSERT INTO aisDb.stud_relationship
 (relationship,
 relationshiptostud,
 name,
@@ -5223,7 +5258,7 @@ VALUES
 @otherthanenglish,
 @doc,
 @photo,
-@maker)", db.get_connection());
+@maker)", Db.get_connection());
                     cmd.Parameters.Add("@relationship", MySqlDbType.VarChar).Value = "Step Father";
                     cmd.Parameters.Add("@relationshiptostud", MySqlDbType.VarChar).Value = aisid;
                     cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = txtSFName.Text;
@@ -5258,7 +5293,7 @@ VALUES
                         msg.Alert("Step Father information saved succesfully!", frmAlert.AlertType.Success);
                         stepFatherIsSaved = true;
                     }
-                    db.close_connection();
+                    Db.close_connection();
                 }
                 catch (MySqlException ex)
                 {
@@ -5270,9 +5305,9 @@ VALUES
                 //revise
                 try
                 {
-                    db.open_connection();
+                    Db.open_connection();
 
-                    MySqlCommand cmd = new MySqlCommand(@"UPDATE aisdb.stud_relationship
+                    MySqlCommand cmd = new MySqlCommand(@"UPDATE aisDb.stud_relationship
 SET
 relationship = @relationship,
 relationshiptostud = @relationshiptostud,
@@ -5304,7 +5339,7 @@ doc = @doc,
 photo = @photo,
 maker = @maker
 WHERE relationshiptostud = @relationshiptostud and relationship = 'Step Father'
-", db.get_connection());
+", Db.get_connection());
                     cmd.Parameters.Add("@relationship", MySqlDbType.VarChar).Value = "Step Father";
                     cmd.Parameters.Add("@relationshiptostud", MySqlDbType.VarChar).Value = aisid;
                     cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = txtSFName.Text;
@@ -5347,7 +5382,7 @@ WHERE relationshiptostud = @relationshiptostud and relationship = 'Step Father'
                 {
                     msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
-                db.close_connection();
+                Db.close_connection();
             }
         }
 
@@ -5358,8 +5393,8 @@ WHERE relationshiptostud = @relationshiptostud and relationship = 'Step Father'
                 //pull save
                 try
                 {
-                    db.open_connection();
-                    MySqlCommand cmd = new MySqlCommand(@"INSERT INTO aisdb.stud_relationship
+                    Db.open_connection();
+                    MySqlCommand cmd = new MySqlCommand(@"INSERT INTO aisDb.stud_relationship
 (relationship,
 relationshiptostud,
 name,
@@ -5418,7 +5453,7 @@ VALUES
 @otherthanenglish,
 @doc,
 @photo,
-@maker)", db.get_connection());
+@maker)", Db.get_connection());
                     cmd.Parameters.Add("@relationship", MySqlDbType.VarChar).Value = "Step Mother";
                     cmd.Parameters.Add("@relationshiptostud", MySqlDbType.VarChar).Value = aisid;
                     cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = txtSMname.Text;
@@ -5453,7 +5488,7 @@ VALUES
                         msg.Alert("Step Mother information saved succesfully!", frmAlert.AlertType.Success);
                         stepMotherIsSaved = true;
                     }
-                    db.close_connection();
+                    Db.close_connection();
                 }
                 catch (MySqlException ex)
                 {
@@ -5465,9 +5500,9 @@ VALUES
                 //revise
                 try
                 {
-                    db.open_connection();
+                    Db.open_connection();
 
-                    MySqlCommand cmd = new MySqlCommand(@"UPDATE aisdb.stud_relationship
+                    MySqlCommand cmd = new MySqlCommand(@"UPDATE aisDb.stud_relationship
 SET
 relationship = @relationship,
 relationshiptostud = @relationshiptostud,
@@ -5499,7 +5534,7 @@ doc = @doc,
 photo = @photo,
 maker = @maker
 WHERE relationshiptostud = @relationshiptostud and relationship = 'Step Mother'
-", db.get_connection());
+", Db.get_connection());
                     cmd.Parameters.Add("@relationship", MySqlDbType.VarChar).Value = "Step Mother";
                     cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                     cmd.Parameters.Add("@relationshiptostud", MySqlDbType.VarChar).Value = aisid;
@@ -5543,7 +5578,7 @@ WHERE relationshiptostud = @relationshiptostud and relationship = 'Step Mother'
                 {
                     msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
-                db.close_connection();
+                Db.close_connection();
             }
         }
 
@@ -5554,8 +5589,8 @@ WHERE relationshiptostud = @relationshiptostud and relationship = 'Step Mother'
                 //pull save
                 try
                 {
-                    db.open_connection();
-                    MySqlCommand cmd = new MySqlCommand(@"INSERT INTO aisdb.stud_relationship
+                    Db.open_connection();
+                    MySqlCommand cmd = new MySqlCommand(@"INSERT INTO aisDb.stud_relationship
 (relationship,
 relationshiptostud,
 name,
@@ -5614,7 +5649,7 @@ VALUES
 @otherthanenglish,
 @doc,
 @photo,
-@maker)", db.get_connection());
+@maker)", Db.get_connection());
                     cmd.Parameters.Add("@relationship", MySqlDbType.VarChar).Value = txtGRelationshipChild.Text;
                     cmd.Parameters.Add("@relationshiptostud", MySqlDbType.VarChar).Value = aisid;
                     cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = txtGname.Text;
@@ -5649,7 +5684,7 @@ VALUES
                         msg.Alert(txtGRelationshipChild.Text + "information saved succesfully!", frmAlert.AlertType.Success);
                         guardianIsSaved = true;
                     }
-                    db.close_connection();
+                    Db.close_connection();
                 }
                 catch (MySqlException ex)
                 {
@@ -5662,9 +5697,9 @@ VALUES
                 //revise
                 try
                 {
-                    db.open_connection();
+                    Db.open_connection();
 
-                    MySqlCommand cmd = new MySqlCommand(@"UPDATE aisdb.stud_relationship
+                    MySqlCommand cmd = new MySqlCommand(@"UPDATE aisDb.stud_relationship
 SET
 relationship = @relationship,
 relationshiptostud = @relationshiptostud,
@@ -5696,7 +5731,7 @@ doc = @doc,
 photo = @photo,
 maker = @maker
 WHERE relationshiptostud = @relationshiptostud and relationship = @relationship
-", db.get_connection());
+", Db.get_connection());
                     cmd.Parameters.Add("@relationship", MySqlDbType.VarChar).Value = txtGRelationshipChild.Text;
                     cmd.Parameters.Add("@relationshiptostud", MySqlDbType.VarChar).Value = aisid;
                     cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = txtGname.Text;
@@ -5739,7 +5774,7 @@ WHERE relationshiptostud = @relationshiptostud and relationship = @relationship
                 {
                     msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
-                db.close_connection();
+                Db.close_connection();
             }
         }
 
@@ -5752,8 +5787,8 @@ WHERE relationshiptostud = @relationshiptostud and relationship = @relationship
                 //pull save
                 try
                 {
-                    db.open_connection();
-                    MySqlCommand cmd = new MySqlCommand(@"INSERT INTO aisdb.stud_relationship
+                    Db.open_connection();
+                    MySqlCommand cmd = new MySqlCommand(@"INSERT INTO aisDb.stud_relationship
 (relationship,
 relationshiptostud,
 name,
@@ -5812,7 +5847,7 @@ VALUES
 @otherthanenglish,
 @doc,
 @photo,
-@maker)", db.get_connection());
+@maker)", Db.get_connection());
                     cmd.Parameters.Add("@relationship", MySqlDbType.VarChar).Value = "Father";
                     cmd.Parameters.Add("@relationshiptostud", MySqlDbType.VarChar).Value = aisid;
                     cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = txtFName.Text;
@@ -5847,7 +5882,7 @@ VALUES
                         msg.Alert("Father information saved succesfully!", frmAlert.AlertType.Success);
                         fatherIsSaved = true;
                     }
-                    db.close_connection();
+                    Db.close_connection();
                 }
                 catch (MySqlException ex)
                 {
@@ -5859,9 +5894,9 @@ VALUES
                 //revise
                 try
                 {
-                    db.open_connection();
+                    Db.open_connection();
 
-                    MySqlCommand cmd = new MySqlCommand(@"UPDATE aisdb.stud_relationship
+                    MySqlCommand cmd = new MySqlCommand(@"UPDATE aisDb.stud_relationship
 SET
 name = @name,
 nationality = @nationality,
@@ -5891,7 +5926,7 @@ doc = @doc,
 photo = @photo,
 maker = @maker
 WHERE relationshiptostud = @relationshiptostud and relationship = @relationship
-", db.get_connection());
+", Db.get_connection());
                     cmd.Parameters.Add("@relationship", MySqlDbType.VarChar).Value = "Father";
                     cmd.Parameters.Add("@relationshiptostud", MySqlDbType.VarChar).Value = aisid;
                     cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = txtFName.Text;
@@ -5934,7 +5969,7 @@ WHERE relationshiptostud = @relationshiptostud and relationship = @relationship
                 {
                     msg.Alert(ex.Message, frmAlert.AlertType.Error);
                 }
-                db.close_connection();
+                Db.close_connection();
             }
         }
 

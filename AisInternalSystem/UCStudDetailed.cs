@@ -13,12 +13,12 @@ using Guna.UI2.WinForms;
 using System.ComponentModel.Design;
 using Microsoft.VisualBasic;
 using AisInternalSystem.Properties;
+using System.Runtime.InteropServices;
 
 namespace AisInternalSystem
 {
     public partial class UCStudDetailed : UserControl
     {
-        Db db = new Db();
         Dialog msg = new Dialog();
         MySqlCommand cmd = new MySqlCommand();
         PanelNotAvailable NA = new PanelNotAvailable();
@@ -40,9 +40,9 @@ namespace AisInternalSystem
         {
             try
             {
-                db.open_connection();
+                Db.open_connection();
                 aisid = i;
-                cmd = new MySqlCommand("SELECT * FROM student_data where aisid = @aisid", db.get_connection());
+                cmd = new MySqlCommand("SELECT * FROM student_data where aisid = @aisid", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.HasRows)
@@ -88,13 +88,17 @@ namespace AisInternalSystem
                         txtSPostalCode.Text = reader.GetString("postalcode");
                         txtSPOstalCountry.Text = reader.GetString("postalcountry");
                         txtSHomePhone.Text = reader.GetString("homephone");
+                        if(txtSHomePhone.Text == "" | txtSHomePhone.Text == null)
+                        {
+                            txtSHomePhone.Text = reader.GetString("mobilenumb");
+                        }
                         txtSMobileNumber.Text = reader.GetString("mobilenumb");
                         txtsFaxNumber.Text = reader.GetString("faxnumb");
                     }
                 }
                 reader.Close();
                 //initiate the user panel for parents
-                cmd = new MySqlCommand("select id, relationship, name, photo from stud_relationship where relationshiptostud = @aisid", db.get_connection());
+                cmd = new MySqlCommand("select id, relationship, name, photo from stud_relationship where relationshiptostud = @aisid", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(cmd);
                 DataTable dataTable = new DataTable();
@@ -130,8 +134,9 @@ namespace AisInternalSystem
                 }
                 ReadDocuments();
                 ReadPrevSchool();
+                ReadClassHistory();
                 //medical
-                cmd = new MySqlCommand("SELECT * FROM aisdb.stud_medical_info where medicalofstud = @aisid", db.get_connection());
+                cmd = new MySqlCommand("SELECT * FROM aisDb.stud_medical_info where medicalofstud = @aisid", Db.get_connection());
                 cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
                 reader = cmd.ExecuteReader();
                 if(reader.HasRows)
@@ -151,13 +156,51 @@ namespace AisInternalSystem
 
                 }
                 reader.Close();
-                db.close_connection();
+                
+                Db.close_connection();
             }
             catch (MySqlException ex)
             {
                 msg.Alert(ex.Message, frmAlert.AlertType.Error);
             }
 
+        }
+
+        public void ReadClassHistory()
+        {
+            //class history
+            cmd = new MySqlCommand("select class_history.class_id, class_history.class_status, class.classname, class.careteacher, class.assistant, class.class_start, class.class_stat, employee_data.emp_fullname from aisDb.class_history inner join class on class.class_id = class_history.class_id inner join employee_data on employee_data.employeeid = class.careteacher where class_history.stud_id = @aisid;", Db.get_connection());
+            cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            if (dt.Rows.Count >= 1)
+            {
+                FlowClassHistory.Controls.Clear();
+                FlowClassHistory.Visible = true;
+                FlowClassHistory.BringToFront();
+                ClassHistory[] ClassHistory = new ClassHistory[dt.Rows.Count];
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    var _classname = dt.Rows[i][2];
+                    var _careteacher = dt.Rows[i][7];
+                    var _schoolyear = dt.Rows[i][5];
+                    var _classstatus = dt.Rows[i][6];
+                    DateTime schyear = Convert.ToDateTime(_schoolyear.ToString());
+                    ClassHistory[i] = new ClassHistory();
+                    ClassHistory[i].Classname = "Class Name: " + _classname.ToString();
+                    ClassHistory[i].CareTeacher = "Care Teacher: " + _careteacher.ToString();
+                    ClassHistory[i].SchoolYear = "School Year: " + schyear.ToString("yyyy" + " - ");
+                    ClassHistory[i].ClassStatus = "Class Status: " + _classstatus.ToString();
+                    //reserved for media
+                    FlowClassHistory.Controls.Add(ClassHistory[i]);
+                }
+            }
+            else
+            {
+                FlowClassHistory.Visible = false;
+            }
+            da.Dispose();
         }
 
         public void ShowNotAvailable()
@@ -169,7 +212,7 @@ namespace AisInternalSystem
         public void ReadPrevSchool()
         {
             //prevschoolinfo
-            cmd = new MySqlCommand("SELECT name_of_school, country, grade, dateattended, language_of_instruction, extra_support, curriculum FROM student_previous_school_info where of_student = @aisid", db.get_connection());
+            cmd = new MySqlCommand("SELECT name_of_school, country, grade, dateattended, language_of_instruction, extra_support, curriculum FROM student_previous_school_info where of_student = @aisid", Db.get_connection());
             cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
             MySqlDataAdapter daSchool = new MySqlDataAdapter(cmd);
             DataTable dtSchool = new DataTable();
@@ -214,7 +257,7 @@ namespace AisInternalSystem
         public void ReadDocuments()
         {
             //read documents
-            cmd = new MySqlCommand("select docsname, docspath, docstype, docsdesc from document_students where owner_id = @owner_id", db.get_connection());
+            cmd = new MySqlCommand("select docsname, docspath, docstype, docsdesc from document_students where owner_id = @owner_id", Db.get_connection());
             cmd.Parameters.Add("@owner_id", MySqlDbType.Int32).Value = aisid;
             MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -425,7 +468,7 @@ namespace AisInternalSystem
                             AcademicButtonSwitcher(BtnAcademicGeneral);
                             break;
                     }
-                    FocusedButton(btnAcademic);
+                    FocuseDbutton(btnAcademic);
                     ShowButton();
                     break;
                 case UIStateStudDetailed.Personal:
@@ -453,12 +496,12 @@ namespace AisInternalSystem
                             btnStudPersonalContactt.ForeColor = Color.Black;
                             break;
                     }
-                    FocusedButton(btnPersonal);
+                    FocuseDbutton(btnPersonal);
                     ShowButton();
                     break;
                 case UIStateStudDetailed.Relationship:
                     ShowButton();
-                    FocusedButton(btnRelationship);
+                    FocuseDbutton(btnRelationship);
                     switch (_StateRelationship)
                     {
                         case UIStateRelationship.Mainmenu:
@@ -493,18 +536,18 @@ namespace AisInternalSystem
                     break;
                 case UIStateStudDetailed.MedicalInfo:
                     ShowButton();
-                    FocusedButton(btnMedical);
+                    FocuseDbutton(btnMedical);
                     PanelStudentMedicalInformation.BringToFront();
                     break;
                 case UIStateStudDetailed.Documents:
                     ShowButton();
-                    FocusedButton(btnDocs);
+                    FocuseDbutton(btnDocs);
                     PanelStudentDocuments.BringToFront();
                     break;
 
                 default:
                     ShowButton();
-                    FocusedButton(btnRelationship);
+                    FocuseDbutton(btnRelationship);
                     switch (_StateRelationship)
                     {
                         case UIStateRelationship.Mainmenu:
@@ -597,7 +640,7 @@ namespace AisInternalSystem
             }
         }
 
-        void FocusedButton(Guna2Button btn)
+        void FocuseDbutton(Guna2Button btn)
         {
             //set all button to not focus
             btnAcademic.FillColor = Color.LightGray;

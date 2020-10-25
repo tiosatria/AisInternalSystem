@@ -19,7 +19,6 @@ namespace AisInternalSystem
     public partial class LoginFrm : UserControl
     {
         Dialog dialog = new Dialog();
-        Db db = new Db();
 
         public LoginFrm()
         {
@@ -81,10 +80,10 @@ namespace AisInternalSystem
             string username, password;
             try
             {
-                db.open_connection();
+                Db.open_connection();
                 username = txt_username.Text;
                 password = txt_password.Text;
-                MySqlCommand cmd = new MySqlCommand("select * from user_account where user=@user and password = @password", db.get_connection());
+                MySqlCommand cmd = new MySqlCommand("select * from user_account where user=@user and password = @password", Db.get_connection());
                 cmd.Parameters.Add("@user", MySqlDbType.VarChar).Value = username;
                 cmd.Parameters.Add("@password", MySqlDbType.VarChar).Value = password;
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -99,7 +98,7 @@ namespace AisInternalSystem
                     reader.Close();
                     string role = Dashboard.role;
                     string ownername;
-                    cmd = new MySqlCommand("insert into loginhistory (emp_id, times, publicip, localip) values (@emp_id, @times, @publicip, @localip)", db.get_connection());
+                    cmd = new MySqlCommand("insert into loginhistory (emp_id, times, publicip, localip) values (@emp_id, @times, @publicip, @localip)", Db.get_connection());
                     cmd.Parameters.Add("@emp_id", MySqlDbType.Int32).Value = Dashboard.ownerId;
                     cmd.Parameters.Add("@times", MySqlDbType.Timestamp).Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                     cmd.Parameters.Add("@localip", MySqlDbType.VarChar).Value = GetLocalIPAddress();
@@ -109,7 +108,7 @@ namespace AisInternalSystem
                         switch (role)
                         {
                             case "Administration":
-                                MySqlCommand cmd2 = new MySqlCommand("select emp_fullname, employee_pic from employee_data where employeeid = @employeeid", db.get_connection());
+                                MySqlCommand cmd2 = new MySqlCommand("select emp_fullname, employee_pic from employee_data where employeeid = @employeeid", Db.get_connection());
                                 cmd2.Parameters.AddWithValue("@employeeid", Dashboard.ownerId);
                                 MySqlDataReader erader2 = cmd2.ExecuteReader();
                                 while (erader2.Read())
@@ -141,7 +140,7 @@ namespace AisInternalSystem
                 {
                     dialog.Alert("Oopss.. We don't recognise you \nMind to reintroduce yourself again?", frmAlert.AlertType.Error);
                 }
-                db.close_connection();
+                Db.close_connection();
 
             }
             catch (MySqlException ex)

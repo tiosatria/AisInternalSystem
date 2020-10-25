@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="aisdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="aisdbEntities1" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="getStudstat" ReturnType="Collection(aisdbModel.getStudstat_Result)" />
+  </EntityContainer>
+  <ComplexType Name="getStudstat_Result" />
+</Schema>

@@ -1,0 +1,1199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="aisdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="aisdbEntities2" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="getStudstat" ReturnType="Collection(aisdbModel.getStudstat_Result)" />
+    <EntitySet Name="academic_feedback" EntityType="aisdbModel.academic_feedback" />
+    <EntitySet Name="academic_year" EntityType="aisdbModel.academic_year" />
+    <EntitySet Name="accounting_enrollment" EntityType="aisdbModel.accounting_enrollment" />
+    <EntitySet Name="app_ver" EntityType="aisdbModel.app_ver" />
+    <EntitySet Name="classes" EntityType="aisdbModel.class" />
+    <EntitySet Name="class_history" EntityType="aisdbModel.class_history" />
+    <EntitySet Name="class_media" EntityType="aisdbModel.class_media" />
+    <EntitySet Name="departments" EntityType="aisdbModel.department" />
+    <EntitySet Name="document_employee" EntityType="aisdbModel.document_employee" />
+    <EntitySet Name="document_students" EntityType="aisdbModel.document_students" />
+    <EntitySet Name="employee_data" EntityType="aisdbModel.employee_data" />
+    <EntitySet Name="employee_database" EntityType="aisdbModel.employee_database" />
+    <EntitySet Name="enq_cancel" EntityType="aisdbModel.enq_cancel" />
+    <EntitySet Name="enq_test" EntityType="aisdbModel.enq_test" />
+    <EntitySet Name="enquiries" EntityType="aisdbModel.enquiry" />
+    <EntitySet Name="enquiries_process" EntityType="aisdbModel.enquiries_process" />
+    <EntitySet Name="feedbacks" EntityType="aisdbModel.feedback" />
+    <EntitySet Name="grades" EntityType="aisdbModel.grade" />
+    <EntitySet Name="loginhistories" EntityType="aisdbModel.loginhistory" />
+    <EntitySet Name="stud_father_information" EntityType="aisdbModel.stud_father_information" />
+    <EntitySet Name="stud_guardian_information" EntityType="aisdbModel.stud_guardian_information" />
+    <EntitySet Name="stud_medical_info" EntityType="aisdbModel.stud_medical_info" />
+    <EntitySet Name="stud_mother_information" EntityType="aisdbModel.stud_mother_information" />
+    <EntitySet Name="stud_relationship" EntityType="aisdbModel.stud_relationship" />
+    <EntitySet Name="stud_sibling_info" EntityType="aisdbModel.stud_sibling_info" />
+    <EntitySet Name="students" EntityType="aisdbModel.student" />
+    <EntitySet Name="student_data" EntityType="aisdbModel.student_data" />
+    <EntitySet Name="student_previous_school_info" EntityType="aisdbModel.student_previous_school_info" />
+    <EntitySet Name="student_transaction" EntityType="aisdbModel.student_transaction" />
+    <EntitySet Name="subjects" EntityType="aisdbModel.subject" />
+    <EntitySet Name="timetables" EntityType="aisdbModel.timetable" />
+    <EntitySet Name="user_account" EntityType="aisdbModel.user_account" />
+    <AssociationSet Name="academic_feedback_ibfk_1" Association="aisdbModel.academic_feedback_ibfk_1">
+      <End Role="enquiry" EntitySet="enquiries" />
+      <End Role="academic_feedback" EntitySet="academic_feedback" />
+    </AssociationSet>
+    <AssociationSet Name="accounting_enrollment_ibfk_2" Association="aisdbModel.accounting_enrollment_ibfk_2">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="accounting_enrollment" EntitySet="accounting_enrollment" />
+    </AssociationSet>
+    <AssociationSet Name="accounting_enrollment_ibfk_3" Association="aisdbModel.accounting_enrollment_ibfk_3">
+      <End Role="enquiry" EntitySet="enquiries" />
+      <End Role="accounting_enrollment" EntitySet="accounting_enrollment" />
+    </AssociationSet>
+    <AssociationSet Name="class_ibfk_1" Association="aisdbModel.class_ibfk_1">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="class" EntitySet="classes" />
+    </AssociationSet>
+    <AssociationSet Name="class_ibfk_2" Association="aisdbModel.class_ibfk_2">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="class" EntitySet="classes" />
+    </AssociationSet>
+    <AssociationSet Name="class_media_ibfk_1" Association="aisdbModel.class_media_ibfk_1">
+      <End Role="class" EntitySet="classes" />
+      <End Role="class_media" EntitySet="class_media" />
+    </AssociationSet>
+    <AssociationSet Name="enquiries_ibfk_3" Association="aisdbModel.enquiries_ibfk_3">
+      <End Role="class" EntitySet="classes" />
+      <End Role="enquiry" EntitySet="enquiries" />
+    </AssociationSet>
+    <AssociationSet Name="student_data_ibfk_1" Association="aisdbModel.student_data_ibfk_1">
+      <End Role="class" EntitySet="classes" />
+      <End Role="student_data" EntitySet="student_data" />
+    </AssociationSet>
+    <AssociationSet Name="document_employee_ibfk_1" Association="aisdbModel.document_employee_ibfk_1">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="document_employee" EntitySet="document_employee" />
+    </AssociationSet>
+    <AssociationSet Name="document_students_ibfk_1" Association="aisdbModel.document_students_ibfk_1">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="document_students" EntitySet="document_students" />
+    </AssociationSet>
+    <AssociationSet Name="enq_cancel_ibfk_2" Association="aisdbModel.enq_cancel_ibfk_2">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="enq_cancel" EntitySet="enq_cancel" />
+    </AssociationSet>
+    <AssociationSet Name="enq_test_ibfk_2" Association="aisdbModel.enq_test_ibfk_2">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="enq_test" EntitySet="enq_test" />
+    </AssociationSet>
+    <AssociationSet Name="enquiries_ibfk_1" Association="aisdbModel.enquiries_ibfk_1">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="enquiry" EntitySet="enquiries" />
+    </AssociationSet>
+    <AssociationSet Name="enquiries_process_ibfk_2" Association="aisdbModel.enquiries_process_ibfk_2">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="enquiries_process" EntitySet="enquiries_process" />
+    </AssociationSet>
+    <AssociationSet Name="feedback_ibfk_1" Association="aisdbModel.feedback_ibfk_1">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="feedback" EntitySet="feedbacks" />
+    </AssociationSet>
+    <AssociationSet Name="loginhistory_ibfk_1" Association="aisdbModel.loginhistory_ibfk_1">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="loginhistory" EntitySet="loginhistories" />
+    </AssociationSet>
+    <AssociationSet Name="stud_medical_info_ibfk_2" Association="aisdbModel.stud_medical_info_ibfk_2">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="stud_medical_info" EntitySet="stud_medical_info" />
+    </AssociationSet>
+    <AssociationSet Name="stud_medical_info_ibfk_3" Association="aisdbModel.stud_medical_info_ibfk_3">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="stud_medical_info" EntitySet="stud_medical_info" />
+    </AssociationSet>
+    <AssociationSet Name="stud_sibling_info_ibfk_2" Association="aisdbModel.stud_sibling_info_ibfk_2">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="stud_sibling_info" EntitySet="stud_sibling_info" />
+    </AssociationSet>
+    <AssociationSet Name="stud_sibling_info_ibfk_3" Association="aisdbModel.stud_sibling_info_ibfk_3">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="stud_sibling_info" EntitySet="stud_sibling_info" />
+    </AssociationSet>
+    <AssociationSet Name="student_data_ibfk_2" Association="aisdbModel.student_data_ibfk_2">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="student_data" EntitySet="student_data" />
+    </AssociationSet>
+    <AssociationSet Name="student_data_ibfk_5" Association="aisdbModel.student_data_ibfk_5">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="student_data" EntitySet="student_data" />
+    </AssociationSet>
+    <AssociationSet Name="student_transaction_ibfk_2" Association="aisdbModel.student_transaction_ibfk_2">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="student_transaction" EntitySet="student_transaction" />
+    </AssociationSet>
+    <AssociationSet Name="subjects_ibfk_1" Association="aisdbModel.subjects_ibfk_1">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="subject" EntitySet="subjects" />
+    </AssociationSet>
+    <AssociationSet Name="subjects_ibfk_3" Association="aisdbModel.subjects_ibfk_3">
+      <End Role="employee_data" EntitySet="employee_data" />
+      <End Role="subject" EntitySet="subjects" />
+    </AssociationSet>
+    <AssociationSet Name="enq_cancel_ibfk_1" Association="aisdbModel.enq_cancel_ibfk_1">
+      <End Role="enquiry" EntitySet="enquiries" />
+      <End Role="enq_cancel" EntitySet="enq_cancel" />
+    </AssociationSet>
+    <AssociationSet Name="enq_test_ibfk_1" Association="aisdbModel.enq_test_ibfk_1">
+      <End Role="enquiry" EntitySet="enquiries" />
+      <End Role="enq_test" EntitySet="enq_test" />
+    </AssociationSet>
+    <AssociationSet Name="enquiries_process_ibfk_1" Association="aisdbModel.enquiries_process_ibfk_1">
+      <End Role="enquiry" EntitySet="enquiries" />
+      <End Role="enquiries_process" EntitySet="enquiries_process" />
+    </AssociationSet>
+    <AssociationSet Name="timetable_ibfk_1" Association="aisdbModel.timetable_ibfk_1">
+      <End Role="subject" EntitySet="subjects" />
+      <End Role="timetable" EntitySet="timetables" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="getStudstat_Result" />
+  <EntityType Name="academic_feedback">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ref" Type="Int32" />
+    <Property Name="feedback" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="maker" Type="Int64" />
+    <Property Name="submitted" Type="DateTime" />
+    <NavigationProperty Name="enquiry" Relationship="aisdbModel.academic_feedback_ibfk_1" FromRole="academic_feedback" ToRole="enquiry" />
+  </EntityType>
+  <EntityType Name="academic_year">
+    <Key>
+      <PropertyRef Name="IDAyear" />
+      <PropertyRef Name="AYCode" />
+    </Key>
+    <Property Name="IDAyear" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AYCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AcademicYear" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TermsAcademicYear" Type="Int32" />
+    <Property Name="StatusAY" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="accounting_enrollment">
+    <Key>
+      <PropertyRef Name="idenrollment" />
+    </Key>
+    <Property Name="idenrollment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="aisid" Type="Int32" />
+    <Property Name="appfee" Type="Decimal" />
+    <Property Name="schoolfee" Type="Decimal" />
+    <Property Name="uniformfee" Type="Decimal" />
+    <Property Name="materialfee" Type="Decimal" />
+    <Property Name="formfee" Type="Decimal" />
+    <Property Name="totalfee" Type="Decimal" />
+    <Property Name="doc" Type="DateTime" />
+    <Property Name="maker" Type="Int32" />
+    <Property Name="payment_plan" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+    <Property Name="notes" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+    <Property Name="intake" Type="DateTime" />
+    <Property Name="enq_id" Type="Int32" />
+    <NavigationProperty Name="employee_data" Relationship="aisdbModel.accounting_enrollment_ibfk_2" FromRole="accounting_enrollment" ToRole="employee_data" />
+    <NavigationProperty Name="enquiry" Relationship="aisdbModel.accounting_enrollment_ibfk_3" FromRole="accounting_enrollment" ToRole="enquiry" />
+  </EntityType>
+  <EntityType Name="app_ver">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="ver" Type="Double" Nullable="false" />
+    <Property Name="released" Type="DateTime" Nullable="false" />
+    <Property Name="release_note" Type="String" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+    <Property Name="dbver" Type="Double" Nullable="false" />
+    <Property Name="path" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="app_maintenance" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="class">
+    <Key>
+      <PropertyRef Name="class_id" />
+    </Key>
+    <Property Name="class_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="classname" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="grade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="careteacher" Type="Int32" />
+    <Property Name="assistant" Type="Int32" />
+    <Property Name="class_start" Type="DateTime" />
+    <Property Name="class_end" Type="DateTime" />
+    <Property Name="class_stat" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="class_capacity" Type="Int32" />
+    <Property Name="AYCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="employee_data" Relationship="aisdbModel.class_ibfk_1" FromRole="class" ToRole="employee_data" />
+    <NavigationProperty Name="employee_data1" Relationship="aisdbModel.class_ibfk_2" FromRole="class" ToRole="employee_data" />
+    <NavigationProperty Name="class_media" Relationship="aisdbModel.class_media_ibfk_1" FromRole="class" ToRole="class_media" />
+    <NavigationProperty Name="enquiries" Relationship="aisdbModel.enquiries_ibfk_3" FromRole="class" ToRole="enquiry" />
+    <NavigationProperty Name="student_data" Relationship="aisdbModel.student_data_ibfk_1" FromRole="class" ToRole="student_data" />
+  </EntityType>
+  <EntityType Name="class_history">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="stud_id" Type="Int32" />
+    <Property Name="class_id" Type="Int32" />
+    <Property Name="class_status" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="DESC" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="assigned_date" Type="DateTime" />
+    <Property Name="assignedby" Type="Int32" />
+  </EntityType>
+  <EntityType Name="class_media">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="media_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="media_description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="media_location" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="media_uploader" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="visibility" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="media_class" Type="Int32" />
+    <NavigationProperty Name="class" Relationship="aisdbModel.class_media_ibfk_1" FromRole="class_media" ToRole="class" />
+  </EntityType>
+  <EntityType Name="department">
+    <Key>
+      <PropertyRef Name="iddepartment" />
+      <PropertyRef Name="dept_name" />
+    </Key>
+    <Property Name="iddepartment" Type="Int32" Nullable="false" />
+    <Property Name="dept_name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="supervisor" Type="Int32" />
+  </EntityType>
+  <EntityType Name="document_employee">
+    <Key>
+      <PropertyRef Name="id_Docs" />
+    </Key>
+    <Property Name="id_Docs" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="docsname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="docspath" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="maker" Type="Int32" />
+    <Property Name="doc" Type="DateTime" />
+    <Property Name="docstype" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="docsdesc" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+    <Property Name="owner_id" Type="Int32" />
+    <NavigationProperty Name="employee_data" Relationship="aisdbModel.document_employee_ibfk_1" FromRole="document_employee" ToRole="employee_data" />
+  </EntityType>
+  <EntityType Name="document_students">
+    <Key>
+      <PropertyRef Name="id_Docs" />
+    </Key>
+    <Property Name="id_Docs" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="docsname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="docspath" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="maker" Type="Int32" />
+    <Property Name="doc" Type="DateTime" />
+    <Property Name="docstype" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="docsdesc" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+    <Property Name="owner_id" Type="Int32" />
+    <NavigationProperty Name="employee_data" Relationship="aisdbModel.document_students_ibfk_1" FromRole="document_students" ToRole="employee_data" />
+  </EntityType>
+  <EntityType Name="employee_data">
+    <Key>
+      <PropertyRef Name="employeeid" />
+    </Key>
+    <Property Name="created_on" Type="DateTime" />
+    <Property Name="emp_id" Type="Int64" />
+    <Property Name="employeeid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="emp_department" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="emp_roles" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="emp_joindate" Type="DateTime" />
+    <Property Name="emp_fullname" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="emp_gender" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_religion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_pob" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nationality" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="emp_dob" Type="DateTime" />
+    <Property Name="emp_address" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_homephone" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_hometown_address" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_hometown_number" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="emp_whatsapp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="emp_personal_email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_npwp" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nik" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_bpjs_kes" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_bpjs_tk" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_marital_stat" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="emp_spouse_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_spouse_phone" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_no_dependant" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_emergencycontactname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_emergencyrelationship" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_emergencycontactaddress" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_emergencycontactphone" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="employee_pic" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nonsch1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nonsch1_designation" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nonsch1_institution" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nonsch1_year" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nonsch2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nonsch2_designation" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nonsch2_year" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nonsch2_institution" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_schedu" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_schedu_name" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_schedu_graduated" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_ispursuingdegree" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="emp_ispursuingdegree_institution" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_ispursuingdegree_duration" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_ispursuingdegree_startemployee" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_ispursuingdegree_degree" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_passport_no" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="emp_status" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="date_of_creation" Type="DateTime" />
+    <NavigationProperty Name="accounting_enrollment" Relationship="aisdbModel.accounting_enrollment_ibfk_2" FromRole="employee_data" ToRole="accounting_enrollment" />
+    <NavigationProperty Name="classes" Relationship="aisdbModel.class_ibfk_1" FromRole="employee_data" ToRole="class" />
+    <NavigationProperty Name="classes1" Relationship="aisdbModel.class_ibfk_2" FromRole="employee_data" ToRole="class" />
+    <NavigationProperty Name="document_employee" Relationship="aisdbModel.document_employee_ibfk_1" FromRole="employee_data" ToRole="document_employee" />
+    <NavigationProperty Name="document_students" Relationship="aisdbModel.document_students_ibfk_1" FromRole="employee_data" ToRole="document_students" />
+    <NavigationProperty Name="enq_cancel" Relationship="aisdbModel.enq_cancel_ibfk_2" FromRole="employee_data" ToRole="enq_cancel" />
+    <NavigationProperty Name="enq_test" Relationship="aisdbModel.enq_test_ibfk_2" FromRole="employee_data" ToRole="enq_test" />
+    <NavigationProperty Name="enquiries" Relationship="aisdbModel.enquiries_ibfk_1" FromRole="employee_data" ToRole="enquiry" />
+    <NavigationProperty Name="enquiries_process" Relationship="aisdbModel.enquiries_process_ibfk_2" FromRole="employee_data" ToRole="enquiries_process" />
+    <NavigationProperty Name="feedbacks" Relationship="aisdbModel.feedback_ibfk_1" FromRole="employee_data" ToRole="feedback" />
+    <NavigationProperty Name="loginhistories" Relationship="aisdbModel.loginhistory_ibfk_1" FromRole="employee_data" ToRole="loginhistory" />
+    <NavigationProperty Name="stud_medical_info" Relationship="aisdbModel.stud_medical_info_ibfk_2" FromRole="employee_data" ToRole="stud_medical_info" />
+    <NavigationProperty Name="stud_medical_info1" Relationship="aisdbModel.stud_medical_info_ibfk_3" FromRole="employee_data" ToRole="stud_medical_info" />
+    <NavigationProperty Name="stud_sibling_info" Relationship="aisdbModel.stud_sibling_info_ibfk_2" FromRole="employee_data" ToRole="stud_sibling_info" />
+    <NavigationProperty Name="stud_sibling_info1" Relationship="aisdbModel.stud_sibling_info_ibfk_3" FromRole="employee_data" ToRole="stud_sibling_info" />
+    <NavigationProperty Name="student_data" Relationship="aisdbModel.student_data_ibfk_2" FromRole="employee_data" ToRole="student_data" />
+    <NavigationProperty Name="student_data1" Relationship="aisdbModel.student_data_ibfk_5" FromRole="employee_data" ToRole="student_data" />
+    <NavigationProperty Name="student_transaction" Relationship="aisdbModel.student_transaction_ibfk_2" FromRole="employee_data" ToRole="student_transaction" />
+    <NavigationProperty Name="subjects" Relationship="aisdbModel.subjects_ibfk_1" FromRole="employee_data" ToRole="subject" />
+    <NavigationProperty Name="subjects1" Relationship="aisdbModel.subjects_ibfk_3" FromRole="employee_data" ToRole="subject" />
+  </EntityType>
+  <EntityType Name="employee_database">
+    <Key>
+      <PropertyRef Name="emp_id" />
+    </Key>
+    <Property Name="created_on" Type="DateTime" />
+    <Property Name="emp_id" Type="Int64" Nullable="false" />
+    <Property Name="employeeid" Type="Int32" />
+    <Property Name="emp_dept" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="emp_role" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="join_date" Type="DateTime" />
+    <Property Name="emp_fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_gender" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="emp_religion" Type="String" MaxLength="59" FixedLength="false" Unicode="false" />
+    <Property Name="emp_pob" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nationality" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_dob" Type="DateTime" />
+    <Property Name="emp_address" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_homephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="emp_hometown_address" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_hometown_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="emp_mobilenumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="emp_whatsapp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="emp_personal_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_npwp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nik" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="emp_bpjs_kes" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="emp_bpjs_tk" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="emp_marital" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="emp_spouse_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_spouse_phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="emp_no_dependant" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_emergency_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_emergency_relationship" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_emergency_address" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_emergency_phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="employeepic" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nonsch1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nonsch1_designation" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nonsch1_institution" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nonsch1_year" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nonsch2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nonsch2_designation" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nonsch2_year" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_nonsch2_institution" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_schedu" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_schedu_name" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_schedu_graduated" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_ispursuingdegree" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_ispursuingdegree_institution" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_ispursuingdegree_duration" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_ispursuingdegree_start" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="emp_ispursuingdegree_degree" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="emp_passport" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_status" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="maker" Type="Int32" />
+    <Property Name="doc" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="enq_cancel">
+    <Key>
+      <PropertyRef Name="idcancellation" />
+    </Key>
+    <Property Name="idcancellation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="enq_id" Type="Int32" />
+    <Property Name="reason" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+    <Property Name="timest" Type="DateTime" />
+    <Property Name="maker" Type="Int32" />
+    <NavigationProperty Name="employee_data" Relationship="aisdbModel.enq_cancel_ibfk_2" FromRole="enq_cancel" ToRole="employee_data" />
+    <NavigationProperty Name="enquiry" Relationship="aisdbModel.enq_cancel_ibfk_1" FromRole="enq_cancel" ToRole="enquiry" />
+  </EntityType>
+  <EntityType Name="enq_test">
+    <Key>
+      <PropertyRef Name="test_id" />
+    </Key>
+    <Property Name="test_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="enq_id" Type="Int32" />
+    <Property Name="math" Type="Int32" />
+    <Property Name="english" Type="Int32" />
+    <Property Name="science" Type="Int32" />
+    <Property Name="additional" Type="Int32" />
+    <Property Name="additional_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="timest" Type="DateTime" />
+    <Property Name="maker" Type="Int32" />
+    <Property Name="remarks" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="employee_data" Relationship="aisdbModel.enq_test_ibfk_2" FromRole="enq_test" ToRole="employee_data" />
+    <NavigationProperty Name="enquiry" Relationship="aisdbModel.enq_test_ibfk_1" FromRole="enq_test" ToRole="enquiry" />
+  </EntityType>
+  <EntityType Name="enquiry">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="studname" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="pob" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="dob" Type="DateTime" />
+    <Property Name="presentschool" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="levels" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="parentsname" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="parentstype" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="phonenumb" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="whatsappnumb" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+    <Property Name="remarks" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+    <Property Name="maker" Type="Int32" />
+    <Property Name="doc" Type="DateTime" />
+    <Property Name="current_procedure" Type="Int32" />
+    <Property Name="test_date" Type="DateTime" />
+    <Property Name="skiptest" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="decidedclass" Type="Int32" />
+    <Property Name="advanced" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="aisid" Type="Int32" />
+    <NavigationProperty Name="academic_feedback" Relationship="aisdbModel.academic_feedback_ibfk_1" FromRole="enquiry" ToRole="academic_feedback" />
+    <NavigationProperty Name="accounting_enrollment" Relationship="aisdbModel.accounting_enrollment_ibfk_3" FromRole="enquiry" ToRole="accounting_enrollment" />
+    <NavigationProperty Name="class" Relationship="aisdbModel.enquiries_ibfk_3" FromRole="enquiry" ToRole="class" />
+    <NavigationProperty Name="employee_data" Relationship="aisdbModel.enquiries_ibfk_1" FromRole="enquiry" ToRole="employee_data" />
+    <NavigationProperty Name="enq_cancel" Relationship="aisdbModel.enq_cancel_ibfk_1" FromRole="enquiry" ToRole="enq_cancel" />
+    <NavigationProperty Name="enq_test" Relationship="aisdbModel.enq_test_ibfk_1" FromRole="enquiry" ToRole="enq_test" />
+    <NavigationProperty Name="enquiries_process" Relationship="aisdbModel.enquiries_process_ibfk_1" FromRole="enquiry" ToRole="enquiries_process" />
+  </EntityType>
+  <EntityType Name="enquiries_process">
+    <Key>
+      <PropertyRef Name="proc_id" />
+    </Key>
+    <Property Name="proc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="proc_numb" Type="Int32" />
+    <Property Name="procedure_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="enq_id" Type="Int32" />
+    <Property Name="timest" Type="DateTime" />
+    <Property Name="maker" Type="Int32" />
+    <NavigationProperty Name="employee_data" Relationship="aisdbModel.enquiries_process_ibfk_2" FromRole="enquiries_process" ToRole="employee_data" />
+    <NavigationProperty Name="enquiry" Relationship="aisdbModel.enquiries_process_ibfk_1" FromRole="enquiries_process" ToRole="enquiry" />
+  </EntityType>
+  <EntityType Name="feedback">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="maker" Type="Int32" Nullable="false" />
+    <Property Name="feedback1" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="doc" Type="DateTime" />
+    <Property Name="stat" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="employee_data" Relationship="aisdbModel.feedback_ibfk_1" FromRole="feedback" ToRole="employee_data" />
+  </EntityType>
+  <EntityType Name="grade">
+    <Key>
+      <PropertyRef Name="gname" />
+      <PropertyRef Name="glevel" />
+    </Key>
+    <Property Name="gname" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="glevel" Type="Int32" Nullable="false" />
+    <Property Name="dept" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="desc" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="loginhistory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="emp_id" Type="Int32" />
+    <Property Name="times" Type="DateTime" />
+    <Property Name="publicip" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="localip" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="employee_data" Relationship="aisdbModel.loginhistory_ibfk_1" FromRole="loginhistory" ToRole="employee_data" />
+  </EntityType>
+  <EntityType Name="stud_father_information">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="relationship" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fatherofstud" Type="Int32" />
+    <Property Name="fname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fnationality" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="faustralianresidence" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fauabortorres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fschooleducation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fnonschooleducation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="foccupation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fhomeaddress" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+    <Property Name="fhomestate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fhomecountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fsuburb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fpostcode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="fpostaladdress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fpostalstate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fpostalsuburb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fpostalcode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="fpostalcountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fhomephoneno" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="fmobilenumb" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="ffaxnumb" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="femailaddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fwhatsapp" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="fmainlang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fotherthanenglish" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="doc" Type="DateTime" />
+    <Property Name="photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="maker" Type="Int32" />
+  </EntityType>
+  <EntityType Name="stud_guardian_information">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="guardianofstud" Type="Int32" />
+    <Property Name="gname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gnationality" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gaustralianresidence" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gauabortorres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gschooleducation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gnonschooleducation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="goccupation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ghomeaddress" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+    <Property Name="ghomestate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ghomecountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gsuburb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gpostcode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="gpostaladdress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gpostalstate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gpostalsuburb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gpostalcode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="gpostalcountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ghomephoneno" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="gmobilenumb" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="gfaxnumb" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="gemailaddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gwhatsapp" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="doc" Type="DateTime" />
+    <Property Name="grelationshiptochild" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="maker" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="stud_medical_info">
+    <Key>
+      <PropertyRef Name="idmedical" />
+    </Key>
+    <Property Name="idmedical" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="medicalofstud" Type="Int32" />
+    <Property Name="healthcondition" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="allergies" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="medication_for_allergies" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="regularmedication" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="regularmedicationdetails" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="maker" Type="Int32" />
+    <Property Name="doc" Type="DateTime" />
+    <Property Name="revised" Type="Int32" />
+    <NavigationProperty Name="employee_data" Relationship="aisdbModel.stud_medical_info_ibfk_2" FromRole="stud_medical_info" ToRole="employee_data" />
+    <NavigationProperty Name="employee_data1" Relationship="aisdbModel.stud_medical_info_ibfk_3" FromRole="stud_medical_info" ToRole="employee_data" />
+  </EntityType>
+  <EntityType Name="stud_mother_information">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="relationship" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="motherofstud" Type="Int32" />
+    <Property Name="mname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mnationality" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="maustralianresidence" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mauabortorres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mschooleducation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mnonschooleducation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="moccupation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mhomeaddress" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+    <Property Name="mhomestate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mhomecountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="msuburb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mpostcode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="mpostaladdress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mpostalstate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mpostalsuburb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mpostalcode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="mpostalcountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mhomephoneno" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="mmobilenumb" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="mfaxnumb" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="memailaddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mwhatsapp" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="mmainlang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="motherthanenglish" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="doc" Type="DateTime" />
+    <Property Name="photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="maker" Type="Int32" />
+  </EntityType>
+  <EntityType Name="stud_relationship">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="relationship" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="relationshiptostud" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="nationality" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="australianresidence" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="auabortorres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="schooleducation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="nonschooleducation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="occupation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="homeaddress" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+    <Property Name="homestate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="homecountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="suburb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="postcode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="postaladdress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="postalstate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="postalsuburb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="postalcode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="postalcountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="homephoneno" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="mobilenumb" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="faxnumb" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="emailaddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="whatsapp" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="mainlang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="otherthanenglish" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="doc" Type="DateTime" />
+    <Property Name="photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="maker" Type="Int32" />
+  </EntityType>
+  <EntityType Name="stud_sibling_info">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="siblingofstud" Type="Int32" />
+    <Property Name="siblingfname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="siblinglname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="currentschoolsibling" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dob" Type="DateTime" />
+    <Property Name="gender" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="maker" Type="Int32" />
+    <Property Name="revised" Type="Int32" />
+    <Property Name="doc" Type="DateTime" />
+    <NavigationProperty Name="employee_data" Relationship="aisdbModel.stud_sibling_info_ibfk_2" FromRole="stud_sibling_info" ToRole="employee_data" />
+    <NavigationProperty Name="employee_data1" Relationship="aisdbModel.stud_sibling_info_ibfk_3" FromRole="stud_sibling_info" ToRole="employee_data" />
+  </EntityType>
+  <EntityType Name="student">
+    <Key>
+      <PropertyRef Name="idstudent" />
+    </Key>
+    <Property Name="idstudent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="aisid" Type="Int32" />
+    <Property Name="nis" Type="Int32" />
+    <Property Name="waid" Type="Int32" />
+    <Property Name="currentclass" Type="Int32" />
+    <Property Name="joined" Type="DateTime" />
+    <Property Name="certificatename" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="dob" Type="DateTime" />
+    <Property Name="pob" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="gender" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="religion" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="nationality" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="homeaddress" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="homephone" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="mobile" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="emailaddress" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="fname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="fwhatsapp" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="fmobile" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="femail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="faddress" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="mname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="mwhatsapp" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="mmobile" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="memail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="maddress" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="foreigner" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="student_data">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="aisid" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="aisid" Type="Int32" Nullable="false" />
+    <Property Name="nis" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="ausid" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="intake" Type="DateTime" />
+    <Property Name="familyname" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="givenname" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="middlename" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="certificatename" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="dob" Type="DateTime" />
+    <Property Name="pob" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="cob" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="gender" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="religion" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="nationality" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="homeaddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="homestate" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="suburb" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="postcode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="homecountry" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="postaladdress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="postalstate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="postalsuburb" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="postalcode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="postalcountry" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="homephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="mobilenumb" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="faxnumb" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="langspoken" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="englishproficiency" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="studstat" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="studentimg" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="currclass" Type="Int32" />
+    <Property Name="doc" Type="DateTime" />
+    <Property Name="maker" Type="Int32" />
+    <Property Name="current_grade" Type="Int32" />
+    <Property Name="proposedgrade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="revised" Type="Int32" />
+    <Property Name="localforeign" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="class" Relationship="aisdbModel.student_data_ibfk_1" FromRole="student_data" ToRole="class" />
+    <NavigationProperty Name="employee_data" Relationship="aisdbModel.student_data_ibfk_2" FromRole="student_data" ToRole="employee_data" />
+    <NavigationProperty Name="employee_data1" Relationship="aisdbModel.student_data_ibfk_5" FromRole="student_data" ToRole="employee_data" />
+  </EntityType>
+  <EntityType Name="student_previous_school_info">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="of_student" Type="Int32" />
+    <Property Name="name_of_school" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="grade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dateattended" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="language_of_instruction" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="extra_support" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="curriculum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="student_transaction">
+    <Key>
+      <PropertyRef Name="id_trans" />
+    </Key>
+    <Property Name="id_trans" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="aisid" Type="Int32" />
+    <Property Name="trans_time" Type="DateTime" />
+    <Property Name="trans_date" Type="DateTime" />
+    <Property Name="payment_method" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="bank_ref" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="amount" Type="Decimal" />
+    <Property Name="pay_for" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="digi_sign" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="maker" Type="Int32" />
+    <NavigationProperty Name="employee_data" Relationship="aisdbModel.student_transaction_ibfk_2" FromRole="student_transaction" ToRole="employee_data" />
+  </EntityType>
+  <EntityType Name="subject">
+    <Key>
+      <PropertyRef Name="SubjectID" />
+    </Key>
+    <Property Name="SubjectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SubjectGrade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SubjectTeacher" Type="Int32" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" />
+    <NavigationProperty Name="employee_data" Relationship="aisdbModel.subjects_ibfk_1" FromRole="subject" ToRole="employee_data" />
+    <NavigationProperty Name="employee_data1" Relationship="aisdbModel.subjects_ibfk_3" FromRole="subject" ToRole="employee_data" />
+    <NavigationProperty Name="timetables" Relationship="aisdbModel.timetable_ibfk_1" FromRole="subject" ToRole="timetable" />
+  </EntityType>
+  <EntityType Name="timetable">
+    <Key>
+      <PropertyRef Name="TimetableID" />
+    </Key>
+    <Property Name="TimetableID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AcademicYear" Type="Int16" />
+    <Property Name="Semester" Type="Int32" />
+    <Property Name="days" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="period" Type="Int32" />
+    <Property Name="periodTime" Type="Time" />
+    <Property Name="SubjectID" Type="Int32" />
+    <NavigationProperty Name="subject" Relationship="aisdbModel.timetable_ibfk_1" FromRole="timetable" ToRole="subject" />
+  </EntityType>
+  <EntityType Name="user_account">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user" Type="String" MaxLength="43" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="43" FixedLength="false" Unicode="false" />
+    <Property Name="role" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="owner_id" Type="Int64" />
+  </EntityType>
+  <Association Name="academic_feedback_ibfk_1">
+    <End Type="aisdbModel.enquiry" Role="enquiry" Multiplicity="0..1" />
+    <End Type="aisdbModel.academic_feedback" Role="academic_feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="enquiry">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="academic_feedback">
+        <PropertyRef Name="ref" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="accounting_enrollment_ibfk_2">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.accounting_enrollment" Role="accounting_enrollment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="accounting_enrollment">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="accounting_enrollment_ibfk_3">
+    <End Type="aisdbModel.enquiry" Role="enquiry" Multiplicity="0..1" />
+    <End Type="aisdbModel.accounting_enrollment" Role="accounting_enrollment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="enquiry">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="accounting_enrollment">
+        <PropertyRef Name="enq_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="class_ibfk_1">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.class" Role="class" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="class">
+        <PropertyRef Name="careteacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="class_ibfk_2">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.class" Role="class" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="class">
+        <PropertyRef Name="assistant" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="class_media_ibfk_1">
+    <End Type="aisdbModel.class" Role="class" Multiplicity="0..1" />
+    <End Type="aisdbModel.class_media" Role="class_media" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="class">
+        <PropertyRef Name="class_id" />
+      </Principal>
+      <Dependent Role="class_media">
+        <PropertyRef Name="media_class" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="enquiries_ibfk_3">
+    <End Type="aisdbModel.class" Role="class" Multiplicity="0..1" />
+    <End Type="aisdbModel.enquiry" Role="enquiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="class">
+        <PropertyRef Name="class_id" />
+      </Principal>
+      <Dependent Role="enquiry">
+        <PropertyRef Name="decidedclass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="student_data_ibfk_1">
+    <End Type="aisdbModel.class" Role="class" Multiplicity="0..1" />
+    <End Type="aisdbModel.student_data" Role="student_data" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="class">
+        <PropertyRef Name="class_id" />
+      </Principal>
+      <Dependent Role="student_data">
+        <PropertyRef Name="currclass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="document_employee_ibfk_1">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.document_employee" Role="document_employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="document_employee">
+        <PropertyRef Name="owner_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="document_students_ibfk_1">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.document_students" Role="document_students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="document_students">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="enq_cancel_ibfk_2">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.enq_cancel" Role="enq_cancel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="enq_cancel">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="enq_test_ibfk_2">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.enq_test" Role="enq_test" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="enq_test">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="enquiries_ibfk_1">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.enquiry" Role="enquiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="enquiry">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="enquiries_process_ibfk_2">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.enquiries_process" Role="enquiries_process" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="enquiries_process">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="feedback_ibfk_1">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="1" />
+    <End Type="aisdbModel.feedback" Role="feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="feedback">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="loginhistory_ibfk_1">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.loginhistory" Role="loginhistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="loginhistory">
+        <PropertyRef Name="emp_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="stud_medical_info_ibfk_2">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.stud_medical_info" Role="stud_medical_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="stud_medical_info">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="stud_medical_info_ibfk_3">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.stud_medical_info" Role="stud_medical_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="stud_medical_info">
+        <PropertyRef Name="revised" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="stud_sibling_info_ibfk_2">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.stud_sibling_info" Role="stud_sibling_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="stud_sibling_info">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="stud_sibling_info_ibfk_3">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.stud_sibling_info" Role="stud_sibling_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="stud_sibling_info">
+        <PropertyRef Name="revised" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="student_data_ibfk_2">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.student_data" Role="student_data" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="student_data">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="student_data_ibfk_5">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.student_data" Role="student_data" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="student_data">
+        <PropertyRef Name="revised" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="student_transaction_ibfk_2">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.student_transaction" Role="student_transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="student_transaction">
+        <PropertyRef Name="maker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="subjects_ibfk_1">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.subject" Role="subject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="subject">
+        <PropertyRef Name="SubjectTeacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="subjects_ibfk_3">
+    <End Type="aisdbModel.employee_data" Role="employee_data" Multiplicity="0..1" />
+    <End Type="aisdbModel.subject" Role="subject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee_data">
+        <PropertyRef Name="employeeid" />
+      </Principal>
+      <Dependent Role="subject">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="enq_cancel_ibfk_1">
+    <End Type="aisdbModel.enquiry" Role="enquiry" Multiplicity="0..1" />
+    <End Type="aisdbModel.enq_cancel" Role="enq_cancel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="enquiry">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="enq_cancel">
+        <PropertyRef Name="enq_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="enq_test_ibfk_1">
+    <End Type="aisdbModel.enquiry" Role="enquiry" Multiplicity="0..1" />
+    <End Type="aisdbModel.enq_test" Role="enq_test" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="enquiry">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="enq_test">
+        <PropertyRef Name="enq_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="enquiries_process_ibfk_1">
+    <End Type="aisdbModel.enquiry" Role="enquiry" Multiplicity="0..1" />
+    <End Type="aisdbModel.enquiries_process" Role="enquiries_process" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="enquiry">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="enquiries_process">
+        <PropertyRef Name="enq_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="timetable_ibfk_1">
+    <End Type="aisdbModel.subject" Role="subject" Multiplicity="0..1" />
+    <End Type="aisdbModel.timetable" Role="timetable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subject">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="timetable">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,676 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="aisdbModelStoreContainer" CdmEntityContainer="aisdbEntities2">
+    <FunctionImportMapping FunctionImportName="getStudstat" FunctionName="aisdbModel.Store.getStudstat">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="aisdbModel.getStudstat_Result" />
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="academic_feedback">
+      <EntityTypeMapping TypeName="aisdbModel.academic_feedback">
+        <MappingFragment StoreEntitySet="academic_feedback">
+          <ScalarProperty Name="submitted" ColumnName="submitted" />
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="feedback" ColumnName="feedback" />
+          <ScalarProperty Name="ref" ColumnName="ref" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="academic_year">
+      <EntityTypeMapping TypeName="aisdbModel.academic_year">
+        <MappingFragment StoreEntitySet="academic_year">
+          <ScalarProperty Name="StatusAY" ColumnName="StatusAY" />
+          <ScalarProperty Name="TermsAcademicYear" ColumnName="TermsAcademicYear" />
+          <ScalarProperty Name="AcademicYear" ColumnName="AcademicYear" />
+          <ScalarProperty Name="AYCode" ColumnName="AYCode" />
+          <ScalarProperty Name="IDAyear" ColumnName="IDAyear" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="accounting_enrollment">
+      <EntityTypeMapping TypeName="aisdbModel.accounting_enrollment">
+        <MappingFragment StoreEntitySet="accounting_enrollment">
+          <ScalarProperty Name="enq_id" ColumnName="enq_id" />
+          <ScalarProperty Name="intake" ColumnName="intake" />
+          <ScalarProperty Name="notes" ColumnName="notes" />
+          <ScalarProperty Name="payment_plan" ColumnName="payment_plan" />
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="doc" ColumnName="doc" />
+          <ScalarProperty Name="totalfee" ColumnName="totalfee" />
+          <ScalarProperty Name="formfee" ColumnName="formfee" />
+          <ScalarProperty Name="materialfee" ColumnName="materialfee" />
+          <ScalarProperty Name="uniformfee" ColumnName="uniformfee" />
+          <ScalarProperty Name="schoolfee" ColumnName="schoolfee" />
+          <ScalarProperty Name="appfee" ColumnName="appfee" />
+          <ScalarProperty Name="aisid" ColumnName="aisid" />
+          <ScalarProperty Name="idenrollment" ColumnName="idenrollment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="app_ver">
+      <EntityTypeMapping TypeName="aisdbModel.app_ver">
+        <MappingFragment StoreEntitySet="app_ver">
+          <ScalarProperty Name="app_maintenance" ColumnName="app_maintenance" />
+          <ScalarProperty Name="path" ColumnName="path" />
+          <ScalarProperty Name="dbver" ColumnName="dbver" />
+          <ScalarProperty Name="release_note" ColumnName="release_note" />
+          <ScalarProperty Name="released" ColumnName="released" />
+          <ScalarProperty Name="ver" ColumnName="ver" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="classes">
+      <EntityTypeMapping TypeName="aisdbModel.class">
+        <MappingFragment StoreEntitySet="class">
+          <ScalarProperty Name="AYCODE" ColumnName="AYCODE" />
+          <ScalarProperty Name="class_capacity" ColumnName="class_capacity" />
+          <ScalarProperty Name="class_stat" ColumnName="class_stat" />
+          <ScalarProperty Name="class_end" ColumnName="class_end" />
+          <ScalarProperty Name="class_start" ColumnName="class_start" />
+          <ScalarProperty Name="assistant" ColumnName="assistant" />
+          <ScalarProperty Name="careteacher" ColumnName="careteacher" />
+          <ScalarProperty Name="grade" ColumnName="grade" />
+          <ScalarProperty Name="classname" ColumnName="classname" />
+          <ScalarProperty Name="class_id" ColumnName="class_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="class_history">
+      <EntityTypeMapping TypeName="aisdbModel.class_history">
+        <MappingFragment StoreEntitySet="class_history">
+          <ScalarProperty Name="assignedby" ColumnName="assignedby" />
+          <ScalarProperty Name="assigned_date" ColumnName="assigned_date" />
+          <ScalarProperty Name="DESC" ColumnName="DESC" />
+          <ScalarProperty Name="class_status" ColumnName="class_status" />
+          <ScalarProperty Name="class_id" ColumnName="class_id" />
+          <ScalarProperty Name="stud_id" ColumnName="stud_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="class_media">
+      <EntityTypeMapping TypeName="aisdbModel.class_media">
+        <MappingFragment StoreEntitySet="class_media">
+          <ScalarProperty Name="media_class" ColumnName="media_class" />
+          <ScalarProperty Name="visibility" ColumnName="visibility" />
+          <ScalarProperty Name="media_uploader" ColumnName="media_uploader" />
+          <ScalarProperty Name="media_location" ColumnName="media_location" />
+          <ScalarProperty Name="media_description" ColumnName="media_description" />
+          <ScalarProperty Name="media_name" ColumnName="media_name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="departments">
+      <EntityTypeMapping TypeName="aisdbModel.department">
+        <MappingFragment StoreEntitySet="department">
+          <ScalarProperty Name="supervisor" ColumnName="supervisor" />
+          <ScalarProperty Name="dept_name" ColumnName="dept_name" />
+          <ScalarProperty Name="iddepartment" ColumnName="iddepartment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="document_employee">
+      <EntityTypeMapping TypeName="aisdbModel.document_employee">
+        <MappingFragment StoreEntitySet="document_employee">
+          <ScalarProperty Name="owner_id" ColumnName="owner_id" />
+          <ScalarProperty Name="docsdesc" ColumnName="docsdesc" />
+          <ScalarProperty Name="docstype" ColumnName="docstype" />
+          <ScalarProperty Name="doc" ColumnName="doc" />
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="docspath" ColumnName="docspath" />
+          <ScalarProperty Name="docsname" ColumnName="docsname" />
+          <ScalarProperty Name="id_Docs" ColumnName="id_Docs" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="document_students">
+      <EntityTypeMapping TypeName="aisdbModel.document_students">
+        <MappingFragment StoreEntitySet="document_students">
+          <ScalarProperty Name="owner_id" ColumnName="owner_id" />
+          <ScalarProperty Name="docsdesc" ColumnName="docsdesc" />
+          <ScalarProperty Name="docstype" ColumnName="docstype" />
+          <ScalarProperty Name="doc" ColumnName="doc" />
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="docspath" ColumnName="docspath" />
+          <ScalarProperty Name="docsname" ColumnName="docsname" />
+          <ScalarProperty Name="id_Docs" ColumnName="id_Docs" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="employee_data">
+      <EntityTypeMapping TypeName="aisdbModel.employee_data">
+        <MappingFragment StoreEntitySet="employee_data">
+          <ScalarProperty Name="date_of_creation" ColumnName="date_of_creation" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="emp_status" ColumnName="emp_status" />
+          <ScalarProperty Name="emp_passport_no" ColumnName="emp_passport_no" />
+          <ScalarProperty Name="emp_ispursuingdegree_degree" ColumnName="emp_ispursuingdegree_degree" />
+          <ScalarProperty Name="emp_ispursuingdegree_startemployee" ColumnName="emp_ispursuingdegree_startemployee" />
+          <ScalarProperty Name="emp_ispursuingdegree_duration" ColumnName="emp_ispursuingdegree_duration" />
+          <ScalarProperty Name="emp_ispursuingdegree_institution" ColumnName="emp_ispursuingdegree_institution" />
+          <ScalarProperty Name="emp_ispursuingdegree" ColumnName="emp_ispursuingdegree" />
+          <ScalarProperty Name="emp_schedu_graduated" ColumnName="emp_schedu_graduated" />
+          <ScalarProperty Name="emp_schedu_name" ColumnName="emp_schedu_name" />
+          <ScalarProperty Name="emp_schedu" ColumnName="emp_schedu" />
+          <ScalarProperty Name="emp_nonsch2_institution" ColumnName="emp_nonsch2_institution" />
+          <ScalarProperty Name="emp_nonsch2_year" ColumnName="emp_nonsch2_year" />
+          <ScalarProperty Name="emp_nonsch2_designation" ColumnName="emp_nonsch2_designation" />
+          <ScalarProperty Name="emp_nonsch2" ColumnName="emp_nonsch2" />
+          <ScalarProperty Name="emp_nonsch1_year" ColumnName="emp_nonsch1_year" />
+          <ScalarProperty Name="emp_nonsch1_institution" ColumnName="emp_nonsch1_institution" />
+          <ScalarProperty Name="emp_nonsch1_designation" ColumnName="emp_nonsch1_designation" />
+          <ScalarProperty Name="emp_nonsch1" ColumnName="emp_nonsch1" />
+          <ScalarProperty Name="employee_pic" ColumnName="employee_pic" />
+          <ScalarProperty Name="emp_emergencycontactphone" ColumnName="emp_emergencycontactphone" />
+          <ScalarProperty Name="emp_emergencycontactaddress" ColumnName="emp_emergencycontactaddress" />
+          <ScalarProperty Name="emp_emergencyrelationship" ColumnName="emp_emergencyrelationship" />
+          <ScalarProperty Name="emp_emergencycontactname" ColumnName="emp_emergencycontactname" />
+          <ScalarProperty Name="emp_no_dependant" ColumnName="emp_no_dependant" />
+          <ScalarProperty Name="emp_spouse_phone" ColumnName="emp_spouse_phone" />
+          <ScalarProperty Name="emp_spouse_name" ColumnName="emp_spouse_name" />
+          <ScalarProperty Name="emp_marital_stat" ColumnName="emp_marital_stat" />
+          <ScalarProperty Name="emp_bpjs_tk" ColumnName="emp_bpjs_tk" />
+          <ScalarProperty Name="emp_bpjs_kes" ColumnName="emp_bpjs_kes" />
+          <ScalarProperty Name="emp_nik" ColumnName="emp_nik" />
+          <ScalarProperty Name="emp_npwp" ColumnName="emp_npwp" />
+          <ScalarProperty Name="emp_personal_email" ColumnName="emp_personal_email" />
+          <ScalarProperty Name="emp_whatsapp" ColumnName="emp_whatsapp" />
+          <ScalarProperty Name="emp_mobile" ColumnName="emp_mobile" />
+          <ScalarProperty Name="emp_hometown_number" ColumnName="emp_hometown_number" />
+          <ScalarProperty Name="emp_hometown_address" ColumnName="emp_hometown_address" />
+          <ScalarProperty Name="emp_homephone" ColumnName="emp_homephone" />
+          <ScalarProperty Name="emp_address" ColumnName="emp_address" />
+          <ScalarProperty Name="emp_dob" ColumnName="emp_dob" />
+          <ScalarProperty Name="emp_nationality" ColumnName="emp_nationality" />
+          <ScalarProperty Name="emp_pob" ColumnName="emp_pob" />
+          <ScalarProperty Name="emp_religion" ColumnName="emp_religion" />
+          <ScalarProperty Name="emp_gender" ColumnName="emp_gender" />
+          <ScalarProperty Name="emp_fullname" ColumnName="emp_fullname" />
+          <ScalarProperty Name="emp_joindate" ColumnName="emp_joindate" />
+          <ScalarProperty Name="emp_roles" ColumnName="emp_roles" />
+          <ScalarProperty Name="emp_department" ColumnName="emp_department" />
+          <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="employee_database">
+      <EntityTypeMapping TypeName="aisdbModel.employee_database">
+        <MappingFragment StoreEntitySet="employee_database">
+          <ScalarProperty Name="doc" ColumnName="doc" />
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="emp_status" ColumnName="emp_status" />
+          <ScalarProperty Name="emp_passport" ColumnName="emp_passport" />
+          <ScalarProperty Name="emp_ispursuingdegree_degree" ColumnName="emp_ispursuingdegree_degree" />
+          <ScalarProperty Name="emp_ispursuingdegree_start" ColumnName="emp_ispursuingdegree_start" />
+          <ScalarProperty Name="emp_ispursuingdegree_duration" ColumnName="emp_ispursuingdegree_duration" />
+          <ScalarProperty Name="emp_ispursuingdegree_institution" ColumnName="emp_ispursuingdegree_institution" />
+          <ScalarProperty Name="emp_ispursuingdegree" ColumnName="emp_ispursuingdegree" />
+          <ScalarProperty Name="emp_schedu_graduated" ColumnName="emp_schedu_graduated" />
+          <ScalarProperty Name="emp_schedu_name" ColumnName="emp_schedu_name" />
+          <ScalarProperty Name="emp_schedu" ColumnName="emp_schedu" />
+          <ScalarProperty Name="emp_nonsch2_institution" ColumnName="emp_nonsch2_institution" />
+          <ScalarProperty Name="emp_nonsch2_year" ColumnName="emp_nonsch2_year" />
+          <ScalarProperty Name="emp_nonsch2_designation" ColumnName="emp_nonsch2_designation" />
+          <ScalarProperty Name="emp_nonsch2" ColumnName="emp_nonsch2" />
+          <ScalarProperty Name="emp_nonsch1_year" ColumnName="emp_nonsch1_year" />
+          <ScalarProperty Name="emp_nonsch1_institution" ColumnName="emp_nonsch1_institution" />
+          <ScalarProperty Name="emp_nonsch1_designation" ColumnName="emp_nonsch1_designation" />
+          <ScalarProperty Name="emp_nonsch1" ColumnName="emp_nonsch1" />
+          <ScalarProperty Name="employeepic" ColumnName="employeepic" />
+          <ScalarProperty Name="emp_emergency_phone" ColumnName="emp_emergency_phone" />
+          <ScalarProperty Name="emp_emergency_address" ColumnName="emp_emergency_address" />
+          <ScalarProperty Name="emp_emergency_relationship" ColumnName="emp_emergency_relationship" />
+          <ScalarProperty Name="emp_emergency_name" ColumnName="emp_emergency_name" />
+          <ScalarProperty Name="emp_no_dependant" ColumnName="emp_no_dependant" />
+          <ScalarProperty Name="emp_spouse_phone" ColumnName="emp_spouse_phone" />
+          <ScalarProperty Name="emp_spouse_name" ColumnName="emp_spouse_name" />
+          <ScalarProperty Name="emp_marital" ColumnName="emp_marital" />
+          <ScalarProperty Name="emp_bpjs_tk" ColumnName="emp_bpjs_tk" />
+          <ScalarProperty Name="emp_bpjs_kes" ColumnName="emp_bpjs_kes" />
+          <ScalarProperty Name="emp_nik" ColumnName="emp_nik" />
+          <ScalarProperty Name="emp_npwp" ColumnName="emp_npwp" />
+          <ScalarProperty Name="emp_personal_email" ColumnName="emp_personal_email" />
+          <ScalarProperty Name="emp_whatsapp" ColumnName="emp_whatsapp" />
+          <ScalarProperty Name="emp_mobilenumber" ColumnName="emp_mobilenumber" />
+          <ScalarProperty Name="emp_hometown_number" ColumnName="emp_hometown_number" />
+          <ScalarProperty Name="emp_hometown_address" ColumnName="emp_hometown_address" />
+          <ScalarProperty Name="emp_homephone" ColumnName="emp_homephone" />
+          <ScalarProperty Name="emp_address" ColumnName="emp_address" />
+          <ScalarProperty Name="emp_dob" ColumnName="emp_dob" />
+          <ScalarProperty Name="emp_nationality" ColumnName="emp_nationality" />
+          <ScalarProperty Name="emp_pob" ColumnName="emp_pob" />
+          <ScalarProperty Name="emp_religion" ColumnName="emp_religion" />
+          <ScalarProperty Name="emp_gender" ColumnName="emp_gender" />
+          <ScalarProperty Name="emp_fullname" ColumnName="emp_fullname" />
+          <ScalarProperty Name="join_date" ColumnName="join_date" />
+          <ScalarProperty Name="emp_role" ColumnName="emp_role" />
+          <ScalarProperty Name="emp_dept" ColumnName="emp_dept" />
+          <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="enq_cancel">
+      <EntityTypeMapping TypeName="aisdbModel.enq_cancel">
+        <MappingFragment StoreEntitySet="enq_cancel">
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="timest" ColumnName="timest" />
+          <ScalarProperty Name="reason" ColumnName="reason" />
+          <ScalarProperty Name="enq_id" ColumnName="enq_id" />
+          <ScalarProperty Name="idcancellation" ColumnName="idcancellation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="enq_test">
+      <EntityTypeMapping TypeName="aisdbModel.enq_test">
+        <MappingFragment StoreEntitySet="enq_test">
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="timest" ColumnName="timest" />
+          <ScalarProperty Name="additional_name" ColumnName="additional_name" />
+          <ScalarProperty Name="additional" ColumnName="additional" />
+          <ScalarProperty Name="science" ColumnName="science" />
+          <ScalarProperty Name="english" ColumnName="english" />
+          <ScalarProperty Name="math" ColumnName="math" />
+          <ScalarProperty Name="enq_id" ColumnName="enq_id" />
+          <ScalarProperty Name="test_id" ColumnName="test_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="enquiries">
+      <EntityTypeMapping TypeName="aisdbModel.enquiry">
+        <MappingFragment StoreEntitySet="enquiries">
+          <ScalarProperty Name="aisid" ColumnName="aisid" />
+          <ScalarProperty Name="advanced" ColumnName="advanced" />
+          <ScalarProperty Name="decidedclass" ColumnName="decidedclass" />
+          <ScalarProperty Name="skiptest" ColumnName="skiptest" />
+          <ScalarProperty Name="test_date" ColumnName="test_date" />
+          <ScalarProperty Name="current_procedure" ColumnName="current_procedure" />
+          <ScalarProperty Name="doc" ColumnName="doc" />
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="whatsappnumb" ColumnName="whatsappnumb" />
+          <ScalarProperty Name="phonenumb" ColumnName="phonenumb" />
+          <ScalarProperty Name="parentstype" ColumnName="parentstype" />
+          <ScalarProperty Name="parentsname" ColumnName="parentsname" />
+          <ScalarProperty Name="levels" ColumnName="levels" />
+          <ScalarProperty Name="presentschool" ColumnName="presentschool" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="pob" ColumnName="pob" />
+          <ScalarProperty Name="studname" ColumnName="studname" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="enquiries_process">
+      <EntityTypeMapping TypeName="aisdbModel.enquiries_process">
+        <MappingFragment StoreEntitySet="enquiries_process">
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="timest" ColumnName="timest" />
+          <ScalarProperty Name="enq_id" ColumnName="enq_id" />
+          <ScalarProperty Name="procedure_name" ColumnName="procedure_name" />
+          <ScalarProperty Name="proc_numb" ColumnName="proc_numb" />
+          <ScalarProperty Name="proc_id" ColumnName="proc_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="feedbacks">
+      <EntityTypeMapping TypeName="aisdbModel.feedback">
+        <MappingFragment StoreEntitySet="feedback">
+          <ScalarProperty Name="stat" ColumnName="stat" />
+          <ScalarProperty Name="doc" ColumnName="doc" />
+          <ScalarProperty Name="feedback1" ColumnName="feedback" />
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="grades">
+      <EntityTypeMapping TypeName="aisdbModel.grade">
+        <MappingFragment StoreEntitySet="grade">
+          <ScalarProperty Name="desc" ColumnName="desc" />
+          <ScalarProperty Name="dept" ColumnName="dept" />
+          <ScalarProperty Name="glevel" ColumnName="glevel" />
+          <ScalarProperty Name="gname" ColumnName="gname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="loginhistories">
+      <EntityTypeMapping TypeName="aisdbModel.loginhistory">
+        <MappingFragment StoreEntitySet="loginhistory">
+          <ScalarProperty Name="localip" ColumnName="localip" />
+          <ScalarProperty Name="publicip" ColumnName="publicip" />
+          <ScalarProperty Name="times" ColumnName="times" />
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="stud_father_information">
+      <EntityTypeMapping TypeName="aisdbModel.stud_father_information">
+        <MappingFragment StoreEntitySet="stud_father_information">
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="doc" ColumnName="doc" />
+          <ScalarProperty Name="fotherthanenglish" ColumnName="fotherthanenglish" />
+          <ScalarProperty Name="fmainlang" ColumnName="fmainlang" />
+          <ScalarProperty Name="fwhatsapp" ColumnName="fwhatsapp" />
+          <ScalarProperty Name="femailaddress" ColumnName="femailaddress" />
+          <ScalarProperty Name="ffaxnumb" ColumnName="ffaxnumb" />
+          <ScalarProperty Name="fmobilenumb" ColumnName="fmobilenumb" />
+          <ScalarProperty Name="fhomephoneno" ColumnName="fhomephoneno" />
+          <ScalarProperty Name="fpostalcountry" ColumnName="fpostalcountry" />
+          <ScalarProperty Name="fpostalcode" ColumnName="fpostalcode" />
+          <ScalarProperty Name="fpostalsuburb" ColumnName="fpostalsuburb" />
+          <ScalarProperty Name="fpostalstate" ColumnName="fpostalstate" />
+          <ScalarProperty Name="fpostaladdress" ColumnName="fpostaladdress" />
+          <ScalarProperty Name="fpostcode" ColumnName="fpostcode" />
+          <ScalarProperty Name="fsuburb" ColumnName="fsuburb" />
+          <ScalarProperty Name="fhomecountry" ColumnName="fhomecountry" />
+          <ScalarProperty Name="fhomestate" ColumnName="fhomestate" />
+          <ScalarProperty Name="fhomeaddress" ColumnName="fhomeaddress" />
+          <ScalarProperty Name="foccupation" ColumnName="foccupation" />
+          <ScalarProperty Name="fnonschooleducation" ColumnName="fnonschooleducation" />
+          <ScalarProperty Name="fschooleducation" ColumnName="fschooleducation" />
+          <ScalarProperty Name="fauabortorres" ColumnName="fauabortorres" />
+          <ScalarProperty Name="faustralianresidence" ColumnName="faustralianresidence" />
+          <ScalarProperty Name="fnationality" ColumnName="fnationality" />
+          <ScalarProperty Name="fname" ColumnName="fname" />
+          <ScalarProperty Name="fatherofstud" ColumnName="fatherofstud" />
+          <ScalarProperty Name="relationship" ColumnName="relationship" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="stud_guardian_information">
+      <EntityTypeMapping TypeName="aisdbModel.stud_guardian_information">
+        <MappingFragment StoreEntitySet="stud_guardian_information">
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="grelationshiptochild" ColumnName="grelationshiptochild" />
+          <ScalarProperty Name="doc" ColumnName="doc" />
+          <ScalarProperty Name="gwhatsapp" ColumnName="gwhatsapp" />
+          <ScalarProperty Name="gemailaddress" ColumnName="gemailaddress" />
+          <ScalarProperty Name="gfaxnumb" ColumnName="gfaxnumb" />
+          <ScalarProperty Name="gmobilenumb" ColumnName="gmobilenumb" />
+          <ScalarProperty Name="ghomephoneno" ColumnName="ghomephoneno" />
+          <ScalarProperty Name="gpostalcountry" ColumnName="gpostalcountry" />
+          <ScalarProperty Name="gpostalcode" ColumnName="gpostalcode" />
+          <ScalarProperty Name="gpostalsuburb" ColumnName="gpostalsuburb" />
+          <ScalarProperty Name="gpostalstate" ColumnName="gpostalstate" />
+          <ScalarProperty Name="gpostaladdress" ColumnName="gpostaladdress" />
+          <ScalarProperty Name="gpostcode" ColumnName="gpostcode" />
+          <ScalarProperty Name="gsuburb" ColumnName="gsuburb" />
+          <ScalarProperty Name="ghomecountry" ColumnName="ghomecountry" />
+          <ScalarProperty Name="ghomestate" ColumnName="ghomestate" />
+          <ScalarProperty Name="ghomeaddress" ColumnName="ghomeaddress" />
+          <ScalarProperty Name="goccupation" ColumnName="goccupation" />
+          <ScalarProperty Name="gnonschooleducation" ColumnName="gnonschooleducation" />
+          <ScalarProperty Name="gschooleducation" ColumnName="gschooleducation" />
+          <ScalarProperty Name="gauabortorres" ColumnName="gauabortorres" />
+          <ScalarProperty Name="gaustralianresidence" ColumnName="gaustralianresidence" />
+          <ScalarProperty Name="gnationality" ColumnName="gnationality" />
+          <ScalarProperty Name="gname" ColumnName="gname" />
+          <ScalarProperty Name="guardianofstud" ColumnName="guardianofstud" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="stud_medical_info">
+      <EntityTypeMapping TypeName="aisdbModel.stud_medical_info">
+        <MappingFragment StoreEntitySet="stud_medical_info">
+          <ScalarProperty Name="revised" ColumnName="revised" />
+          <ScalarProperty Name="doc" ColumnName="doc" />
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="regularmedicationdetails" ColumnName="regularmedicationdetails" />
+          <ScalarProperty Name="regularmedication" ColumnName="regularmedication" />
+          <ScalarProperty Name="medication_for_allergies" ColumnName="medication_for_allergies" />
+          <ScalarProperty Name="allergies" ColumnName="allergies" />
+          <ScalarProperty Name="healthcondition" ColumnName="healthcondition" />
+          <ScalarProperty Name="medicalofstud" ColumnName="medicalofstud" />
+          <ScalarProperty Name="idmedical" ColumnName="idmedical" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="stud_mother_information">
+      <EntityTypeMapping TypeName="aisdbModel.stud_mother_information">
+        <MappingFragment StoreEntitySet="stud_mother_information">
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="doc" ColumnName="doc" />
+          <ScalarProperty Name="motherthanenglish" ColumnName="motherthanenglish" />
+          <ScalarProperty Name="mmainlang" ColumnName="mmainlang" />
+          <ScalarProperty Name="mwhatsapp" ColumnName="mwhatsapp" />
+          <ScalarProperty Name="memailaddress" ColumnName="memailaddress" />
+          <ScalarProperty Name="mfaxnumb" ColumnName="mfaxnumb" />
+          <ScalarProperty Name="mmobilenumb" ColumnName="mmobilenumb" />
+          <ScalarProperty Name="mhomephoneno" ColumnName="mhomephoneno" />
+          <ScalarProperty Name="mpostalcountry" ColumnName="mpostalcountry" />
+          <ScalarProperty Name="mpostalcode" ColumnName="mpostalcode" />
+          <ScalarProperty Name="mpostalsuburb" ColumnName="mpostalsuburb" />
+          <ScalarProperty Name="mpostalstate" ColumnName="mpostalstate" />
+          <ScalarProperty Name="mpostaladdress" ColumnName="mpostaladdress" />
+          <ScalarProperty Name="mpostcode" ColumnName="mpostcode" />
+          <ScalarProperty Name="msuburb" ColumnName="msuburb" />
+          <ScalarProperty Name="mhomecountry" ColumnName="mhomecountry" />
+          <ScalarProperty Name="mhomestate" ColumnName="mhomestate" />
+          <ScalarProperty Name="mhomeaddress" ColumnName="mhomeaddress" />
+          <ScalarProperty Name="moccupation" ColumnName="moccupation" />
+          <ScalarProperty Name="mnonschooleducation" ColumnName="mnonschooleducation" />
+          <ScalarProperty Name="mschooleducation" ColumnName="mschooleducation" />
+          <ScalarProperty Name="mauabortorres" ColumnName="mauabortorres" />
+          <ScalarProperty Name="maustralianresidence" ColumnName="maustralianresidence" />
+          <ScalarProperty Name="mnationality" ColumnName="mnationality" />
+          <ScalarProperty Name="mname" ColumnName="mname" />
+          <ScalarProperty Name="motherofstud" ColumnName="motherofstud" />
+          <ScalarProperty Name="relationship" ColumnName="relationship" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="stud_relationship">
+      <EntityTypeMapping TypeName="aisdbModel.stud_relationship">
+        <MappingFragment StoreEntitySet="stud_relationship">
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="doc" ColumnName="doc" />
+          <ScalarProperty Name="otherthanenglish" ColumnName="otherthanenglish" />
+          <ScalarProperty Name="mainlang" ColumnName="mainlang" />
+          <ScalarProperty Name="whatsapp" ColumnName="whatsapp" />
+          <ScalarProperty Name="emailaddress" ColumnName="emailaddress" />
+          <ScalarProperty Name="faxnumb" ColumnName="faxnumb" />
+          <ScalarProperty Name="mobilenumb" ColumnName="mobilenumb" />
+          <ScalarProperty Name="homephoneno" ColumnName="homephoneno" />
+          <ScalarProperty Name="postalcountry" ColumnName="postalcountry" />
+          <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+          <ScalarProperty Name="postalsuburb" ColumnName="postalsuburb" />
+          <ScalarProperty Name="postalstate" ColumnName="postalstate" />
+          <ScalarProperty Name="postaladdress" ColumnName="postaladdress" />
+          <ScalarProperty Name="postcode" ColumnName="postcode" />
+          <ScalarProperty Name="suburb" ColumnName="suburb" />
+          <ScalarProperty Name="homecountry" ColumnName="homecountry" />
+          <ScalarProperty Name="homestate" ColumnName="homestate" />
+          <ScalarProperty Name="homeaddress" ColumnName="homeaddress" />
+          <ScalarProperty Name="occupation" ColumnName="occupation" />
+          <ScalarProperty Name="nonschooleducation" ColumnName="nonschooleducation" />
+          <ScalarProperty Name="schooleducation" ColumnName="schooleducation" />
+          <ScalarProperty Name="auabortorres" ColumnName="auabortorres" />
+          <ScalarProperty Name="australianresidence" ColumnName="australianresidence" />
+          <ScalarProperty Name="nationality" ColumnName="nationality" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="relationshiptostud" ColumnName="relationshiptostud" />
+          <ScalarProperty Name="relationship" ColumnName="relationship" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="stud_sibling_info">
+      <EntityTypeMapping TypeName="aisdbModel.stud_sibling_info">
+        <MappingFragment StoreEntitySet="stud_sibling_info">
+          <ScalarProperty Name="doc" ColumnName="doc" />
+          <ScalarProperty Name="revised" ColumnName="revised" />
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="currentschoolsibling" ColumnName="currentschoolsibling" />
+          <ScalarProperty Name="siblinglname" ColumnName="siblinglname" />
+          <ScalarProperty Name="siblingfname" ColumnName="siblingfname" />
+          <ScalarProperty Name="siblingofstud" ColumnName="siblingofstud" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="students">
+      <EntityTypeMapping TypeName="aisdbModel.student">
+        <MappingFragment StoreEntitySet="student">
+          <ScalarProperty Name="foreigner" ColumnName="foreigner" />
+          <ScalarProperty Name="maddress" ColumnName="maddress" />
+          <ScalarProperty Name="memail" ColumnName="memail" />
+          <ScalarProperty Name="mmobile" ColumnName="mmobile" />
+          <ScalarProperty Name="mwhatsapp" ColumnName="mwhatsapp" />
+          <ScalarProperty Name="mname" ColumnName="mname" />
+          <ScalarProperty Name="faddress" ColumnName="faddress" />
+          <ScalarProperty Name="femail" ColumnName="femail" />
+          <ScalarProperty Name="fmobile" ColumnName="fmobile" />
+          <ScalarProperty Name="fwhatsapp" ColumnName="fwhatsapp" />
+          <ScalarProperty Name="fname" ColumnName="fname" />
+          <ScalarProperty Name="emailaddress" ColumnName="emailaddress" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="homephone" ColumnName="homephone" />
+          <ScalarProperty Name="homeaddress" ColumnName="homeaddress" />
+          <ScalarProperty Name="nationality" ColumnName="nationality" />
+          <ScalarProperty Name="religion" ColumnName="religion" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="pob" ColumnName="pob" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="certificatename" ColumnName="certificatename" />
+          <ScalarProperty Name="joined" ColumnName="joined" />
+          <ScalarProperty Name="currentclass" ColumnName="currentclass" />
+          <ScalarProperty Name="waid" ColumnName="waid" />
+          <ScalarProperty Name="nis" ColumnName="nis" />
+          <ScalarProperty Name="aisid" ColumnName="aisid" />
+          <ScalarProperty Name="idstudent" ColumnName="idstudent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="student_data">
+      <EntityTypeMapping TypeName="aisdbModel.student_data">
+        <MappingFragment StoreEntitySet="student_data">
+          <ScalarProperty Name="localforeign" ColumnName="localforeign" />
+          <ScalarProperty Name="revised" ColumnName="revised" />
+          <ScalarProperty Name="proposedgrade" ColumnName="proposedgrade" />
+          <ScalarProperty Name="current_grade" ColumnName="current_grade" />
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="doc" ColumnName="doc" />
+          <ScalarProperty Name="currclass" ColumnName="currclass" />
+          <ScalarProperty Name="studentimg" ColumnName="studentimg" />
+          <ScalarProperty Name="studstat" ColumnName="studstat" />
+          <ScalarProperty Name="englishproficiency" ColumnName="englishproficiency" />
+          <ScalarProperty Name="langspoken" ColumnName="langspoken" />
+          <ScalarProperty Name="faxnumb" ColumnName="faxnumb" />
+          <ScalarProperty Name="mobilenumb" ColumnName="mobilenumb" />
+          <ScalarProperty Name="homephone" ColumnName="homephone" />
+          <ScalarProperty Name="postalcountry" ColumnName="postalcountry" />
+          <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+          <ScalarProperty Name="postalsuburb" ColumnName="postalsuburb" />
+          <ScalarProperty Name="postalstate" ColumnName="postalstate" />
+          <ScalarProperty Name="postaladdress" ColumnName="postaladdress" />
+          <ScalarProperty Name="homecountry" ColumnName="homecountry" />
+          <ScalarProperty Name="postcode" ColumnName="postcode" />
+          <ScalarProperty Name="suburb" ColumnName="suburb" />
+          <ScalarProperty Name="homestate" ColumnName="homestate" />
+          <ScalarProperty Name="homeaddress" ColumnName="homeaddress" />
+          <ScalarProperty Name="nationality" ColumnName="nationality" />
+          <ScalarProperty Name="religion" ColumnName="religion" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="cob" ColumnName="cob" />
+          <ScalarProperty Name="pob" ColumnName="pob" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="certificatename" ColumnName="certificatename" />
+          <ScalarProperty Name="middlename" ColumnName="middlename" />
+          <ScalarProperty Name="givenname" ColumnName="givenname" />
+          <ScalarProperty Name="familyname" ColumnName="familyname" />
+          <ScalarProperty Name="intake" ColumnName="intake" />
+          <ScalarProperty Name="ausid" ColumnName="ausid" />
+          <ScalarProperty Name="nis" ColumnName="nis" />
+          <ScalarProperty Name="aisid" ColumnName="aisid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="student_previous_school_info">
+      <EntityTypeMapping TypeName="aisdbModel.student_previous_school_info">
+        <MappingFragment StoreEntitySet="student_previous_school_info">
+          <ScalarProperty Name="curriculum" ColumnName="curriculum" />
+          <ScalarProperty Name="extra_support" ColumnName="extra_support" />
+          <ScalarProperty Name="language_of_instruction" ColumnName="language_of_instruction" />
+          <ScalarProperty Name="dateattended" ColumnName="dateattended" />
+          <ScalarProperty Name="grade" ColumnName="grade" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="name_of_school" ColumnName="name_of_school" />
+          <ScalarProperty Name="of_student" ColumnName="of_student" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="student_transaction">
+      <EntityTypeMapping TypeName="aisdbModel.student_transaction">
+        <MappingFragment StoreEntitySet="student_transaction">
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="digi_sign" ColumnName="digi_sign" />
+          <ScalarProperty Name="pay_for" ColumnName="pay_for" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+          <ScalarProperty Name="bank_ref" ColumnName="bank_ref" />
+          <ScalarProperty Name="payment_method" ColumnName="payment_method" />
+          <ScalarProperty Name="trans_date" ColumnName="trans_date" />
+          <ScalarProperty Name="trans_time" ColumnName="trans_time" />
+          <ScalarProperty Name="aisid" ColumnName="aisid" />
+          <ScalarProperty Name="id_trans" ColumnName="id_trans" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="subjects">
+      <EntityTypeMapping TypeName="aisdbModel.subject">
+        <MappingFragment StoreEntitySet="subjects">
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="SubjectTeacher" ColumnName="SubjectTeacher" />
+          <ScalarProperty Name="SubjectGrade" ColumnName="SubjectGrade" />
+          <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+          <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="timetables">
+      <EntityTypeMapping TypeName="aisdbModel.timetable">
+        <MappingFragment StoreEntitySet="timetable">
+          <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+          <ScalarProperty Name="periodTime" ColumnName="periodTime" />
+          <ScalarProperty Name="period" ColumnName="period" />
+          <ScalarProperty Name="days" ColumnName="days" />
+          <ScalarProperty Name="Semester" ColumnName="Semester" />
+          <ScalarProperty Name="AcademicYear" ColumnName="AcademicYear" />
+          <ScalarProperty Name="TimetableID" ColumnName="TimetableID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_account">
+      <EntityTypeMapping TypeName="aisdbModel.user_account">
+        <MappingFragment StoreEntitySet="user_account">
+          <ScalarProperty Name="owner_id" ColumnName="owner_id" />
+          <ScalarProperty Name="role" ColumnName="role" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="user" ColumnName="user" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

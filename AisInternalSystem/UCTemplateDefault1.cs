@@ -13,29 +13,28 @@ using System.Windows.Forms;
 namespace AisInternalSystem
 {
     
-    public partial class UCFeedback : UserControl
+    public partial class UCFeeDback : UserControl
     {
 
         Dialog msg = new Dialog();
-        Db db = new Db();
 
 
-        public UCFeedback()
+        public UCFeeDback()
         {
             InitializeComponent();
         }
 
-        private void btnBackFeedBack_Click(object sender, EventArgs e)
+        private void btnBackFeeDback_Click(object sender, EventArgs e)
         {
             this.SendToBack();
         }
 
-        void LoadFeedback()
+        void LoadFeeDback()
         {
             try
             {
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("select id as 'Ticket ID', feedback as 'Feedback', stat as 'Status', doc as 'Submitted' from feedback;", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("select id as 'Ticket ID', feeDback as 'FeeDback', stat as 'Status', doc as 'Submitted' from feeDback;", Db.get_connection());
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -53,7 +52,7 @@ namespace AisInternalSystem
                     dg_feedback.Visible = true ;
 
                 }
-                db.close_connection();
+                Db.close_connection();
             }
             catch (MySqlException ex)
             {
@@ -67,22 +66,22 @@ namespace AisInternalSystem
             {
                 try
                 {
-                    db.open_connection();
-                    MySqlCommand cmd = new MySqlCommand("insert into aisdb.feedback (maker, feedback, doc, stat) values (@maker, @feedback, @doc, @stat)", db.get_connection());
+                    Db.open_connection();
+                    MySqlCommand cmd = new MySqlCommand("insert into aisDb.feeDback (maker, feeDback, doc, stat) values (@maker, @feeDback, @doc, @stat)", Db.get_connection());
                     cmd.Parameters.Add("@maker", MySqlDbType.Int32).Value = Dashboard.ownerId;
-                    cmd.Parameters.Add("@feedback", MySqlDbType.Text).Value = txtFeedback.Text;
+                    cmd.Parameters.Add("@feeDback", MySqlDbType.Text).Value = txtFeedback.Text;
                     cmd.Parameters.Add("@doc", MySqlDbType.Timestamp).Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                     cmd.Parameters.Add("@stat", MySqlDbType.VarChar).Value = "Input Received";
                     if (cmd.ExecuteNonQuery() == 1)
                     {
-                        msg.Alert("Thank you for your feedback!\nWe'll get back to you soon! :)", frmAlert.AlertType.Info);
-                        LoadFeedback();
+                        msg.Alert("Thank you for your feeDback!\nWe'll get back to you soon! :)", frmAlert.AlertType.Info);
+                        LoadFeeDback();
                     }
                     else
                     {
                         msg.Alert("We're sorry we're having some trouble", frmAlert.AlertType.Error);
                     }
-                    db.close_connection();
+                    Db.close_connection();
                 }
                 catch (MySqlException ex)
                 {
@@ -95,9 +94,9 @@ namespace AisInternalSystem
             }
         }
 
-        private void UCFeedback_Load(object sender, EventArgs e)
+        private void UCFeeDback_Load(object sender, EventArgs e)
         {
-            LoadFeedback();
+            LoadFeeDback();
 
         }
     }

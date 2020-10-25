@@ -19,7 +19,6 @@ namespace AisInternalSystem
 {
     public partial class UCEmployeeDetailed : UserControl
     {
-        Db db = new Db();
         Dialog msg = new Dialog();
         MySqlCommand cmd = new MySqlCommand();
 
@@ -36,8 +35,8 @@ namespace AisInternalSystem
         {
             try
             {
-                db.open_connection();
-                cmd = new MySqlCommand("select * from employee_data where emp_id = @emp_id", db.get_connection());
+                Db.open_connection();
+                cmd = new MySqlCommand("select * from employee_data where emp_id = @emp_id", Db.get_connection());
                 cmd.Parameters.Add("@emp_id", MySqlDbType.Int64).Value = empID;
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if(reader.HasRows)
@@ -163,7 +162,7 @@ namespace AisInternalSystem
                 reader.Close();
                 flowDocuments.Controls.Clear();
                 ReadDocuments();
-                db.close_connection();
+                Db.close_connection();
             }
             catch (MySqlException ex)
             {
@@ -174,7 +173,7 @@ namespace AisInternalSystem
         public void ReadDocuments()
         {
             //read documents
-            cmd = new MySqlCommand("select docsname, docspath, docstype, docsdesc from document_employee where owner_id = @owner_id", db.get_connection());
+            cmd = new MySqlCommand("select docsname, docspath, docstype, docsdesc from document_employee where owner_id = @owner_id", Db.get_connection());
             cmd.Parameters.Add("@owner_id", MySqlDbType.Int32).Value = employeeID;
             MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -226,28 +225,28 @@ namespace AisInternalSystem
             {
                 case UIStateEmployeeDetailed.Role:
                     PanelRoles.BringToFront();
-                    FocusedButton(btnRoles);
+                    FocuseDbutton(btnRoles);
                     break;
                 case UIStateEmployeeDetailed.Personal:
                     PanelPersonal.BringToFront();
-                    FocusedButton(btnPersonal);
+                    FocuseDbutton(btnPersonal);
                     break;
                 case UIStateEmployeeDetailed.Relationship:
-                    FocusedButton(btnRelationship);
+                    FocuseDbutton(btnRelationship);
                     PanelRelationship.BringToFront();
                     break;
                 case UIStateEmployeeDetailed.Education:
-                    FocusedButton(btnEducation);
+                    FocuseDbutton(btnEducation);
                     PanelEducation.BringToFront();
                     break;
                 case UIStateEmployeeDetailed.Documents:
-                    FocusedButton(btnDocs);
+                    FocuseDbutton(btnDocs);
                     panelDocuments.BringToFront();
                     break;
             }
         }
 
-        void FocusedButton(Guna2Button btn)
+        void FocuseDbutton(Guna2Button btn)
         {
             //set all button to not focus
             btnRoles.FillColor = Color.LightGray;

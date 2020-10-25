@@ -163,6 +163,16 @@ namespace AisInternalSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_calendar_400px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_calendar_400px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_certificate_80px {
             get {
                 object obj = ResourceManager.GetObject("icons8_certificate_80px", resourceCulture);
@@ -246,6 +256,16 @@ namespace AisInternalSystem.Properties {
         internal static System.Drawing.Bitmap icons8_delete_bin_60px {
             get {
                 object obj = ResourceManager.GetObject("icons8_delete_bin_60px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_Development_128px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Development_128px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -366,6 +386,16 @@ namespace AisInternalSystem.Properties {
         internal static System.Drawing.Bitmap icons8_passport_50px {
             get {
                 object obj = ResourceManager.GetObject("icons8_passport_50px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_password_400px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_password_400px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

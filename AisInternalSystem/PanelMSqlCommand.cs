@@ -15,7 +15,6 @@ namespace AisInternalSystem
 {
     public partial class PanelMSqlCommand : UserControl
     {
-        Db db = new Db();
         Dialog msg = new Dialog();
         public PanelMSqlCommand()
         {

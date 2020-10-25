@@ -19,7 +19,6 @@ namespace AisInternalSystem
 {
     public partial class UCEmployee : UserControl
     {
-        Db db = new Db();
         Dialog msg = new Dialog();
         Size defaultUcSize = new Size(1280, 611);
         BackgroundWorker worker = new BackgroundWorker();
@@ -249,8 +248,8 @@ namespace AisInternalSystem
             txtBriefRole.Clear();
             try
             {
-                db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("select emp_id, emp_dob, emp_fullname, emp_roles, emp_joindate, emp_nationality, emp_mobile, emp_emergencycontactphone, emp_address, emp_nonsch1_institution, emp_nonsch1_designation, emp_nonsch2_institution, emp_nonsch2_designation, emp_ispursuingdegree, employee_pic, emp_schedu_name from employee_data where emp_id = @emp_id", db.get_connection());
+                Db.open_connection();
+                MySqlCommand cmd = new MySqlCommand("select emp_id, emp_dob, emp_fullname, emp_roles, emp_joindate, emp_nationality, emp_mobile, emp_emergencycontactphone, emp_address, emp_nonsch1_institution, emp_nonsch1_designation, emp_nonsch2_institution, emp_nonsch2_designation, emp_ispursuingdegree, employee_pic, emp_schedu_name from employee_data where emp_id = @emp_id", Db.get_connection());
                 cmd.Parameters.Add("@emp_id", MySqlDbType.Int64).Value = employeeid;
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if(reader.HasRows)
@@ -311,7 +310,7 @@ namespace AisInternalSystem
                     PanelBriefEducationIn.Visible = false;
                 }
                 reader.Dispose();
-                db.close_connection();
+                Db.close_connection();
             }
             catch (MySqlException ex)
             {
@@ -429,8 +428,8 @@ namespace AisInternalSystem
                 case Searchby.Name:
                     try
                     {
-                        db.open_connection();
-                        MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_fullname like '%" + where + "%' order by 'No.'", db.get_connection());
+                        Db.open_connection();
+                        MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_fullname like '%" + where + "%' order by 'No.'", Db.get_connection());
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
                         da.Fill(dt);
@@ -438,7 +437,7 @@ namespace AisInternalSystem
                         bd.DataSource = dt;
                         dgEmployeeList.DataSource = bd;
                         RightPanelDataReader();
-                        db.close_connection();
+                        Db.close_connection();
                         if (dgEmployeeList.Rows.Count < 1)
                         {
                             panelEmpty.Visible = true;
@@ -456,8 +455,8 @@ namespace AisInternalSystem
                 case Searchby.ID:
                     try
                     {
-                        db.open_connection();
-                        MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_id like '%" + where + "%' order by 'No.'", db.get_connection());
+                        Db.open_connection();
+                        MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_id like '%" + where + "%' order by 'No.'", Db.get_connection());
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
                         da.Fill(dt);
@@ -469,7 +468,7 @@ namespace AisInternalSystem
                             msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
                         }
                         RightPanelDataReader();
-                        db.close_connection();
+                        Db.close_connection();
                         if (dgEmployeeList.Rows.Count < 1)
                         {
                             lblItsEmpty.Visible = true;
@@ -489,8 +488,8 @@ namespace AisInternalSystem
                     {
                         try
                         {
-                            db.open_connection();
-                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_gender = 'Male' order by 'No.'", db.get_connection());
+                            Db.open_connection();
+                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_gender = 'Male' order by 'No.'", Db.get_connection());
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                             DataTable dt = new DataTable();
                             da.Fill(dt);
@@ -512,7 +511,7 @@ namespace AisInternalSystem
 
                             }
                             RightPanelDataReader();
-                            db.close_connection();
+                            Db.close_connection();
                             if (dgEmployeeList.Rows.Count < 1)
                             {
                                 msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
@@ -535,8 +534,8 @@ namespace AisInternalSystem
                     {
                         try
                         {
-                            db.open_connection();
-                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_gender = 'Female' order by 'No.'", db.get_connection());
+                            Db.open_connection();
+                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_gender = 'Female' order by 'No.'", Db.get_connection());
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                             DataTable dt = new DataTable();
                             da.Fill(dt);
@@ -556,7 +555,7 @@ namespace AisInternalSystem
                                 msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                             }
                             RightPanelDataReader();
-                            db.close_connection();
+                            Db.close_connection();
                         }
                         catch (MySqlException ex)
                         {
@@ -570,8 +569,8 @@ namespace AisInternalSystem
                     {
                         try
                         {
-                            db.open_connection();
-                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_nationality like '%" + "Indonesia" + "%' order by 'No.'", db.get_connection());
+                            Db.open_connection();
+                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_nationality like '%" + "Indonesia" + "%' order by 'No.'", Db.get_connection());
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                             DataTable dt = new DataTable();
                             da.Fill(dt);
@@ -591,7 +590,7 @@ namespace AisInternalSystem
                                 msg.Alert("Here's all the info you need", frmAlert.AlertType.Success);
                             }
                             RightPanelDataReader();
-                            db.close_connection();
+                            Db.close_connection();
                         }
                         catch (MySqlException ex)
                         {
@@ -602,8 +601,8 @@ namespace AisInternalSystem
                     {
                         try
                         {
-                            db.open_connection();
-                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_nationality != 'Indonesia' order by 'No.'", db.get_connection());
+                            Db.open_connection();
+                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_nationality != 'Indonesia' order by 'No.'", Db.get_connection());
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                             DataTable dt = new DataTable();
                             da.Fill(dt);
@@ -623,7 +622,7 @@ namespace AisInternalSystem
                                 dgEmployeeList.Visible = true;
                             }
                             RightPanelDataReader();
-                            db.close_connection();
+                            Db.close_connection();
                         }
                         catch (MySqlException ex)
                         {
@@ -637,8 +636,8 @@ namespace AisInternalSystem
                     {
                         try
                         {
-                            db.open_connection();
-                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_nonsch1_institution != '' and emp_nonsch2_institution = '' order by 'No.'", db.get_connection());
+                            Db.open_connection();
+                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_nonsch1_institution != '' and emp_nonsch2_institution = '' order by 'No.'", Db.get_connection());
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                             DataTable dt = new DataTable();
                             da.Fill(dt);
@@ -658,7 +657,7 @@ namespace AisInternalSystem
                                 panelEmpty.Visible = false;
                             }
                             RightPanelDataReader();
-                            db.close_connection();
+                            Db.close_connection();
                         }
                         catch (MySqlException ex)
                         {
@@ -669,8 +668,8 @@ namespace AisInternalSystem
                     {
                         try
                         {
-                            db.open_connection();
-                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_nonsch1_institution != '' and emp_nonsch2_institution != '' order by 'No.'", db.get_connection());
+                            Db.open_connection();
+                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_nonsch1_institution != '' and emp_nonsch2_institution != '' order by 'No.'", Db.get_connection());
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                             DataTable dt = new DataTable();
                             da.Fill(dt);
@@ -690,7 +689,7 @@ namespace AisInternalSystem
                                 panelEmpty.Visible = false;
                             }
                             RightPanelDataReader();
-                            db.close_connection();
+                            Db.close_connection();
                         }
                         catch (MySqlException ex)
                         {
@@ -701,8 +700,8 @@ namespace AisInternalSystem
                     {
                         try
                         {
-                            db.open_connection();
-                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_nonsch1_institution = '' and emp_nonsch2_institution = '' order by 'No.'", db.get_connection());
+                            Db.open_connection();
+                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_nonsch1_institution = '' and emp_nonsch2_institution = '' order by 'No.'", Db.get_connection());
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                             DataTable dt = new DataTable();
                             da.Fill(dt);
@@ -722,7 +721,7 @@ namespace AisInternalSystem
                                 panelEmpty.Visible = false;
                             }
                             RightPanelDataReader();
-                            db.close_connection();
+                            Db.close_connection();
                         }
                         catch (MySqlException ex)
                         {
@@ -733,8 +732,8 @@ namespace AisInternalSystem
                     {
                         try
                         {
-                            db.open_connection();
-                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_ispursuingdegree = 'YES' order by 'No.'", db.get_connection());
+                            Db.open_connection();
+                            MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', employee_data.emp_id as 'Employee ID', employee_data.emp_fullname as 'Full Name', employee_data.emp_department as 'Department', emp_roles as 'Role' from employee_data where emp_ispursuingdegree = 'YES' order by 'No.'", Db.get_connection());
                             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                             DataTable dt = new DataTable();
                             da.Fill(dt);
@@ -754,7 +753,7 @@ namespace AisInternalSystem
                                 panelEmpty.Visible = false;
                             }
                             RightPanelDataReader();
-                            db.close_connection();
+                            Db.close_connection();
                         }
                         catch (MySqlException ex)
                         {

@@ -216,10 +216,10 @@
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.Picschool = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.FlowClassHistory = new System.Windows.Forms.FlowLayoutPanel();
             this.panelNotAvailable1 = new AisInternalSystem.PanelNotAvailable();
             this.panelNotAvailable3 = new AisInternalSystem.PanelNotAvailable();
             this.panelNotAvailable2 = new AisInternalSystem.PanelNotAvailable();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2ShadowPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.studBriefPic)).BeginInit();
             this.PanelAcademicGeneral.SuspendLayout();
@@ -2210,7 +2210,7 @@
             // PanelAcademicClassHistory
             // 
             this.PanelAcademicClassHistory.BackColor = System.Drawing.Color.Transparent;
-            this.PanelAcademicClassHistory.Controls.Add(this.flowLayoutPanel1);
+            this.PanelAcademicClassHistory.Controls.Add(this.FlowClassHistory);
             this.PanelAcademicClassHistory.Controls.Add(this.panelNotAvailable1);
             this.PanelAcademicClassHistory.Controls.Add(this.label83);
             this.PanelAcademicClassHistory.FillColor = System.Drawing.Color.White;
@@ -3740,6 +3740,13 @@
             this.Picschool.TabIndex = 70;
             this.Picschool.TabStop = false;
             // 
+            // FlowClassHistory
+            // 
+            this.FlowClassHistory.Location = new System.Drawing.Point(27, 64);
+            this.FlowClassHistory.Name = "FlowClassHistory";
+            this.FlowClassHistory.Size = new System.Drawing.Size(801, 436);
+            this.FlowClassHistory.TabIndex = 70;
+            // 
             // panelNotAvailable1
             // 
             this.panelNotAvailable1.BackColor = System.Drawing.Color.Gainsboro;
@@ -3764,13 +3771,6 @@
             this.panelNotAvailable2.Size = new System.Drawing.Size(346, 294);
             this.panelNotAvailable2.TabIndex = 0;
             this.panelNotAvailable2.Visible = false;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(27, 64);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(801, 436);
-            this.flowLayoutPanel1.TabIndex = 70;
             // 
             // UCStudDetailed
             // 
@@ -4035,6 +4035,6 @@
         public System.Windows.Forms.Label label24;
         public System.Windows.Forms.Label label23;
         private Guna.UI2.WinForms.Guna2CirclePictureBox Picschool;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel FlowClassHistory;
     }
 }
