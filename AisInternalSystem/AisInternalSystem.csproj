@@ -183,9 +183,23 @@
     <Compile Include="ModuleInProgress.Designer.cs">
       <DependentUpon>ModuleInProgress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Module\AcademicYear.cs" />
+    <Compile Include="Module\Classroom.cs" />
     <Compile Include="Module\Data.cs" />
     <Compile Include="Module\Db.cs" />
     <Compile Include="Module\Dialog.cs" />
+    <Compile Include="Module\Document.cs" />
+    <Compile Include="Module\Employee.cs" />
+    <Compile Include="Module\Grade.cs" />
+    <Compile Include="Module\QueryProcessor.cs" />
+    <Compile Include="Module\School.cs" />
+    <Compile Include="Module\Student.cs" />
+    <Compile Include="Module\StudentRelationship.cs" />
+    <Compile Include="Module\Subject.cs" />
+    <Compile Include="Module\Teacher.cs" />
+    <Compile Include="Module\Timetable.cs" />
+    <Compile Include="Module\User.cs" />
+    <Compile Include="Module\UserInterface.cs" />
     <Compile Include="PanelMSqlCommand.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -339,6 +353,12 @@
     <Compile Include="UCTimetable.Designer.cs">
       <DependentUpon>UCTimetable.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIMember_AcademicYear.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIMember_AcademicYear.Designer.cs">
+      <DependentUpon>UIMember_AcademicYear.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ClassHistory.resx">
       <DependentUpon>ClassHistory.cs</DependentUpon>
     </EmbeddedResource>
@@ -449,6 +469,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCTimetable.resx">
       <DependentUpon>UCTimetable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIMember_AcademicYear.resx">
+      <DependentUpon>UIMember_AcademicYear.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="DataSet1.xsc">
       <DependentUpon>DataSet1.xsd</DependentUpon>

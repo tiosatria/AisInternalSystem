@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace AisInternalSystem.Module
 {
-    class Data
+    public class Data
     {
 
         public StringCollection Religion = new StringCollection()

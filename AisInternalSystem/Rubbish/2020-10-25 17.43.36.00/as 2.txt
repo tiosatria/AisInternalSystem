@@ -1,0 +1,10 @@
+intake
+birthdate
+nationality
+fathercontact
+mothercontact
+studentaddress
+currentclass
+created by
+revised
+last mod

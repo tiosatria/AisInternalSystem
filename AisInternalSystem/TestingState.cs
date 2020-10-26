@@ -35,5 +35,13 @@ namespace AisInternalSystem
             reportViewer1.LocalReport.DataSources.Add(rds);
             reportViewer1.RefreshReport();
         }
+
+        private void openMasterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UCMaster master = new UCMaster();
+            this.Controls.Add(master);
+            this.Controls[Controls.IndexOf(master)].BringToFront();
+            master.Dock = DockStyle.Fill;
+        }
     }
 }

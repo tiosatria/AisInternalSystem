@@ -497,9 +497,9 @@
             this.lbleditsubjecttotal.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbleditsubjecttotal.Location = new System.Drawing.Point(336, 18);
             this.lbleditsubjecttotal.Name = "lbleditsubjecttotal";
-            this.lbleditsubjecttotal.Size = new System.Drawing.Size(71, 19);
+            this.lbleditsubjecttotal.Size = new System.Drawing.Size(67, 19);
             this.lbleditsubjecttotal.TabIndex = 2;
-            this.lbleditsubjecttotal.Text = "Total: 99";
+            this.lbleditsubjecttotal.Text = "Total: --";
             // 
             // floweditsubjectlist
             // 
@@ -997,9 +997,9 @@
             this.Controls.Add(this.BtnSubjectList);
             this.Controls.Add(this.btnCreateSubject);
             this.Controls.Add(this.btnBackto);
-            this.Controls.Add(this.PanelSubjectCreate);
             this.Controls.Add(this.PanelAssignSubject);
             this.Controls.Add(this.PanelSubjectList);
+            this.Controls.Add(this.PanelSubjectCreate);
             this.Name = "UCSubject";
             this.Size = new System.Drawing.Size(1280, 611);
             this.PanelSubjectCreate.ResumeLayout(false);
