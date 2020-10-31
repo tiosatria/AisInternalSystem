@@ -26,8 +26,16 @@ namespace AisInternalSystem
 
         public void FillRelationshipPanelData()
         {
+            Student.Update(new string[5]
+                {txtSCertname.Text,
+                txtSCOB.Text,
+                txtSDateOfBirth.Text,
+                txtSDCurrClass.Text,
+                txtSFamilyName.Text}); 
 
         }
+
+        
 
         public UCStudDetailed()
         {

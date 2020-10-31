@@ -184,6 +184,7 @@
       <DependentUpon>ModuleInProgress.cs</DependentUpon>
     </Compile>
     <Compile Include="Module\AcademicYear.cs" />
+    <Compile Include="Module\AppVersion.cs" />
     <Compile Include="Module\Classroom.cs" />
     <Compile Include="Module\Data.cs" />
     <Compile Include="Module\Db.cs" />
@@ -359,6 +360,18 @@
     <Compile Include="UIMember_AcademicYear.Designer.cs">
       <DependentUpon>UIMember_AcademicYear.cs</DependentUpon>
     </Compile>
+    <Compile Include="UpperPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UpperPanel.Designer.cs">
+      <DependentUpon>UpperPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UpperPanelAdmin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UpperPanelAdmin.Designer.cs">
+      <DependentUpon>UpperPanelAdmin.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ClassHistory.resx">
       <DependentUpon>ClassHistory.cs</DependentUpon>
     </EmbeddedResource>
@@ -472,6 +485,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIMember_AcademicYear.resx">
       <DependentUpon>UIMember_AcademicYear.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpperPanel.resx">
+      <DependentUpon>UpperPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpperPanelAdmin.resx">
+      <DependentUpon>UpperPanelAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="DataSet1.xsc">
       <DependentUpon>DataSet1.xsd</DependentUpon>

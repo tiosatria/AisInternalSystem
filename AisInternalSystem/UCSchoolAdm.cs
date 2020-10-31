@@ -63,8 +63,6 @@ namespace AisInternalSystem
             dropReligion.DataSource = collection.Religion;
             dropSpokenEnglish.DataSource = collection.Proficiency;
             dropPropGrade.DataSource = collection.Grade;
-            dropChooseGrade.DataSource = collection.ChooseGrade;
-            dropClassGradeGrade.DataSource = collection.ClassGrade;
             dropDocsType.DataSource = collection.DocumentType;
             dropStudStat.DataSource = collection.StudentStatus;
             dropGradeSchool.DataSource = collection.Grade;
@@ -188,8 +186,6 @@ namespace AisInternalSystem
                     panelRecStud.Show();
                     panelRecStud.Dock = DockStyle.Fill;
                     panelRecStud.BringToFront();
-                    PanelClassAssignment.Dock = DockStyle.None;
-                    PanelClassAssignment.SendToBack();
                     normalizePanelLeft(panelStud1);
                     normalizePanelRight(PanelUploadDocsUp);
                     normalizePanelRightDown(PanelStudDocsDown);
@@ -218,10 +214,6 @@ namespace AisInternalSystem
                     break;
                 case UIStateEnum.ClassAssignment:
                     hideMenu();
-                    ClassAssignmentInit();
-                    PanelClassAssignment.Show();
-                    PanelClassAssignment.BringToFront();
-                    PanelClassAssignment.Dock = DockStyle.Fill;
                     break;
                 case UIStateEnum.ClassDirectory:
                     this.Controls.Add(ClassDirectory);
@@ -1354,7 +1346,6 @@ langspoken = @langspoken,
 englishproficiency = @englishproficiency,
 studstat = @studstat,
 studentimg = @studentimg,
-currclass = @currclass,
 doc = @doc,
 current_grade = @current_grade,
 proposedgrade = @proposedgrade,
@@ -1391,7 +1382,6 @@ WHERE aisid = @aisid", Db.get_connection());
                     cmd.Parameters.Add("@englishproficiency", MySqlDbType.VarChar).Value = dropSpokenEnglish.SelectedValue.ToString();
                     cmd.Parameters.Add("@studstat", MySqlDbType.VarChar).Value = dropStudStat.SelectedValue.ToString();
                     cmd.Parameters.Add("@studentimg", MySqlDbType.VarChar).Value = studentPhoto;
-                    cmd.Parameters.Add("@currclass", MySqlDbType.VarChar).Value = 0;
                     cmd.Parameters.Add("@doc", MySqlDbType.VarChar).Value = DateTime.Now.ToString(timeStamping);
                     cmd.Parameters.Add("@revised", MySqlDbType.Int32).Value = Dashboard.ownerId;
                     cmd.Parameters.Add("@current_grade", MySqlDbType.VarChar).Value = 0;
@@ -3874,135 +3864,7 @@ WHERE medicalofstud = @medicalofstud;
 
         private void btnBackEmpDir_Click(object sender, EventArgs e)
         {
-            PanelClassAssignment.Hide();
             UIState(UIStateEnum.MainMenu);
-        }
-
-        void ClassAssignmentInit()
-        {
-            dropTc.Items.Clear();
-            dropAssTc.Items.Clear();
-            collection.EmpidTeacherEmpid.Clear();
-            try
-            {
-                Db.open_connection();
-                //careteacher
-                MySqlCommand cmd = new MySqlCommand("fetch_teacher_assign_class", Db.get_connection());
-                cmd.Parameters.Add("@teacher", MySqlDbType.VarChar).Value = "Teacher";
-                cmd.CommandType = CommandType.StoredProcedure;
-                MySqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        dropTc.Items.Add(reader.GetString("emp_fullname"));
-                        collection.EmpidTeacherEmpid.Add(reader.GetInt32("employeeid").ToString());
-                    }
-                }
-                reader.Close();
-                cmd = new MySqlCommand("fetch_teacher_assign_class", Db.get_connection());
-                cmd.Parameters.Add("@teacher", MySqlDbType.VarChar).Value = "Assistant Teacher";
-                cmd.CommandType = CommandType.StoredProcedure;
-                reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        dropAssTc.Items.Add(reader.GetString("emp_fullname"));
-                        collection.EmpidAssistantTeacherEmpid.Add(reader.GetInt32("employeeid").ToString());
-                    }
-                }
-                reader.Close();
-                Db.close_connection();
-                ClassLoader();
-            }
-            catch (MySqlException ex)
-            {
-                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
-            }
-        }
-
-        private void dropGrade_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string grade = "def";
-            if (dropClassGradeGrade.SelectedValue == "KINDERGARTEN 1" || dropClassGradeGrade.SelectedValue == "KINDERGARTEN 2" || dropClassGradeGrade.SelectedValue == "KINDERGARTEN 3" || dropClassGradeGrade.SelectedValue == "NURSERY")
-            {
-                lblAssTc.Visible = true;
-                dropAssTc.Visible = true;
-                grade = "Preschool";
-            }
-            else
-            {
-                dropAssTc.Visible = false;
-                lblAssTc.Visible = false;
-                grade = "Upper Level";
-            }
-            switch (grade)
-            {
-                case "Preschool":
-                    try
-                    {
-                        Db.open_connection();
-
-
-                        Db.close_connection();
-                    }
-                    catch (MySqlException ex)
-                    {
-                        Msg.Alert(ex.Message, frmAlert.AlertType.Error);
-                    }
-                    break;
-
-                case "Upper Level":
-
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        public enum EnumClassLeftPanel
-        {
-            Student,
-            Class
-        };
-        private EnumClassLeftPanel _LeftPanel;
-
-        void CASwitcher(EnumClassLeftPanel e)
-        {
-            _LeftPanel = e;
-            switch (_LeftPanel)
-            {
-                case EnumClassLeftPanel.Student:
-                    btn_class_addclass.FillColor = Color.Silver;
-                    btn_class_addclass.ForeColor = Color.Black;
-                    btn_class_stud.FillColor = Color.Black;
-                    btn_class_stud.ForeColor = Color.White;
-                    PanelAddClass.Hide();
-                    panel_class_stud.Show();
-                    break;
-                case EnumClassLeftPanel.Class:
-                    btn_class_addclass.FillColor = Color.Black;
-                    btn_class_addclass.ForeColor = Color.White;
-                    btn_class_stud.FillColor = Color.Silver;
-                    btn_class_stud.ForeColor = Color.White;
-                    PanelAddClass.Show();
-                    panel_class_stud.Hide();
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void btn_class_stud_Click(object sender, EventArgs e)
-        {
-            CASwitcher(EnumClassLeftPanel.Student);
-        }
-
-        private void btn_class_addclass_Click(object sender, EventArgs e)
-        {
-            CASwitcher(EnumClassLeftPanel.Class);
-
         }
 
         private void PanelClassAssignment_Paint(object sender, PaintEventArgs e)
@@ -4019,156 +3881,9 @@ WHERE medicalofstud = @medicalofstud;
             }
         }
 
-        private void dropTc_SelectedValueChanged(object sender, EventArgs e)
-        {
-            SelectTeacherController();
-
-        }
-
-        private void dropAssTc_SelectedValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dropAssTc_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            SelectTeacherController();
-
-        }
-
-        void ClassLoader()
-        {
-            try
-            {
-                Db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("select class_id as 'Class ID', grade as 'Level', classname as 'Class Section', class_capacity as 'Available Seat', emp_fullname as 'Care Teacher' from aisDb.class join employee_data on employeeid = careteacher where grade = @grade and class_stat = 'ONGOING';", Db.get_connection());
-                cmd.Parameters.Add("@grade", MySqlDbType.VarChar).Value = dropChooseGrade.SelectedValue.ToString();
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dataTable = new DataTable();
-                da.Fill(dataTable);
-                BindingSource bs = new BindingSource();
-                bs.DataSource = dataTable;
-                dgClassList.DataSource = bs;
-                if(dgClassList.Rows.Count < 1)
-                {
-                    dgClassList.Visible = false;
-                    panelClassIsEmpty.Visible = true;
-                }
-                else
-                {
-                    dgClassList.Columns[0].Visible = false;
-                    dgClassList.Columns[1].Visible = false;
-                    dgClassList.Visible = true;
-                    panelClassIsEmpty.Visible = false;
-
-                }
-                Db.close_connection();
-            }
-            catch (MySqlException ex)
-            {
-                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
-            }
-        }
-
-        void InsertClass()
-        {
-            try
-            {
-                
-                Db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("insert into aisDb.class (classname, grade, careteacher, assistant, class_start, class_stat, class_capacity) values (@classname, @grade, @careteacher, @assistant, @class_start, @class_stat, @class_capacity)", Db.get_connection());
-                cmd.Parameters.Add("@classname", MySqlDbType.VarChar).Value = dropClassGradeGrade.SelectedValue.ToString() + " " + txtClassName.Text;
-                cmd.Parameters.Add("@grade", MySqlDbType.VarChar).Value = dropClassGradeGrade.SelectedValue.ToString();
-                cmd.Parameters.Add("@careteacher", MySqlDbType.VarChar).Value = careTeacher;
-                cmd.Parameters.Add("@assistant", MySqlDbType.VarChar).Value = AssTeacher;
-                cmd.Parameters.Add("@class_start", MySqlDbType.Date).Value = dropClassStart.Value.ToString("yyyy-MM-dd");
-                cmd.Parameters.Add("@class_stat", MySqlDbType.VarChar).Value = "ONGOING";
-                cmd.Parameters.Add("@class_capacity", MySqlDbType.Int32).Value = txtClassCapacity.Text;
-                if(cmd.ExecuteNonQuery() == 1)
-                {
-                    Msg.Alert("Yay! you've succesfully created class\nnow please add some class member :)", frmAlert.AlertType.Success);
-                    ClearPropertyClass();
-                    ClassLoader();
-                }
-                Db.close_connection();
-            }
-            catch (MySqlException ex)
-            {
-                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
-            }
-        }
-
-        private void dgClassList_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        void ClassMemberLoad()
-        {
-
-            try
-            {
-                Db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("select grade, classname, class_id as 'Class ID', aisid as 'AIS ID', certificatename as 'Name', gender as 'Gender', religion as 'Religion' from class join student_data on currclass = class_id where class_id = @class_id order by certificatename", Db.get_connection());
-                cmd.Parameters.Add("@class_id", MySqlDbType.Int32).Value = ClassId;
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                BindingSource bs = new BindingSource();
-                bs.DataSource = dt;
-                dgClassMember.DataSource = bs;
-                dgClassMember.Columns[0].Visible = false;
-                dgClassMember.Columns[1].Visible = false;
-                dgClassMember.Columns[2].Visible = false;
-                dgClassMember.Columns[3].Visible = false;
-                MySqlDataReader reader = cmd.ExecuteReader();
-                if(reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        lblClassName.Text = reader.GetString("classname")  + " " + "Members";
-                    }
-                }
-                reader.Close();
-                MySqlCommand cmd1 = new MySqlCommand("select grade, classname, class_capacity from class where class_id = @class_id2", Db.get_connection());
-                cmd1.Parameters.Add("@class_id2", MySqlDbType.Int32).Value = ClassId;
-                MySqlDataReader reader1 = cmd1.ExecuteReader();
-                while (reader1.Read())
-                {
-                    lblClassName.Text = reader1.GetString("classname") + " " + "Members";
-                    
-                }
-                cmd1.Parameters.Add("@class_id", MySqlDbType.Int32).Value = ClassId;
-                reader1.Close();
-                Db.close_connection();
-                if(dgClassMember.Rows.Count < 1)
-                {
-                    //hide dglist
-                    class_ass_member_empty.Visible = true;
-                    dgClassMember.Visible = false;
-                }
-                else
-                {
-                    //show dglist
-                    dgClassMember.Visible = true;
-                    class_ass_member_empty.Visible = false;
-                }
-            }
-            catch (MySqlException ex)
-            {
-                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
-            }
-        }
-
         private void radClassByName_CheckedChanged(object sender, EventArgs e)
         {
             _searcby = Searchby.Name;
-        }
-
-        private void radClassById_CheckedChanged(object sender, EventArgs e)
-        {
-            txtCASearchStud.Clear();
-            _searcby = Searchby.ID;
         }
 
         private void txtCASearchStud_KeyPress(object sender, KeyPressEventArgs e)
@@ -4180,138 +3895,6 @@ WHERE medicalofstud = @medicalofstud;
                 {
                     e.Handled = true;
                 }
-            }
-        }
-
-        private void guna2Button8_Click(object sender, EventArgs e)
-        {
-            switch (_searcby)
-            {
-                case Searchby.Name:
-                    SearchQueryCA(txtCASearchStud.Text);
-                    break;
-                case Searchby.ID:
-                    SearchQueryCA(txtCASearchStud.Text);
-                    break;
-            }
-        }
-
-        void RightCAReader()
-        {
-            try
-            {
-                Db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("select certificatename, religion, gender, studentimg from student_data where aisid = @aisid", Db.get_connection());
-                cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
-                MySqlDataReader reader = cmd.ExecuteReader();
-                if(reader.HasRows)
-                {
-                    lblCAStudGender.Visible = true;
-                    lblCAStudName.Visible = true;
-                    lblCAStudReligion.Visible = true;
-                    lblPleaseAssignStud.Visible = false;
-                    picSwap.Visible = true;
-                    picCAStud.Visible = true;
-                    while (reader.Read())
-                    {
-                        lblCAStudGender.Text = "Gender: " + reader.GetString("gender");
-                        lblCAStudName.Text = "Student Name: " + reader.GetString("certificatename");
-                        lblCAStudReligion.Text = "Religion: " + reader.GetString("religion");
-                        try
-                        {
-                            picCAStud.Image = Image.FromFile(reader.GetString("studentimg"));
-
-                        }
-                        catch (Exception)
-                        {
-                            picCAStud.Image = Resources.icons8_student_male_80px;
-                        }
-                    }
-                }
-                else
-                {
-                    picSwap.Visible = false;
-                    lblCAStudGender.Visible = false;
-                    lblCAStudName.Visible = false;
-                    lblCAStudReligion.Visible = false;
-                    picCAStud.Visible = false;
-                    lblPleaseAssignStud.Visible = true;
-                }
-                reader.Close();
-                Db.close_connection(); 
-            }
-            catch (MySqlException ex)
-            {
-                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
-            }
-        }
-
-        void SearchQueryCA(string where)
-        {
-            switch (_searcby)
-            {
-                case Searchby.Name:
-                    try
-                    {
-                        Db.open_connection();
-                        MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', student_data.aisid as 'AIS ID', student_data.certificatename as 'Name', student_data.dob as 'Birthdate', class.classname as 'Class' from student_data join aisDb.class on student_data.currclass = class.class_id where certificatename like '%" + where + "%' and currclass = '0' order by 'No.' ", Db.get_connection());
-                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        BindingSource bd = new BindingSource();
-                        bd.DataSource = dt;
-                        dgClassStudList.DataSource = bd;
-                        rightPanelDataReader();
-                        Db.close_connection();
-                        if (dgClassStudList.Rows.Count < 1)
-                        {
-                            guna2ShadowPanel7.Visible = true;
-                            dgClassStudList.Visible = false;
-                        }
-                        else
-                        {
-                            guna2ShadowPanel7.Visible = false;
-                            dgClassStudList.Visible = true;
-                        }
-                    }
-                    catch (MySqlException ex)
-                    {
-                        Msg.Alert(ex.Message, frmAlert.AlertType.Error);
-                    }
-                    break;
-                case Searchby.ID:
-                    try
-                    {
-                        Db.open_connection();
-                        MySqlCommand cmd = new MySqlCommand("set @row_number = 0; select @row_number:=(@row_number+1) AS 'No.', student_data.aisid as 'AIS ID', student_data.certificatename as 'Name', student_data.dob as 'Birthdate', class.classname as 'Class' from student_data join aisDb.class on student_data.currclass = class.class_id where aisid like '%" + where + "%' and currclass = '0' order by 'No.' ", Db.get_connection());
-                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        BindingSource bd = new BindingSource();
-                        bd.DataSource = dt;
-                        dgClassStudList.DataSource = bd;
-                        if (dgClassStudList.Rows.Count < 1)
-                        {
-                            Msg.Alert("Oops we couldn't find what you're looking for :( \nTry searching with different condition", frmAlert.AlertType.Warning);
-                        }
-                        rightPanelDataReader();
-                        Db.close_connection();
-                        if (dgClassStudList.Rows.Count < 1)
-                        {
-                            panelEmpty.Visible = true;
-                            dgClassStudList.Visible = false;
-                        }
-                        else
-                        {
-                            panelEmpty.Visible = false;
-                            dgClassStudList.Visible = true;
-                        }
-                    }
-                    catch (MySqlException ex)
-                    {
-                        Msg.Alert(ex.Message, frmAlert.AlertType.Error);
-                    }
-                    break;
             }
         }
 
@@ -4378,43 +3961,7 @@ WHERE medicalofstud = @medicalofstud;
 
         }
 
-        private void dgClassStudList_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgClassStudList.SelectedCells.Count > 0)
-            {
-                int selectedrowindex = dgClassStudList.SelectedCells[0].RowIndex;
-                DataGridViewRow selectedRow = dgClassStudList.Rows[selectedrowindex];
-                string aisidchoosed = Convert.ToString(selectedRow.Cells["AIS ID"].Value);
-                aisid = Convert.ToInt32(aisidchoosed);
-                RightCAReader();
-            }
-        }
         int classCapacity;
-        private void dgClassList_SelectionChanged(object sender, EventArgs e)
-        {
-            //readdg
-            if (dgClassList.SelectedCells.Count > 0)
-            {
-                int selectedrowindex = dgClassList.SelectedCells[0].RowIndex;
-                DataGridViewRow selectedRow = dgClassList.Rows[selectedrowindex];
-                string classchoosed = Convert.ToString(selectedRow.Cells["Class ID"].Value);
-                string capacity = Convert.ToString(selectedRow.Cells["Available Seat"].Value);
-                ClassId = Convert.ToInt32(classchoosed);
-                classCapacity = Convert.ToInt32(capacity);
-                ClassMemberLoad();
-            }
-        }
-
-        private void dgClassMember_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgClassMember.SelectedCells.Count > 0)
-            {
-                int selectedrowindex = dgClassMember.SelectedCells[0].RowIndex;
-                DataGridViewRow selectedRow = dgClassMember.Rows[selectedrowindex];
-                string memberchoosed = Convert.ToString(selectedRow.Cells["AIS ID"].Value);
-                aisidCA = Convert.ToInt32(memberchoosed);
-            }
-        }
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -4440,18 +3987,6 @@ WHERE medicalofstud = @medicalofstud;
 
         }
 
-        private void label6_Click(object sender, EventArgs e)
-        {
-            CASwitcher(EnumClassLeftPanel.Class);
-            UIState(UIStateEnum.ClassAssignment);
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-            CASwitcher(EnumClassLeftPanel.Class);
-            UIState(UIStateEnum.ClassAssignment);
-        }
-
         private void btnStudDetailed_Click(object sender, EventArgs e)
         {
             UIState(UIStateEnum.DetailedStudent);
@@ -4467,134 +4002,6 @@ WHERE medicalofstud = @medicalofstud;
         private void PanelClassAssignment3_Paint(object sender, PaintEventArgs e)
         {
 
-        }
-
-        private void guna2Button10_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //update student
-                Db.open_connection();
-                MySqlCommand cmd = new MySqlCommand("update student_data set currclass = 0 where aisid = @aisid", Db.get_connection());
-                cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisidCA;
-                if(cmd.ExecuteNonQuery() == 1)
-                {
-                    cmd = new MySqlCommand("update class set class_capacity = class_capacity + 1 where class_id = @class_id", Db.get_connection());
-                    cmd.Parameters.Add("@class_id", MySqlDbType.Int32).Value = ClassId;
-                    if(cmd.ExecuteNonQuery() == 1)
-                    {
-                        Msg.Alert("Student has been removed succesfully!", frmAlert.AlertType.Success);
-                        ClassMemberLoad();
-                        ClassLoader();
-                        switch (_searcby)
-                        {
-                            case Searchby.Name:
-                                SearchQueryCA(txtCASearchStud.Text);
-                                break;
-                            case Searchby.ID:
-                                SearchQueryCA(txtCASearchStud.Text);
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        Msg.Alert("Unknown Error", frmAlert.AlertType.Error);
-                    }
-                }
-                //add capacity
-                Db.close_connection();
-            }
-            catch (MySqlException ex)
-            {
-                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
-            }
-        }
-
-        private void guna2Button5_Click_1(object sender, EventArgs e)
-        {
-            if (dropChooseGrade.SelectedValue.ToString() == "NOT ASSIGNED")
-            {
-                Msg.Alert("You cannot assign the student to this grade/level", frmAlert.AlertType.Warning);
-            }
-            else if (dgClassList.Rows.Count < 1)
-            {
-                Msg.Alert("No Class choosed, please select the class first!", frmAlert.AlertType.Warning);
-            }
-            else if (classCapacity < 1)
-            {
-                Msg.Alert("This class section is full, please create another section", frmAlert.AlertType.Error);
-            }
-            else if (aisid == 0 || aisid == null)
-            {
-                Msg.Alert("Please select student first!", frmAlert.AlertType.Warning);
-            }
-            else if(dgClassStudList.Rows.Count < 1)
-            {
-                Msg.Alert("Please select student first!", frmAlert.AlertType.Warning);
-            }
-            else
-            {
-                AssignStudent();
-            }
-
-        }
-
-        void AssignStudent()
-        {
-            try
-            {
-                Db.open_connection();
-                MySqlCommand fetchGrade = new MySqlCommand("select glevel from grade where gname = @gname", Db.get_connection());
-                fetchGrade.Parameters.Add("@gname", MySqlDbType.VarChar).Value = dropChooseGrade.SelectedValue.ToString();
-                MySqlDataReader readerFetch = fetchGrade.ExecuteReader();
-                while (readerFetch.Read())
-                {
-                    GradeID = readerFetch.GetInt32("glevel");
-                }
-                readerFetch.Close();
-                MySqlCommand cmd = new MySqlCommand("update student_data set current_grade = @grade, currclass = @currclass where aisid = @aisid", Db.get_connection());
-                cmd.Parameters.Add("@aisid", MySqlDbType.Int32).Value = aisid;
-                cmd.Parameters.Add("@grade", MySqlDbType.Int32).Value = GradeID;
-                cmd.Parameters.Add("@currclass", MySqlDbType.Int32).Value = ClassId;
-                if(cmd.ExecuteNonQuery() == 1)
-                {
-                    MySqlCommand cmdClassHistory = new MySqlCommand("insert into class_history (stud_id, class_id, assigned_date, assigneDby, class_status) values (@stud_id, @class_id, @assigned_date, @assigneDby, @status)", Db.get_connection());
-                    cmdClassHistory.Parameters.Add("@stud_id", MySqlDbType.Int32).Value = aisid;
-                    cmdClassHistory.Parameters.Add("@class_id", MySqlDbType.Int32).Value = ClassId;
-                    cmdClassHistory.Parameters.Add("@assigned_date", MySqlDbType.Timestamp).Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    cmdClassHistory.Parameters.Add("@assigneDby", MySqlDbType.Int32).Value = Dashboard.ownerId;
-                    cmdClassHistory.Parameters.Add("@status", MySqlDbType.VarChar).Value = "ASSIGNED";
-                    if(cmdClassHistory.ExecuteNonQuery() == 1)
-                    {
-                        cmd = new MySqlCommand("update class set class_capacity = class_capacity - 1 where class_id = @class_id", Db.get_connection());
-                        cmd.Parameters.Add("@class_id", MySqlDbType.Int32).Value = ClassId;
-                        if(cmd.ExecuteNonQuery() == 1)
-                        {
-                            Msg.Alert(lblCAStudName.Text + "\nHas Been Assigned to\n" + lblClassName.Text, frmAlert.AlertType.Info);
-                            ClassMemberLoad();
-                            ClassLoader();
-                            switch (_searcby)
-                            {
-                                case Searchby.Name:
-                                    SearchQueryCA(txtCASearchStud.Text);
-                                    break;
-                                case Searchby.ID:
-                                    SearchQueryCA(txtCASearchStud.Text);
-                                    break;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Msg.Alert("Something is wrong", frmAlert.AlertType.Error);
-                    }
-                }
-                Db.close_connection();
-            }
-            catch (MySqlException ex)
-            {
-                Msg.Alert(ex.Message, frmAlert.AlertType.Error);
-            }
         }
 
         private void btnDCExpand_Click(object sender, EventArgs e)
@@ -4621,79 +4028,6 @@ WHERE medicalofstud = @medicalofstud;
         private void btnDCStudForm_Click(object sender, EventArgs e)
         {
             DCShowStat(lblExpform);
-        }
-
-        void ClearPropertyClass()
-        {
-            txtClassName.Clear();
-            txtClassCapacity.Clear();
-            ClassAssignmentInit();
-        }
-        private void dropAssTc_DropDownClosed(object sender, EventArgs e)
-        {
-            SelectTeacherController();
-        }
-
-        private void dropChooseGrade_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ClassLoader();
-            ClassMemberLoad();
-            if(dgClassList.Rows.Count < 1)
-            {
-                lblClassName.Text = "No Class Selected - Please select class";
-            }
-        }
-
-        private void btnAddClass_Click(object sender, EventArgs e)
-        {
-            //validate before can insert
-            if(txtClassName.Text == "")
-            {
-                Msg.Alert("We don't know the class name/section\nPlease specify", frmAlert.AlertType.Warning);
-            }
-
-            else if(txtClassCapacity.Text == "")
-            {
-                Msg.Alert("Class capacity cannot be empty!", frmAlert.AlertType.Warning);
-            }
-            else if(dropClassGradeGrade.SelectedValue == "NOT ASSIGNED")
-            {
-                Msg.Alert("You cannot create class on this grade", frmAlert.AlertType.Warning);
-            }
-            else if(careTeacher == null)
-            {
-                Msg.Alert("We don't know who's the careteacher", frmAlert.AlertType.Warning);
-            }
-            else
-            {
-                InsertClass();
-            }
-        }
-
-        void SelectTeacherController()
-        {
-            if(dropClassGradeGrade.SelectedValue == "KINDERGARTEN 1" || dropClassGradeGrade.SelectedValue == "KINDERGARTEN 2" || dropClassGradeGrade.SelectedValue == "KINDERGARTEN 3" || dropClassGradeGrade.SelectedValue == "NURSERY")
-            {
-                careTeacher = Convert.ToInt32(collection.EmpidTeacherEmpid[dropTc.SelectedIndex]);
-                try
-                {
-                    AssTeacher = Convert.ToInt32(collection.EmpidAssistantTeacherEmpid[dropAssTc.SelectedIndex]);
-                }
-                catch (Exception)
-                {
-                    AssTeacher = null;
-                }
-            }
-            else
-            {
-                careTeacher = Convert.ToInt32(collection.EmpidTeacherEmpid[dropTc.SelectedIndex]);
-                AssTeacher = null;
-            }
-        }
-
-        private void dropTc_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            SelectTeacherController();
         }
 
         void deleteDocs()

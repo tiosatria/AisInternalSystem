@@ -222,7 +222,6 @@ C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\bin\Debug\pt\Micros
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\bin\Debug\ru\Microsoft.ReportViewer.WinForms.resources.dll
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\bin\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\bin\Debug\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
-C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.csprojAssemblyReference.cache
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.ClassHistory.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.DashboardUC.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.DialogControl.resources
@@ -266,3 +265,6 @@ C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisIntern
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.exe
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.pdb
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UIMember_AcademicYear.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.csprojAssemblyReference.cache
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UpperPanel.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UpperPanelAdmin.resources

@@ -31,8 +31,9 @@ namespace AisInternalSystem.Module
         #endregion
 
         #region Function
-        public string GetCurrentAcademicYearCode()
+        public static string GetCurrentAcademicYearCode()
         {
+            MySqlCommand cmd;
             string AYCode = null;
             try
             {
@@ -41,15 +42,15 @@ namespace AisInternalSystem.Module
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if(reader.HasRows)
                 {
-
+                    AYCode = reader.GetString("AcademicYearCode");
                 }
                 return AYCode;
             }
             catch (MySqlException ex)
             {
                 Msg.Alert(ex.Message, frmAlert.AlertType.Error);
+                return null;
             }
-            return "12";
         }
         #endregion
     }
