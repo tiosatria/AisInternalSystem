@@ -23,8 +23,8 @@ namespace AisInternalSystem
 
         private void TestingState_Load(object sender, EventArgs e)
         {
-            Db.open_connection();
-            MySqlCommand cmd = new MySqlCommand("getstudstat", Db.get_connection());
+            Db.OpenConnection();
+            MySqlCommand cmd = new MySqlCommand("getstudstat", Db.GetConnection());
             cmd.CommandType = CommandType.StoredProcedure;
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             DataTable dt = new DataTable();

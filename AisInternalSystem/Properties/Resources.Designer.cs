@@ -93,6 +93,36 @@ namespace AisInternalSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Ball_1s_200px {
+            get {
+                object obj = ResourceManager.GetObject("Ball-1s-200px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Ball_1s_200px1 {
+            get {
+                object obj = ResourceManager.GetObject("Ball-1s-200px1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap disappointed_200_transparent {
+            get {
+                object obj = ResourceManager.GetObject("disappointed_200_transparent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Djuwita {
             get {
                 object obj = ResourceManager.GetObject("Djuwita", resourceCulture);
@@ -116,6 +146,16 @@ namespace AisInternalSystem.Properties {
         internal static System.Drawing.Bitmap exit_static {
             get {
                 object obj = ResourceManager.GetObject("exit_static", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap expand_200_transparent {
+            get {
+                object obj = ResourceManager.GetObject("expand_200_transparent", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -216,6 +256,16 @@ namespace AisInternalSystem.Properties {
         internal static System.Drawing.Bitmap icons8_classroom_200px {
             get {
                 object obj = ResourceManager.GetObject("icons8_classroom_200px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_close_window_48px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_close_window_48px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -406,6 +456,16 @@ namespace AisInternalSystem.Properties {
         internal static System.Drawing.Bitmap icons8_people_480px_1 {
             get {
                 object obj = ResourceManager.GetObject("icons8_people_480px_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_people_48px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_people_48px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -676,6 +736,36 @@ namespace AisInternalSystem.Properties {
         internal static System.Drawing.Bitmap notif_freeze {
             get {
                 object obj = ResourceManager.GetObject("notif_freeze", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pulse_0_4s_200px {
+            get {
+                object obj = ResourceManager.GetObject("Pulse-0.4s-200px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pulse_1s_200px__1_ {
+            get {
+                object obj = ResourceManager.GetObject("Pulse-1s-200px (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pulse_1s_200px__1_1 {
+            get {
+                object obj = ResourceManager.GetObject("Pulse-1s-200px (1)1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

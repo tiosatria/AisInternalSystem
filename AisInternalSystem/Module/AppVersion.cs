@@ -8,5 +8,6 @@ namespace AisInternalSystem.Module
 {
     class AppVersion
     {
+
     }
 }
