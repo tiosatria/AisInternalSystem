@@ -20,10 +20,19 @@ namespace AisInternalSystem.Module
             get { return "Password"; }
             set { _password = value; }
         }
-        public string Roles { get; set; }
+        public string Roles { get; set ; }
         public int OwnerID { get; set; }
         public int UserID { get; set; }
         public string OwnerName { get; set; }
+        public RoleIdentifier _role;
+        public enum RoleIdentifier
+        {
+            Management,
+            Admin,
+            IT,
+            Teacher,
+            Accounting
+        }
         #endregion
 
         #region Variable

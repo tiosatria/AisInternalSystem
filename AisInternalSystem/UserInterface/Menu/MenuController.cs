@@ -8,9 +8,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Hosting;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Forms;
+using Telerik.WinControls.UI;
 
 namespace AisInternalSystem.UserInterface.Menu
 {
@@ -22,7 +25,7 @@ namespace AisInternalSystem.UserInterface.Menu
         }
         public enum MenuType
         {
-            Employee, SchoolAdministration
+            Employee, SchoolAdministration, Inventory
         }
         private MenuType _menutype;
         public enum MenuDoes
@@ -30,17 +33,38 @@ namespace AisInternalSystem.UserInterface.Menu
             EmployeeDirectoryService, RecordEmployee, StudentDirectoryService, RecordNewStudentData
         }
         public enum MenuItemsEmployee
-        { 
+        {
             EmployeeDirectoryService, RecordEmployee
         }
         private static MenuItemsEmployee menuItemsEmployee;
         public enum MenuItemSchoolAdministration
-        { 
+        {
             StudentDirectoryService, RecordNewStudentData
+        }
+        public static bool isOpen;
+        private static MenuType _memmnu;
+        public static MenuType Memmnu
+        {
+            get
+            {
+                if (isOpen)
+                {
+                    return _memmnu;
+                }
+                else
+                {
+                    return _memmnu;
+                }
+            }
+            set { _memmnu = value; isOpen = true;  }
         }
 
         public static void GetContainerProperties(MenuContainer menu, MenuType menuType)
         {
+            if (isOpen)
+            {
+                Memmnu = menuType;
+            }
             switch (menuType)
             {
                 case MenuType.Employee:
@@ -49,89 +73,42 @@ namespace AisInternalSystem.UserInterface.Menu
                 case MenuType.SchoolAdministration:
                     menu.Title = "You've opened School Administration";
                     break;
+                case MenuType.Inventory:
+                    menu.Title = "Inventory Menus";
+                    break;
                 default:
+
                     break;
             }
         }
 
-        public static void GetItemProperties(MenuItem item, MenuDoes does)
+        private static List<string> MenuCategories =  new List<string> 
+        {
+        
+        };
+
+        public static void GetTaskProps(TaskItem child, MenuDoes does)
         {
             switch (does)
             {
                 case MenuDoes.EmployeeDirectoryService:
-                    item.Title = "Employee Directory Services";
-                    item.Subtitle = "Employee Directory";
-                    item.Image = Resources.icons8_people_48px;
+                    child.Title = "Viewing:";
+                    child.TaskStart = DateTime.Now;
                     break;
                 case MenuDoes.RecordEmployee:
-                    item.Title = "Record Employee Data";
-                    item.Subtitle = "Record new employee data";
-                    item.Image = Resources.icons8_add_60px;
+                    child.Title = "Working on:";
                     break;
                 case MenuDoes.StudentDirectoryService:
-                    item.Title = "Student Directory Services";
-                    item.Subtitle = "Search/View Detailed information about students";
-                    item.Image = Resources.icons8_student_male_60px;
+                    child.Title = "";
                     break;
-                case MenuDoes.RecordNewStudentData:
-                    item.Title = "Record Student Data";
-                    item.Subtitle = "Record new student data";
-                    item.Image = Resources.icons8_add_60px;
+                case
+                MenuDoes.RecordNewStudentData:
+                
                     break;
                 default:
                     break;
             }
         }
-
-        public static List<MenuItem> GetMenu(MenuType menu)
-        {
-            List<MenuItem> menuItems = new List<MenuItem>();
-            int enumcount = 0;
-            string enumvalue;
-            switch (menu)
-            {
-                case MenuType.Employee:
-                    enumcount = Enum.GetNames(typeof(MenuItemsEmployee)).Length;
-                    MenuItemsEmployee enumEmployee;
-                    if (enumcount >= 1)
-                    {
-                        MenuItem[] itemsMenu = new MenuItem[enumcount];
-                        for (int i = 0; i < enumcount; i++)
-                        {
-                            itemsMenu[i] = new MenuItem();
-                            enumEmployee = (MenuItemsEmployee)i;
-                            enumvalue = enumEmployee.ToString();
-                            itemsMenu[i].Does = (MenuDoes)Enum.Parse(typeof(MenuDoes), enumvalue);
-                            menuItems.Add(itemsMenu[i]);
-                        }
-                    }
-                    return menuItems;
-                    break;
-                case MenuType.SchoolAdministration:
-                    enumcount = Enum.GetNames(typeof(MenuItemSchoolAdministration)).Length;
-                    MenuItemSchoolAdministration EnumSchool;
-                    if (enumcount >= 1)
-                    {
-                        MenuItem[] itemsMenu = new MenuItem[enumcount];
-                        for (int i = 0; i < enumcount; i++)
-                        {
-                            itemsMenu[i] = new MenuItem();
-                            EnumSchool = (MenuItemSchoolAdministration)i;
-                            enumvalue = EnumSchool.ToString();
-                            itemsMenu[i].Does = (MenuDoes)Enum.Parse(typeof(MenuDoes), enumvalue);
-                            menuItems.Add(itemsMenu[i]);
-                        }
-                    }
-                    return menuItems;
-                    break;
-                default:
-                    return null;
-                    break;
-            }
-        }
-
-        private static List<MenuDoes> tasks = new List<MenuDoes>();
-
 
         private static void AddToTask(MenuDoes does)
         {
@@ -142,12 +119,14 @@ namespace AisInternalSystem.UserInterface.Menu
             else
             {
                 TasksUser newTask = new TasksUser();
+                TaskItem taskItem = new TaskItem();
                 newTask.TaskIndex = Data.tasks.Count + 1;
                 newTask.Sender = UIController.SenderButton();
                 newTask.Control = (Guna2ShadowPanel)newTask.Sender.Parent;
                 newTask.Location = new System.Drawing.Point(newTask.Sender.Location.X, newTask.Sender.Location.Y);
                 newTask.Does = does;
                 newTask.Group = UIController.GetGroup();
+                taskItem.Does = does;
                 Data.tasks.Add(newTask);
                 UIController.ResetMenu();
                 UIController.InitTask(newTask.Group, newTask.Sender);

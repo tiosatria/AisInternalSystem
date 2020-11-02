@@ -13,19 +13,13 @@ namespace AisInternalSystem.Controller
 
 
         #region Enumeration
-        public enum RoleIdentifier
-        {
-            Management,
-            Admin,
-            IT,
-            Teacher
-        }
+
         #endregion
 
         #region Entities
         public static User user = new User();
         public static List<TasksUser> tasks = new List<TasksUser>();
-
+        private static List<TaskItem> tasksItems = new List<TaskItem>();
         #endregion
 
         #region Variable

@@ -333,6 +333,16 @@ namespace AisInternalSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_enter_key_32px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_enter_key_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_envelope_60px_1 {
             get {
                 object obj = ResourceManager.GetObject("icons8_envelope_60px_1", resourceCulture);
@@ -606,6 +616,16 @@ namespace AisInternalSystem.Properties {
         internal static System.Drawing.Bitmap icons8_swap_100px_1 {
             get {
                 object obj = ResourceManager.GetObject("icons8_swap_100px_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_switch_24px_1 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_switch_24px_1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

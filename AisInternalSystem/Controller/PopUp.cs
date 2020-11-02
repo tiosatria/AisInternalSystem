@@ -12,6 +12,7 @@ namespace AisInternalSystem.Controller
         {
             return $"Hello! {usr}, welcome back!\nWe missed you!";
         }
+        public static string NotAuthorized = "We're sorry but you're not authorized to do this\n Contact IT for more information or support.";
         #endregion
 
         public static void Alert(string msg, frmAlert.AlertType type)

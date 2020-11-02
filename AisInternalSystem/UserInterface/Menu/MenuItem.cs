@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AisInternalSystem.Module;
+using System.ComponentModel.Design;
 
 namespace AisInternalSystem.UserInterface.Menu
 {
@@ -46,8 +48,26 @@ namespace AisInternalSystem.UserInterface.Menu
         public MenuController.MenuDoes Does
         {
             get { return menuDoes; }
-            set { menuDoes = value; MenuController.GetItemProperties(this, Does); }
+            set { menuDoes = value; }
         }
+
+        private List<MenuController.MenuType> _category;
+
+        public List<MenuController.MenuType> Category
+        {
+            get { return _category; }
+            set { _category = value; }
+        }
+
+
+        private List<User.RoleIdentifier> _accessor;
+
+        public List<User.RoleIdentifier> Accesor
+        {
+            get { return _accessor; }
+            set { _accessor = value; }
+        }
+
 
         #endregion
         public MenuItem()

@@ -25,6 +25,22 @@ namespace AisInternalSystem.UserInterface.Menu
             set { index = value; }
         }
 
+        private string _title;
+
+        public string Title
+        {
+            get { return _title; }
+            set { _title = value; }
+        }
+
+        private string _subtitle;
+
+        public string Subtitle
+        {
+            get { return _subtitle; }
+            set { _subtitle = value; }
+        }
+
         private Guna2ShadowPanel _uc;
 
         public Guna2ShadowPanel Control
@@ -38,7 +54,13 @@ namespace AisInternalSystem.UserInterface.Menu
         public MenuController.MenuDoes Does
         {
             get { return menuDoes; }
-            set { menuDoes = value; }
+            set { menuDoes = value;
+                TaskItem taskItem = new TaskItem();
+                taskItem.Group = Group;
+                taskItem.Does = Does;
+                taskItem.Title = Does.ToString();
+                taskItem.Subtitle = Subtitle;
+                }
         }
 
         private Guna2Button _sender;
@@ -57,6 +79,13 @@ namespace AisInternalSystem.UserInterface.Menu
             set { _fromgroup = value; }
         }
 
+        private DateTime _started;
+
+        public DateTime StartTime
+        {
+            get { return _started; }
+            set { _started = value; }
+        }
 
         private System.Drawing.Point _location;
 

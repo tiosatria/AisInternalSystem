@@ -67,22 +67,24 @@ namespace AisInternalSystem.Entities
 
         private static List<Dotter> dotters = new List<Dotter>();
 
+
         public static void InitTask(MenuController.MenuType _men, Guna2Button sender)
         {
             if (dotters.Exists(o => o.FromGroup == _men))
             {
-                    dotters[dotters.FindIndex(o => o.FromGroup == _men)].TaskCount++;
+                dotters[dotters.FindIndex(o => o.FromGroup == _men)].TaskCount++;
+                    
             }
             else
             {
-                    Dotter dotter = new Dotter();
-                    dotter.TaskCount ++;
-                    dotter.FromGroup = _men;
-                    dotter.Location = new Point (sender.Location.X + 5, ((Guna2ShadowPanel)sender.Parent).Height - dotter.Height - 7);
-                    dotters.Add(dotter);
-                    mainform.Controls.Add(dotter);
-                    DotterLogic(_men, sender);
-                    SetControl(dotter, DockStyle.None);
+                Dotter dotter = new Dotter();
+                dotter.TaskCount ++;
+                dotter.FromGroup = _men;
+                dotter.Location = new Point (sender.Location.X + 5, ((Guna2ShadowPanel)sender.Parent).Height - dotter.Height - 7);
+                dotters.Add(dotter);
+                mainform.Controls.Add(dotter);
+                DotterLogic(_men, sender);
+                SetControl(dotter, DockStyle.None);
             }
                     
         }

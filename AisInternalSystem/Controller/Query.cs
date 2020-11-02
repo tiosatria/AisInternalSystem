@@ -43,16 +43,14 @@ namespace AisInternalSystem.Controller
                     cmd.Parameters.Add("@_usr", MySqlDbType.VarChar).Value = str[0];
                     cmd.Parameters.Add("@_pwd", MySqlDbType.VarChar).Value = str[1];
                     cmd.CommandType = CommandType.StoredProcedure;
-                    da = new MySqlDataAdapter(cmd);
-                    da.Fill(dt);
+                    Db.DataAdapter(cmd, dt);
                     return dt;
                     break;
                 case Process.LoadStudent:
                     cmd = new MySqlCommand("LoadStudentData", Db.GetConnection());
                     cmd.Parameters.Add("@_aisid", MySqlDbType.Int32).Value = str[0];
                     cmd.CommandType = CommandType.StoredProcedure;
-                    da = new MySqlDataAdapter(cmd);
-                    da.Fill(dt);
+                    Db.DataAdapter(cmd, dt);
                     return dt;
                     break;
                 default:

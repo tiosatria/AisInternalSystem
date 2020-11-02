@@ -169,11 +169,24 @@
     <Compile Include="UserInterface\Menu\MenuItem.Designer.cs">
       <DependentUpon>MenuItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserInterface\Menu\Menus.cs" />
     <Compile Include="UserInterface\Menu\MenuSchoolAdministration.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserInterface\Menu\MenuSchoolAdministration.Designer.cs">
       <DependentUpon>MenuSchoolAdministration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\Menu\TaskExpander.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserInterface\Menu\TaskExpander.Designer.cs">
+      <DependentUpon>TaskExpander.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\Menu\TaskItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserInterface\Menu\TaskItem.Designer.cs">
+      <DependentUpon>TaskItem.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\Menu\Tasks.cs" />
     <Compile Include="UserInterface\Student\Student.cs">
@@ -429,6 +442,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\Menu\MenuSchoolAdministration.resx">
       <DependentUpon>MenuSchoolAdministration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\Menu\TaskExpander.resx">
+      <DependentUpon>TaskExpander.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\Menu\TaskItem.resx">
+      <DependentUpon>TaskItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\Student\Student.resx">
       <DependentUpon>Student.cs</DependentUpon>
@@ -705,6 +724,8 @@
     <None Include="Resources\Pulse-1s-200px %281%29.gif" />
     <None Include="Resources\Pulse-0.4s-200px.gif" />
     <None Include="Resources\disappointed_200_transparent.gif" />
+    <None Include="Properties\icons8_switch_24px_1.png" />
+    <None Include="Properties\icons8_enter_key_32px.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -18,7 +18,7 @@ namespace AisInternalSystem.Controller
 {
     public class Utilities
     {
-        private static Data.RoleIdentifier _role;
+        private static User.RoleIdentifier _role;
         public Utilities()
         {
 
@@ -47,9 +47,28 @@ namespace AisInternalSystem.Controller
 
         private static void RoleSwitcher(string str)
         {
-            if (str == "Administration")
+            switch (str)
             {
-                _role = Data.RoleIdentifier.Admin;
+                case "Administration":
+                    _role = User.RoleIdentifier.Admin;
+                    Data.user._role = User.RoleIdentifier.Admin;
+                    break;
+                case "Teacher":
+                    _role = User.RoleIdentifier.Teacher;
+                    Data.user._role = User.RoleIdentifier.Teacher;
+                    break;
+                case "Management":
+                    _role = User.RoleIdentifier.Management;
+                    Data.user._role = User.RoleIdentifier.Management;
+                    break;
+                case "IT":
+                    _role = User.RoleIdentifier.IT;
+                    Data.user._role = User.RoleIdentifier.IT;
+                    break;
+                case "Accounting":
+                    _role = User.RoleIdentifier.Accounting;
+                    Data.user._role = User.RoleIdentifier.Accounting;
+                    break;
             }
         }
 
@@ -57,17 +76,25 @@ namespace AisInternalSystem.Controller
         {
             switch (_role)
             {
-                case Data.RoleIdentifier.Management:
+                case User.RoleIdentifier.Management:
+                    PopUp.Alert("You're using the preview build!", frmAlert.AlertType.Info);
                     break;
-                case Data.RoleIdentifier.Admin:
+                case User.RoleIdentifier.Admin:
                     UIController.NavigateUI(UIController.Controls.UpperPanelAdmin);
                     UIController.NavigateUI(UIController.Controls.UCDashboardAdmin);
                     PopUp.Alert(PopUp.MessageIntroduction(Data.user.OwnerName), frmAlert.AlertType.Info);
                     break;
-                case Data.RoleIdentifier.IT:
+                case User.RoleIdentifier.IT:
+
                     break;
-                case Data.RoleIdentifier.Teacher:
+                case User.RoleIdentifier.Teacher:
+                    PopUp.Alert(PopUp.NotAuthorized, frmAlert.AlertType.Warning);
                     break;
+
+                case User.RoleIdentifier.Accounting:
+                    PopUp.Alert(PopUp.NotAuthorized, frmAlert.AlertType.Warning);
+                    break;
+
                 default:
                     break;
             }

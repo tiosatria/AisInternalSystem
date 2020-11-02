@@ -226,7 +226,6 @@ C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisIntern
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.DashboardUC.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.DialogControl.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.EmployeeSummary.resources
-C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.Dashboard.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.frmAlert.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.LoginFrm.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.ModuleInProgress.resources
@@ -419,3 +418,13 @@ C:\Users\tiosa\Desktop\Project\AisInternalSystem\WorkingFolder\AisInternalSystem
 C:\Users\tiosa\Desktop\Project\AisInternalSystem\WorkingFolder\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.MenuItem.resources
 C:\Users\tiosa\Desktop\Project\AisInternalSystem\WorkingFolder\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.Dotter.resources
 C:\Users\tiosa\Desktop\Project\AisInternalSystem\WorkingFolder\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.Liner.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.Main.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.Dotter.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.Liner.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.MenuContainer.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.MenuItem.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.MenuSchoolAdministration.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Student.Student.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.UCRecStud.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.TaskExpander.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.TaskItem.resources

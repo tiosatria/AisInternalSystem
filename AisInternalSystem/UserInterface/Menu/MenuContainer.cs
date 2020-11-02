@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Management;
 using AisInternalSystem.Entities;
 using Telerik.WinControls.UI;
+using AisInternalSystem.Controller;
 
 namespace AisInternalSystem.UserInterface.Menu
 {
@@ -47,27 +48,71 @@ namespace AisInternalSystem.UserInterface.Menu
 
         private void GetMenuItem(MenuController.MenuType men)
         {
-            MenuController.GetContainerProperties(this, men);
-            flowMenuItems.Controls.Clear();
-            List<MenuItem> menuItems = MenuController.GetMenu(men);
-            if (menuItems.Count >= 1)
+            if (MenuController.isOpen)
             {
-                panelnotfound.Visible = false;
-                flowMenuItems.Visible = true;
-                MenuItem[] items = new MenuItem[menuItems.Count];
-                for (int i = 0; i < menuItems.Count; i++)
+                if (men == MenuController.Memmnu)
                 {
-                    items[i] = new MenuItem();
-                    items[i] = menuItems[i];
-                    flowMenuItems.Controls.Add(items[i]);
+                    
+                }
+                else
+                {
+                    MenuController.GetContainerProperties(this, men);
+                    flowMenuItems.Controls.Clear();
+                    Menus.InitMenus();
+                    List<MenuItem> menuItems = Menus.ListMenu;
+                    if (menuItems.Count >= 1)
+                    {
+                        panelnotfound.Visible = false;
+                        flowMenuItems.Visible = true;
+                        MenuItem[] items = new MenuItem[menuItems.Count];
+                        foreach (MenuItem item in menuItems)
+                        {
+                            if (item.Category.Contains(men))
+                            {
+                                if (item.Accesor.Contains(Data.user._role))
+                                {
+                                    flowMenuItems.Controls.Add(item);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        flowMenuItems.Visible = false;
+                        panelnotfound.Visible = true;
+                    }
+                    DefaultControls = flowMenuItems.Controls;
                 }
             }
-            else
+            else 
             {
-                flowMenuItems.Visible = false;
-                panelnotfound.Visible = true;
+                MenuController.GetContainerProperties(this, men);
+                flowMenuItems.Controls.Clear();
+                Menus.InitMenus();
+                List<MenuItem> menuItems = Menus.ListMenu;
+                if (menuItems.Count >= 1)
+                {
+                    panelnotfound.Visible = false;
+                    flowMenuItems.Visible = true;
+                    MenuItem[] items = new MenuItem[menuItems.Count];
+                    foreach (MenuItem item in menuItems)
+                    {
+                        if (item.Category.Contains(men))
+                        {
+                            if (item.Accesor.Contains(Data.user._role))
+                            {
+                                flowMenuItems.Controls.Add(item);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    flowMenuItems.Visible = false;
+                    panelnotfound.Visible = true;
+                }
+                DefaultControls = flowMenuItems.Controls;
             }
-            DefaultControls = flowMenuItems.Controls;
         }
 
         private ControlCollection DefaultControls;
