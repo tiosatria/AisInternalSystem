@@ -28,7 +28,7 @@ namespace AisInternalSystem.UserInterface.Menu
         public string Title
         {
             get { return _title; }
-            set { _title = value; } 
+            set { _title = value; lbltitle.Text = value; } 
         }
         private string _subtitle;
 
@@ -43,7 +43,7 @@ namespace AisInternalSystem.UserInterface.Menu
         public DateTime TaskStart
         {
             get { return _taskstart; }
-            set { _taskstart = value; }
+            set { _taskstart = value;  lblstart.Text = value.ToString("t"); }
         }
 
         private DateTime _taskfinish;
@@ -60,7 +60,6 @@ namespace AisInternalSystem.UserInterface.Menu
         {
             get { return _does; }
             set { _does = value; MenuController.GetTaskProps(this, _does); }
-        
         }
 
         private MenuController.MenuType _fromgroup;

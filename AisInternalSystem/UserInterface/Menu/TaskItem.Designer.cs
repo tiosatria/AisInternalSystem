@@ -34,7 +34,7 @@
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.lblsubtitle = new System.Windows.Forms.Label();
             this.btnMarkAsDone = new Guna.UI2.WinForms.Guna2Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblstart = new System.Windows.Forms.Label();
             this.img = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.img)).BeginInit();
             this.SuspendLayout();
@@ -108,17 +108,17 @@
             this.btnMarkAsDone.TabIndex = 10;
             this.btnMarkAsDone.Click += new System.EventHandler(this.btnMarkAsDone_Click);
             // 
-            // label1
+            // lblstart
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(30, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 12);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Started: ";
-            this.label1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.label1_MouseClick);
+            this.lblstart.AutoSize = true;
+            this.lblstart.BackColor = System.Drawing.Color.Transparent;
+            this.lblstart.Font = new System.Drawing.Font("Segoe UI Semibold", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblstart.Location = new System.Drawing.Point(30, 36);
+            this.lblstart.Name = "lblstart";
+            this.lblstart.Size = new System.Drawing.Size(38, 12);
+            this.lblstart.TabIndex = 11;
+            this.lblstart.Text = "Started: ";
+            this.lblstart.MouseClick += new System.Windows.Forms.MouseEventHandler(this.label1_MouseClick);
             // 
             // img
             // 
@@ -134,7 +134,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.Controls.Add(this.img);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblstart);
             this.Controls.Add(this.btnMarkAsDone);
             this.Controls.Add(this.lblsubtitle);
             this.Controls.Add(this.lbltitle);
@@ -159,7 +159,7 @@
         private System.Windows.Forms.Label lbltitle;
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
         private System.Windows.Forms.Label lblsubtitle;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblstart;
         private Guna.UI2.WinForms.Guna2Button btnMarkAsDone;
         private System.Windows.Forms.PictureBox img;
     }

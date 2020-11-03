@@ -110,6 +110,11 @@ namespace AisInternalSystem.UserInterface.Menu
             }
         }
 
+        public static void ExpandTask(MenuController.MenuType menu)
+        {
+            Data.taskExpanders[Data.taskExpanders.FindIndex(o => o.FromGroup== menu)].Expand();
+        }
+
         private static void AddToTask(MenuDoes does)
         {
             if (Data.tasks.Exists(o => o.Does == does))
@@ -119,23 +124,16 @@ namespace AisInternalSystem.UserInterface.Menu
             else
             {
                 TasksUser newTask = new TasksUser();
-                TaskItem taskItem = new TaskItem();
                 newTask.TaskIndex = Data.tasks.Count + 1;
                 newTask.Sender = UIController.SenderButton();
                 newTask.Control = (Guna2ShadowPanel)newTask.Sender.Parent;
                 newTask.Location = new System.Drawing.Point(newTask.Sender.Location.X, newTask.Sender.Location.Y);
-                newTask.Does = does;
                 newTask.Group = UIController.GetGroup();
-                taskItem.Does = does;
+                newTask.Does = does;
                 Data.tasks.Add(newTask);
                 UIController.ResetMenu();
                 UIController.InitTask(newTask.Group, newTask.Sender);
             }
-        }
-
-        public static void ExpandTask()
-        {
-
         }
 
         public static void DoAction(MenuDoes does)
@@ -155,7 +153,6 @@ namespace AisInternalSystem.UserInterface.Menu
 
                     break;
                 case MenuDoes.RecordNewStudentData:
-                    UIController.NavigateUI(UIController.Controls.RecordStudentData);
                     AddToTask(does);
 
                     break;

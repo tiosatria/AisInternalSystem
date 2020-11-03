@@ -19,7 +19,8 @@ namespace AisInternalSystem.Controller
         #region Entities
         public static User user = new User();
         public static List<TasksUser> tasks = new List<TasksUser>();
-        private static List<TaskItem> tasksItems = new List<TaskItem>();
+        public static List<TaskItem> tasksItems = new List<TaskItem>();
+        public static List<TaskExpander> taskExpanders = new List<TaskExpander>();
         #endregion
 
         #region Variable

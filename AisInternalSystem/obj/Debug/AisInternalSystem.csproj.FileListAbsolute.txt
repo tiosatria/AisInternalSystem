@@ -428,3 +428,5 @@ C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisIntern
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.UCRecStud.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.TaskExpander.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.TaskItem.resources
+C:\Users\tiosa\Desktop\Project\AisInternalSystem\WorkingFolder\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.TaskExpander.resources
+C:\Users\tiosa\Desktop\Project\AisInternalSystem\WorkingFolder\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.TaskItem.resources

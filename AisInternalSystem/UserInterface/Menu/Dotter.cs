@@ -45,7 +45,13 @@ namespace AisInternalSystem.UserInterface.Menu
 
         private void btnShow_Click(object sender, EventArgs e)
         {
-            
+            MenuController.ExpandTask(FromGroup);
+            MessageBox.Show(FromGroup.ToString());
+        }
+
+        private void Dotter_MouseEnter(object sender, EventArgs e)
+        {
+            this.BackColor = Color.WhiteSmoke;
         }
     }
 }

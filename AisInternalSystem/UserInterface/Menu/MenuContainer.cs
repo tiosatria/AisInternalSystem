@@ -36,7 +36,6 @@ namespace AisInternalSystem.UserInterface.Menu
             if (isLoaded)
             {
                 GetMenuItem(men);
-
             }
             else
             {
@@ -48,14 +47,6 @@ namespace AisInternalSystem.UserInterface.Menu
 
         private void GetMenuItem(MenuController.MenuType men)
         {
-            if (MenuController.isOpen)
-            {
-                if (men == MenuController.Memmnu)
-                {
-                    
-                }
-                else
-                {
                     MenuController.GetContainerProperties(this, men);
                     flowMenuItems.Controls.Clear();
                     Menus.InitMenus();
@@ -82,37 +73,6 @@ namespace AisInternalSystem.UserInterface.Menu
                         panelnotfound.Visible = true;
                     }
                     DefaultControls = flowMenuItems.Controls;
-                }
-            }
-            else 
-            {
-                MenuController.GetContainerProperties(this, men);
-                flowMenuItems.Controls.Clear();
-                Menus.InitMenus();
-                List<MenuItem> menuItems = Menus.ListMenu;
-                if (menuItems.Count >= 1)
-                {
-                    panelnotfound.Visible = false;
-                    flowMenuItems.Visible = true;
-                    MenuItem[] items = new MenuItem[menuItems.Count];
-                    foreach (MenuItem item in menuItems)
-                    {
-                        if (item.Category.Contains(men))
-                        {
-                            if (item.Accesor.Contains(Data.user._role))
-                            {
-                                flowMenuItems.Controls.Add(item);
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    flowMenuItems.Visible = false;
-                    panelnotfound.Visible = true;
-                }
-                DefaultControls = flowMenuItems.Controls;
-            }
         }
 
         private ControlCollection DefaultControls;

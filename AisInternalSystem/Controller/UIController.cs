@@ -66,6 +66,7 @@ namespace AisInternalSystem.Entities
         }
 
         private static List<Dotter> dotters = new List<Dotter>();
+        private static List<TaskExpander> TaskExpander = new List<TaskExpander>();
 
 
         public static void InitTask(MenuController.MenuType _men, Guna2Button sender)
@@ -73,20 +74,26 @@ namespace AisInternalSystem.Entities
             if (dotters.Exists(o => o.FromGroup == _men))
             {
                 dotters[dotters.FindIndex(o => o.FromGroup == _men)].TaskCount++;
-                    
+                Data.taskExpanders[Data.taskExpanders.FindIndex(o => o.FromGroup == _men)].InitObject();
             }
             else
             {
                 Dotter dotter = new Dotter();
+                TaskExpander expander = new TaskExpander();
                 dotter.TaskCount ++;
                 dotter.FromGroup = _men;
                 dotter.Location = new Point (sender.Location.X + 5, ((Guna2ShadowPanel)sender.Parent).Height - dotter.Height - 7);
+                expander.FromGroup = _men;
+                expander.Location = new Point(sender.Location.X, dotter.Location.Y + dotter.Height);
+                expander.InitObject();
                 dotters.Add(dotter);
                 mainform.Controls.Add(dotter);
+                mainform.Controls.Add(expander);
+                Data.taskExpanders.Add(expander);
                 DotterLogic(_men, sender);
+                SetControl(expander, DockStyle.None);
                 SetControl(dotter, DockStyle.None);
             }
-                    
         }
 
         private static List<Guna2Button> btnDotted = new List<Guna2Button>();
