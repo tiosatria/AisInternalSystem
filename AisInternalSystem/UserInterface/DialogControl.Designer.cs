@@ -124,7 +124,6 @@
             this.Controls.Add(this.lbldialogHeader);
             this.Name = "DialogControl";
             this.Size = new System.Drawing.Size(1280, 611);
-            this.Load += new System.EventHandler(this.DialogControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picIllustration)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

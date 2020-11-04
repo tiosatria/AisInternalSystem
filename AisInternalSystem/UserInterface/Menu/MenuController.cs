@@ -30,7 +30,7 @@ namespace AisInternalSystem.UserInterface.Menu
         private MenuType _menutype;
         public enum MenuDoes
         {
-            EmployeeDirectoryService, RecordEmployee, StudentDirectoryService, RecordNewStudentData
+            EmployeeDirectoryService, RecordEmployee, StudentDirectoryService, RecordNewStudentData, ClassAssignment, ClassInsight
         }
         public enum MenuItemsEmployee
         {
@@ -47,14 +47,7 @@ namespace AisInternalSystem.UserInterface.Menu
         {
             get
             {
-                if (isOpen)
-                {
                     return _memmnu;
-                }
-                else
-                {
-                    return _memmnu;
-                }
             }
             set { _memmnu = value; isOpen = true;  }
         }
@@ -87,33 +80,10 @@ namespace AisInternalSystem.UserInterface.Menu
         
         };
 
-        public static void GetTaskProps(TaskItem child, MenuDoes does)
-        {
-            switch (does)
-            {
-                case MenuDoes.EmployeeDirectoryService:
-                    child.Title = "Viewing:";
-                    child.TaskStart = DateTime.Now;
-                    break;
-                case MenuDoes.RecordEmployee:
-                    child.Title = "Working on:";
-                    break;
-                case MenuDoes.StudentDirectoryService:
-                    child.Title = "";
-                    break;
-                case
-                MenuDoes.RecordNewStudentData:
-                
-                    break;
-                default:
-                    break;
-            }
-        }
-
         public static void ExpandTask(MenuController.MenuType menu)
         {
             Data.taskExpanders[Data.taskExpanders.FindIndex(o => o.FromGroup== menu)].Expand();
-        }
+        }   
 
         private static void AddToTask(MenuDoes does)
         {
@@ -155,6 +125,14 @@ namespace AisInternalSystem.UserInterface.Menu
                 case MenuDoes.RecordNewStudentData:
                     AddToTask(does);
 
+                    break;
+                case MenuDoes.ClassAssignment:
+                    AddToTask(does);
+
+                    break;
+                case MenuDoes.ClassInsight:
+                    AddToTask(does);
+                    
                     break;
                 default:
                     break;

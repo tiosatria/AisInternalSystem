@@ -83,6 +83,7 @@
             this.Name = "Dotter";
             this.Size = new System.Drawing.Size(104, 30);
             this.MouseEnter += new System.EventHandler(this.Dotter_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.Dotter_MouseLeave);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

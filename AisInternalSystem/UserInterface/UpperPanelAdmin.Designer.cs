@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.panel_Upper_admin = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.guna2VSeparator3 = new Guna.UI2.WinForms.Guna2VSeparator();
+            this.guna2VSeparator2 = new Guna.UI2.WinForms.Guna2VSeparator();
+            this.guna2VSeparator1 = new Guna.UI2.WinForms.Guna2VSeparator();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.btnMsg = new System.Windows.Forms.PictureBox();
             this.picBtnExit = new System.Windows.Forms.PictureBox();
@@ -39,9 +42,6 @@
             this.BtnInventoryAdmin = new Guna.UI2.WinForms.Guna2Button();
             this.BtnEmployeeAdmin = new Guna.UI2.WinForms.Guna2Button();
             this.BtnSchoolAdmin = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2VSeparator1 = new Guna.UI2.WinForms.Guna2VSeparator();
-            this.guna2VSeparator2 = new Guna.UI2.WinForms.Guna2VSeparator();
-            this.guna2VSeparator3 = new Guna.UI2.WinForms.Guna2VSeparator();
             this.panel_Upper_admin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMsg)).BeginInit();
@@ -75,6 +75,27 @@
             this.panel_Upper_admin.Size = new System.Drawing.Size(1280, 109);
             this.panel_Upper_admin.TabIndex = 2;
             // 
+            // guna2VSeparator3
+            // 
+            this.guna2VSeparator3.Location = new System.Drawing.Point(816, 7);
+            this.guna2VSeparator3.Name = "guna2VSeparator3";
+            this.guna2VSeparator3.Size = new System.Drawing.Size(10, 61);
+            this.guna2VSeparator3.TabIndex = 17;
+            // 
+            // guna2VSeparator2
+            // 
+            this.guna2VSeparator2.Location = new System.Drawing.Point(1119, 7);
+            this.guna2VSeparator2.Name = "guna2VSeparator2";
+            this.guna2VSeparator2.Size = new System.Drawing.Size(10, 61);
+            this.guna2VSeparator2.TabIndex = 16;
+            // 
+            // guna2VSeparator1
+            // 
+            this.guna2VSeparator1.Location = new System.Drawing.Point(969, 8);
+            this.guna2VSeparator1.Name = "guna2VSeparator1";
+            this.guna2VSeparator1.Size = new System.Drawing.Size(10, 61);
+            this.guna2VSeparator1.TabIndex = 15;
+            // 
             // guna2PictureBox1
             // 
             this.guna2PictureBox1.Image = global::AisInternalSystem.Properties.Resources.AIS;
@@ -107,6 +128,7 @@
             this.picBtnExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picBtnExit.TabIndex = 10;
             this.picBtnExit.TabStop = false;
+            this.picBtnExit.Click += new System.EventHandler(this.picBtnExit_Click);
             // 
             // Btn_Notif
             // 
@@ -226,27 +248,6 @@
             this.BtnSchoolAdmin.Text = "School Administration";
             this.BtnSchoolAdmin.UseTransparentBackground = true;
             this.BtnSchoolAdmin.Click += new System.EventHandler(this.BtnSchoolAdmin_Click);
-            // 
-            // guna2VSeparator1
-            // 
-            this.guna2VSeparator1.Location = new System.Drawing.Point(969, 8);
-            this.guna2VSeparator1.Name = "guna2VSeparator1";
-            this.guna2VSeparator1.Size = new System.Drawing.Size(10, 61);
-            this.guna2VSeparator1.TabIndex = 15;
-            // 
-            // guna2VSeparator2
-            // 
-            this.guna2VSeparator2.Location = new System.Drawing.Point(1119, 7);
-            this.guna2VSeparator2.Name = "guna2VSeparator2";
-            this.guna2VSeparator2.Size = new System.Drawing.Size(10, 61);
-            this.guna2VSeparator2.TabIndex = 16;
-            // 
-            // guna2VSeparator3
-            // 
-            this.guna2VSeparator3.Location = new System.Drawing.Point(816, 7);
-            this.guna2VSeparator3.Name = "guna2VSeparator3";
-            this.guna2VSeparator3.Size = new System.Drawing.Size(10, 61);
-            this.guna2VSeparator3.TabIndex = 17;
             // 
             // UpperPanelAdmin
             // 

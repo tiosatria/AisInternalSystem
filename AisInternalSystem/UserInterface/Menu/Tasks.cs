@@ -1,4 +1,5 @@
 ﻿using AisInternalSystem.Controller;
+using AisInternalSystem.Entities;
 using Guna.UI2.WinForms;
 using System;
 using System.Collections.Generic;
@@ -51,16 +52,28 @@ namespace AisInternalSystem.UserInterface.Menu
 
         private MenuController.MenuDoes menuDoes;
 
+        private string GetTitle()
+        {
+            return Menus.ListMenu[Menus.ListMenu.FindIndex(o => o.Does == this.Does)].ActInString;
+        }
+
+        private string GetSubtitle()
+        {
+            return Menus.ListMenu[Menus.ListMenu.FindIndex(o => o.Does == this.Does)].Title;
+        }
+
+
         public MenuController.MenuDoes Does
         {
             get { return menuDoes; }
             set { menuDoes = value;
                 TaskItem taskItem = new TaskItem();
-                taskItem.Group = Group;
-                taskItem.Does = Does;
-                taskItem.Title = Does.ToString();
-                taskItem.Subtitle = Subtitle;
-                Data.tasksItems.Add(taskItem);  
+                taskItem.Group = this.Group;
+                taskItem.Does = this.Does;
+                taskItem.Title = GetTitle();
+                taskItem.TaskStart = DateTime.Now;
+                taskItem.Subtitle = GetSubtitle();
+                Data.tasksItems.Add(taskItem);
                 }
         }
 

@@ -30,6 +30,7 @@ namespace AisInternalSystem.Entities
         private static UCRecStud uCRecStud = new UCRecStud();
         private static UCRecStud uCUpStud = new UCRecStud();
         private static Liner liner = new Liner();
+        private static DialogControl dialogConfirmation = new DialogControl();
         private MenuController.MenuType _menutype;
         #region Enumeration
         public enum Controls
@@ -38,7 +39,8 @@ namespace AisInternalSystem.Entities
             UCDashboardAdmin, UCDashboardManagement, UCDashboardTeacher, UCDashboardAccounting,
             UCLogin,
             MenuSchoolAdm, MenuEmployee, MenuContainer,
-            RecordStudentData, UpdateStudentData
+            RecordStudentData, UpdateStudentData,
+            DialogConfirmation
         }
 
         #endregion
@@ -74,18 +76,17 @@ namespace AisInternalSystem.Entities
             if (dotters.Exists(o => o.FromGroup == _men))
             {
                 dotters[dotters.FindIndex(o => o.FromGroup == _men)].TaskCount++;
-                Data.taskExpanders[Data.taskExpanders.FindIndex(o => o.FromGroup == _men)].InitObject();
+
             }
             else
             {
                 Dotter dotter = new Dotter();
-                TaskExpander expander = new TaskExpander();
+                TaskExpander expander = new TaskExpander(_men);
                 dotter.TaskCount ++;
                 dotter.FromGroup = _men;
                 dotter.Location = new Point (sender.Location.X + 5, ((Guna2ShadowPanel)sender.Parent).Height - dotter.Height - 7);
                 expander.FromGroup = _men;
                 expander.Location = new Point(sender.Location.X, dotter.Location.Y + dotter.Height);
-                expander.InitObject();
                 dotters.Add(dotter);
                 mainform.Controls.Add(dotter);
                 mainform.Controls.Add(expander);
@@ -141,6 +142,12 @@ namespace AisInternalSystem.Entities
             UIController.FocusButton(button, (Guna2ShadowPanel)button.Parent);
             UIController.GetLiner(button);
             UIController.GetMenu(menuType);
+        }
+
+        public static void OverrideControl(System.Windows.Forms.UserControl uc, DockStyle dock)
+        {
+            mainform.Controls.Add(uc);
+            SetControl(uc, dock);
         }
 
         public static void NavigateUI(Controls controls)
@@ -249,6 +256,17 @@ namespace AisInternalSystem.Entities
                         mainform.Controls.Add(uCUpStud);
                         uCUpStud.InitObject(_memId);
                         SetControl(uCUpStud, DockStyle.Fill);
+                    }
+                    break;
+                case Controls.DialogConfirmation:
+                    if (IsLoaded(dialogConfirmation))
+                    {
+                        SetControl(dialogConfirmation, DockStyle.Fill);
+                    }
+                    else
+                    {
+                        mainform.Controls.Add(dialogConfirmation);
+                        SetControl(dialogConfirmation, DockStyle.Fill);
                     }
                     break;
                 default:

@@ -35,15 +35,15 @@ namespace AisInternalSystem.UserInterface.Menu
         public string Subtitle
         {
             get { return _subtitle; }
-            set { _subtitle = value; }
+            set { _subtitle = value; lblsubtitle.Text = value; }
         }
 
-        private DateTime _taskstart;
+        private DateTime _taskstart = DateTime.Now; 
 
         public DateTime TaskStart
         {
             get { return _taskstart; }
-            set { _taskstart = value;  lblstart.Text = value.ToString("t"); }
+            set { _taskstart = value; lblstart.Text = "Started at: " + value.ToString("t"); }
         }
 
         private DateTime _taskfinish;
@@ -59,7 +59,7 @@ namespace AisInternalSystem.UserInterface.Menu
         public MenuController.MenuDoes Does
         {
             get { return _does; }
-            set { _does = value; MenuController.GetTaskProps(this, _does); }
+            set { _does = value;  }
         }
 
         private MenuController.MenuType _fromgroup;
@@ -84,12 +84,12 @@ namespace AisInternalSystem.UserInterface.Menu
 
         private void TaskItem_MouseEnter(object sender, EventArgs e)
         {
-
+            this.BackColor = Color.Gainsboro;
         }
 
         private void TaskItem_MouseLeave(object sender, EventArgs e)
         {
-
+            this.BackColor = Color.WhiteSmoke;
         }
 
         private void TaskItem_MouseClick(object sender, MouseEventArgs e)
@@ -118,6 +118,11 @@ namespace AisInternalSystem.UserInterface.Menu
         }
 
         private void label1_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void TaskItem_Load(object sender, EventArgs e)
         {
 
         }

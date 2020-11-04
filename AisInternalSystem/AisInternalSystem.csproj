@@ -127,6 +127,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\Confirmation.cs" />
     <Compile Include="Controller\Data.cs" />
     <Compile Include="Controller\Query.cs" />
     <Compile Include="Controller\UIController.cs" />

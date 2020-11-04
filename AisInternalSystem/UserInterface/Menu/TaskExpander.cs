@@ -22,7 +22,13 @@ namespace AisInternalSystem.UserInterface.Menu
         public int TaskCount
         {
             get { return _taskcount; }
-            set { _taskcount = value; }
+            set
+            {
+                _taskcount = value; if (TaskCount == 1) { lblTaskcount.Text = $"{value.ToString()} Task"; }
+                else
+                {
+                    lblTaskcount.Text = $"{value.ToString()} Tasks\nClick to switch";
+                } }
         }
 
         private MenuController.MenuType _group;
@@ -33,24 +39,24 @@ namespace AisInternalSystem.UserInterface.Menu
             set { _group = value; }
         }
 
-        public void InitObject()
+        public void InitObject(MenuController.MenuType m)
         {
+            GetChild(m);
+        }
+
+        #endregion
+        public TaskExpander(MenuController.MenuType i)
+        {
+            this.Hide();
             if (isLoaded)
             {
-                GetChild();
+                GetChild(i);
             }
             else
             {
                 InitializeComponent();
-                this.Hide();
-                GetChild();
+                GetChild(i);
             }
-        }
-
-        #endregion
-        public TaskExpander()
-        {
-
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -62,18 +68,19 @@ namespace AisInternalSystem.UserInterface.Menu
         {
             this.Show();
             this.BringToFront();
+            GetChild(this.FromGroup);
         }
 
-        private void GetChild()
+        private void GetChild(MenuController.MenuType i)
         {
             foreach (TaskItem item in Data.tasksItems)
             {
-                if (item.Group == this.FromGroup)
+                if (item.Group == i)
                 {
-                    flowTasks.Controls.Add(item);
+                    this.flowTasks.Controls.Add(item);
                 }
             }
-            MessageBox.Show(flowTasks.Controls.Count.ToString());
+            this.TaskCount = flowTasks.Controls.Count;
         }
 
     }

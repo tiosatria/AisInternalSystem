@@ -12,6 +12,7 @@ using AisInternalSystem.UserInterface.Menu;
 using Guna.UI2.WinForms;
 using System.Xml;
 using AisInternalSystem.Module;
+using AisInternalSystem.Controller;
 
 namespace AisInternalSystem
 {
@@ -62,6 +63,11 @@ namespace AisInternalSystem
         private void BtnInventoryAdmin_Click(object sender, EventArgs e)
         {
             UIController.MenuChoosed(MenuController.MenuType.Inventory, BtnInventoryAdmin);
+        }
+
+        private void picBtnExit_Click(object sender, EventArgs e)
+        {
+            Confirmation.Fire(Confirmation.onConfirmEnum.Exit);
         }
     }
 }

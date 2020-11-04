@@ -17,6 +17,51 @@ namespace AisInternalSystem.UserInterface.Menu
         #region Properties
         private int _index;
 
+        public enum DoingWhatEnum
+        {
+            Reviewing, Adding, Working, Checking, Marking
+        }
+
+        private DoingWhatEnum _doing;
+        public DoingWhatEnum Doing
+        {
+            get { return _doing; }
+            set { _doing = value; _act = GetFancyAct(value); }
+        }
+        private string GetFancyAct(DoingWhatEnum _do)
+        {
+            switch (_do)
+            {
+                case DoingWhatEnum.Reviewing:
+                    return "Reviwing: ";
+                    break;
+                case DoingWhatEnum.Adding:
+                    return "Adding: ";
+                    break;
+                case DoingWhatEnum.Working:
+                    return "Working on: ";
+                    break;
+                case DoingWhatEnum.Checking:
+                    return "Checking: ";
+                    break;
+                case DoingWhatEnum.Marking:
+                    return "Marking: ";
+                    break;
+                default:
+                    return "Not defined";
+                    break;
+            }
+        }
+
+        private string _act;
+
+        public string ActInString
+        {
+            get { return _act; }
+            set { _act = value; }
+        }
+
+
         public int Index
         {
             get { return _index; }
