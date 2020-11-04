@@ -30,7 +30,7 @@ namespace AisInternalSystem.UserInterface.Menu
         private MenuType _menutype;
         public enum MenuDoes
         {
-            EmployeeDirectoryService, RecordEmployee, StudentDirectoryService, RecordNewStudentData, ClassAssignment, ClassInsight
+            EmployeeDirectoryService, RecordEmployee, StudentDirectoryService, RecordNewStudentData, ClassAssignment, ClassInsight, ClassDirectoryService
         }
         public enum MenuItemsEmployee
         {
@@ -90,6 +90,8 @@ namespace AisInternalSystem.UserInterface.Menu
             if (Data.tasks.Exists(o => o.Does == does))
             {
 
+                UIController.ResetMenu();
+                Data.taskExpanders[Data.taskExpanders.FindIndex(o => o.FromGroup == UIController.GetGroup())].Hide();
             }
             else
             {
@@ -103,6 +105,10 @@ namespace AisInternalSystem.UserInterface.Menu
                 Data.tasks.Add(newTask);
                 UIController.ResetMenu();
                 UIController.InitTask(newTask.Group, newTask.Sender);
+                if (Data.taskExpanders.Exists(o=> o.FromGroup == UIController.GetGroup()))
+                {
+                    Data.taskExpanders[Data.taskExpanders.FindIndex(o => o.FromGroup == UIController.GetGroup())].Hide();
+                }
             }
         }
 
@@ -133,6 +139,10 @@ namespace AisInternalSystem.UserInterface.Menu
                 case MenuDoes.ClassInsight:
                     AddToTask(does);
                     
+                    break;
+                case MenuDoes.ClassDirectoryService:
+                    AddToTask(does);
+                    UIController.NavigateUI(UIController.Controls.ClassDirectoryService);
                     break;
                 default:
                     break;

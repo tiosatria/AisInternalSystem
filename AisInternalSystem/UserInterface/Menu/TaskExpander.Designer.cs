@@ -89,10 +89,11 @@
             this.BtnLogin.ShadowDecoration.Parent = this.BtnLogin;
             this.BtnLogin.Size = new System.Drawing.Size(100, 22);
             this.BtnLogin.TabIndex = 6;
-            this.BtnLogin.Text = "btnFinishAll";
+            this.BtnLogin.Text = "Mark all as done";
             // 
             // flowTasks
             // 
+            this.flowTasks.AutoScroll = true;
             this.flowTasks.Location = new System.Drawing.Point(4, 36);
             this.flowTasks.Name = "flowTasks";
             this.flowTasks.Size = new System.Drawing.Size(132, 178);
@@ -104,7 +105,7 @@
             this.lblTaskcount.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTaskcount.Location = new System.Drawing.Point(11, 10);
             this.lblTaskcount.Name = "lblTaskcount";
-            this.lblTaskcount.Size = new System.Drawing.Size(74, 13);
+            this.lblTaskcount.Size = new System.Drawing.Size(73, 13);
             this.lblTaskcount.TabIndex = 1;
             this.lblTaskcount.Text = "lblTaskCount";
             // 

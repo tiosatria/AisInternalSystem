@@ -10,9 +10,10 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Forms;
+using System.Windows.Markup.Localizer;
 using Telerik.WinControls.FileDialogs;
+using Telerik.WinControls.UI;
 using MenuItem = AisInternalSystem.UserInterface.Menu.MenuItem;
 
 namespace AisInternalSystem.Entities
@@ -31,6 +32,7 @@ namespace AisInternalSystem.Entities
         private static UCRecStud uCUpStud = new UCRecStud();
         private static Liner liner = new Liner();
         private static DialogControl dialogConfirmation = new DialogControl();
+        private static UCClassDirectoryService classDirService = new UCClassDirectoryService();
         private MenuController.MenuType _menutype;
         #region Enumeration
         public enum Controls
@@ -39,9 +41,15 @@ namespace AisInternalSystem.Entities
             UCDashboardAdmin, UCDashboardManagement, UCDashboardTeacher, UCDashboardAccounting,
             UCLogin,
             MenuSchoolAdm, MenuEmployee, MenuContainer,
-            RecordStudentData, UpdateStudentData,
+            RecordStudentData, UpdateStudentData, ClassDirectoryService,
             DialogConfirmation
         }
+
+        public enum ControlState
+        {
+            Load, Dispose   
+        }
+
 
         #endregion
 
@@ -150,6 +158,25 @@ namespace AisInternalSystem.Entities
             SetControl(uc, dock);
         }
 
+        private static void AddNavigation(UserControl control)
+        {
+            if (IsLoaded(control))
+            {
+                SetControl(control, DockStyle.Fill);
+            }
+            else
+            {
+                mainform.Controls.Add(control);
+                SetControl(control, DockStyle.Fill);
+            }
+        }
+
+        public static void ClassChoosed(string id)
+        {
+            classDirService.GetClassInfo(id);
+            
+        }
+
         public static void NavigateUI(Controls controls)
         {
             _controls = controls;
@@ -185,6 +212,10 @@ namespace AisInternalSystem.Entities
                     break;
                 case Controls.UpperPanelTeacher:
 
+                    break;
+                case Controls.ClassDirectoryService:
+                    AddNavigation(classDirService);
+                    classDirService.InitObject(ControlState.Load);
                     break;
                 case Controls.UCDashboardAdmin:
                     if (IsLoaded(ucDashboardAdmin))
@@ -274,6 +305,8 @@ namespace AisInternalSystem.Entities
                     break;
             }
         }
+
+        
 
         public static void FocusButton(Guna2Button button, Guna2ShadowPanel panel)
         {

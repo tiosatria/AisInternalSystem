@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AisInternalSystem.Entities;
+using Microsoft.VisualBasic.CompilerServices;
+using Guna.UI2.WinForms;
 
 namespace AisInternalSystem
 {
     public partial class UCClassModel : UserControl
     {
-        bool IsClicked = false;
         UCClassView ClassView = new UCClassView();
         public UCClassModel()
         {
@@ -69,10 +71,9 @@ namespace AisInternalSystem
         #region Function
         private void OnClick()
         {
-            guna2ShadowPanel1.FillColor = Color.LightCoral;
-            guna2ShadowPanel2.FillColor = Color.LightCoral;
-            IsClicked = true;
-
+            guna2ShadowPanel1.FillColor = Color.Coral;
+            guna2ShadowPanel2.FillColor = Color.Coral;
+            UIController.ClassChoosed(this.ClassIdentifier.ToString());
         }
         #endregion
         
@@ -104,8 +105,12 @@ namespace AisInternalSystem
         {
             //this shit is useless
         }
+
         #endregion
 
+        private void guna2ShadowPanel1_Paint(object sender, PaintEventArgs e)
+        {
 
+        }
     }
 }

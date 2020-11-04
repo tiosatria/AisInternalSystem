@@ -12,5 +12,10 @@ namespace AisInternalSystem.Module
         {
 
         }
+        #region Properties
+        public int TeacherID { get; set; }
+        public string TeacherName { get; set; }
+        
+        #endregion
     }
 }

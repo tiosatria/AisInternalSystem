@@ -80,12 +80,12 @@
             this.dgClassStudList = new Guna.UI2.WinForms.Guna2DataGridView();
             this.label207 = new System.Windows.Forms.Label();
             this.guna2ShadowPanel5 = new Guna.UI2.WinForms.Guna2ShadowPanel();
-            this.label210 = new System.Windows.Forms.Label();
-            this.guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button7 = new Guna.UI2.WinForms.Guna2Button();
-            this.label208 = new System.Windows.Forms.Label();
-            this.label220 = new System.Windows.Forms.Label();
             this.label221 = new System.Windows.Forms.Label();
+            this.label220 = new System.Windows.Forms.Label();
+            this.label208 = new System.Windows.Forms.Label();
+            this.guna2Button7 = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
+            this.label210 = new System.Windows.Forms.Label();
             this.dgClassList = new Guna.UI2.WinForms.Guna2DataGridView();
             this.dropChooseGrade = new Guna.UI2.WinForms.Guna2ComboBox();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
@@ -95,8 +95,8 @@
             this.picCAStud = new Guna.UI2.WinForms.Guna2PictureBox();
             this.label216 = new System.Windows.Forms.Label();
             this.panelClassIsEmpty = new Guna.UI2.WinForms.Guna2ShadowPanel();
-            this.label218 = new System.Windows.Forms.Label();
             this.guna2PictureBox4 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.label218 = new System.Windows.Forms.Label();
             this.lblPleaseAssignStud = new System.Windows.Forms.Label();
             this.guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.picSwap = new Guna.UI2.WinForms.Guna2PictureBox();
@@ -647,9 +647,9 @@
             // panel_class_stud
             // 
             this.panel_class_stud.BackColor = System.Drawing.Color.Transparent;
+            this.panel_class_stud.Controls.Add(this.dgClassStudList);
             this.panel_class_stud.Controls.Add(this.guna2ShadowPanel7);
             this.panel_class_stud.Controls.Add(this.guna2ShadowPanel6);
-            this.panel_class_stud.Controls.Add(this.dgClassStudList);
             this.panel_class_stud.FillColor = System.Drawing.Color.White;
             this.panel_class_stud.Location = new System.Drawing.Point(7, 43);
             this.panel_class_stud.Name = "panel_class_stud";
@@ -928,36 +928,41 @@
             this.guna2ShadowPanel5.Size = new System.Drawing.Size(142, 298);
             this.guna2ShadowPanel5.TabIndex = 86;
             // 
-            // label210
+            // label221
             // 
-            this.label210.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.label221.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label210.AutoSize = true;
-            this.label210.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label210.Location = new System.Drawing.Point(37, 9);
-            this.label210.Name = "label210";
-            this.label210.Size = new System.Drawing.Size(66, 25);
-            this.label210.TabIndex = 83;
-            this.label210.Text = "Action";
+            this.label221.AutoSize = true;
+            this.label221.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label221.Location = new System.Drawing.Point(32, 86);
+            this.label221.Name = "label221";
+            this.label221.Size = new System.Drawing.Size(49, 15);
+            this.label221.TabIndex = 102;
+            this.label221.Text = "to Class:";
             // 
-            // guna2Button5
+            // label220
             // 
-            this.guna2Button5.Animated = true;
-            this.guna2Button5.BorderRadius = 6;
-            this.guna2Button5.CheckedState.Parent = this.guna2Button5;
-            this.guna2Button5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.guna2Button5.CustomImages.Parent = this.guna2Button5;
-            this.guna2Button5.FillColor = System.Drawing.Color.Silver;
-            this.guna2Button5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2Button5.ForeColor = System.Drawing.Color.Black;
-            this.guna2Button5.HoverState.FillColor = System.Drawing.Color.Coral;
-            this.guna2Button5.HoverState.Parent = this.guna2Button5;
-            this.guna2Button5.Location = new System.Drawing.Point(16, 158);
-            this.guna2Button5.Name = "guna2Button5";
-            this.guna2Button5.ShadowDecoration.Parent = this.guna2Button5;
-            this.guna2Button5.Size = new System.Drawing.Size(111, 54);
-            this.guna2Button5.TabIndex = 84;
-            this.guna2Button5.Text = "Add Student to selected class";
+            this.label220.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label220.AutoSize = true;
+            this.label220.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label220.Location = new System.Drawing.Point(8, 71);
+            this.label220.Name = "label220";
+            this.label220.Size = new System.Drawing.Size(80, 15);
+            this.label220.TabIndex = 101;
+            this.label220.Text = "Student Name";
+            // 
+            // label208
+            // 
+            this.label208.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label208.AutoSize = true;
+            this.label208.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label208.Location = new System.Drawing.Point(48, 53);
+            this.label208.Name = "label208";
+            this.label208.Size = new System.Drawing.Size(40, 15);
+            this.label208.TabIndex = 100;
+            this.label208.Text = "Assign";
             // 
             // guna2Button7
             // 
@@ -978,41 +983,36 @@
             this.guna2Button7.TabIndex = 85;
             this.guna2Button7.Text = "Delete Selected Class";
             // 
-            // label208
+            // guna2Button5
             // 
-            this.label208.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.guna2Button5.Animated = true;
+            this.guna2Button5.BorderRadius = 6;
+            this.guna2Button5.CheckedState.Parent = this.guna2Button5;
+            this.guna2Button5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.guna2Button5.CustomImages.Parent = this.guna2Button5;
+            this.guna2Button5.FillColor = System.Drawing.Color.Silver;
+            this.guna2Button5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2Button5.ForeColor = System.Drawing.Color.Black;
+            this.guna2Button5.HoverState.FillColor = System.Drawing.Color.Coral;
+            this.guna2Button5.HoverState.Parent = this.guna2Button5;
+            this.guna2Button5.Location = new System.Drawing.Point(16, 158);
+            this.guna2Button5.Name = "guna2Button5";
+            this.guna2Button5.ShadowDecoration.Parent = this.guna2Button5;
+            this.guna2Button5.Size = new System.Drawing.Size(111, 54);
+            this.guna2Button5.TabIndex = 84;
+            this.guna2Button5.Text = "Add Student to selected class";
+            // 
+            // label210
+            // 
+            this.label210.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label208.AutoSize = true;
-            this.label208.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label208.Location = new System.Drawing.Point(48, 53);
-            this.label208.Name = "label208";
-            this.label208.Size = new System.Drawing.Size(40, 15);
-            this.label208.TabIndex = 100;
-            this.label208.Text = "Assign";
-            // 
-            // label220
-            // 
-            this.label220.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label220.AutoSize = true;
-            this.label220.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label220.Location = new System.Drawing.Point(8, 71);
-            this.label220.Name = "label220";
-            this.label220.Size = new System.Drawing.Size(80, 15);
-            this.label220.TabIndex = 101;
-            this.label220.Text = "Student Name";
-            // 
-            // label221
-            // 
-            this.label221.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label221.AutoSize = true;
-            this.label221.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label221.Location = new System.Drawing.Point(32, 86);
-            this.label221.Name = "label221";
-            this.label221.Size = new System.Drawing.Size(49, 15);
-            this.label221.TabIndex = 102;
-            this.label221.Text = "to Class:";
+            this.label210.AutoSize = true;
+            this.label210.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label210.Location = new System.Drawing.Point(37, 9);
+            this.label210.Name = "label210";
+            this.label210.Size = new System.Drawing.Size(66, 25);
+            this.label210.TabIndex = 83;
+            this.label210.Text = "Action";
             // 
             // dgClassList
             // 
@@ -1179,6 +1179,17 @@
             this.panelClassIsEmpty.Size = new System.Drawing.Size(246, 106);
             this.panelClassIsEmpty.TabIndex = 98;
             // 
+            // guna2PictureBox4
+            // 
+            this.guna2PictureBox4.Image = global::AisInternalSystem.Properties.Resources.icons8_classroom_200px;
+            this.guna2PictureBox4.Location = new System.Drawing.Point(83, 11);
+            this.guna2PictureBox4.Name = "guna2PictureBox4";
+            this.guna2PictureBox4.ShadowDecoration.Parent = this.guna2PictureBox4;
+            this.guna2PictureBox4.Size = new System.Drawing.Size(78, 64);
+            this.guna2PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox4.TabIndex = 78;
+            this.guna2PictureBox4.TabStop = false;
+            // 
             // label218
             // 
             this.label218.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1190,17 +1201,6 @@
             this.label218.Size = new System.Drawing.Size(184, 17);
             this.label218.TabIndex = 77;
             this.label218.Text = "No ongoing class detected...";
-            // 
-            // guna2PictureBox4
-            // 
-            this.guna2PictureBox4.Image = global::AisInternalSystem.Properties.Resources.icons8_classroom_200px;
-            this.guna2PictureBox4.Location = new System.Drawing.Point(83, 11);
-            this.guna2PictureBox4.Name = "guna2PictureBox4";
-            this.guna2PictureBox4.ShadowDecoration.Parent = this.guna2PictureBox4;
-            this.guna2PictureBox4.Size = new System.Drawing.Size(78, 64);
-            this.guna2PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.guna2PictureBox4.TabIndex = 78;
-            this.guna2PictureBox4.TabStop = false;
             // 
             // lblPleaseAssignStud
             // 
@@ -1257,11 +1257,11 @@
             this.Controls.Add(this.guna2ShadowPanel1);
             this.Controls.Add(this.PanelBriefEducationIn);
             this.Controls.Add(this.btn_class_addclass);
-            this.Controls.Add(this.PanelAddClass);
             this.Controls.Add(this.label206);
             this.Controls.Add(this.btn_class_stud);
             this.Controls.Add(this.btnBackEmpDir);
             this.Controls.Add(this.panel_class_stud);
+            this.Controls.Add(this.PanelAddClass);
             this.Name = "UCClassAssignment";
             this.Size = new System.Drawing.Size(1280, 611);
             this.PanelBriefEducationIn.ResumeLayout(false);

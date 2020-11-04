@@ -126,5 +126,10 @@ namespace AisInternalSystem.UserInterface.Menu
         {
 
         }
+
+        private void TaskItem_Click(object sender, EventArgs e)
+        {
+            MenuController.DoAction(Does);
+        }
     }
 }

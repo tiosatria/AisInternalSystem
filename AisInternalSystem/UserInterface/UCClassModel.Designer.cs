@@ -57,6 +57,7 @@
             this.guna2ShadowPanel1.Size = new System.Drawing.Size(270, 100);
             this.guna2ShadowPanel1.TabIndex = 0;
             this.guna2ShadowPanel1.Click += new System.EventHandler(this.guna2ShadowPanel1_Click);
+            this.guna2ShadowPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2ShadowPanel1_Paint);
             this.guna2ShadowPanel1.MouseEnter += new System.EventHandler(this.guna2ShadowPanel1_MouseEnter);
             // 
             // guna2ShadowPanel2

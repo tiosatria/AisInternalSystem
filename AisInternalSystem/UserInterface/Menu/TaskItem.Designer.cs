@@ -110,6 +110,7 @@
             this.Name = "TaskItem";
             this.Size = new System.Drawing.Size(127, 54);
             this.Load += new System.EventHandler(this.TaskItem_Load);
+            this.Click += new System.EventHandler(this.TaskItem_Click);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TaskItem_MouseClick);
             this.MouseEnter += new System.EventHandler(this.TaskItem_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.TaskItem_MouseLeave);

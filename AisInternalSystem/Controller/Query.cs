@@ -15,7 +15,7 @@ namespace AisInternalSystem.Controller
         #region Enumeration
         public enum Process
         { 
-            Auth, LogLoginHistory, Master, LoadStudent, LoadStudentList
+            Auth, LogLoginHistory, Master, LoadStudent, LoadStudentList, GetAcademicYearList, GetClassListByYear, GetClassMember, GetClassInfo, GetAvailableTeacherToAssign
         }
         #endregion
 
@@ -53,11 +53,47 @@ namespace AisInternalSystem.Controller
                     Db.DataAdapter(cmd, dt);
                     return dt;
                     break;
+                case Process.GetAcademicYearList:
+                    cmd = new MySqlCommand("GetAcademicYearList", Db.GetConnection());
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    Db.DataAdapter(cmd, dt);
+                    return dt;
+                case Process.GetClassListByYear:
+                    cmd = new MySqlCommand("LoadClassLListFilter", Db.GetConnection());
+                    cmd.Parameters.Add("@ay", MySqlDbType.VarChar).Value = str[0];
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    Db.DataAdapter(cmd, dt);
+                    return dt;
+                    break;
+                case Process.GetClassMember:
+                    cmd = new MySqlCommand("fetchmemberlist", Db.GetConnection());
+                    cmd.Parameters.Add("@classid", MySqlDbType.Int32).Value = str[0];
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    Db.DataAdapter(cmd, dt);
+                    return dt;
+                case Process.GetClassInfo:
+                    cmd = Command("fetch_class_info");
+                    cmd.Parameters.Add("@classid", MySqlDbType.Int32).Value = str[0];
+                    Db.DataAdapter(cmd, dt);
+                    return dt;
+                case Process.GetAvailableTeacherToAssign:
+                    cmd = Command("fetch_teacher_assign_class");
+                    cmd.Parameters.Add("@teacher", MySqlDbType.VarChar).Value = str[0];
+                    Db.DataAdapter(cmd, dt);
+                    return dt;
                 default:
                     return null;
                     break;
             }
         }
+
+        private static MySqlCommand Command(string str)
+        {
+            MySqlCommand cmd = new MySqlCommand(str, Db.GetConnection());
+            cmd.CommandType = CommandType.StoredProcedure;
+            return cmd;
+        }
+
         public static int? GetRandomNumber(Process proc)
         {
             MySqlCommand cmd;
