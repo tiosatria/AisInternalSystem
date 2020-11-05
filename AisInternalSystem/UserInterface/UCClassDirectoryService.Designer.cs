@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label206 = new System.Windows.Forms.Label();
             this.guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.label9 = new System.Windows.Forms.Label();
@@ -40,13 +43,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.FlowClassList = new System.Windows.Forms.FlowLayoutPanel();
             this.PanelClassMember = new Guna.UI2.WinForms.Guna2ShadowPanel();
-            this.panelEmpty = new Guna.UI2.WinForms.Guna2ShadowPanel();
-            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.label205 = new System.Windows.Forms.Label();
             this.dgStudList = new Guna.UI2.WinForms.Guna2DataGridView();
             this.lbltotalmember = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.panelEmpty = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.label205 = new System.Windows.Forms.Label();
             this.guna2VSeparator1 = new Guna.UI2.WinForms.Guna2VSeparator();
             this.btnClassMember = new Guna.UI2.WinForms.Guna2Button();
             this.btnEditClassInfo = new Guna.UI2.WinForms.Guna2Button();
@@ -64,12 +67,27 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.BtnGoBack = new Guna.UI2.WinForms.Guna2Button();
+            this.btnClassAssignment = new Guna.UI2.WinForms.Guna2Button();
+            this.PanelAssignStudent = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.lblUnassignedMember = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.guna2ShadowPanel3 = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.guna2PictureBox2 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.dgMemberUnassigned = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.btnAssignTo = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2ShadowPanel1.SuspendLayout();
             this.PanelClassMember.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgStudList)).BeginInit();
             this.panelEmpty.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgStudList)).BeginInit();
             this.PanelClassInfo.SuspendLayout();
+            this.PanelAssignStudent.SuspendLayout();
+            this.guna2ShadowPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgMemberUnassigned)).BeginInit();
             this.SuspendLayout();
             // 
             // label206
@@ -174,11 +192,12 @@
             // PanelClassMember
             // 
             this.PanelClassMember.BackColor = System.Drawing.Color.Transparent;
-            this.PanelClassMember.Controls.Add(this.dgStudList);
+            this.PanelClassMember.Controls.Add(this.guna2Button1);
             this.PanelClassMember.Controls.Add(this.lbltotalmember);
             this.PanelClassMember.Controls.Add(this.label4);
             this.PanelClassMember.Controls.Add(this.label2);
             this.PanelClassMember.Controls.Add(this.panelEmpty);
+            this.PanelClassMember.Controls.Add(this.dgStudList);
             this.PanelClassMember.FillColor = System.Drawing.Color.White;
             this.PanelClassMember.Location = new System.Drawing.Point(641, 47);
             this.PanelClassMember.Name = "PanelClassMember";
@@ -186,71 +205,34 @@
             this.PanelClassMember.Size = new System.Drawing.Size(625, 548);
             this.PanelClassMember.TabIndex = 107;
             // 
-            // panelEmpty
-            // 
-            this.panelEmpty.BackColor = System.Drawing.Color.Transparent;
-            this.panelEmpty.Controls.Add(this.guna2PictureBox1);
-            this.panelEmpty.Controls.Add(this.label205);
-            this.panelEmpty.FillColor = System.Drawing.Color.White;
-            this.panelEmpty.Location = new System.Drawing.Point(53, 85);
-            this.panelEmpty.Name = "panelEmpty";
-            this.panelEmpty.Radius = 6;
-            this.panelEmpty.ShadowColor = System.Drawing.Color.Black;
-            this.panelEmpty.Size = new System.Drawing.Size(536, 396);
-            this.panelEmpty.TabIndex = 81;
-            this.panelEmpty.Visible = false;
-            // 
-            // guna2PictureBox1
-            // 
-            this.guna2PictureBox1.Image = global::AisInternalSystem.Properties.Resources.icons8_search_property_500px;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(139, 62);
-            this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.ShadowDecoration.Parent = this.guna2PictureBox1;
-            this.guna2PictureBox1.Size = new System.Drawing.Size(231, 194);
-            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.guna2PictureBox1.TabIndex = 78;
-            this.guna2PictureBox1.TabStop = false;
-            // 
-            // label205
-            // 
-            this.label205.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label205.AutoSize = true;
-            this.label205.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label205.Location = new System.Drawing.Point(139, 271);
-            this.label205.Name = "label205";
-            this.label205.Size = new System.Drawing.Size(219, 25);
-            this.label205.TabIndex = 77;
-            this.label205.Text = "Welp... It\'s empty here...";
-            // 
             // dgStudList
             // 
             this.dgStudList.AllowUserToAddRows = false;
             this.dgStudList.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            this.dgStudList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.dgStudList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgStudList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgStudList.BackgroundColor = System.Drawing.Color.White;
             this.dgStudList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgStudList.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgStudList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgStudList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgStudList.ColumnHeadersHeight = 30;
             this.dgStudList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgStudList.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgStudList.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgStudList.EnableHeadersVisualStyles = false;
             this.dgStudList.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgStudList.Location = new System.Drawing.Point(19, 59);
@@ -258,7 +240,7 @@
             this.dgStudList.ReadOnly = true;
             this.dgStudList.RowHeadersVisible = false;
             this.dgStudList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgStudList.Size = new System.Drawing.Size(585, 469);
+            this.dgStudList.Size = new System.Drawing.Size(585, 436);
             this.dgStudList.TabIndex = 80;
             this.dgStudList.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Default;
             this.dgStudList.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
@@ -313,6 +295,43 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Class Member";
             // 
+            // panelEmpty
+            // 
+            this.panelEmpty.BackColor = System.Drawing.Color.Transparent;
+            this.panelEmpty.Controls.Add(this.guna2PictureBox1);
+            this.panelEmpty.Controls.Add(this.label205);
+            this.panelEmpty.FillColor = System.Drawing.Color.White;
+            this.panelEmpty.Location = new System.Drawing.Point(53, 78);
+            this.panelEmpty.Name = "panelEmpty";
+            this.panelEmpty.Radius = 6;
+            this.panelEmpty.ShadowColor = System.Drawing.Color.Black;
+            this.panelEmpty.Size = new System.Drawing.Size(536, 396);
+            this.panelEmpty.TabIndex = 81;
+            this.panelEmpty.Visible = false;
+            // 
+            // guna2PictureBox1
+            // 
+            this.guna2PictureBox1.Image = global::AisInternalSystem.Properties.Resources.icons8_search_property_500px;
+            this.guna2PictureBox1.Location = new System.Drawing.Point(139, 62);
+            this.guna2PictureBox1.Name = "guna2PictureBox1";
+            this.guna2PictureBox1.ShadowDecoration.Parent = this.guna2PictureBox1;
+            this.guna2PictureBox1.Size = new System.Drawing.Size(231, 194);
+            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox1.TabIndex = 78;
+            this.guna2PictureBox1.TabStop = false;
+            // 
+            // label205
+            // 
+            this.label205.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label205.AutoSize = true;
+            this.label205.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label205.Location = new System.Drawing.Point(139, 271);
+            this.label205.Name = "label205";
+            this.label205.Size = new System.Drawing.Size(219, 25);
+            this.label205.TabIndex = 77;
+            this.label205.Text = "Welp... It\'s empty here...";
+            // 
             // guna2VSeparator1
             // 
             this.guna2VSeparator1.Location = new System.Drawing.Point(623, 209);
@@ -331,7 +350,7 @@
             this.btnClassMember.ForeColor = System.Drawing.Color.Black;
             this.btnClassMember.HoverState.FillColor = System.Drawing.Color.Coral;
             this.btnClassMember.HoverState.Parent = this.btnClassMember;
-            this.btnClassMember.Location = new System.Drawing.Point(807, 15);
+            this.btnClassMember.Location = new System.Drawing.Point(883, 15);
             this.btnClassMember.Name = "btnClassMember";
             this.btnClassMember.ShadowDecoration.Parent = this.btnClassMember;
             this.btnClassMember.Size = new System.Drawing.Size(122, 30);
@@ -350,7 +369,7 @@
             this.btnEditClassInfo.ForeColor = System.Drawing.Color.Black;
             this.btnEditClassInfo.HoverState.FillColor = System.Drawing.Color.Coral;
             this.btnEditClassInfo.HoverState.Parent = this.btnEditClassInfo;
-            this.btnEditClassInfo.Location = new System.Drawing.Point(935, 15);
+            this.btnEditClassInfo.Location = new System.Drawing.Point(1011, 15);
             this.btnEditClassInfo.Name = "btnEditClassInfo";
             this.btnEditClassInfo.ShadowDecoration.Parent = this.btnEditClassInfo;
             this.btnEditClassInfo.Size = new System.Drawing.Size(122, 30);
@@ -599,30 +618,239 @@
             this.BtnGoBack.TabIndex = 105;
             this.BtnGoBack.Text = "Done";
             // 
+            // btnClassAssignment
+            // 
+            this.btnClassAssignment.Animated = true;
+            this.btnClassAssignment.CheckedState.Parent = this.btnClassAssignment;
+            this.btnClassAssignment.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClassAssignment.CustomImages.Parent = this.btnClassAssignment;
+            this.btnClassAssignment.FillColor = System.Drawing.Color.Silver;
+            this.btnClassAssignment.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClassAssignment.ForeColor = System.Drawing.Color.Black;
+            this.btnClassAssignment.HoverState.FillColor = System.Drawing.Color.Coral;
+            this.btnClassAssignment.HoverState.Parent = this.btnClassAssignment;
+            this.btnClassAssignment.Location = new System.Drawing.Point(1138, 15);
+            this.btnClassAssignment.Name = "btnClassAssignment";
+            this.btnClassAssignment.ShadowDecoration.Parent = this.btnClassAssignment;
+            this.btnClassAssignment.Size = new System.Drawing.Size(122, 30);
+            this.btnClassAssignment.TabIndex = 111;
+            this.btnClassAssignment.Text = "Class Assignment";
+            this.btnClassAssignment.Click += new System.EventHandler(this.guna2Button1_Click);
+            // 
+            // PanelAssignStudent
+            // 
+            this.PanelAssignStudent.BackColor = System.Drawing.Color.Transparent;
+            this.PanelAssignStudent.Controls.Add(this.btnAssignTo);
+            this.PanelAssignStudent.Controls.Add(this.lblUnassignedMember);
+            this.PanelAssignStudent.Controls.Add(this.label10);
+            this.PanelAssignStudent.Controls.Add(this.label11);
+            this.PanelAssignStudent.Controls.Add(this.guna2ShadowPanel3);
+            this.PanelAssignStudent.Controls.Add(this.dgMemberUnassigned);
+            this.PanelAssignStudent.FillColor = System.Drawing.Color.White;
+            this.PanelAssignStudent.Location = new System.Drawing.Point(641, 48);
+            this.PanelAssignStudent.Name = "PanelAssignStudent";
+            this.PanelAssignStudent.ShadowColor = System.Drawing.Color.Black;
+            this.PanelAssignStudent.Size = new System.Drawing.Size(625, 548);
+            this.PanelAssignStudent.TabIndex = 108;
+            // 
+            // lblUnassignedMember
+            // 
+            this.lblUnassignedMember.AutoSize = true;
+            this.lblUnassignedMember.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUnassignedMember.Location = new System.Drawing.Point(426, 9);
+            this.lblUnassignedMember.Name = "lblUnassignedMember";
+            this.lblUnassignedMember.Size = new System.Drawing.Size(149, 21);
+            this.lblUnassignedMember.TabIndex = 4;
+            this.lblUnassignedMember.Text = "Total Unassigned: ";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(18, 33);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(394, 34);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "To assign student to class, Please select the class on the left,\r\nand proceed to " +
+    "select the student on this panel, then click \'Assign\"";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(16, 8);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(206, 21);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "Student Class Assignment";
+            // 
+            // guna2ShadowPanel3
+            // 
+            this.guna2ShadowPanel3.BackColor = System.Drawing.Color.Transparent;
+            this.guna2ShadowPanel3.Controls.Add(this.guna2PictureBox2);
+            this.guna2ShadowPanel3.Controls.Add(this.label12);
+            this.guna2ShadowPanel3.FillColor = System.Drawing.Color.White;
+            this.guna2ShadowPanel3.Location = new System.Drawing.Point(53, 85);
+            this.guna2ShadowPanel3.Name = "guna2ShadowPanel3";
+            this.guna2ShadowPanel3.Radius = 6;
+            this.guna2ShadowPanel3.ShadowColor = System.Drawing.Color.Black;
+            this.guna2ShadowPanel3.Size = new System.Drawing.Size(536, 396);
+            this.guna2ShadowPanel3.TabIndex = 81;
+            this.guna2ShadowPanel3.Visible = false;
+            // 
+            // guna2PictureBox2
+            // 
+            this.guna2PictureBox2.Image = global::AisInternalSystem.Properties.Resources.icons8_search_property_500px;
+            this.guna2PictureBox2.Location = new System.Drawing.Point(139, 62);
+            this.guna2PictureBox2.Name = "guna2PictureBox2";
+            this.guna2PictureBox2.ShadowDecoration.Parent = this.guna2PictureBox2;
+            this.guna2PictureBox2.Size = new System.Drawing.Size(231, 194);
+            this.guna2PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox2.TabIndex = 78;
+            this.guna2PictureBox2.TabStop = false;
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(139, 271);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(219, 25);
+            this.label12.TabIndex = 77;
+            this.label12.Text = "Welp... It\'s empty here...";
+            // 
+            // dgMemberUnassigned
+            // 
+            this.dgMemberUnassigned.AllowUserToAddRows = false;
+            this.dgMemberUnassigned.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.dgMemberUnassigned.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgMemberUnassigned.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgMemberUnassigned.BackgroundColor = System.Drawing.Color.White;
+            this.dgMemberUnassigned.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgMemberUnassigned.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgMemberUnassigned.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgMemberUnassigned.ColumnHeadersHeight = 30;
+            this.dgMemberUnassigned.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgMemberUnassigned.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgMemberUnassigned.EnableHeadersVisualStyles = false;
+            this.dgMemberUnassigned.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.dgMemberUnassigned.Location = new System.Drawing.Point(21, 72);
+            this.dgMemberUnassigned.Name = "dgMemberUnassigned";
+            this.dgMemberUnassigned.ReadOnly = true;
+            this.dgMemberUnassigned.RowHeadersVisible = false;
+            this.dgMemberUnassigned.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgMemberUnassigned.Size = new System.Drawing.Size(585, 424);
+            this.dgMemberUnassigned.TabIndex = 80;
+            this.dgMemberUnassigned.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Default;
+            this.dgMemberUnassigned.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
+            this.dgMemberUnassigned.ThemeStyle.AlternatingRowsStyle.Font = null;
+            this.dgMemberUnassigned.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
+            this.dgMemberUnassigned.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
+            this.dgMemberUnassigned.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
+            this.dgMemberUnassigned.ThemeStyle.BackColor = System.Drawing.Color.White;
+            this.dgMemberUnassigned.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.dgMemberUnassigned.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.dgMemberUnassigned.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Raised;
+            this.dgMemberUnassigned.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgMemberUnassigned.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
+            this.dgMemberUnassigned.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgMemberUnassigned.ThemeStyle.HeaderStyle.Height = 30;
+            this.dgMemberUnassigned.ThemeStyle.ReadOnly = true;
+            this.dgMemberUnassigned.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
+            this.dgMemberUnassigned.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgMemberUnassigned.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgMemberUnassigned.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.dgMemberUnassigned.ThemeStyle.RowsStyle.Height = 22;
+            this.dgMemberUnassigned.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.dgMemberUnassigned.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            // 
+            // btnAssignTo
+            // 
+            this.btnAssignTo.Animated = true;
+            this.btnAssignTo.BorderRadius = 6;
+            this.btnAssignTo.CheckedState.Parent = this.btnAssignTo;
+            this.btnAssignTo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAssignTo.CustomImages.Parent = this.btnAssignTo;
+            this.btnAssignTo.FillColor = System.Drawing.Color.Silver;
+            this.btnAssignTo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAssignTo.ForeColor = System.Drawing.Color.Black;
+            this.btnAssignTo.HoverState.FillColor = System.Drawing.Color.Coral;
+            this.btnAssignTo.HoverState.Parent = this.btnAssignTo;
+            this.btnAssignTo.Location = new System.Drawing.Point(226, 500);
+            this.btnAssignTo.Name = "btnAssignTo";
+            this.btnAssignTo.ShadowDecoration.Parent = this.btnAssignTo;
+            this.btnAssignTo.Size = new System.Drawing.Size(174, 39);
+            this.btnAssignTo.TabIndex = 112;
+            this.btnAssignTo.Text = "Assign to ";
+            // 
+            // guna2Button1
+            // 
+            this.guna2Button1.Animated = true;
+            this.guna2Button1.BorderRadius = 6;
+            this.guna2Button1.CheckedState.Parent = this.guna2Button1;
+            this.guna2Button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.guna2Button1.CustomImages.Parent = this.guna2Button1;
+            this.guna2Button1.FillColor = System.Drawing.Color.Silver;
+            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2Button1.ForeColor = System.Drawing.Color.Black;
+            this.guna2Button1.HoverState.FillColor = System.Drawing.Color.Coral;
+            this.guna2Button1.HoverState.Parent = this.guna2Button1;
+            this.guna2Button1.Location = new System.Drawing.Point(238, 499);
+            this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.ShadowDecoration.Parent = this.guna2Button1;
+            this.guna2Button1.Size = new System.Drawing.Size(174, 39);
+            this.guna2Button1.TabIndex = 113;
+            this.guna2Button1.Text = "Remove From Class";
+            // 
             // UCClassDirectoryService
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.btnClassAssignment);
             this.Controls.Add(this.btnEditClassInfo);
             this.Controls.Add(this.btnClassMember);
             this.Controls.Add(this.guna2VSeparator1);
             this.Controls.Add(this.guna2ShadowPanel1);
             this.Controls.Add(this.BtnGoBack);
             this.Controls.Add(this.label206);
-            this.Controls.Add(this.PanelClassInfo);
             this.Controls.Add(this.PanelClassMember);
+            this.Controls.Add(this.PanelClassInfo);
+            this.Controls.Add(this.PanelAssignStudent);
             this.Name = "UCClassDirectoryService";
             this.Size = new System.Drawing.Size(1280, 611);
             this.guna2ShadowPanel1.ResumeLayout(false);
             this.guna2ShadowPanel1.PerformLayout();
             this.PanelClassMember.ResumeLayout(false);
             this.PanelClassMember.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgStudList)).EndInit();
             this.panelEmpty.ResumeLayout(false);
             this.panelEmpty.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgStudList)).EndInit();
             this.PanelClassInfo.ResumeLayout(false);
             this.PanelClassInfo.PerformLayout();
+            this.PanelAssignStudent.ResumeLayout(false);
+            this.PanelAssignStudent.PerformLayout();
+            this.guna2ShadowPanel3.ResumeLayout(false);
+            this.guna2ShadowPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgMemberUnassigned)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -663,5 +891,16 @@
         public System.Windows.Forms.Label label205;
         private Guna.UI2.WinForms.Guna2DataGridView dgStudList;
         private Guna.UI2.WinForms.Guna2Button BtnGoBack;
+        private Guna.UI2.WinForms.Guna2Button btnClassAssignment;
+        private Guna.UI2.WinForms.Guna2ShadowPanel PanelAssignStudent;
+        private System.Windows.Forms.Label lblUnassignedMember;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel3;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox2;
+        public System.Windows.Forms.Label label12;
+        private Guna.UI2.WinForms.Guna2DataGridView dgMemberUnassigned;
+        private Guna.UI2.WinForms.Guna2Button btnAssignTo;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
     }
 }

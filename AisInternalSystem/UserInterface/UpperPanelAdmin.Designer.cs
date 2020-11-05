@@ -67,6 +67,7 @@
             this.panel_Upper_admin.Controls.Add(this.BtnInventoryAdmin);
             this.panel_Upper_admin.Controls.Add(this.BtnEmployeeAdmin);
             this.panel_Upper_admin.Controls.Add(this.BtnSchoolAdmin);
+            this.panel_Upper_admin.Cursor = System.Windows.Forms.Cursors.NoMove2D;
             this.panel_Upper_admin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_Upper_admin.FillColor = System.Drawing.Color.White;
             this.panel_Upper_admin.Location = new System.Drawing.Point(0, 0);
@@ -117,6 +118,8 @@
             this.btnMsg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnMsg.TabIndex = 11;
             this.btnMsg.TabStop = false;
+            this.btnMsg.MouseEnter += new System.EventHandler(this.btnMsg_MouseEnter);
+            this.btnMsg.MouseLeave += new System.EventHandler(this.btnMsg_MouseLeave);
             // 
             // picBtnExit
             // 
@@ -129,6 +132,8 @@
             this.picBtnExit.TabIndex = 10;
             this.picBtnExit.TabStop = false;
             this.picBtnExit.Click += new System.EventHandler(this.picBtnExit_Click);
+            this.picBtnExit.MouseEnter += new System.EventHandler(this.picBtnExit_MouseEnter);
+            this.picBtnExit.MouseLeave += new System.EventHandler(this.picBtnExit_MouseLeave);
             // 
             // Btn_Notif
             // 
@@ -140,6 +145,8 @@
             this.Btn_Notif.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Btn_Notif.TabIndex = 9;
             this.Btn_Notif.TabStop = false;
+            this.Btn_Notif.MouseEnter += new System.EventHandler(this.Btn_Notif_MouseEnter);
+            this.Btn_Notif.MouseLeave += new System.EventHandler(this.Btn_Notif_MouseLeave);
             // 
             // btnFeedback
             // 
@@ -151,6 +158,8 @@
             this.btnFeedback.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnFeedback.TabIndex = 14;
             this.btnFeedback.TabStop = false;
+            this.btnFeedback.MouseEnter += new System.EventHandler(this.btnFeedback_MouseEnter);
+            this.btnFeedback.MouseLeave += new System.EventHandler(this.btnFeedback_MouseLeave);
             // 
             // picThumbUser
             // 

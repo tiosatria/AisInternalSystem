@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Text;
 using AisInternalSystem.Entities;
+using AisInternalSystem.Controller;
 
 namespace AisInternalSystem
 {
@@ -29,14 +30,14 @@ namespace AisInternalSystem
             else
             {
                 InitializeComponent();
-
+                UIController.GetDragControl(panel_default);
             }
             isLoaded = true;
         }
 
         private void BtnExit_Click(object sender, EventArgs e)
         {
-
+            Confirmation.Fire(Confirmation.onConfirmEnum.Exit);
         }
     }
 }

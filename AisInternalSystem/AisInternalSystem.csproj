@@ -132,6 +132,7 @@
     <Compile Include="Controller\Query.cs" />
     <Compile Include="Controller\UIController.cs" />
     <Compile Include="Controller\Utilities.cs" />
+    <Compile Include="Entities\ClassRoom.cs" />
     <Compile Include="Entities\Student.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>

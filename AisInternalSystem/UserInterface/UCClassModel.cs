@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using AisInternalSystem.Entities;
 using Microsoft.VisualBasic.CompilerServices;
 using Guna.UI2.WinForms;
+using Microsoft.ReportingServices.Interfaces;
+using AisInternalSystem.Controller;
 
 namespace AisInternalSystem
 {
@@ -88,9 +90,19 @@ namespace AisInternalSystem
         }
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            ClassView.loadStudentList(ClassIdentifier);
-            ClassView.Cswitcher(UCClassView.ClassViewEnum.Grading);
-            //mainform.Controls[mainform.Controls.IndexOf(UCSchoolAdm)].BringToFront();
+            if (this.ClassName == "NOT ASSIGNED")
+            {
+                PopUp.Alert("Could not open Unassigned class!", frmAlert.AlertType.Error);
+            }
+            else
+            {
+                ClassView.InitObject();
+                ClassView.loadStudentList(this.ClassIdentifier);
+                ClassView.Cswitcher(UCClassView.ClassViewEnum.Grading);
+                UIController.OverrideControl(ClassView, DockStyle.Fill);
+            }
+
+            
         }
         private void UCClassModel_MouseEnter(object sender, EventArgs e)
         {

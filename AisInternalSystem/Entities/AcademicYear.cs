@@ -18,7 +18,6 @@ namespace AisInternalSystem.Module
         }
 
         #region Variable
-        MySqlCommand cmd;
 
         #endregion
 

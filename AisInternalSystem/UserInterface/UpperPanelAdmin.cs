@@ -32,11 +32,10 @@ namespace AisInternalSystem
             else
             {
                 InitializeComponent();
-
+                UIController.GetDragControl(panel_Upper_admin);
             }
             IsLoaded = true;
         }
-
 
         private MenuController.MenuType _menutype;
 
@@ -68,6 +67,48 @@ namespace AisInternalSystem
         private void picBtnExit_Click(object sender, EventArgs e)
         {
             Confirmation.Fire(Confirmation.onConfirmEnum.Exit);
+        }
+
+        private void btnFeedback_MouseEnter(object sender, EventArgs e)
+        {
+            UIController.ImageButtonZoom(btnFeedback, UIController.stateofControlEnum.Focused);
+        }
+
+        private void btnFeedback_MouseLeave(object sender, EventArgs e)
+        {
+            UIController.ImageButtonZoom(btnFeedback, UIController.stateofControlEnum.Iddle);
+
+        }
+
+        private void Btn_Notif_MouseEnter(object sender, EventArgs e)
+        {
+            UIController.ImageButtonZoom(Btn_Notif, UIController.stateofControlEnum.Focused);
+
+        }
+
+        private void Btn_Notif_MouseLeave(object sender, EventArgs e)
+        {
+            UIController.ImageButtonZoom(Btn_Notif, UIController.stateofControlEnum.Iddle);
+
+        }
+        private void picBtnExit_MouseEnter(object sender, EventArgs e)
+        {
+            UIController.ImageButtonZoom(picBtnExit, UIController.stateofControlEnum.Focused);
+
+        }
+        private void picBtnExit_MouseLeave(object sender, EventArgs e)
+        {
+            UIController.ImageButtonZoom(picBtnExit, UIController.stateofControlEnum.Iddle);
+
+        }
+        private void btnMsg_MouseEnter(object sender, EventArgs e)
+        {
+            UIController.ImageButtonZoom(btnMsg, UIController.stateofControlEnum.Focused);
+        }
+
+        private void btnMsg_MouseLeave(object sender, EventArgs e)
+        {
+            UIController.ImageButtonZoom(btnMsg, UIController.stateofControlEnum.Iddle);
         }
     }
 }

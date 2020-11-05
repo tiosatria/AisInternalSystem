@@ -24,6 +24,7 @@ namespace AisInternalSystem.Controller
 
         }
 
+
         public static void Auth(string usr, string pwd)
         {
             DataTable dt = new DataTable();

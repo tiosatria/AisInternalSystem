@@ -15,7 +15,7 @@ namespace AisInternalSystem.Controller
         #region Enumeration
         public enum Process
         { 
-            Auth, LogLoginHistory, Master, LoadStudent, LoadStudentList, GetAcademicYearList, GetClassListByYear, GetClassMember, GetClassInfo, GetAvailableTeacherToAssign
+            Auth, LogLoginHistory, Master, LoadStudent, LoadStudentList, GetAcademicYearList, GetClassListByYear, GetClassMember, GetClassInfo, GetAvailableTeacherToAssign, GetUnassignedStudent
         }
         #endregion
 
@@ -79,6 +79,10 @@ namespace AisInternalSystem.Controller
                 case Process.GetAvailableTeacherToAssign:
                     cmd = Command("fetch_teacher_assign_class");
                     cmd.Parameters.Add("@teacher", MySqlDbType.VarChar).Value = str[0];
+                    Db.DataAdapter(cmd, dt);
+                    return dt;
+                case Process.GetUnassignedStudent:
+                    cmd = Command("GetUnassignedStudent");
                     Db.DataAdapter(cmd, dt);
                     return dt;
                 default:

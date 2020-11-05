@@ -64,7 +64,7 @@
             this.BtnExit.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnExit.ForeColor = System.Drawing.Color.Black;
             this.BtnExit.HoverState.Parent = this.BtnExit;
-            this.BtnExit.Location = new System.Drawing.Point(1109, 22);
+            this.BtnExit.Location = new System.Drawing.Point(1108, 22);
             this.BtnExit.Name = "BtnExit";
             this.BtnExit.ShadowDecoration.Parent = this.BtnExit;
             this.BtnExit.Size = new System.Drawing.Size(142, 57);

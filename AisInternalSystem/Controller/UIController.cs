@@ -33,6 +33,7 @@ namespace AisInternalSystem.Entities
         private static Liner liner = new Liner();
         private static DialogControl dialogConfirmation = new DialogControl();
         private static UCClassDirectoryService classDirService = new UCClassDirectoryService();
+        private static UCClassView classView = new UCClassView();
         private MenuController.MenuType _menutype;
         #region Enumeration
         public enum Controls
@@ -41,7 +42,7 @@ namespace AisInternalSystem.Entities
             UCDashboardAdmin, UCDashboardManagement, UCDashboardTeacher, UCDashboardAccounting,
             UCLogin,
             MenuSchoolAdm, MenuEmployee, MenuContainer,
-            RecordStudentData, UpdateStudentData, ClassDirectoryService,
+            RecordStudentData, UpdateStudentData, ClassDirectoryService, ClassView,
             DialogConfirmation
         }
 
@@ -177,6 +178,34 @@ namespace AisInternalSystem.Entities
             
         }
 
+        public enum stateofControlEnum
+        {
+            Iddle, Focused
+        }
+        private static Guna2DragControl dragger = new Guna2DragControl();
+
+        public static void GetDragControl(Guna2ShadowPanel targetPanel)
+        {
+            dragger.TargetControl = targetPanel;
+        }
+
+        public static void ImageButtonZoom(PictureBox pic, stateofControlEnum state)
+        {
+            switch (state)
+            {
+                case stateofControlEnum.Iddle:
+                    pic.Height -= 10;
+                    pic.Width -= 10;
+                    break;
+                case stateofControlEnum.Focused:
+                    pic.Height += 10;
+                    pic.Width += 10;
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public static void NavigateUI(Controls controls)
         {
             _controls = controls;
@@ -216,6 +245,11 @@ namespace AisInternalSystem.Entities
                 case Controls.ClassDirectoryService:
                     AddNavigation(classDirService);
                     classDirService.InitObject(ControlState.Load);
+
+                    break;
+                case Controls.ClassView:
+                    AddNavigation(classView);
+                    classView.InitObject();
                     break;
                 case Controls.UCDashboardAdmin:
                     if (IsLoaded(ucDashboardAdmin))

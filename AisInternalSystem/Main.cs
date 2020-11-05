@@ -25,5 +25,6 @@ namespace AisInternalSystem
             UIController.NavigateUI(UIController.Controls.UpperPanel);
             UIController.NavigateUI(UIController.Controls.UCLogin);
         }
+            
     }
 }

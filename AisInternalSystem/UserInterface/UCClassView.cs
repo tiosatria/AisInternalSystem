@@ -12,11 +12,13 @@ using MySql.Data.MySqlClient;
 using AisInternalSystem.Properties;
 using Guna.UI2.WinForms;
 using System.Numerics;
+using MediaFoundation.Alt;
 
 namespace AisInternalSystem
 {
     public partial class UCClassView : UserControl
     {
+        private bool isLoaded;
         int ClassID = 0 ;
         Int64 empId = 0;
         ModuleInProgress indevelopment = new ModuleInProgress();
@@ -25,7 +27,16 @@ namespace AisInternalSystem
 
         public UCClassView()
         {
-            InitializeComponent();
+        }
+
+        public void InitObject()
+        {
+            if (!isLoaded)
+            {
+                InitializeComponent();
+
+            }
+
         }
 
         #region EventListener
@@ -135,23 +146,23 @@ namespace AisInternalSystem
                 {
                     students[i] = new UCClassMember();
                     students[i].RowNumber = i + 1;
-                    students[i].Name = dt.Rows[i][0].ToString();
-                    students[i].Religion = dt.Rows[i][1].ToString();
-                    students[i].Birthdate = dt.Rows[i][2].ToString();
-                    students[i].Mobile = dt.Rows[i][3].ToString();
-                    students[i].Aisid = Convert.ToInt32(dt.Rows[i][7].ToString());
+                    students[i].Name = dt.Rows[i][1].ToString();
+                    students[i].Religion = "Religion: " + dt.Rows[i][2].ToString();
+                    students[i].Birthdate = "Birthdate" + Convert.ToDateTime(dt.Rows[i][3].ToString()).ToString("d");
+                    students[i].Mobile = dt.Rows[i][4].ToString();
+                    students[i].Aisid = Convert.ToInt32(dt.Rows[i][8].ToString());
                     if(students[i].Mobile == "" | students[i].Mobile == null)
                     {
-                        students[i].Mobile = dt.Rows[i][4].ToString();
+                        students[i].Mobile = dt.Rows[i][5].ToString();
                         if(students[i].Mobile == "" | students[i].Mobile == null)
                         {
                             students[i].Mobile = "No info";
                         }
                     }
-                    students[i].EnglishProficiency = dt.Rows[i][5].ToString();
+                    students[i].EnglishProficiency = "Eng. Prof: " + dt.Rows[i][6].ToString();
                     try
                     {
-                        students[i].StudentPicture = Image.FromFile(dt.Rows[i][6].ToString());
+                        students[i].StudentPicture = Image.FromFile(dt.Rows[i][7].ToString());
 
                     }
                     catch (Exception)

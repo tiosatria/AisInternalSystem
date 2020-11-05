@@ -12,17 +12,15 @@ using MySql.Data.MySqlClient;
 using AisInternalSystem.Entities;
 using Telerik.WinControls.UI;
 using Telerik.Pivot.Queryable.Filtering;
+using Guna.UI2.WinForms;
 
 namespace AisInternalSystem
 {
 
     public partial class UCClassDirectoryService : UserControl
     {
+        bool isLoaded;
         public UCClassDirectoryService()
-        {
-
-        }
-        public UCClassDirectoryService(UIController.ControlState state)
         {
 
         }
@@ -32,8 +30,12 @@ namespace AisInternalSystem
             switch (state)
             {
                 case UIController.ControlState.Load:
-                    InitializeComponent();
-                    GetAcademicYear();
+                    if (!isLoaded)
+                    {
+                        InitializeComponent();
+                        GetAcademicYear();
+                        SwitchMenu(CaSwitcher.ClassMember);
+                    }
                     break;
                 case UIController.ControlState.Dispose:
 
@@ -41,18 +43,19 @@ namespace AisInternalSystem
                 default:
                     break;
             }
+            isLoaded = true;
         }
 
         #region Event
 
         private void btnClassMember_Click(object sender, EventArgs e)
         {
-
+            SwitchMenu(CaSwitcher.ClassMember);
         }
 
         private void btnEditClassInfo_Click(object sender, EventArgs e)
         {
-
+            SwitchMenu(CaSwitcher.EditClassinfo);
         }
 
         private void btnRevise_Click(object sender, EventArgs e)
@@ -60,6 +63,64 @@ namespace AisInternalSystem
 
         }
 
+        enum CaSwitcher
+        {
+            ClassMember,
+            EditClassinfo,
+            AssignStudent
+        }
+        
+        private void SwitchMenu(CaSwitcher switcher)
+        {
+            switch (switcher)
+            {
+                case CaSwitcher.ClassMember:
+                    PanelClassMember.BringToFront();
+                    btnClassMember.FillColor = Color.Black;
+                    btnClassMember.ForeColor = Color.White;
+                    btnEditClassInfo.FillColor = Color.White;
+                    btnEditClassInfo.ForeColor = Color.Black;
+                    btnClassAssignment.FillColor = Color.White;
+                    btnClassAssignment.ForeColor = Color.Black;
+                    break;
+                case CaSwitcher.EditClassinfo:
+                    PanelClassInfo.BringToFront();
+                    btnClassMember.FillColor = Color.White;
+                    btnClassMember.ForeColor = Color.Black;
+                    btnEditClassInfo.FillColor = Color.Black;
+                    btnEditClassInfo.ForeColor = Color.White;
+                    btnClassAssignment.FillColor = Color.White;
+                    btnClassAssignment.ForeColor = Color.Black;
+                    break;
+                case CaSwitcher.AssignStudent:
+                    GetUnassignedMember();
+                    PanelAssignStudent.BringToFront();
+                    btnClassMember.FillColor = Color.White;
+                    btnClassMember.ForeColor = Color.Black;
+                    btnEditClassInfo.FillColor = Color.White;
+                    btnEditClassInfo.ForeColor = Color.Black;
+                    btnClassAssignment.FillColor = Color.Black;
+                    btnClassAssignment.ForeColor = Color.White;
+                    break;
+                default:
+                    PanelClassMember.BringToFront();
+                    btnClassMember.FillColor = Color.Black;
+                    btnClassMember.ForeColor = Color.White;
+                    btnEditClassInfo.FillColor = Color.White;
+                    btnEditClassInfo.ForeColor = Color.Black;
+                    break;
+            }
+        }
+
+        private bool UnassignedLoad;
+        private void GetUnassignedMember()
+        {
+            if (!UnassignedLoad)
+            {
+                 dgMemberUnassigned.DataSource = Query.Load(Query.Process.GetUnassignedStudent, new string[1] { "0" });
+            }
+            UnassignedLoad = true;
+        }
 
 
         public void GetClassInfo(string id)
@@ -73,6 +134,10 @@ namespace AisInternalSystem
             {
                 dgStudList.Visible = true;
                 dgStudList.DataSource = dt;
+                dgStudList.Columns[4].Visible = false;
+                dgStudList.Columns[5].Visible = false;
+                dgStudList.Columns[7].Visible = false;
+                lbltotalmember.Text = "Total Member: " + dt.Rows.Count.ToString();
             }
             else
             {
@@ -165,6 +230,7 @@ namespace AisInternalSystem
         #region Function
         private void GetAcademicYear()
         {
+            dropAcademicYear.Items.Clear(); 
             DataTable dt = Query.Load(Query.Process.GetAcademicYearList, new string[1] { "0" });
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -186,11 +252,19 @@ namespace AisInternalSystem
                     classList[i].ClassMember = $"Class Member Count:  {dt.Rows[i][9].ToString()}";
                     classList[i].ClassDepartment = $"Department: {dt.Rows[i][8].ToString()}";
                     classList[i].ClassIdentifier = Convert.ToInt32(dt.Rows[i][7].ToString());
+                    if (classList[i].ClassName == "NOT ASSIGNED")
+                    {
+                        classList[i].Visible = false;
+                    }
                     FlowClassList.Controls.Add(classList[i]);
                 }
             }
         }
         #endregion
 
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            SwitchMenu(CaSwitcher.AssignStudent);
+        }
     }
 }
