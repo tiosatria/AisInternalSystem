@@ -813,6 +813,16 @@ namespace AisInternalSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap subjectdefault {
+            get {
+                object obj = ResourceManager.GetObject("subjectdefault", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Tabqha {
             get {
                 object obj = ResourceManager.GetObject("Tabqha", resourceCulture);

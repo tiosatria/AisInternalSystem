@@ -33,11 +33,11 @@ namespace AisInternalSystem
             set { _taughtby = value; lbltaughtby.Text = value; }
         }
         private Image _subjectImage;
-
+        public string ImageLocation { get; set; }
         public Image SubjectImage
         {
             get { return _subjectImage; }
-            set { _subjectImage = value; pictureSubject.Image = value; }
+            set { _subjectImage = Image.FromFile(ImageLocation); pictureSubject.Image = Image.FromFile(ImageLocation); }
         }
         private string _subjectdesc;
 
@@ -46,7 +46,7 @@ namespace AisInternalSystem
             get { return _subjectdesc; }
             set { _subjectdesc = value; lblSubjectDesc.Text = value; }
         }
-
+        public string CreatedBy { get; set; }
         #endregion
 
         #region Function

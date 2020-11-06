@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             this.guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.lblIsTaughtBy = new System.Windows.Forms.Label();
+            this.lblSubTaught = new System.Windows.Forms.Label();
+            this.lblSubjectDesc = new System.Windows.Forms.Label();
+            this.lblSubjectName = new System.Windows.Forms.Label();
             this.guna2ShadowPanel2 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.pictureSubject = new System.Windows.Forms.PictureBox();
-            this.lblSubjectName = new System.Windows.Forms.Label();
-            this.lblSubjectDesc = new System.Windows.Forms.Label();
             this.guna2ShadowPanel1.SuspendLayout();
             this.guna2ShadowPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSubject)).BeginInit();
@@ -41,9 +43,12 @@
             // guna2ShadowPanel1
             // 
             this.guna2ShadowPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2ShadowPanel1.Controls.Add(this.lblIsTaughtBy);
+            this.guna2ShadowPanel1.Controls.Add(this.lblSubTaught);
             this.guna2ShadowPanel1.Controls.Add(this.lblSubjectDesc);
             this.guna2ShadowPanel1.Controls.Add(this.lblSubjectName);
             this.guna2ShadowPanel1.Controls.Add(this.guna2ShadowPanel2);
+            this.guna2ShadowPanel1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2ShadowPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2ShadowPanel1.FillColor = System.Drawing.Color.White;
             this.guna2ShadowPanel1.Location = new System.Drawing.Point(0, 0);
@@ -51,6 +56,46 @@
             this.guna2ShadowPanel1.ShadowColor = System.Drawing.Color.Black;
             this.guna2ShadowPanel1.Size = new System.Drawing.Size(385, 100);
             this.guna2ShadowPanel1.TabIndex = 0;
+            // 
+            // lblIsTaughtBy
+            // 
+            this.lblIsTaughtBy.AutoSize = true;
+            this.lblIsTaughtBy.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIsTaughtBy.Location = new System.Drawing.Point(116, 57);
+            this.lblIsTaughtBy.Name = "lblIsTaughtBy";
+            this.lblIsTaughtBy.Size = new System.Drawing.Size(74, 15);
+            this.lblIsTaughtBy.TabIndex = 4;
+            this.lblIsTaughtBy.Text = "Is Taught by:";
+            // 
+            // lblSubTaught
+            // 
+            this.lblSubTaught.AutoSize = true;
+            this.lblSubTaught.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubTaught.Location = new System.Drawing.Point(116, 75);
+            this.lblSubTaught.Name = "lblSubTaught";
+            this.lblSubTaught.Size = new System.Drawing.Size(84, 15);
+            this.lblSubTaught.TabIndex = 3;
+            this.lblSubTaught.Text = "Also taught in:";
+            // 
+            // lblSubjectDesc
+            // 
+            this.lblSubjectDesc.AutoSize = true;
+            this.lblSubjectDesc.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubjectDesc.Location = new System.Drawing.Point(116, 33);
+            this.lblSubjectDesc.Name = "lblSubjectDesc";
+            this.lblSubjectDesc.Size = new System.Drawing.Size(109, 15);
+            this.lblSubjectDesc.TabIndex = 2;
+            this.lblSubjectDesc.Text = "Subject Description";
+            // 
+            // lblSubjectName
+            // 
+            this.lblSubjectName.AutoSize = true;
+            this.lblSubjectName.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubjectName.Location = new System.Drawing.Point(116, 13);
+            this.lblSubjectName.Name = "lblSubjectName";
+            this.lblSubjectName.Size = new System.Drawing.Size(99, 16);
+            this.lblSubjectName.TabIndex = 1;
+            this.lblSubjectName.Text = "Subject Name";
             // 
             // guna2ShadowPanel2
             // 
@@ -66,31 +111,12 @@
             // 
             // pictureSubject
             // 
-            this.pictureSubject.Location = new System.Drawing.Point(13, 13);
+            this.pictureSubject.Location = new System.Drawing.Point(16, 13);
             this.pictureSubject.Name = "pictureSubject";
-            this.pictureSubject.Size = new System.Drawing.Size(85, 74);
+            this.pictureSubject.Size = new System.Drawing.Size(80, 74);
+            this.pictureSubject.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureSubject.TabIndex = 0;
             this.pictureSubject.TabStop = false;
-            // 
-            // lblSubjectName
-            // 
-            this.lblSubjectName.AutoSize = true;
-            this.lblSubjectName.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubjectName.Location = new System.Drawing.Point(116, 13);
-            this.lblSubjectName.Name = "lblSubjectName";
-            this.lblSubjectName.Size = new System.Drawing.Size(99, 16);
-            this.lblSubjectName.TabIndex = 1;
-            this.lblSubjectName.Text = "Subject Name";
-            // 
-            // lblSubjectDesc
-            // 
-            this.lblSubjectDesc.AutoSize = true;
-            this.lblSubjectDesc.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubjectDesc.Location = new System.Drawing.Point(116, 38);
-            this.lblSubjectDesc.Name = "lblSubjectDesc";
-            this.lblSubjectDesc.Size = new System.Drawing.Size(109, 15);
-            this.lblSubjectDesc.TabIndex = 2;
-            this.lblSubjectDesc.Text = "Subject Description";
             // 
             // UCSubjectList
             // 
@@ -113,5 +139,7 @@
         private System.Windows.Forms.Label lblSubjectDesc;
         private System.Windows.Forms.Label lblSubjectName;
         private System.Windows.Forms.PictureBox pictureSubject;
+        private System.Windows.Forms.Label lblSubTaught;
+        private System.Windows.Forms.Label lblIsTaughtBy;
     }
 }

@@ -30,7 +30,7 @@ namespace AisInternalSystem.Controller
         #endregion
         public Data()
         {
-
+            
         }
 
     }

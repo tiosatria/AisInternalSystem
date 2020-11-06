@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             this.btnBackto = new Guna.UI2.WinForms.Guna2Button();
-            this.PanelSubjectCreate = new Guna.UI2.WinForms.Guna2ShadowPanel();
-            this.guna2VSeparator1 = new Guna.UI2.WinForms.Guna2VSeparator();
+            this.PanelCreateSubject = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.guna2ShadowPanel2 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.drop_image_Preset = new Guna.UI2.WinForms.Guna2ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -42,26 +41,18 @@
             this.label72 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtSubjectDesc = new Guna.UI2.WinForms.Guna2TextBox();
-            this.guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
-            this.lblcreatedsubject = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.flowSubject = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCreateSubject = new Guna.UI2.WinForms.Guna2Button();
-            this.BtnAssignSubject = new Guna.UI2.WinForms.Guna2Button();
+            this.btnAssignsubject = new Guna.UI2.WinForms.Guna2Button();
             this.btnSubjectSummary = new Guna.UI2.WinForms.Guna2Button();
-            this.BtnSubjectList = new Guna.UI2.WinForms.Guna2Button();
-            this.PanelSubjectList = new Guna.UI2.WinForms.Guna2ShadowPanel();
-            this.guna2VSeparator2 = new Guna.UI2.WinForms.Guna2VSeparator();
+            this.btnEditSubject = new Guna.UI2.WinForms.Guna2Button();
             this.guna2ShadowPanel4 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.lbleditsubjecttotal = new System.Windows.Forms.Label();
-            this.floweditsubjectlist = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowSubjectList = new System.Windows.Forms.FlowLayoutPanel();
             this.label8 = new System.Windows.Forms.Label();
-            this.guna2ShadowPanel5 = new Guna.UI2.WinForms.Guna2ShadowPanel();
-            this.guna2VSeparator4 = new Guna.UI2.WinForms.Guna2VSeparator();
             this.guna2ShadowPanel9 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.FlowSubjectTeacher = new System.Windows.Forms.FlowLayoutPanel();
             this.label13 = new System.Windows.Forms.Label();
-            this.panelEditSubject = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.childpanelEditSubject = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.label11 = new System.Windows.Forms.Label();
             this.txtEditSubjectDesc = new Guna.UI2.WinForms.Guna2TextBox();
             this.dropEditPicPreset = new Guna.UI2.WinForms.Guna2ComboBox();
@@ -72,11 +63,8 @@
             this.piceditSubjectPic = new System.Windows.Forms.PictureBox();
             this.btnEditOk = new Guna.UI2.WinForms.Guna2Button();
             this.txteditSubjectName = new Guna.UI2.WinForms.Guna2TextBox();
-            this.PanelAssignSubject = new Guna.UI2.WinForms.Guna2ShadowPanel();
-            this.guna2VSeparator3 = new Guna.UI2.WinForms.Guna2VSeparator();
-            this.guna2ShadowPanel6 = new Guna.UI2.WinForms.Guna2ShadowPanel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label12 = new System.Windows.Forms.Label();
+            this.PanelEditSubject = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.PanelAssign = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.guna2ShadowPanel7 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.lblsubjnoselectassign = new System.Windows.Forms.Label();
             this.guna2ShadowPanel8 = new Guna.UI2.WinForms.Guna2ShadowPanel();
@@ -89,18 +77,17 @@
             this.guna2ShadowPanel3 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.lblassignselectedsubject = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.PanelSubjectCreate.SuspendLayout();
+            this.guna2VSeparator1 = new Guna.UI2.WinForms.Guna2VSeparator();
+            this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
+            this.PanelCreateSubject.SuspendLayout();
             this.guna2ShadowPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_subject)).BeginInit();
-            this.guna2ShadowPanel1.SuspendLayout();
-            this.PanelSubjectList.SuspendLayout();
             this.guna2ShadowPanel4.SuspendLayout();
-            this.guna2ShadowPanel5.SuspendLayout();
             this.guna2ShadowPanel9.SuspendLayout();
-            this.panelEditSubject.SuspendLayout();
+            this.childpanelEditSubject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.piceditSubjectPic)).BeginInit();
-            this.PanelAssignSubject.SuspendLayout();
-            this.guna2ShadowPanel6.SuspendLayout();
+            this.PanelEditSubject.SuspendLayout();
+            this.PanelAssign.SuspendLayout();
             this.guna2ShadowPanel7.SuspendLayout();
             this.guna2ShadowPanel8.SuspendLayout();
             this.guna2ShadowPanel3.SuspendLayout();
@@ -124,27 +111,19 @@
             this.btnBackto.ShadowDecoration.Parent = this.btnBackto;
             this.btnBackto.Size = new System.Drawing.Size(122, 30);
             this.btnBackto.TabIndex = 105;
-            this.btnBackto.Text = "Go Back";
+            this.btnBackto.Text = "Done";
             // 
-            // PanelSubjectCreate
+            // PanelCreateSubject
             // 
-            this.PanelSubjectCreate.BackColor = System.Drawing.Color.Transparent;
-            this.PanelSubjectCreate.Controls.Add(this.guna2VSeparator1);
-            this.PanelSubjectCreate.Controls.Add(this.guna2ShadowPanel2);
-            this.PanelSubjectCreate.Controls.Add(this.guna2ShadowPanel1);
-            this.PanelSubjectCreate.FillColor = System.Drawing.Color.White;
-            this.PanelSubjectCreate.Location = new System.Drawing.Point(0, 39);
-            this.PanelSubjectCreate.Name = "PanelSubjectCreate";
-            this.PanelSubjectCreate.ShadowColor = System.Drawing.Color.Black;
-            this.PanelSubjectCreate.Size = new System.Drawing.Size(1280, 572);
-            this.PanelSubjectCreate.TabIndex = 106;
-            // 
-            // guna2VSeparator1
-            // 
-            this.guna2VSeparator1.Location = new System.Drawing.Point(433, 166);
-            this.guna2VSeparator1.Name = "guna2VSeparator1";
-            this.guna2VSeparator1.Size = new System.Drawing.Size(10, 200);
-            this.guna2VSeparator1.TabIndex = 114;
+            this.PanelCreateSubject.BackColor = System.Drawing.Color.Transparent;
+            this.PanelCreateSubject.Controls.Add(this.guna2ShadowPanel2);
+            this.PanelCreateSubject.FillColor = System.Drawing.Color.White;
+            this.PanelCreateSubject.Location = new System.Drawing.Point(450, 39);
+            this.PanelCreateSubject.Name = "PanelCreateSubject";
+            this.PanelCreateSubject.ShadowColor = System.Drawing.Color.Black;
+            this.PanelCreateSubject.Size = new System.Drawing.Size(831, 572);
+            this.PanelCreateSubject.TabIndex = 106;
+            this.PanelCreateSubject.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelCreateSubject_Paint);
             // 
             // guna2ShadowPanel2
             // 
@@ -159,13 +138,12 @@
             this.guna2ShadowPanel2.Controls.Add(this.label72);
             this.guna2ShadowPanel2.Controls.Add(this.label2);
             this.guna2ShadowPanel2.Controls.Add(this.txtSubjectDesc);
-            this.guna2ShadowPanel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.guna2ShadowPanel2.FillColor = System.Drawing.Color.White;
-            this.guna2ShadowPanel2.Location = new System.Drawing.Point(0, 0);
+            this.guna2ShadowPanel2.Location = new System.Drawing.Point(0, 3);
             this.guna2ShadowPanel2.Name = "guna2ShadowPanel2";
             this.guna2ShadowPanel2.ShadowColor = System.Drawing.Color.Black;
-            this.guna2ShadowPanel2.Size = new System.Drawing.Size(423, 572);
-            this.guna2ShadowPanel2.TabIndex = 113;
+            this.guna2ShadowPanel2.Size = new System.Drawing.Size(835, 572);
+            this.guna2ShadowPanel2.TabIndex = 114;
             // 
             // drop_image_Preset
             // 
@@ -253,6 +231,7 @@
             this.btnAddSubject.Size = new System.Drawing.Size(338, 57);
             this.btnAddSubject.TabIndex = 111;
             this.btnAddSubject.Text = "Add Subject";
+            this.btnAddSubject.Click += new System.EventHandler(this.btnAddSubject_Click_1);
             // 
             // txtSubjectName
             // 
@@ -274,7 +253,6 @@
             this.txtSubjectName.Name = "txtSubjectName";
             this.txtSubjectName.PasswordChar = '\0';
             this.txtSubjectName.PlaceholderText = "Subject Name";
-            this.txtSubjectName.ReadOnly = true;
             this.txtSubjectName.SelectedText = "";
             this.txtSubjectName.ShadowDecoration.Parent = this.txtSubjectName;
             this.txtSubjectName.Size = new System.Drawing.Size(340, 36);
@@ -283,9 +261,11 @@
             // 
             // pic_subject
             // 
+            this.pic_subject.Image = global::AisInternalSystem.Properties.Resources.subjectdefault;
             this.pic_subject.Location = new System.Drawing.Point(39, 288);
             this.pic_subject.Name = "pic_subject";
             this.pic_subject.Size = new System.Drawing.Size(176, 152);
+            this.pic_subject.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic_subject.TabIndex = 69;
             this.pic_subject.TabStop = false;
             // 
@@ -334,54 +314,11 @@
             this.txtSubjectDesc.Name = "txtSubjectDesc";
             this.txtSubjectDesc.PasswordChar = '\0';
             this.txtSubjectDesc.PlaceholderText = "Descibe this subject";
-            this.txtSubjectDesc.ReadOnly = true;
             this.txtSubjectDesc.SelectedText = "";
             this.txtSubjectDesc.ShadowDecoration.Parent = this.txtSubjectDesc;
             this.txtSubjectDesc.Size = new System.Drawing.Size(340, 85);
             this.txtSubjectDesc.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             this.txtSubjectDesc.TabIndex = 67;
-            // 
-            // guna2ShadowPanel1
-            // 
-            this.guna2ShadowPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2ShadowPanel1.Controls.Add(this.lblcreatedsubject);
-            this.guna2ShadowPanel1.Controls.Add(this.label5);
-            this.guna2ShadowPanel1.Controls.Add(this.flowSubject);
-            this.guna2ShadowPanel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.guna2ShadowPanel1.FillColor = System.Drawing.Color.White;
-            this.guna2ShadowPanel1.Location = new System.Drawing.Point(457, 0);
-            this.guna2ShadowPanel1.Name = "guna2ShadowPanel1";
-            this.guna2ShadowPanel1.ShadowColor = System.Drawing.Color.Black;
-            this.guna2ShadowPanel1.Size = new System.Drawing.Size(823, 572);
-            this.guna2ShadowPanel1.TabIndex = 112;
-            // 
-            // lblcreatedsubject
-            // 
-            this.lblcreatedsubject.AutoSize = true;
-            this.lblcreatedsubject.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblcreatedsubject.Location = new System.Drawing.Point(722, 18);
-            this.lblcreatedsubject.Name = "lblcreatedsubject";
-            this.lblcreatedsubject.Size = new System.Drawing.Size(71, 19);
-            this.lblcreatedsubject.TabIndex = 3;
-            this.lblcreatedsubject.Text = "Total: 99";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(19, 18);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(172, 19);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "List of created subject";
-            // 
-            // flowSubject
-            // 
-            this.flowSubject.AutoScroll = true;
-            this.flowSubject.Location = new System.Drawing.Point(23, 56);
-            this.flowSubject.Name = "flowSubject";
-            this.flowSubject.Size = new System.Drawing.Size(775, 494);
-            this.flowSubject.TabIndex = 0;
             // 
             // btnCreateSubject
             // 
@@ -394,30 +331,32 @@
             this.btnCreateSubject.ForeColor = System.Drawing.Color.Black;
             this.btnCreateSubject.HoverState.FillColor = System.Drawing.Color.Coral;
             this.btnCreateSubject.HoverState.Parent = this.btnCreateSubject;
-            this.btnCreateSubject.Location = new System.Drawing.Point(433, 5);
+            this.btnCreateSubject.Location = new System.Drawing.Point(651, 6);
             this.btnCreateSubject.Name = "btnCreateSubject";
             this.btnCreateSubject.ShadowDecoration.Parent = this.btnCreateSubject;
             this.btnCreateSubject.Size = new System.Drawing.Size(122, 30);
             this.btnCreateSubject.TabIndex = 107;
             this.btnCreateSubject.Text = "Create Subject";
+            this.btnCreateSubject.Click += new System.EventHandler(this.btnCreateSubject_Click);
             // 
-            // BtnAssignSubject
+            // btnAssignsubject
             // 
-            this.BtnAssignSubject.Animated = true;
-            this.BtnAssignSubject.CheckedState.Parent = this.BtnAssignSubject;
-            this.BtnAssignSubject.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnAssignSubject.CustomImages.Parent = this.BtnAssignSubject;
-            this.BtnAssignSubject.FillColor = System.Drawing.Color.Silver;
-            this.BtnAssignSubject.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnAssignSubject.ForeColor = System.Drawing.Color.Black;
-            this.BtnAssignSubject.HoverState.FillColor = System.Drawing.Color.Coral;
-            this.BtnAssignSubject.HoverState.Parent = this.BtnAssignSubject;
-            this.BtnAssignSubject.Location = new System.Drawing.Point(714, 5);
-            this.BtnAssignSubject.Name = "BtnAssignSubject";
-            this.BtnAssignSubject.ShadowDecoration.Parent = this.BtnAssignSubject;
-            this.BtnAssignSubject.Size = new System.Drawing.Size(122, 30);
-            this.BtnAssignSubject.TabIndex = 109;
-            this.BtnAssignSubject.Text = "Assign Subject";
+            this.btnAssignsubject.Animated = true;
+            this.btnAssignsubject.CheckedState.Parent = this.btnAssignsubject;
+            this.btnAssignsubject.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAssignsubject.CustomImages.Parent = this.btnAssignsubject;
+            this.btnAssignsubject.FillColor = System.Drawing.Color.Silver;
+            this.btnAssignsubject.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAssignsubject.ForeColor = System.Drawing.Color.Black;
+            this.btnAssignsubject.HoverState.FillColor = System.Drawing.Color.Coral;
+            this.btnAssignsubject.HoverState.Parent = this.btnAssignsubject;
+            this.btnAssignsubject.Location = new System.Drawing.Point(932, 6);
+            this.btnAssignsubject.Name = "btnAssignsubject";
+            this.btnAssignsubject.ShadowDecoration.Parent = this.btnAssignsubject;
+            this.btnAssignsubject.Size = new System.Drawing.Size(122, 30);
+            this.btnAssignsubject.TabIndex = 109;
+            this.btnAssignsubject.Text = "Assign Subject";
+            this.btnAssignsubject.Click += new System.EventHandler(this.btnAssignsubject_Click);
             // 
             // btnSubjectSummary
             // 
@@ -439,53 +378,34 @@
             this.btnSubjectSummary.TabIndex = 110;
             this.btnSubjectSummary.Text = "Subject Summary";
             // 
-            // BtnSubjectList
+            // btnEditSubject
             // 
-            this.BtnSubjectList.Animated = true;
-            this.BtnSubjectList.CheckedState.Parent = this.BtnSubjectList;
-            this.BtnSubjectList.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnSubjectList.CustomImages.Parent = this.BtnSubjectList;
-            this.BtnSubjectList.FillColor = System.Drawing.Color.Silver;
-            this.BtnSubjectList.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSubjectList.ForeColor = System.Drawing.Color.Black;
-            this.BtnSubjectList.HoverState.FillColor = System.Drawing.Color.Coral;
-            this.BtnSubjectList.HoverState.Parent = this.BtnSubjectList;
-            this.BtnSubjectList.Location = new System.Drawing.Point(574, 5);
-            this.BtnSubjectList.Name = "BtnSubjectList";
-            this.BtnSubjectList.ShadowDecoration.Parent = this.BtnSubjectList;
-            this.BtnSubjectList.Size = new System.Drawing.Size(122, 30);
-            this.BtnSubjectList.TabIndex = 108;
-            this.BtnSubjectList.Text = "Edit Subject";
-            // 
-            // PanelSubjectList
-            // 
-            this.PanelSubjectList.BackColor = System.Drawing.Color.Transparent;
-            this.PanelSubjectList.Controls.Add(this.guna2VSeparator2);
-            this.PanelSubjectList.Controls.Add(this.guna2ShadowPanel4);
-            this.PanelSubjectList.Controls.Add(this.guna2ShadowPanel5);
-            this.PanelSubjectList.FillColor = System.Drawing.Color.White;
-            this.PanelSubjectList.Location = new System.Drawing.Point(0, 39);
-            this.PanelSubjectList.Name = "PanelSubjectList";
-            this.PanelSubjectList.ShadowColor = System.Drawing.Color.Black;
-            this.PanelSubjectList.Size = new System.Drawing.Size(1280, 572);
-            this.PanelSubjectList.TabIndex = 111;
-            // 
-            // guna2VSeparator2
-            // 
-            this.guna2VSeparator2.Location = new System.Drawing.Point(433, 166);
-            this.guna2VSeparator2.Name = "guna2VSeparator2";
-            this.guna2VSeparator2.Size = new System.Drawing.Size(10, 200);
-            this.guna2VSeparator2.TabIndex = 114;
+            this.btnEditSubject.Animated = true;
+            this.btnEditSubject.CheckedState.Parent = this.btnEditSubject;
+            this.btnEditSubject.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditSubject.CustomImages.Parent = this.btnEditSubject;
+            this.btnEditSubject.FillColor = System.Drawing.Color.Silver;
+            this.btnEditSubject.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditSubject.ForeColor = System.Drawing.Color.Black;
+            this.btnEditSubject.HoverState.FillColor = System.Drawing.Color.Coral;
+            this.btnEditSubject.HoverState.Parent = this.btnEditSubject;
+            this.btnEditSubject.Location = new System.Drawing.Point(792, 6);
+            this.btnEditSubject.Name = "btnEditSubject";
+            this.btnEditSubject.ShadowDecoration.Parent = this.btnEditSubject;
+            this.btnEditSubject.Size = new System.Drawing.Size(122, 30);
+            this.btnEditSubject.TabIndex = 108;
+            this.btnEditSubject.Text = "Edit Subject";
+            this.btnEditSubject.Click += new System.EventHandler(this.btnEditSubject_Click);
             // 
             // guna2ShadowPanel4
             // 
             this.guna2ShadowPanel4.BackColor = System.Drawing.Color.Transparent;
+            this.guna2ShadowPanel4.Controls.Add(this.txtSearch);
             this.guna2ShadowPanel4.Controls.Add(this.lbleditsubjecttotal);
-            this.guna2ShadowPanel4.Controls.Add(this.floweditsubjectlist);
+            this.guna2ShadowPanel4.Controls.Add(this.flowSubjectList);
             this.guna2ShadowPanel4.Controls.Add(this.label8);
-            this.guna2ShadowPanel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.guna2ShadowPanel4.FillColor = System.Drawing.Color.White;
-            this.guna2ShadowPanel4.Location = new System.Drawing.Point(0, 0);
+            this.guna2ShadowPanel4.Location = new System.Drawing.Point(0, 39);
             this.guna2ShadowPanel4.Name = "guna2ShadowPanel4";
             this.guna2ShadowPanel4.ShadowColor = System.Drawing.Color.Black;
             this.guna2ShadowPanel4.Size = new System.Drawing.Size(423, 572);
@@ -501,13 +421,13 @@
             this.lbleditsubjecttotal.TabIndex = 2;
             this.lbleditsubjecttotal.Text = "Total: --";
             // 
-            // floweditsubjectlist
+            // flowSubjectList
             // 
-            this.floweditsubjectlist.AutoScroll = true;
-            this.floweditsubjectlist.Location = new System.Drawing.Point(16, 54);
-            this.floweditsubjectlist.Name = "floweditsubjectlist";
-            this.floweditsubjectlist.Size = new System.Drawing.Size(389, 497);
-            this.floweditsubjectlist.TabIndex = 1;
+            this.flowSubjectList.AutoScroll = true;
+            this.flowSubjectList.Location = new System.Drawing.Point(16, 54);
+            this.flowSubjectList.Name = "flowSubjectList";
+            this.flowSubjectList.Size = new System.Drawing.Size(389, 497);
+            this.flowSubjectList.TabIndex = 1;
             // 
             // label8
             // 
@@ -519,27 +439,6 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Subject List";
             // 
-            // guna2ShadowPanel5
-            // 
-            this.guna2ShadowPanel5.BackColor = System.Drawing.Color.Transparent;
-            this.guna2ShadowPanel5.Controls.Add(this.guna2VSeparator4);
-            this.guna2ShadowPanel5.Controls.Add(this.guna2ShadowPanel9);
-            this.guna2ShadowPanel5.Controls.Add(this.panelEditSubject);
-            this.guna2ShadowPanel5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.guna2ShadowPanel5.FillColor = System.Drawing.Color.White;
-            this.guna2ShadowPanel5.Location = new System.Drawing.Point(457, 0);
-            this.guna2ShadowPanel5.Name = "guna2ShadowPanel5";
-            this.guna2ShadowPanel5.ShadowColor = System.Drawing.Color.Black;
-            this.guna2ShadowPanel5.Size = new System.Drawing.Size(823, 572);
-            this.guna2ShadowPanel5.TabIndex = 112;
-            // 
-            // guna2VSeparator4
-            // 
-            this.guna2VSeparator4.Location = new System.Drawing.Point(413, 166);
-            this.guna2VSeparator4.Name = "guna2VSeparator4";
-            this.guna2VSeparator4.Size = new System.Drawing.Size(10, 200);
-            this.guna2VSeparator4.TabIndex = 127;
-            // 
             // guna2ShadowPanel9
             // 
             this.guna2ShadowPanel9.BackColor = System.Drawing.Color.Transparent;
@@ -547,10 +446,10 @@
             this.guna2ShadowPanel9.Controls.Add(this.label13);
             this.guna2ShadowPanel9.Dock = System.Windows.Forms.DockStyle.Right;
             this.guna2ShadowPanel9.FillColor = System.Drawing.Color.White;
-            this.guna2ShadowPanel9.Location = new System.Drawing.Point(428, 0);
+            this.guna2ShadowPanel9.Location = new System.Drawing.Point(434, 0);
             this.guna2ShadowPanel9.Name = "guna2ShadowPanel9";
             this.guna2ShadowPanel9.ShadowColor = System.Drawing.Color.Black;
-            this.guna2ShadowPanel9.Size = new System.Drawing.Size(395, 572);
+            this.guna2ShadowPanel9.Size = new System.Drawing.Size(397, 572);
             this.guna2ShadowPanel9.TabIndex = 126;
             // 
             // FlowSubjectTeacher
@@ -571,27 +470,26 @@
             this.label13.TabIndex = 2;
             this.label13.Text = "Subject Teacher";
             // 
-            // panelEditSubject
+            // childpanelEditSubject
             // 
-            this.panelEditSubject.BackColor = System.Drawing.Color.Transparent;
-            this.panelEditSubject.Controls.Add(this.label11);
-            this.panelEditSubject.Controls.Add(this.txtEditSubjectDesc);
-            this.panelEditSubject.Controls.Add(this.dropEditPicPreset);
-            this.panelEditSubject.Controls.Add(this.label10);
-            this.panelEditSubject.Controls.Add(this.label6);
-            this.panelEditSubject.Controls.Add(this.label9);
-            this.panelEditSubject.Controls.Add(this.label7);
-            this.panelEditSubject.Controls.Add(this.piceditSubjectPic);
-            this.panelEditSubject.Controls.Add(this.btnEditOk);
-            this.panelEditSubject.Controls.Add(this.txteditSubjectName);
-            this.panelEditSubject.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelEditSubject.FillColor = System.Drawing.Color.White;
-            this.panelEditSubject.Location = new System.Drawing.Point(0, 0);
-            this.panelEditSubject.Name = "panelEditSubject";
-            this.panelEditSubject.ShadowColor = System.Drawing.Color.Black;
-            this.panelEditSubject.Size = new System.Drawing.Size(406, 572);
-            this.panelEditSubject.TabIndex = 125;
-            this.panelEditSubject.Visible = false;
+            this.childpanelEditSubject.BackColor = System.Drawing.Color.Transparent;
+            this.childpanelEditSubject.Controls.Add(this.label11);
+            this.childpanelEditSubject.Controls.Add(this.txtEditSubjectDesc);
+            this.childpanelEditSubject.Controls.Add(this.dropEditPicPreset);
+            this.childpanelEditSubject.Controls.Add(this.label10);
+            this.childpanelEditSubject.Controls.Add(this.label6);
+            this.childpanelEditSubject.Controls.Add(this.label9);
+            this.childpanelEditSubject.Controls.Add(this.label7);
+            this.childpanelEditSubject.Controls.Add(this.piceditSubjectPic);
+            this.childpanelEditSubject.Controls.Add(this.btnEditOk);
+            this.childpanelEditSubject.Controls.Add(this.txteditSubjectName);
+            this.childpanelEditSubject.Dock = System.Windows.Forms.DockStyle.Left;
+            this.childpanelEditSubject.FillColor = System.Drawing.Color.White;
+            this.childpanelEditSubject.Location = new System.Drawing.Point(0, 0);
+            this.childpanelEditSubject.Name = "childpanelEditSubject";
+            this.childpanelEditSubject.ShadowColor = System.Drawing.Color.Black;
+            this.childpanelEditSubject.Size = new System.Drawing.Size(428, 572);
+            this.childpanelEditSubject.TabIndex = 125;
             // 
             // label11
             // 
@@ -767,57 +665,28 @@
             this.txteditSubjectName.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             this.txteditSubjectName.TabIndex = 115;
             // 
-            // PanelAssignSubject
+            // PanelEditSubject
             // 
-            this.PanelAssignSubject.BackColor = System.Drawing.Color.Transparent;
-            this.PanelAssignSubject.Controls.Add(this.guna2VSeparator3);
-            this.PanelAssignSubject.Controls.Add(this.guna2ShadowPanel6);
-            this.PanelAssignSubject.Controls.Add(this.guna2ShadowPanel7);
-            this.PanelAssignSubject.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PanelAssignSubject.FillColor = System.Drawing.Color.White;
-            this.PanelAssignSubject.Location = new System.Drawing.Point(0, 39);
-            this.PanelAssignSubject.Name = "PanelAssignSubject";
-            this.PanelAssignSubject.ShadowColor = System.Drawing.Color.Black;
-            this.PanelAssignSubject.Size = new System.Drawing.Size(1280, 572);
-            this.PanelAssignSubject.TabIndex = 115;
+            this.PanelEditSubject.BackColor = System.Drawing.Color.Transparent;
+            this.PanelEditSubject.Controls.Add(this.guna2ShadowPanel9);
+            this.PanelEditSubject.Controls.Add(this.childpanelEditSubject);
+            this.PanelEditSubject.FillColor = System.Drawing.Color.White;
+            this.PanelEditSubject.Location = new System.Drawing.Point(450, 39);
+            this.PanelEditSubject.Name = "PanelEditSubject";
+            this.PanelEditSubject.ShadowColor = System.Drawing.Color.Black;
+            this.PanelEditSubject.Size = new System.Drawing.Size(831, 572);
+            this.PanelEditSubject.TabIndex = 127;
             // 
-            // guna2VSeparator3
+            // PanelAssign
             // 
-            this.guna2VSeparator3.Location = new System.Drawing.Point(433, 166);
-            this.guna2VSeparator3.Name = "guna2VSeparator3";
-            this.guna2VSeparator3.Size = new System.Drawing.Size(10, 200);
-            this.guna2VSeparator3.TabIndex = 114;
-            // 
-            // guna2ShadowPanel6
-            // 
-            this.guna2ShadowPanel6.BackColor = System.Drawing.Color.Transparent;
-            this.guna2ShadowPanel6.Controls.Add(this.flowLayoutPanel1);
-            this.guna2ShadowPanel6.Controls.Add(this.label12);
-            this.guna2ShadowPanel6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.guna2ShadowPanel6.FillColor = System.Drawing.Color.White;
-            this.guna2ShadowPanel6.Location = new System.Drawing.Point(0, 0);
-            this.guna2ShadowPanel6.Name = "guna2ShadowPanel6";
-            this.guna2ShadowPanel6.ShadowColor = System.Drawing.Color.Black;
-            this.guna2ShadowPanel6.Size = new System.Drawing.Size(423, 572);
-            this.guna2ShadowPanel6.TabIndex = 113;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(17, 54);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(389, 497);
-            this.flowLayoutPanel1.TabIndex = 2;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(20, 18);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(91, 19);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Subject List";
+            this.PanelAssign.BackColor = System.Drawing.Color.Transparent;
+            this.PanelAssign.Controls.Add(this.guna2ShadowPanel7);
+            this.PanelAssign.FillColor = System.Drawing.Color.White;
+            this.PanelAssign.Location = new System.Drawing.Point(450, 39);
+            this.PanelAssign.Name = "PanelAssign";
+            this.PanelAssign.ShadowColor = System.Drawing.Color.Black;
+            this.PanelAssign.Size = new System.Drawing.Size(831, 572);
+            this.PanelAssign.TabIndex = 128;
             // 
             // guna2ShadowPanel7
             // 
@@ -826,13 +695,12 @@
             this.guna2ShadowPanel7.Controls.Add(this.guna2ShadowPanel8);
             this.guna2ShadowPanel7.Controls.Add(this.guna2ShadowPanel3);
             this.guna2ShadowPanel7.Controls.Add(this.label18);
-            this.guna2ShadowPanel7.Dock = System.Windows.Forms.DockStyle.Right;
             this.guna2ShadowPanel7.FillColor = System.Drawing.Color.White;
-            this.guna2ShadowPanel7.Location = new System.Drawing.Point(457, 0);
+            this.guna2ShadowPanel7.Location = new System.Drawing.Point(0, 0);
             this.guna2ShadowPanel7.Name = "guna2ShadowPanel7";
             this.guna2ShadowPanel7.ShadowColor = System.Drawing.Color.Black;
-            this.guna2ShadowPanel7.Size = new System.Drawing.Size(823, 572);
-            this.guna2ShadowPanel7.TabIndex = 112;
+            this.guna2ShadowPanel7.Size = new System.Drawing.Size(831, 572);
+            this.guna2ShadowPanel7.TabIndex = 113;
             // 
             // lblsubjnoselectassign
             // 
@@ -862,7 +730,6 @@
             this.guna2ShadowPanel8.ShadowColor = System.Drawing.Color.Black;
             this.guna2ShadowPanel8.Size = new System.Drawing.Size(380, 386);
             this.guna2ShadowPanel8.TabIndex = 126;
-            this.guna2ShadowPanel8.Visible = false;
             // 
             // dropTeacher
             // 
@@ -966,7 +833,6 @@
             this.guna2ShadowPanel3.ShadowColor = System.Drawing.Color.Black;
             this.guna2ShadowPanel3.Size = new System.Drawing.Size(340, 384);
             this.guna2ShadowPanel3.TabIndex = 125;
-            this.guna2ShadowPanel3.Visible = false;
             // 
             // lblassignselectedsubject
             // 
@@ -988,38 +854,72 @@
             this.label18.TabIndex = 1;
             this.label18.Text = "Assign Subject";
             // 
+            // guna2VSeparator1
+            // 
+            this.guna2VSeparator1.Location = new System.Drawing.Point(431, 219);
+            this.guna2VSeparator1.Name = "guna2VSeparator1";
+            this.guna2VSeparator1.Size = new System.Drawing.Size(10, 200);
+            this.guna2VSeparator1.TabIndex = 129;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Animated = true;
+            this.txtSearch.BackColor = System.Drawing.Color.White;
+            this.txtSearch.BorderColor = System.Drawing.Color.Coral;
+            this.txtSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtSearch.DefaultText = "";
+            this.txtSearch.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtSearch.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtSearch.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtSearch.DisabledState.Parent = this.txtSearch;
+            this.txtSearch.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtSearch.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtSearch.FocusedState.Parent = this.txtSearch;
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.ForeColor = System.Drawing.Color.Black;
+            this.txtSearch.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtSearch.HoverState.Parent = this.txtSearch;
+            this.txtSearch.Location = new System.Drawing.Point(140, 13);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.PasswordChar = '\0';
+            this.txtSearch.PlaceholderForeColor = System.Drawing.Color.DimGray;
+            this.txtSearch.PlaceholderText = "Search Subject";
+            this.txtSearch.SelectedText = "";
+            this.txtSearch.ShadowDecoration.Parent = this.txtSearch;
+            this.txtSearch.Size = new System.Drawing.Size(147, 30);
+            this.txtSearch.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
+            this.txtSearch.TabIndex = 3;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
             // UCSubject
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.guna2VSeparator1);
             this.Controls.Add(this.btnSubjectSummary);
-            this.Controls.Add(this.BtnAssignSubject);
-            this.Controls.Add(this.BtnSubjectList);
+            this.Controls.Add(this.guna2ShadowPanel4);
+            this.Controls.Add(this.btnAssignsubject);
+            this.Controls.Add(this.btnEditSubject);
             this.Controls.Add(this.btnCreateSubject);
             this.Controls.Add(this.btnBackto);
-            this.Controls.Add(this.PanelAssignSubject);
-            this.Controls.Add(this.PanelSubjectList);
-            this.Controls.Add(this.PanelSubjectCreate);
+            this.Controls.Add(this.PanelCreateSubject);
+            this.Controls.Add(this.PanelAssign);
+            this.Controls.Add(this.PanelEditSubject);
             this.Name = "UCSubject";
             this.Size = new System.Drawing.Size(1280, 611);
-            this.PanelSubjectCreate.ResumeLayout(false);
+            this.PanelCreateSubject.ResumeLayout(false);
             this.guna2ShadowPanel2.ResumeLayout(false);
             this.guna2ShadowPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_subject)).EndInit();
-            this.guna2ShadowPanel1.ResumeLayout(false);
-            this.guna2ShadowPanel1.PerformLayout();
-            this.PanelSubjectList.ResumeLayout(false);
             this.guna2ShadowPanel4.ResumeLayout(false);
             this.guna2ShadowPanel4.PerformLayout();
-            this.guna2ShadowPanel5.ResumeLayout(false);
             this.guna2ShadowPanel9.ResumeLayout(false);
             this.guna2ShadowPanel9.PerformLayout();
-            this.panelEditSubject.ResumeLayout(false);
-            this.panelEditSubject.PerformLayout();
+            this.childpanelEditSubject.ResumeLayout(false);
+            this.childpanelEditSubject.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.piceditSubjectPic)).EndInit();
-            this.PanelAssignSubject.ResumeLayout(false);
-            this.guna2ShadowPanel6.ResumeLayout(false);
-            this.guna2ShadowPanel6.PerformLayout();
+            this.PanelEditSubject.ResumeLayout(false);
+            this.PanelAssign.ResumeLayout(false);
             this.guna2ShadowPanel7.ResumeLayout(false);
             this.guna2ShadowPanel7.PerformLayout();
             this.guna2ShadowPanel8.ResumeLayout(false);
@@ -1033,31 +933,13 @@
         #endregion
 
         private Guna.UI2.WinForms.Guna2Button btnBackto;
-        private Guna.UI2.WinForms.Guna2ShadowPanel PanelSubjectCreate;
+        private Guna.UI2.WinForms.Guna2ShadowPanel PanelCreateSubject;
         private Guna.UI2.WinForms.Guna2Button btnCreateSubject;
-        private Guna.UI2.WinForms.Guna2Button BtnAssignSubject;
+        private Guna.UI2.WinForms.Guna2Button btnAssignsubject;
         private Guna.UI2.WinForms.Guna2Button btnSubjectSummary;
-        private System.Windows.Forms.Label label1;
-        private Guna.UI2.WinForms.Guna2Button BtnSubjectList;
-        private Guna.UI2.WinForms.Guna2TextBox txtSubjectName;
-        public System.Windows.Forms.Label label2;
-        private Guna.UI2.WinForms.Guna2TextBox txtSubjectDesc;
-        public System.Windows.Forms.Label label72;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel1;
-        private Guna.UI2.WinForms.Guna2Button btnAddSubject;
-        private System.Windows.Forms.PictureBox pic_subject;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel2;
-        public System.Windows.Forms.Label label4;
-        public System.Windows.Forms.Label label3;
-        private Guna.UI2.WinForms.Guna2ComboBox drop_image_Preset;
-        private Guna.UI2.WinForms.Guna2VSeparator guna2VSeparator1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.FlowLayoutPanel flowSubject;
-        private Guna.UI2.WinForms.Guna2ShadowPanel PanelSubjectList;
-        private Guna.UI2.WinForms.Guna2VSeparator guna2VSeparator2;
+        private Guna.UI2.WinForms.Guna2Button btnEditSubject;
         private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel4;
         private System.Windows.Forms.Label label8;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel5;
         private System.Windows.Forms.Label label11;
         private Guna.UI2.WinForms.Guna2ComboBox dropEditPicPreset;
         public System.Windows.Forms.Label label6;
@@ -1068,30 +950,38 @@
         public System.Windows.Forms.Label label9;
         public System.Windows.Forms.Label label10;
         private Guna.UI2.WinForms.Guna2TextBox txtEditSubjectDesc;
-        private Guna.UI2.WinForms.Guna2ShadowPanel PanelAssignSubject;
-        private Guna.UI2.WinForms.Guna2VSeparator guna2VSeparator3;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel6;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lbleditsubjecttotal;
+        private System.Windows.Forms.FlowLayoutPanel flowSubjectList;
+        private Guna.UI2.WinForms.Guna2ShadowPanel childpanelEditSubject;
+        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel9;
+        private System.Windows.Forms.FlowLayoutPanel FlowSubjectTeacher;
+        private System.Windows.Forms.Label label13;
+        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel2;
+        private Guna.UI2.WinForms.Guna2ComboBox drop_image_Preset;
+        public System.Windows.Forms.Label label4;
+        public System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
+        private Guna.UI2.WinForms.Guna2Button btnAddSubject;
+        private Guna.UI2.WinForms.Guna2TextBox txtSubjectName;
+        private System.Windows.Forms.PictureBox pic_subject;
+        public System.Windows.Forms.Label label72;
+        public System.Windows.Forms.Label label2;
+        private Guna.UI2.WinForms.Guna2TextBox txtSubjectDesc;
+        private Guna.UI2.WinForms.Guna2ShadowPanel PanelEditSubject;
+        private Guna.UI2.WinForms.Guna2ShadowPanel PanelAssign;
         private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel7;
         public System.Windows.Forms.Label lblsubjnoselectassign;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label lbleditsubjecttotal;
-        private System.Windows.Forms.FlowLayoutPanel floweditsubjectlist;
-        private System.Windows.Forms.Label lblcreatedsubject;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel8;
+        private Guna.UI2.WinForms.Guna2ComboBox dropTeacher;
+        private System.Windows.Forms.Label label16;
         private Guna.UI2.WinForms.Guna2ComboBox dropGrade;
+        private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label lblassignavailability;
         private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel3;
         private System.Windows.Forms.Label lblassignselectedsubject;
-        private Guna.UI2.WinForms.Guna2ComboBox dropTeacher;
-        private System.Windows.Forms.Label label16;
-        private Guna.UI2.WinForms.Guna2ShadowPanel panelEditSubject;
-        private Guna.UI2.WinForms.Guna2VSeparator guna2VSeparator4;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel9;
-        private System.Windows.Forms.FlowLayoutPanel FlowSubjectTeacher;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label18;
+        private Guna.UI2.WinForms.Guna2VSeparator guna2VSeparator1;
+        private Guna.UI2.WinForms.Guna2TextBox txtSearch;
     }
 }

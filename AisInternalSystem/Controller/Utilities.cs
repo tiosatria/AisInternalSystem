@@ -13,6 +13,7 @@ using AisInternalSystem.Entities;
 using Microsoft.ReportingServices.Interfaces;
 using System.Windows;
 using System.Windows.Forms;
+using Telerik.Charting;
 
 namespace AisInternalSystem.Controller
 {
@@ -24,6 +25,22 @@ namespace AisInternalSystem.Controller
 
         }
 
+        public static DateTime GetDateTimeNow()
+        {
+            DateTime date = DateTime.Now;
+            return date;
+        }
+
+        public static string GetTimeStamp()
+        {
+            string str = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            return str;
+        }
+
+        public static int GetCurrentUserID()
+        {
+            return Data.user.OwnerID;
+        }
 
         public static void Auth(string usr, string pwd)
         {

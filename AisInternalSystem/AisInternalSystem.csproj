@@ -728,6 +728,7 @@
     <None Include="Resources\disappointed_200_transparent.gif" />
     <None Include="Properties\icons8_switch_24px_1.png" />
     <None Include="Properties\icons8_enter_key_32px.png" />
+    <None Include="Properties\Subjects\subjectdefault.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

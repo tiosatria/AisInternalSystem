@@ -107,7 +107,6 @@ namespace AisInternalSystem.UserInterface.Menu
                     item.Visible = false;
                 }
             }
-
         }
 
         private void MenuContainer_KeyDown(object sender, KeyEventArgs e)

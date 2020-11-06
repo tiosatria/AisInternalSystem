@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
-            this.lblSubjectName = new System.Windows.Forms.Label();
-            this.lblSubjectDesc = new System.Windows.Forms.Label();
+            this.lbltaughtby = new System.Windows.Forms.Label();
             this.guna2ShadowPanel2 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.pictureSubject = new System.Windows.Forms.PictureBox();
-            this.lbltaughtby = new System.Windows.Forms.Label();
+            this.lblSubjectDesc = new System.Windows.Forms.Label();
+            this.lblSubjectName = new System.Windows.Forms.Label();
             this.guna2ShadowPanel1.SuspendLayout();
             this.guna2ShadowPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSubject)).BeginInit();
@@ -54,26 +54,15 @@
             this.guna2ShadowPanel1.Size = new System.Drawing.Size(377, 100);
             this.guna2ShadowPanel1.TabIndex = 0;
             // 
-            // lblSubjectName
+            // lbltaughtby
             // 
-            this.lblSubjectName.AutoSize = true;
-            this.lblSubjectName.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubjectName.Location = new System.Drawing.Point(10, 10);
-            this.lblSubjectName.Name = "lblSubjectName";
-            this.lblSubjectName.Size = new System.Drawing.Size(102, 18);
-            this.lblSubjectName.TabIndex = 0;
-            this.lblSubjectName.Text = "Subjet Name";
-            // 
-            // lblSubjectDesc
-            // 
-            this.lblSubjectDesc.AutoSize = true;
-            this.lblSubjectDesc.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubjectDesc.Location = new System.Drawing.Point(10, 36);
-            this.lblSubjectDesc.Name = "lblSubjectDesc";
-            this.lblSubjectDesc.Size = new System.Drawing.Size(125, 17);
-            this.lblSubjectDesc.TabIndex = 1;
-            this.lblSubjectDesc.Text = "Subject Description";
-            this.lblSubjectDesc.Click += new System.EventHandler(this.label1_Click);
+            this.lbltaughtby.AutoSize = true;
+            this.lbltaughtby.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbltaughtby.Location = new System.Drawing.Point(10, 70);
+            this.lbltaughtby.Name = "lbltaughtby";
+            this.lbltaughtby.Size = new System.Drawing.Size(68, 17);
+            this.lbltaughtby.TabIndex = 3;
+            this.lbltaughtby.Text = "Taught by:";
             // 
             // guna2ShadowPanel2
             // 
@@ -95,15 +84,26 @@
             this.pictureSubject.TabIndex = 0;
             this.pictureSubject.TabStop = false;
             // 
-            // lbltaughtby
+            // lblSubjectDesc
             // 
-            this.lbltaughtby.AutoSize = true;
-            this.lbltaughtby.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbltaughtby.Location = new System.Drawing.Point(10, 72);
-            this.lbltaughtby.Name = "lbltaughtby";
-            this.lbltaughtby.Size = new System.Drawing.Size(68, 17);
-            this.lbltaughtby.TabIndex = 3;
-            this.lbltaughtby.Text = "Taught by:";
+            this.lblSubjectDesc.AutoSize = true;
+            this.lblSubjectDesc.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubjectDesc.Location = new System.Drawing.Point(10, 33);
+            this.lblSubjectDesc.Name = "lblSubjectDesc";
+            this.lblSubjectDesc.Size = new System.Drawing.Size(125, 17);
+            this.lblSubjectDesc.TabIndex = 1;
+            this.lblSubjectDesc.Text = "Subject Description";
+            this.lblSubjectDesc.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // lblSubjectName
+            // 
+            this.lblSubjectName.AutoSize = true;
+            this.lblSubjectName.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubjectName.Location = new System.Drawing.Point(10, 10);
+            this.lblSubjectName.Name = "lblSubjectName";
+            this.lblSubjectName.Size = new System.Drawing.Size(102, 18);
+            this.lblSubjectName.TabIndex = 0;
+            this.lblSubjectName.Text = "Subjet Name";
             // 
             // UCSubjectModel
             // 

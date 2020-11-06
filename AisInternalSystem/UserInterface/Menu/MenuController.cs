@@ -30,7 +30,7 @@ namespace AisInternalSystem.UserInterface.Menu
         private MenuType _menutype;
         public enum MenuDoes
         {
-            EmployeeDirectoryService, RecordEmployee, StudentDirectoryService, RecordNewStudentData, ClassAssignment, ClassInsight, ClassDirectoryService
+            EmployeeDirectoryService, RecordEmployee, StudentDirectoryService, RecordNewStudentData, ClassAssignment, ClassInsight, ClassDirectoryService, SubjectDirectoryServices
         }
         public enum MenuItemsEmployee
         {
@@ -143,6 +143,10 @@ namespace AisInternalSystem.UserInterface.Menu
                 case MenuDoes.ClassDirectoryService:
                     AddToTask(does);
                     UIController.NavigateUI(UIController.Controls.ClassDirectoryService);
+                    break;
+                case MenuDoes.SubjectDirectoryServices:
+                    AddToTask(does);
+                    UIController.NavigateUI(UIController.Controls.SubjectDirectoryServices);
                     break;
                 default:
                     break;

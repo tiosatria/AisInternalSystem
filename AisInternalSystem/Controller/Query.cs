@@ -5,8 +5,10 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Services.Description;
 using AisInternalSystem.Module;
 using MySql.Data.MySqlClient;
+using Telerik.WinControls.UI;
 
 namespace AisInternalSystem.Controller
 {
@@ -91,7 +93,68 @@ namespace AisInternalSystem.Controller
             }
         }
 
-        private static MySqlCommand Command(string str)
+        public static DataTable GetDataTable(string Query,string[] param,MySqlDbType[] type, string[] value)
+        {
+            DataTable dt = new DataTable();
+            MySqlCommand cmd;
+            cmd = Command(Query);
+            if (param[0] != "@noparam")
+            {
+                for (int i = 0; i < param.Length; i++)
+                {
+                    cmd.Parameters.Add(param[i], type[i]).Value = value[i];
+                }
+                Db.DataAdapter(cmd, dt);
+            }
+            else
+            {
+                Db.DataAdapter(cmd, dt);
+            }
+            return dt;
+        }
+
+        public static bool Insert(string query, string[] param, MySqlDbType[] type, string[] value)
+        {
+            MySqlCommand cmd = Command(query);
+            if (param[0]  != "@noparam")
+            {
+                for (int i = 0; i < param.Length; i++)
+                {
+                    cmd.Parameters.Add(param[i], type[i]).Value = value[i];
+                }
+                try
+                {
+                    if (cmd.ExecuteNonQuery() == 1)
+                    {
+                        PopUp.Alert("Operation completed succesfully", frmAlert.AlertType.Success);
+                    }
+                    return true;
+                }
+                catch (MySqlException ex)
+                {
+                    PopUp.Alert($"Something is wrong, possibly duplicate\nTech. Detail({ex.Message})", frmAlert.AlertType.Error);
+                    return false;
+                }
+            }
+            else
+            {
+                try
+                {
+                    if (cmd.ExecuteNonQuery() == 1)
+                    {
+                        PopUp.Alert("Operation completed succesfully", frmAlert.AlertType.Success);
+                    }
+                    return true;
+                }
+                catch (MySqlException ex)
+                {
+                    PopUp.Alert($"Something is wrong, possibly duplicate\nTech. Detail({ex.Message})", frmAlert.AlertType.Error);
+                    return false;
+                }
+            }
+        }
+
+        public static MySqlCommand Command(string str)
         {
             MySqlCommand cmd = new MySqlCommand(str, Db.GetConnection());
             cmd.CommandType = CommandType.StoredProcedure;

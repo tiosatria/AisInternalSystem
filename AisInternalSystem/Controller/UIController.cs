@@ -34,6 +34,7 @@ namespace AisInternalSystem.Entities
         private static DialogControl dialogConfirmation = new DialogControl();
         private static UCClassDirectoryService classDirService = new UCClassDirectoryService();
         private static UCClassView classView = new UCClassView();
+        private static UCSubject subjectDirectory = new UCSubject();
         private MenuController.MenuType _menutype;
         #region Enumeration
         public enum Controls
@@ -42,7 +43,7 @@ namespace AisInternalSystem.Entities
             UCDashboardAdmin, UCDashboardManagement, UCDashboardTeacher, UCDashboardAccounting,
             UCLogin,
             MenuSchoolAdm, MenuEmployee, MenuContainer,
-            RecordStudentData, UpdateStudentData, ClassDirectoryService, ClassView,
+            RecordStudentData, UpdateStudentData, ClassDirectoryService, ClassView, SubjectDirectoryServices,
             DialogConfirmation
         }
 
@@ -247,6 +248,10 @@ namespace AisInternalSystem.Entities
                     classDirService.InitObject(ControlState.Load);
 
                     break;
+                case Controls.SubjectDirectoryServices:
+                    AddNavigation(subjectDirectory);
+                    subjectDirectory.InitObject();
+                    break;
                 case Controls.ClassView:
                     AddNavigation(classView);
                     classView.InitObject();
@@ -340,7 +345,29 @@ namespace AisInternalSystem.Entities
             }
         }
 
-        
+        public static void FocusButtonNoPanel(Guna2Button btn, UserControl control)
+        {
+            foreach (var item in control.Controls)
+            {
+                if (item is Guna2Button)
+                {
+                    Guna2Button button = item as Guna2Button;
+                    if (button.FillColor == Color.Silver)
+                    {
+                        button.FillColor = Color.Silver;
+                        button.ForeColor = Color.Black;
+                    }
+                    else if (button.FillColor == Color.Black)
+                    {
+                        button.FillColor = Color.Silver;
+                        button.ForeColor = Color.Black;
+                    }
+                }
+
+            }
+            btn.FillColor = Color.Black;
+            btn.ForeColor = Color.White;
+        }
 
         public static void FocusButton(Guna2Button button, Guna2ShadowPanel panel)
         {
@@ -394,6 +421,8 @@ namespace AisInternalSystem.Entities
                 menuContainer.Location = location;
             }
         }
+
+
 
         public static void GetLiner(Guna2Button btn)
         {
