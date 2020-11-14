@@ -46,13 +46,16 @@
             this.btnSubjectSummary = new Guna.UI2.WinForms.Guna2Button();
             this.btnEditSubject = new Guna.UI2.WinForms.Guna2Button();
             this.guna2ShadowPanel4 = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
             this.lbleditsubjecttotal = new System.Windows.Forms.Label();
             this.flowSubjectList = new System.Windows.Forms.FlowLayoutPanel();
             this.label8 = new System.Windows.Forms.Label();
             this.guna2ShadowPanel9 = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.lblTeacherCount = new System.Windows.Forms.Label();
             this.FlowSubjectTeacher = new System.Windows.Forms.FlowLayoutPanel();
             this.label13 = new System.Windows.Forms.Label();
             this.childpanelEditSubject = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.label11 = new System.Windows.Forms.Label();
             this.txtEditSubjectDesc = new Guna.UI2.WinForms.Guna2TextBox();
             this.dropEditPicPreset = new Guna.UI2.WinForms.Guna2ComboBox();
@@ -71,14 +74,20 @@
             this.dropTeacher = new Guna.UI2.WinForms.Guna2ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.dropGrade = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            this.btnAssignTo = new Guna.UI2.WinForms.Guna2Button();
             this.label15 = new System.Windows.Forms.Label();
             this.lblassignavailability = new System.Windows.Forms.Label();
             this.guna2ShadowPanel3 = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.lblassignistaughtin = new System.Windows.Forms.Label();
+            this.lblassignistaughtby = new System.Windows.Forms.Label();
+            this.lblassignsubjectname = new System.Windows.Forms.Label();
+            this.picSelectedAssign = new System.Windows.Forms.PictureBox();
             this.lblassignselectedsubject = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.guna2VSeparator1 = new Guna.UI2.WinForms.Guna2VSeparator();
-            this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.picRefresh = new System.Windows.Forms.PictureBox();
+            this.WorkerAssignTeacher = new System.ComponentModel.BackgroundWorker();
             this.PanelCreateSubject.SuspendLayout();
             this.guna2ShadowPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_subject)).BeginInit();
@@ -91,6 +100,8 @@
             this.guna2ShadowPanel7.SuspendLayout();
             this.guna2ShadowPanel8.SuspendLayout();
             this.guna2ShadowPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picSelectedAssign)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picRefresh)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBackto
@@ -177,6 +188,7 @@
             this.drop_image_Preset.StartIndex = 0;
             this.drop_image_Preset.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             this.drop_image_Preset.TabIndex = 114;
+            this.drop_image_Preset.SelectedIndexChanged += new System.EventHandler(this.drop_image_Preset_SelectedIndexChanged_1);
             // 
             // label4
             // 
@@ -261,6 +273,7 @@
             // 
             // pic_subject
             // 
+            this.pic_subject.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pic_subject.Image = global::AisInternalSystem.Properties.Resources.subjectdefault;
             this.pic_subject.Location = new System.Drawing.Point(39, 288);
             this.pic_subject.Name = "pic_subject";
@@ -268,6 +281,7 @@
             this.pic_subject.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic_subject.TabIndex = 69;
             this.pic_subject.TabStop = false;
+            this.pic_subject.Click += new System.EventHandler(this.pic_subject_Click);
             // 
             // label72
             // 
@@ -411,13 +425,42 @@
             this.guna2ShadowPanel4.Size = new System.Drawing.Size(423, 572);
             this.guna2ShadowPanel4.TabIndex = 113;
             // 
+            // txtSearch
+            // 
+            this.txtSearch.Animated = true;
+            this.txtSearch.BackColor = System.Drawing.Color.White;
+            this.txtSearch.BorderColor = System.Drawing.Color.Coral;
+            this.txtSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtSearch.DefaultText = "";
+            this.txtSearch.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtSearch.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtSearch.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtSearch.DisabledState.Parent = this.txtSearch;
+            this.txtSearch.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtSearch.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtSearch.FocusedState.Parent = this.txtSearch;
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.ForeColor = System.Drawing.Color.Black;
+            this.txtSearch.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtSearch.HoverState.Parent = this.txtSearch;
+            this.txtSearch.Location = new System.Drawing.Point(140, 13);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.PasswordChar = '\0';
+            this.txtSearch.PlaceholderForeColor = System.Drawing.Color.DimGray;
+            this.txtSearch.PlaceholderText = "Search Subject";
+            this.txtSearch.SelectedText = "";
+            this.txtSearch.ShadowDecoration.Parent = this.txtSearch;
+            this.txtSearch.Size = new System.Drawing.Size(147, 30);
+            this.txtSearch.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
+            this.txtSearch.TabIndex = 3;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
             // lbleditsubjecttotal
             // 
-            this.lbleditsubjecttotal.AutoSize = true;
-            this.lbleditsubjecttotal.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbleditsubjecttotal.Location = new System.Drawing.Point(336, 18);
+            this.lbleditsubjecttotal.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbleditsubjecttotal.Location = new System.Drawing.Point(313, 18);
             this.lbleditsubjecttotal.Name = "lbleditsubjecttotal";
-            this.lbleditsubjecttotal.Size = new System.Drawing.Size(67, 19);
+            this.lbleditsubjecttotal.Size = new System.Drawing.Size(92, 33);
             this.lbleditsubjecttotal.TabIndex = 2;
             this.lbleditsubjecttotal.Text = "Total: --";
             // 
@@ -442,6 +485,7 @@
             // guna2ShadowPanel9
             // 
             this.guna2ShadowPanel9.BackColor = System.Drawing.Color.Transparent;
+            this.guna2ShadowPanel9.Controls.Add(this.lblTeacherCount);
             this.guna2ShadowPanel9.Controls.Add(this.FlowSubjectTeacher);
             this.guna2ShadowPanel9.Controls.Add(this.label13);
             this.guna2ShadowPanel9.Dock = System.Windows.Forms.DockStyle.Right;
@@ -451,6 +495,16 @@
             this.guna2ShadowPanel9.ShadowColor = System.Drawing.Color.Black;
             this.guna2ShadowPanel9.Size = new System.Drawing.Size(397, 572);
             this.guna2ShadowPanel9.TabIndex = 126;
+            // 
+            // lblTeacherCount
+            // 
+            this.lblTeacherCount.AutoSize = true;
+            this.lblTeacherCount.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTeacherCount.Location = new System.Drawing.Point(229, 18);
+            this.lblTeacherCount.Name = "lblTeacherCount";
+            this.lblTeacherCount.Size = new System.Drawing.Size(109, 17);
+            this.lblTeacherCount.TabIndex = 4;
+            this.lblTeacherCount.Text = "Subject Teacher";
             // 
             // FlowSubjectTeacher
             // 
@@ -473,6 +527,7 @@
             // childpanelEditSubject
             // 
             this.childpanelEditSubject.BackColor = System.Drawing.Color.Transparent;
+            this.childpanelEditSubject.Controls.Add(this.guna2Button1);
             this.childpanelEditSubject.Controls.Add(this.label11);
             this.childpanelEditSubject.Controls.Add(this.txtEditSubjectDesc);
             this.childpanelEditSubject.Controls.Add(this.dropEditPicPreset);
@@ -490,6 +545,26 @@
             this.childpanelEditSubject.ShadowColor = System.Drawing.Color.Black;
             this.childpanelEditSubject.Size = new System.Drawing.Size(428, 572);
             this.childpanelEditSubject.TabIndex = 125;
+            // 
+            // guna2Button1
+            // 
+            this.guna2Button1.Animated = true;
+            this.guna2Button1.BorderRadius = 6;
+            this.guna2Button1.CheckedState.Parent = this.guna2Button1;
+            this.guna2Button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.guna2Button1.CustomImages.Parent = this.guna2Button1;
+            this.guna2Button1.FillColor = System.Drawing.Color.LightCoral;
+            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2Button1.ForeColor = System.Drawing.Color.Black;
+            this.guna2Button1.HoverState.FillColor = System.Drawing.Color.Coral;
+            this.guna2Button1.HoverState.Parent = this.guna2Button1;
+            this.guna2Button1.Location = new System.Drawing.Point(217, 494);
+            this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.ShadowDecoration.Parent = this.guna2Button1;
+            this.guna2Button1.Size = new System.Drawing.Size(189, 57);
+            this.guna2Button1.TabIndex = 124;
+            this.guna2Button1.Text = "Delete Subject";
+            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // label11
             // 
@@ -522,7 +597,6 @@
             this.txtEditSubjectDesc.Name = "txtEditSubjectDesc";
             this.txtEditSubjectDesc.PasswordChar = '\0';
             this.txtEditSubjectDesc.PlaceholderText = "Descibe this subject";
-            this.txtEditSubjectDesc.ReadOnly = true;
             this.txtEditSubjectDesc.SelectedText = "";
             this.txtEditSubjectDesc.ShadowDecoration.Parent = this.txtEditSubjectDesc;
             this.txtEditSubjectDesc.Size = new System.Drawing.Size(340, 85);
@@ -561,6 +635,7 @@
             this.dropEditPicPreset.StartIndex = 0;
             this.dropEditPicPreset.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             this.dropEditPicPreset.TabIndex = 123;
+            this.dropEditPicPreset.SelectedIndexChanged += new System.EventHandler(this.dropEditPicPreset_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -615,14 +690,15 @@
             this.piceditSubjectPic.Location = new System.Drawing.Point(19, 291);
             this.piceditSubjectPic.Name = "piceditSubjectPic";
             this.piceditSubjectPic.Size = new System.Drawing.Size(176, 152);
+            this.piceditSubjectPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.piceditSubjectPic.TabIndex = 119;
             this.piceditSubjectPic.TabStop = false;
+            this.piceditSubjectPic.Click += new System.EventHandler(this.piceditSubjectPic_Click);
             // 
             // btnEditOk
             // 
             this.btnEditOk.Animated = true;
-            this.btnEditOk.AutoRoundedCorners = true;
-            this.btnEditOk.BorderRadius = 27;
+            this.btnEditOk.BorderRadius = 6;
             this.btnEditOk.CheckedState.Parent = this.btnEditOk;
             this.btnEditOk.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEditOk.CustomImages.Parent = this.btnEditOk;
@@ -631,12 +707,13 @@
             this.btnEditOk.ForeColor = System.Drawing.Color.Black;
             this.btnEditOk.HoverState.FillColor = System.Drawing.Color.Coral;
             this.btnEditOk.HoverState.Parent = this.btnEditOk;
-            this.btnEditOk.Location = new System.Drawing.Point(26, 485);
+            this.btnEditOk.Location = new System.Drawing.Point(22, 494);
             this.btnEditOk.Name = "btnEditOk";
             this.btnEditOk.ShadowDecoration.Parent = this.btnEditOk;
-            this.btnEditOk.Size = new System.Drawing.Size(338, 57);
+            this.btnEditOk.Size = new System.Drawing.Size(189, 57);
             this.btnEditOk.TabIndex = 120;
-            this.btnEditOk.Text = "Edit Subject";
+            this.btnEditOk.Text = "Revise Subject";
+            this.btnEditOk.Click += new System.EventHandler(this.btnEditOk_Click);
             // 
             // txteditSubjectName
             // 
@@ -658,7 +735,6 @@
             this.txteditSubjectName.Name = "txteditSubjectName";
             this.txteditSubjectName.PasswordChar = '\0';
             this.txteditSubjectName.PlaceholderText = "Subject Name";
-            this.txteditSubjectName.ReadOnly = true;
             this.txteditSubjectName.SelectedText = "";
             this.txteditSubjectName.ShadowDecoration.Parent = this.txteditSubjectName;
             this.txteditSubjectName.Size = new System.Drawing.Size(340, 36);
@@ -713,7 +789,6 @@
             this.lblsubjnoselectassign.Size = new System.Drawing.Size(306, 25);
             this.lblsubjnoselectassign.TabIndex = 124;
             this.lblsubjnoselectassign.Text = "Please select subject on left panel";
-            this.lblsubjnoselectassign.Visible = false;
             // 
             // guna2ShadowPanel8
             // 
@@ -721,7 +796,7 @@
             this.guna2ShadowPanel8.Controls.Add(this.dropTeacher);
             this.guna2ShadowPanel8.Controls.Add(this.label16);
             this.guna2ShadowPanel8.Controls.Add(this.dropGrade);
-            this.guna2ShadowPanel8.Controls.Add(this.guna2Button2);
+            this.guna2ShadowPanel8.Controls.Add(this.btnAssignTo);
             this.guna2ShadowPanel8.Controls.Add(this.label15);
             this.guna2ShadowPanel8.Controls.Add(this.lblassignavailability);
             this.guna2ShadowPanel8.FillColor = System.Drawing.Color.White;
@@ -730,6 +805,7 @@
             this.guna2ShadowPanel8.ShadowColor = System.Drawing.Color.Black;
             this.guna2ShadowPanel8.Size = new System.Drawing.Size(380, 386);
             this.guna2ShadowPanel8.TabIndex = 126;
+            this.guna2ShadowPanel8.Visible = false;
             // 
             // dropTeacher
             // 
@@ -783,25 +859,26 @@
             this.dropGrade.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             this.dropGrade.TabIndex = 124;
             // 
-            // guna2Button2
+            // btnAssignTo
             // 
-            this.guna2Button2.Animated = true;
-            this.guna2Button2.AutoRoundedCorners = true;
-            this.guna2Button2.BorderRadius = 27;
-            this.guna2Button2.CheckedState.Parent = this.guna2Button2;
-            this.guna2Button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.guna2Button2.CustomImages.Parent = this.guna2Button2;
-            this.guna2Button2.FillColor = System.Drawing.Color.Silver;
-            this.guna2Button2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2Button2.ForeColor = System.Drawing.Color.Black;
-            this.guna2Button2.HoverState.FillColor = System.Drawing.Color.Coral;
-            this.guna2Button2.HoverState.Parent = this.guna2Button2;
-            this.guna2Button2.Location = new System.Drawing.Point(22, 317);
-            this.guna2Button2.Name = "guna2Button2";
-            this.guna2Button2.ShadowDecoration.Parent = this.guna2Button2;
-            this.guna2Button2.Size = new System.Drawing.Size(338, 57);
-            this.guna2Button2.TabIndex = 120;
-            this.guna2Button2.Text = "Assign";
+            this.btnAssignTo.Animated = true;
+            this.btnAssignTo.AutoRoundedCorners = true;
+            this.btnAssignTo.BorderRadius = 27;
+            this.btnAssignTo.CheckedState.Parent = this.btnAssignTo;
+            this.btnAssignTo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAssignTo.CustomImages.Parent = this.btnAssignTo;
+            this.btnAssignTo.FillColor = System.Drawing.Color.Silver;
+            this.btnAssignTo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAssignTo.ForeColor = System.Drawing.Color.Black;
+            this.btnAssignTo.HoverState.FillColor = System.Drawing.Color.Coral;
+            this.btnAssignTo.HoverState.Parent = this.btnAssignTo;
+            this.btnAssignTo.Location = new System.Drawing.Point(22, 317);
+            this.btnAssignTo.Name = "btnAssignTo";
+            this.btnAssignTo.ShadowDecoration.Parent = this.btnAssignTo;
+            this.btnAssignTo.Size = new System.Drawing.Size(338, 57);
+            this.btnAssignTo.TabIndex = 120;
+            this.btnAssignTo.Text = "Assign";
+            this.btnAssignTo.Click += new System.EventHandler(this.btnAssignTo_Click);
             // 
             // label15
             // 
@@ -826,6 +903,10 @@
             // guna2ShadowPanel3
             // 
             this.guna2ShadowPanel3.BackColor = System.Drawing.Color.Transparent;
+            this.guna2ShadowPanel3.Controls.Add(this.lblassignistaughtin);
+            this.guna2ShadowPanel3.Controls.Add(this.lblassignistaughtby);
+            this.guna2ShadowPanel3.Controls.Add(this.lblassignsubjectname);
+            this.guna2ShadowPanel3.Controls.Add(this.picSelectedAssign);
             this.guna2ShadowPanel3.Controls.Add(this.lblassignselectedsubject);
             this.guna2ShadowPanel3.FillColor = System.Drawing.Color.White;
             this.guna2ShadowPanel3.Location = new System.Drawing.Point(29, 100);
@@ -833,6 +914,44 @@
             this.guna2ShadowPanel3.ShadowColor = System.Drawing.Color.Black;
             this.guna2ShadowPanel3.Size = new System.Drawing.Size(340, 384);
             this.guna2ShadowPanel3.TabIndex = 125;
+            this.guna2ShadowPanel3.Visible = false;
+            // 
+            // lblassignistaughtin
+            // 
+            this.lblassignistaughtin.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblassignistaughtin.Location = new System.Drawing.Point(22, 310);
+            this.lblassignistaughtin.Name = "lblassignistaughtin";
+            this.lblassignistaughtin.Size = new System.Drawing.Size(305, 64);
+            this.lblassignistaughtin.TabIndex = 6;
+            this.lblassignistaughtin.Text = "Is taught in:";
+            // 
+            // lblassignistaughtby
+            // 
+            this.lblassignistaughtby.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblassignistaughtby.Location = new System.Drawing.Point(21, 211);
+            this.lblassignistaughtby.Name = "lblassignistaughtby";
+            this.lblassignistaughtby.Size = new System.Drawing.Size(306, 96);
+            this.lblassignistaughtby.TabIndex = 5;
+            this.lblassignistaughtby.Text = "Is Taught by: ";
+            // 
+            // lblassignsubjectname
+            // 
+            this.lblassignsubjectname.AutoSize = true;
+            this.lblassignsubjectname.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblassignsubjectname.Location = new System.Drawing.Point(21, 180);
+            this.lblassignsubjectname.Name = "lblassignsubjectname";
+            this.lblassignsubjectname.Size = new System.Drawing.Size(93, 17);
+            this.lblassignsubjectname.TabIndex = 4;
+            this.lblassignsubjectname.Text = "Subject Name";
+            // 
+            // picSelectedAssign
+            // 
+            this.picSelectedAssign.Location = new System.Drawing.Point(21, 44);
+            this.picSelectedAssign.Name = "picSelectedAssign";
+            this.picSelectedAssign.Size = new System.Drawing.Size(137, 125);
+            this.picSelectedAssign.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picSelectedAssign.TabIndex = 3;
+            this.picSelectedAssign.TabStop = false;
             // 
             // lblassignselectedsubject
             // 
@@ -861,40 +980,37 @@
             this.guna2VSeparator1.Size = new System.Drawing.Size(10, 200);
             this.guna2VSeparator1.TabIndex = 129;
             // 
-            // txtSearch
+            // backgroundWorker1
             // 
-            this.txtSearch.Animated = true;
-            this.txtSearch.BackColor = System.Drawing.Color.White;
-            this.txtSearch.BorderColor = System.Drawing.Color.Coral;
-            this.txtSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtSearch.DefaultText = "";
-            this.txtSearch.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtSearch.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtSearch.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtSearch.DisabledState.Parent = this.txtSearch;
-            this.txtSearch.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtSearch.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSearch.FocusedState.Parent = this.txtSearch;
-            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.ForeColor = System.Drawing.Color.Black;
-            this.txtSearch.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSearch.HoverState.Parent = this.txtSearch;
-            this.txtSearch.Location = new System.Drawing.Point(140, 13);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.PasswordChar = '\0';
-            this.txtSearch.PlaceholderForeColor = System.Drawing.Color.DimGray;
-            this.txtSearch.PlaceholderText = "Search Subject";
-            this.txtSearch.SelectedText = "";
-            this.txtSearch.ShadowDecoration.Parent = this.txtSearch;
-            this.txtSearch.Size = new System.Drawing.Size(147, 30);
-            this.txtSearch.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
-            this.txtSearch.TabIndex = 3;
-            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
+            // picRefresh
+            // 
+            this.picRefresh.BackColor = System.Drawing.Color.Transparent;
+            this.picRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picRefresh.Image = global::AisInternalSystem.Properties.Resources.refresh_200_transparent;
+            this.picRefresh.Location = new System.Drawing.Point(387, 6);
+            this.picRefresh.Name = "picRefresh";
+            this.picRefresh.Size = new System.Drawing.Size(32, 30);
+            this.picRefresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picRefresh.TabIndex = 130;
+            this.picRefresh.TabStop = false;
+            this.picRefresh.Click += new System.EventHandler(this.picRefresh_Click);
+            // 
+            // WorkerAssignTeacher
+            // 
+            this.WorkerAssignTeacher.WorkerReportsProgress = true;
+            this.WorkerAssignTeacher.WorkerSupportsCancellation = true;
+            this.WorkerAssignTeacher.DoWork += new System.ComponentModel.DoWorkEventHandler(this.WorkerAssignTeacher_DoWork);
             // 
             // UCSubject
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.PanelCreateSubject);
+            this.Controls.Add(this.picRefresh);
             this.Controls.Add(this.guna2VSeparator1);
             this.Controls.Add(this.btnSubjectSummary);
             this.Controls.Add(this.guna2ShadowPanel4);
@@ -902,9 +1018,8 @@
             this.Controls.Add(this.btnEditSubject);
             this.Controls.Add(this.btnCreateSubject);
             this.Controls.Add(this.btnBackto);
-            this.Controls.Add(this.PanelCreateSubject);
-            this.Controls.Add(this.PanelAssign);
             this.Controls.Add(this.PanelEditSubject);
+            this.Controls.Add(this.PanelAssign);
             this.Name = "UCSubject";
             this.Size = new System.Drawing.Size(1280, 611);
             this.PanelCreateSubject.ResumeLayout(false);
@@ -926,6 +1041,8 @@
             this.guna2ShadowPanel8.PerformLayout();
             this.guna2ShadowPanel3.ResumeLayout(false);
             this.guna2ShadowPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picSelectedAssign)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picRefresh)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -975,7 +1092,7 @@
         private Guna.UI2.WinForms.Guna2ComboBox dropTeacher;
         private System.Windows.Forms.Label label16;
         private Guna.UI2.WinForms.Guna2ComboBox dropGrade;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
+        private Guna.UI2.WinForms.Guna2Button btnAssignTo;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label lblassignavailability;
         private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel3;
@@ -983,5 +1100,14 @@
         private System.Windows.Forms.Label label18;
         private Guna.UI2.WinForms.Guna2VSeparator guna2VSeparator1;
         private Guna.UI2.WinForms.Guna2TextBox txtSearch;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Label lblTeacherCount;
+        private System.Windows.Forms.PictureBox picSelectedAssign;
+        private System.Windows.Forms.Label lblassignsubjectname;
+        private System.Windows.Forms.Label lblassignistaughtin;
+        private System.Windows.Forms.Label lblassignistaughtby;
+        private System.Windows.Forms.PictureBox picRefresh;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private System.ComponentModel.BackgroundWorker WorkerAssignTeacher;
     }
 }

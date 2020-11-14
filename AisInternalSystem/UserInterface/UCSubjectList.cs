@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AisInternalSystem.Properties;
+using System.Runtime.Versioning;
+using System.Configuration;
+using System.Windows.Markup;
+using AisInternalSystem.Entities;
 
 namespace AisInternalSystem
 {
@@ -19,6 +23,8 @@ namespace AisInternalSystem
         }
         #region Properties
         private int _subjectId;
+
+        public int IndexOnControl;
 
         public int SubjectID
         {
@@ -56,14 +62,53 @@ namespace AisInternalSystem
             set
             {
                 _imageLocation = value;
-                try
-                {
-                    SubjectImage = Image.FromFile(_imageLocation);
-                }
-                catch (Exception)
+                if (value == "Default")
                 {
                     SubjectImage = Resources.subjectdefault;
                 }
+                else if (value == "Biology")
+                {
+                    SubjectImage = Resources.subjectBiology;
+                }
+                else if (value == "English")
+                {
+                    SubjectImage = Resources.subjectEnglish;
+                }
+                else if (value == "Geography")
+                {
+                    SubjectImage = Resources.subjectGeography;
+                }
+                else if (value == "History")
+                {
+                    SubjectImage = Resources.subjectHistory;
+                }
+                else if(value == "Math")
+                {
+                    SubjectImage = Resources.subjectMath;
+                }
+                else if(value == "Science")
+                {
+                    SubjectImage = Resources.subjectScience;
+                }
+                else if (value == "Social")
+                {
+                    SubjectImage = Resources.subjectSocial;
+                }
+                else if(value == "Technology")
+                {
+                    SubjectImage = Resources.subjectTechnology;
+                }
+                else {
+                    try
+                    {
+                        SubjectImage = Image.FromFile(_imageLocation);
+                    }
+                    catch (Exception)
+                    {
+                        SubjectImage = Resources.subjectdefault;
+                    }
+                }
+
             }
         }
 
@@ -115,5 +160,13 @@ namespace AisInternalSystem
         #region EventListener
 
         #endregion
+        private void OnClick()
+        {
+            UIController.SubjectChoosed(this);
+        }
+        private void guna2ShadowPanel1_MouseClick(object sender, MouseEventArgs e)
+        {
+            OnClick();
+        }
     }
 }

@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Services.Description;
+using System.Windows.Forms;
+using System.Windows.Markup;
+using System.Windows.Resources;
 using AisInternalSystem.Module;
 using MySql.Data.MySqlClient;
 using Telerik.WinControls.UI;
@@ -22,6 +26,52 @@ namespace AisInternalSystem.Controller
         #endregion
 
         #region Properties
+        private static BackgroundWorker worker;
+
+        private static void initWorker()
+        {
+            worker = new BackgroundWorker();
+            worker.ProgressChanged += Worker_ProgressChanged;
+            worker.DoWork += Worker_DoWork;
+            worker.WorkerReportsProgress = true;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+        }
+
+        public enum Do
+        {
+        GetDataTable, GetList, Delete, Insert
+        }
+
+        private static Do @do;
+
+        private static void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
+
+        private static void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+
+        }
+
+        private static void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            switch (@do)
+            {
+                case Do.GetDataTable:
+                    break;
+                case Do.GetList:
+
+                    break;
+                case Do.Delete:
+                    break;
+                case Do.Insert:
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public Query()
         {
 
@@ -35,6 +85,34 @@ namespace AisInternalSystem.Controller
         #endregion
 
         #region Function
+
+        public static List<string> GetList(string query)
+        {
+            List<string> l = new List<string>();
+            DataTable dt = new DataTable();
+            MySqlCommand cmd = Command(query);
+            Db.DataAdapter(cmd, dt);
+            foreach (string item in dt.Rows)
+            {
+                l.Add(item);
+            }
+            return l;
+        }
+
+        public static AutoCompleteStringCollection GetAutoCompleteCollection(string query)
+        {
+            AutoCompleteStringCollection ac = new AutoCompleteStringCollection();
+            DataTable dt = new DataTable();
+            MySqlCommand cmd = Command(query);
+            Db.DataAdapter(cmd, dt);
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                string str = dt.Rows[i][0].ToString();
+                ac.Add(str);
+            }
+            return ac;
+        }
+
         public static DataTable Load(Process proc, string[] str)
         {
             DataTable dt = new DataTable();
@@ -93,6 +171,38 @@ namespace AisInternalSystem.Controller
             }
         }
 
+        public static bool Delete(string Query, string[] param, MySqlDbType[] type, string[] value)
+        {
+            MySqlCommand cmd = Command(Query);
+            if (param[0] != "@noparam")
+            {
+                for (int i = 0; i < param.Length; i++)
+                {
+                    cmd.Parameters.Add(param[i], type[i]).Value = value[i];
+                }
+                try
+                {
+                    if (cmd.ExecuteNonQuery() == 1)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
         public static DataTable GetDataTable(string Query,string[] param,MySqlDbType[] type, string[] value)
         {
             DataTable dt = new DataTable();
@@ -112,6 +222,7 @@ namespace AisInternalSystem.Controller
             }
             return dt;
         }
+            
 
         public static bool Insert(string query, string[] param, MySqlDbType[] type, string[] value)
         {
@@ -132,7 +243,8 @@ namespace AisInternalSystem.Controller
                 }
                 catch (MySqlException ex)
                 {
-                    PopUp.Alert($"Something is wrong, possibly duplicate\nTech. Detail({ex.Message})", frmAlert.AlertType.Error);
+                    MessageBox.Show(ex.Message);
+                    PopUp.Alert($"Oops something wrong\n({ex.Message})", frmAlert.AlertType.Error);
                     return false;
                 }
             }

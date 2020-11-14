@@ -61,7 +61,7 @@ namespace AisInternalSystem.UserInterface.Menu
             switch (menuType)
             {
                 case MenuType.Employee:
-                    menu.Title = "You've opened employee menu";
+                    menu.Title = "Employee menu";
                     break;
                 case MenuType.SchoolAdministration:
                     menu.Title = "You've opened School Administration";
@@ -130,7 +130,7 @@ namespace AisInternalSystem.UserInterface.Menu
                     break;
                 case MenuDoes.RecordNewStudentData:
                     AddToTask(does);
-
+                    UIController.NavigateUI(UIController.Controls.RecordStudentData);
                     break;
                 case MenuDoes.ClassAssignment:
                     AddToTask(does);

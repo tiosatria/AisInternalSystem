@@ -13,6 +13,7 @@ using Guna.UI2.WinForms;
 using System.Xml;
 using AisInternalSystem.Module;
 using AisInternalSystem.Controller;
+using AisInternalSystem.Properties;
 
 namespace AisInternalSystem
 {
@@ -32,11 +33,30 @@ namespace AisInternalSystem
             else
             {
                 InitializeComponent();
+                UIController.Animate(this, Guna.UI2.AnimatorNS.AnimationType.HorizSlide);
                 UIController.GetDragControl(panel_Upper_admin);
             }
             IsLoaded = true;
         }
+        private Image imgUser;
 
+        private string _img;
+        public string imgLocation
+        {
+            get { return _img; }
+            set
+            {
+                _img = value; picThumbUser.Image = Image.FromFile(value);
+            }
+        }
+        public Image UserImage
+        {
+            get { return imgUser; }
+            set
+            {
+                imgUser = value;
+            }
+        }
         private MenuController.MenuType _menutype;
 
         private void BtnDashboardAdmin_Click(object sender, EventArgs e)

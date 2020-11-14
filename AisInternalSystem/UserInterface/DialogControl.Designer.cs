@@ -122,6 +122,7 @@
             this.Controls.Add(this.lbldialogSubtext);
             this.Controls.Add(this.picIllustration);
             this.Controls.Add(this.lbldialogHeader);
+            this.DoubleBuffered = true;
             this.Name = "DialogControl";
             this.Size = new System.Drawing.Size(1280, 611);
             ((System.ComponentModel.ISupportInitialize)(this.picIllustration)).EndInit();

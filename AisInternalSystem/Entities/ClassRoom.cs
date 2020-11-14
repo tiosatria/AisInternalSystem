@@ -41,7 +41,10 @@ namespace AisInternalSystem.Entities
 
         #endregion
         #region Function
+        public static void GetClassMember()
+        {
 
+        }
         #endregion
     }
 }

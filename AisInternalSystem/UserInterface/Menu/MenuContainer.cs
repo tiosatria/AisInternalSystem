@@ -11,6 +11,7 @@ using System.Management;
 using AisInternalSystem.Entities;
 using Telerik.WinControls.UI;
 using AisInternalSystem.Controller;
+using System.Threading;
 
 namespace AisInternalSystem.UserInterface.Menu
 {
@@ -29,20 +30,16 @@ namespace AisInternalSystem.UserInterface.Menu
         private bool isLoaded;
         public MenuContainer()
         {
+            InitializeComponent();
+            this.Visible = false;
+            Utilities.SetDoubleBuffer(this, true);
+            Utilities.SetDoubleBuffer(flowMenuItems, true);
+            this.Location = new Point(640, 109);
 
         }
         public void InitObject(MenuController.MenuType men)
         {
-            if (isLoaded)
-            {
-                GetMenuItem(men);
-            }
-            else
-            {
-                InitializeComponent();
-                GetMenuItem(men);
-            }
-            isLoaded = true;
+            GetMenuItem(men);
         }
 
         private void GetMenuItem(MenuController.MenuType men)

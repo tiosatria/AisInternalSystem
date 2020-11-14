@@ -250,7 +250,6 @@ C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisIntern
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UCStudDetailed.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UCSubject.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UCSubjectList.resources
-C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UCSubjectModel.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UCSubjectTeacher.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UCFeeDback.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UCEmployeeDetailed.resources
@@ -264,7 +263,6 @@ C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisIntern
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.exe
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.pdb
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UIMember_AcademicYear.resources
-C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.csprojAssemblyReference.cache
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UpperPanel.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UpperPanelAdmin.resources
 C:\Users\tiosa\Desktop\Project\AisInternalSystem\WorkingFolder\AisInternalSystem\AisInternalSystem\bin\Debug\SqlServerTypes\x64\msvcr120.dll
@@ -418,15 +416,19 @@ C:\Users\tiosa\Desktop\Project\AisInternalSystem\WorkingFolder\AisInternalSystem
 C:\Users\tiosa\Desktop\Project\AisInternalSystem\WorkingFolder\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.MenuItem.resources
 C:\Users\tiosa\Desktop\Project\AisInternalSystem\WorkingFolder\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.Dotter.resources
 C:\Users\tiosa\Desktop\Project\AisInternalSystem\WorkingFolder\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.Liner.resources
-C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.Main.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.Dotter.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.Liner.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.MenuContainer.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.MenuItem.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.MenuSchoolAdministration.resources
-C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Student.Student.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.UCRecStud.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.TaskExpander.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.TaskItem.resources
 C:\Users\tiosa\Desktop\Project\AisInternalSystem\WorkingFolder\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.TaskExpander.resources
 C:\Users\tiosa\Desktop\Project\AisInternalSystem\WorkingFolder\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.TaskItem.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.MainForm.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Student.UCStudDirectory.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Student.UCRecStudent.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.UCWaiter.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.csprojAssemblyReference.cache
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.UCMessaging.resources

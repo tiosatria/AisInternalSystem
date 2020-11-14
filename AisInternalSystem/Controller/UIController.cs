@@ -1,6 +1,7 @@
 ﻿using AisInternalSystem.Controller;
 using AisInternalSystem.UserInterface;
 using AisInternalSystem.UserInterface.Menu;
+using AisInternalSystem.UserInterface.Student;
 using Guna.UI2.WinForms;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.ComponentModel;
 using System.Windows.Markup.Localizer;
 using Telerik.WinControls.FileDialogs;
 using Telerik.WinControls.UI;
@@ -20,22 +22,63 @@ namespace AisInternalSystem.Entities
 {
     public class UIController
     {
+        #region Props
+        private static BackgroundWorker worker;
         private static UpperPanel upperdefault = new UpperPanel();
         private static UpperPanelAdmin upperPanelAdmin = new UpperPanelAdmin();
-        private static LoginFrm login = new LoginFrm();
+        public static LoginFrm login = new LoginFrm();
         private static DashboardUC ucDashboardAdmin = new DashboardUC();
         private static MenuSchoolAdministration menuSchoolAdm = new MenuSchoolAdministration();
         private static MenuContainer menuContainer = new MenuContainer();
         private static MenuItem menuItem = new MenuItem();
         private static UCEmployeeDetailed employeeDetailed = new UCEmployeeDetailed();
-        private static UCRecStud uCRecStud = new UCRecStud();
-        private static UCRecStud uCUpStud = new UCRecStud();
+        private static UCRecStudent studUI = new UCRecStudent();
         private static Liner liner = new Liner();
         private static DialogControl dialogConfirmation = new DialogControl();
         private static UCClassDirectoryService classDirService = new UCClassDirectoryService();
         private static UCClassView classView = new UCClassView();
         private static UCSubject subjectDirectory = new UCSubject();
+        private static List<UserControl> controls = new List<UserControl>();
         private MenuController.MenuType _menutype;
+        #endregion
+
+        public static event EventHandler FinishedLoadingObject;
+
+        private static void InitWorkerUI()
+        {
+            worker = new BackgroundWorker();
+            worker.DoWork += Worker_DoWork;
+            worker.ProgressChanged += Worker_ProgressChanged;
+            worker.WorkerReportsProgress = true;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+
+        }
+
+        private static void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
+        
+        public static void init()
+        {
+
+        }
+
+        private static void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+        }
+
+        private static void IsWaiting(bool tr)
+        {
+            mainform.Invoke(new MethodInvoker(delegate { mainform.Controls["Waiter"].Visible = tr; }));
+
+        }
+
+        private static void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            IsWaiting(true);
+        }
+
         #region Enumeration
         public enum Controls
         {
@@ -47,11 +90,21 @@ namespace AisInternalSystem.Entities
             DialogConfirmation
         }
 
+        public static void Navigation(UserControl ctrl, DockStyle dock)
+        {
+            mainform.Controls.Add(ctrl);
+            ctrl.Dock = dock;
+        }
+
+        private static void initObject()
+        {
+
+        }
+
         public enum ControlState
         {
             Load, Dispose   
         }
-
 
         #endregion
 
@@ -69,17 +122,43 @@ namespace AisInternalSystem.Entities
         #endregion
 
         #region Function
+
+        public static void SendPanelBack(Guna2ShadowPanel panel)
+        {
+            panel.SendToBack();
+        }
+
+        public static void BringToFront(Guna2ShadowPanel panel)
+        {
+            panel.BringToFront();
+        }
+
+        public static void SendContainerBack(Panel panel)
+        {
+            panel.SendToBack();
+        }
+
+        public static void BringContainerFront(Panel panel)
+        {
+            panel.BringToFront();
+        }
+
+
         public static void DisposeMenu(Guna2ShadowPanel sender)
         {
-            mainform.Controls.Remove(menuContainer);
-            mainform.Controls.Remove(liner);
-            ClearFocusButton(sender);
+            //mainform.Controls.Remove(menuContainer);
+            //mainform.Controls.Remove(liner);
+            //ClearFocusButton(sender);
             
         }
 
         private static List<Dotter> dotters = new List<Dotter>();
         private static List<TaskExpander> TaskExpander = new List<TaskExpander>();
 
+        public static void OpenDialog()
+        {
+            
+        }
 
         public static void InitTask(MenuController.MenuType _men, Guna2Button sender)
         {
@@ -173,10 +252,19 @@ namespace AisInternalSystem.Entities
             }
         }
 
-        public static void ClassChoosed(string id)
+        public static void ClassChoosed(UCClassModel classmodel)
         {
-            classDirService.GetClassInfo(id);
-            
+            classDirService.ClassChoosedEvent(classmodel);
+        }
+
+        public static void TeacherRevoke(UCSubjectTeacher teacher)
+        {
+            subjectDirectory.TeacherRevoke(teacher);
+        }
+
+        public static void SubjectChoosed(UCSubjectList subject)
+        {
+            subjectDirectory.SubjectChoosedEvent(subject);
         }
 
         public enum stateofControlEnum
@@ -234,6 +322,7 @@ namespace AisInternalSystem.Entities
                         DisposeControl(upperdefault);
                         mainform.Controls.Add(upperPanelAdmin);
                         upperPanelAdmin.InitializeObject();
+                        upperPanelAdmin.imgLocation = Data.user.UserImage;
                         SetControl(upperPanelAdmin, DockStyle.Top);
                     }
                     break;
@@ -265,6 +354,8 @@ namespace AisInternalSystem.Entities
                     {
                         mainform.Controls.Add(ucDashboardAdmin);
                         ucDashboardAdmin.InitializeObject();
+                        ucDashboardAdmin.NameUser = Data.user.OwnerName;
+                        ucDashboardAdmin.UserRole = Data.user.Roles;
                         SetControl(ucDashboardAdmin, DockStyle.Fill);
                     }
                     break;
@@ -276,6 +367,7 @@ namespace AisInternalSystem.Entities
                     else
                     {
                         mainform.Controls.Add(login);
+                        mainform.Controls.Add(menuContainer);
                         login.InitializeObject();
                         SetControl(login, DockStyle.Fill);
                     }
@@ -288,7 +380,6 @@ namespace AisInternalSystem.Entities
                     else
                     {
                         mainform.Controls.Add(menuSchoolAdm);
-                        menuSchoolAdm.InitializeObject();
                         SetControl(menuSchoolAdm, DockStyle.Fill);
                     }
                     break;
@@ -299,34 +390,16 @@ namespace AisInternalSystem.Entities
                     }
                     else
                     {
-                        mainform.Controls.Add(menuContainer);
                         SetControl(menuContainer, DockStyle.None);
                     }
                     break;
                 case Controls.RecordStudentData:
-                    if (IsLoaded(uCRecStud))
-                    {
-                        uCRecStud.InitObject(0);
-                        SetControl(uCRecStud, DockStyle.Fill);
-                    }
-                    else
-                    {
-                        mainform.Controls.Add(uCRecStud);
-                        uCRecStud.InitObject(0);
-                        SetControl(uCRecStud, DockStyle.Fill);
-                    }
+                    AddNavigation(studUI);
+                    SetControl(studUI, DockStyle.Fill);
+                    studUI.InitObject();
                     break;
                 case Controls.UpdateStudentData:
-                    if (IsLoaded(uCUpStud))
-                    {
-                        SetControl(uCUpStud, DockStyle.Fill);
-                    }
-                    else
-                    {
-                        mainform.Controls.Add(uCUpStud);
-                        uCUpStud.InitObject(_memId);
-                        SetControl(uCUpStud, DockStyle.Fill);
-                    }
+
                     break;
                 case Controls.DialogConfirmation:
                     if (IsLoaded(dialogConfirmation))
@@ -343,6 +416,18 @@ namespace AisInternalSystem.Entities
 
                     break;
             }
+        }
+
+        public static void NormalizeButton(Guna2Button button, Color color)
+        {
+            button.FillColor = color;
+            button.ForeColor = Color.Black;
+        }
+
+        public static void HighlightButton(Guna2Button button, Color color)
+        {
+            button.FillColor = color;
+            button.ForeColor = Color.White;
         }
 
         public static void FocusButtonNoPanel(Guna2Button btn, UserControl control)
@@ -405,12 +490,10 @@ namespace AisInternalSystem.Entities
         public static void GetMenu(MenuController.MenuType menu)
         {
             menuContainer.Visible = true;
-            Point location = new Point(640, upperdefault.Height);
             if (IsLoaded(menuContainer))
             {
                 SetControl(menuContainer, DockStyle.None);
                 menuContainer.InitObject(menu);
-                menuContainer.Location = location;
 
             }
             else
@@ -418,7 +501,6 @@ namespace AisInternalSystem.Entities
                 mainform.Controls.Add(menuContainer);
                 SetControl(menuContainer, DockStyle.None);
                 menuContainer.InitObject(menu);
-                menuContainer.Location = location;
             }
         }
 
@@ -460,6 +542,14 @@ namespace AisInternalSystem.Entities
             mainform.Controls.Remove(controls);
         }
 
+        public static void Animate(UserControl control, Guna.UI2.AnimatorNS.AnimationType type)
+        {
+            control.Visible = false;
+            Transition.AnimationType = type;
+            Transition.Show(control);
+        }
+
+        private static Guna2Transition Transition = new Guna2Transition();
         private static void SetControl(System.Windows.Forms.UserControl control, DockStyle dock)
         {
             control.BringToFront();
@@ -486,6 +576,7 @@ namespace AisInternalSystem.Entities
                 default:
                     break;
             }
+            //Transition.Dispose();
         }
 
         #endregion

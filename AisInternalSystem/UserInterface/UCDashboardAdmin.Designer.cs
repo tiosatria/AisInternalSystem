@@ -59,7 +59,7 @@
             this.lblRole.AutoSize = true;
             this.lblRole.BackColor = System.Drawing.Color.Transparent;
             this.lblRole.Font = new System.Drawing.Font("Segoe UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRole.Location = new System.Drawing.Point(18, 46);
+            this.lblRole.Location = new System.Drawing.Point(18, 84);
             this.lblRole.Name = "lblRole";
             this.lblRole.Size = new System.Drawing.Size(65, 32);
             this.lblRole.TabIndex = 1;
@@ -71,7 +71,7 @@
             this.guna2ShadowPanel1.Controls.Add(this.label6);
             this.guna2ShadowPanel1.Controls.Add(this.label1);
             this.guna2ShadowPanel1.FillColor = System.Drawing.Color.White;
-            this.guna2ShadowPanel1.Location = new System.Drawing.Point(24, 134);
+            this.guna2ShadowPanel1.Location = new System.Drawing.Point(24, 138);
             this.guna2ShadowPanel1.Name = "guna2ShadowPanel1";
             this.guna2ShadowPanel1.Radius = 6;
             this.guna2ShadowPanel1.ShadowColor = System.Drawing.Color.Black;
@@ -102,7 +102,7 @@
             // 
             // guna2VSeparator1
             // 
-            this.guna2VSeparator1.Location = new System.Drawing.Point(661, 198);
+            this.guna2VSeparator1.Location = new System.Drawing.Point(658, 244);
             this.guna2VSeparator1.Name = "guna2VSeparator1";
             this.guna2VSeparator1.Size = new System.Drawing.Size(10, 117);
             this.guna2VSeparator1.TabIndex = 3;
@@ -123,7 +123,7 @@
             this.flowLayoutPanel2.Controls.Add(this.label4);
             this.flowLayoutPanel2.Location = new System.Drawing.Point(23, 44);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(556, 129);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(556, 198);
             this.flowLayoutPanel2.TabIndex = 3;
             // 
             // label4
@@ -166,11 +166,11 @@
             this.guna2ShadowPanel3.Controls.Add(this.flowLayoutPanel2);
             this.guna2ShadowPanel3.Controls.Add(this.label3);
             this.guna2ShadowPanel3.FillColor = System.Drawing.Color.White;
-            this.guna2ShadowPanel3.Location = new System.Drawing.Point(24, 279);
+            this.guna2ShadowPanel3.Location = new System.Drawing.Point(24, 285);
             this.guna2ShadowPanel3.Name = "guna2ShadowPanel3";
             this.guna2ShadowPanel3.Radius = 6;
             this.guna2ShadowPanel3.ShadowColor = System.Drawing.Color.Black;
-            this.guna2ShadowPanel3.Size = new System.Drawing.Size(596, 189);
+            this.guna2ShadowPanel3.Size = new System.Drawing.Size(596, 273);
             this.guna2ShadowPanel3.TabIndex = 4;
             // 
             // DashboardUC
@@ -182,6 +182,7 @@
             this.Controls.Add(this.guna2ShadowPanel1);
             this.Controls.Add(this.lblRole);
             this.Controls.Add(this.lblNameUser);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "DashboardUC";
             this.Size = new System.Drawing.Size(1280, 611);

@@ -21,6 +21,8 @@ namespace AisInternalSystem
         public UCClassModel()
         {
             InitializeComponent();
+            Utilities.SetDoubleBuffer(this, true);
+
         }
 
         #region Properties
@@ -75,7 +77,7 @@ namespace AisInternalSystem
         {
             guna2ShadowPanel1.FillColor = Color.Coral;
             guna2ShadowPanel2.FillColor = Color.Coral;
-            UIController.ClassChoosed(this.ClassIdentifier.ToString());
+            UIController.ClassChoosed(this);
         }
         #endregion
         
@@ -115,7 +117,7 @@ namespace AisInternalSystem
         }
         private void UCClassModel_MouseClick(object sender, MouseEventArgs e)
         {
-            //this shit is useless
+
         }
 
         #endregion

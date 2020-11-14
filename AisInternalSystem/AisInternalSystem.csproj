@@ -130,15 +130,18 @@
     <Compile Include="Controller\Confirmation.cs" />
     <Compile Include="Controller\Data.cs" />
     <Compile Include="Controller\Query.cs" />
+    <Compile Include="Controller\Startup.cs" />
+    <Compile Include="Controller\Threader.cs" />
     <Compile Include="Controller\UIController.cs" />
     <Compile Include="Controller\Utilities.cs" />
     <Compile Include="Entities\ClassRoom.cs" />
+    <Compile Include="Entities\Relationship.cs" />
     <Compile Include="Entities\Student.cs" />
-    <Compile Include="Main.cs">
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.cs">
-      <DependentUpon>Main.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\ClassHistory.cs">
       <SubType>UserControl</SubType>
@@ -191,11 +194,23 @@
       <DependentUpon>TaskItem.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\Menu\Tasks.cs" />
-    <Compile Include="UserInterface\Student\Student.cs">
+    <Compile Include="UserInterface\Menu\UCWaiter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\Student\Student.Designer.cs">
-      <DependentUpon>Student.cs</DependentUpon>
+    <Compile Include="UserInterface\Menu\UCWaiter.Designer.cs">
+      <DependentUpon>UCWaiter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\Student\UCRecStudent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserInterface\Student\UCRecStudent.Designer.cs">
+      <DependentUpon>UCRecStudent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\Student\UCStudDirectory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserInterface\Student\UCStudDirectory.Designer.cs">
+      <DependentUpon>UCStudDirectory.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\UCDashboardAdmin.cs">
       <SubType>UserControl</SubType>
@@ -235,7 +250,6 @@
     </Compile>
     <Compile Include="Entities\AcademicYear.cs" />
     <Compile Include="Module\AppVersion.cs" />
-    <Compile Include="Reporting\Data.cs" />
     <Compile Include="Module\Db.cs" />
     <Compile Include="Controller\PopUp.cs" />
     <Compile Include="Entities\Document.cs" />
@@ -346,6 +360,12 @@
     <Compile Include="UserInterface\UCMaster.Designer.cs">
       <DependentUpon>UCMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserInterface\UCMessaging.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserInterface\UCMessaging.Designer.cs">
+      <DependentUpon>UCMessaging.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserInterface\UCRecStud.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -375,12 +395,6 @@
     </Compile>
     <Compile Include="UserInterface\UCSubjectList.Designer.cs">
       <DependentUpon>UCSubjectList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserInterface\UCSubjectModel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserInterface\UCSubjectModel.Designer.cs">
-      <DependentUpon>UCSubjectModel.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\UCSubjectTeacher.cs">
       <SubType>UserControl</SubType>
@@ -424,8 +438,8 @@
     <Compile Include="UserInterface\UpperPanelAdmin.Designer.cs">
       <DependentUpon>UpperPanelAdmin.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Main.resx">
-      <DependentUpon>Main.cs</DependentUpon>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\ClassHistory.resx">
       <DependentUpon>ClassHistory.cs</DependentUpon>
@@ -451,8 +465,14 @@
     <EmbeddedResource Include="UserInterface\Menu\TaskItem.resx">
       <DependentUpon>TaskItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\Student\Student.resx">
-      <DependentUpon>Student.cs</DependentUpon>
+    <EmbeddedResource Include="UserInterface\Menu\UCWaiter.resx">
+      <DependentUpon>UCWaiter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\Student\UCRecStudent.resx">
+      <DependentUpon>UCRecStudent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\Student\UCStudDirectory.resx">
+      <DependentUpon>UCStudDirectory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\UCDashboardAdmin.resx">
       <DependentUpon>UCDashboardAdmin.cs</DependentUpon>
@@ -532,6 +552,9 @@
     <EmbeddedResource Include="UserInterface\UCMaster.resx">
       <DependentUpon>UCMaster.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\UCMessaging.resx">
+      <DependentUpon>UCMessaging.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\UCRecStud.resx">
       <DependentUpon>UCRecStud.cs</DependentUpon>
     </EmbeddedResource>
@@ -546,9 +569,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\UCSubjectList.resx">
       <DependentUpon>UCSubjectList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UCSubjectModel.resx">
-      <DependentUpon>UCSubjectModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\UCSubjectTeacher.resx">
       <DependentUpon>UCSubjectTeacher.cs</DependentUpon>
@@ -729,6 +749,18 @@
     <None Include="Properties\icons8_switch_24px_1.png" />
     <None Include="Properties\icons8_enter_key_32px.png" />
     <None Include="Properties\Subjects\subjectdefault.png" />
+    <None Include="Properties\subjectTechnology.png" />
+    <None Include="Properties\subjectSocial.png" />
+    <None Include="Properties\subjectScience.png" />
+    <None Include="Properties\subjectMath.png" />
+    <None Include="Properties\subjectHistory.png" />
+    <None Include="Properties\subjectGeography.png" />
+    <None Include="Properties\subjectEnglish.png" />
+    <None Include="Properties\subjectBiology.png" />
+    <None Include="Properties\refresh_200_transparent.gif" />
+    <None Include="Properties\icons8_search_30px.png" />
+    <None Include="Properties\upload-to-cloud_200_transparent.gif" />
+    <None Include="Properties\Ellipsis-2s-604px.gif" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

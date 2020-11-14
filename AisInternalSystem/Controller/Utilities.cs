@@ -11,9 +11,19 @@ using System.Data;
 using AisInternalSystem.Module;
 using AisInternalSystem.Entities;
 using Microsoft.ReportingServices.Interfaces;
-using System.Windows;
 using System.Windows.Forms;
 using Telerik.Charting;
+using System.IO;
+using System.ComponentModel;
+using Guna.UI2.WinForms;
+using System.Management;
+using System.Reflection;
+using System.Threading;
+using System.Runtime.CompilerServices;
+using System.Drawing;
+using Telerik.WinControls.UI;
+using AisInternalSystem.Properties;
+using System.Diagnostics;
 
 namespace AisInternalSystem.Controller
 {
@@ -22,9 +32,117 @@ namespace AisInternalSystem.Controller
         private static User.RoleIdentifier _role;
         public Utilities()
         {
-
+            
+        }
+        private static int progressInt;
+        private static string[] paramList;
+        private static bool ProcessFinished;
+        public static BackgroundWorker workerparam;
+        private static BackgroundWorker InitWorker(WorkerProcess process, string[] listofParams)
+        {
+            paramList = listofParams;
+            _processEnum = process;
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.ProgressChanged += Worker_ProgressChanged;
+            worker.DoWork += Worker_DoWork;
+            worker.WorkerReportsProgress = true;
+            worker.WorkerSupportsCancellation = true;
+            workerparam = worker;
+            return worker;
         }
 
+        public static string GetSelectedDatagridValue(Guna2DataGridView datagrid, string targetHeader)
+        {
+            if (datagrid.SelectedCells.Count > 0)
+            {
+                int selectedrowindex = datagrid.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = datagrid.Rows[selectedrowindex];
+                string a = Convert.ToString(selectedRow.Cells[targetHeader].Value);
+                return a;
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        public static string GetFileDbLocationString(LocationType type, string name, OpenFileDialog dialog)
+        {
+            string dbstring;
+            string ext = Path.GetExtension(dialog.FileName);
+            switch (type)
+            {
+                case LocationType.SubjectPhoto:
+                    dbstring = $@"\\{Db.ServerIPAddress}\SysInternal\Img\SubjectPhoto\" + name + ext;
+                    return dbstring;
+                    break;
+                case LocationType.StudentDocuments:
+                    dbstring = $@"\\{Db.ServerIPAddress}\SysInternal\Docs\StudDocs\{ name}{ ext}";
+                    return dbstring;
+                    break;
+                case LocationType.StudentPhoto:
+                    dbstring = $@"\\{Db.ServerIPAddress}\SysInternal\Img\StudentPhoto\{name}{ext}";
+                    return dbstring;
+                    break;
+                case LocationType.ParentPhoto:
+                    dbstring = $@"\\{Db.ServerIPAddress}\SysInternal\Img\ParentsPhoto\{name}{ext}";
+                    return dbstring;
+                    break;
+                default:
+                    return null;
+                    break;
+            }
+        }
+        public static void RunInBackground()
+        {
+            
+        }
+        private static void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressInt = e.ProgressPercentage;
+            if (progressInt == 100)
+            {
+                ProcessFinished = true;
+                workerparam.Dispose();
+            }
+            ProcessFinished = false;
+        }
+        public enum LocationType
+        {
+            SubjectPhoto, StudentDocuments, StudentPhoto, ParentPhoto
+
+        }
+        public static void SetDoubleBuffer(Control ctl, bool DoubleBuffered)
+        {
+            typeof(Control).InvokeMember("DoubleBuffered",
+                BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty,
+                null, ctl, new object[] { DoubleBuffered });
+        }
+
+        private static WorkerProcess _processEnum;
+        public enum WorkerProcess
+        {
+           CopyFile, GetClassList
+        }
+        public static void WorkerFire(WorkerProcess process, string[] listofParams)
+        {
+            BackgroundWorker worker = InitWorker(process, listofParams);
+            worker.RunWorkerAsync();
+        }
+        private static void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            switch (_processEnum)
+            {
+                case WorkerProcess.CopyFile:
+                    CopyToServer(paramList[0], paramList[1]);
+                    break;
+                case WorkerProcess.GetClassList:
+
+                    break;
+                default:
+                    break;
+            }
+        }
         public static DateTime GetDateTimeNow()
         {
             DateTime date = DateTime.Now;
@@ -42,6 +160,56 @@ namespace AisInternalSystem.Controller
             return Data.user.OwnerID;
         }
 
+        public static void OpenFileDocs(string path)
+        {
+            Process.Start(path);
+        }
+
+        public static OpenFileDialog OpenImage(PictureBox picture)
+        {
+            OpenFileDialog opf = new OpenFileDialog() ;
+            opf.Filter = ("Image Files(*.BMP; *.JPG; *.JPEG; *.PNG;)| *.BMP; *.JPG; *.JPEG; *.PNG; | All files(*.*) | *.*");
+            if (opf.ShowDialog() == DialogResult.OK)
+            {
+                Stream stream = File.Open(opf.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                picture.Image = Image.FromStream(stream);
+            }
+            else
+            {
+                picture.Image = Resources.icons8_question_mark_480px;
+            }
+            return opf;
+
+        }
+
+        public static OpenFileDialog OpenFile(string filter)
+        {
+            OpenFileDialog opf = new OpenFileDialog();
+            opf.Filter = (filter);
+            if (opf.ShowDialog() == DialogResult.OK)
+            {
+                
+            }
+            return opf;
+        }
+
+        public static void CopyToServer(string from, string to)
+        {
+            FileStream fsOut = new FileStream(to, FileMode.Create);
+            
+            FileStream fsIn = new FileStream(from, FileMode.Open, FileAccess.Read, FileShare.Read);
+            byte[] bt = new byte[10000];
+            int reaDbyte;
+
+            while ((reaDbyte = fsIn.Read(bt, 0, bt.Length)) > 0)
+            {
+                fsOut.Write(bt, 0, reaDbyte);
+                workerparam.ReportProgress((int)(fsIn.Position * 100 / fsIn.Length));
+            }
+            fsIn.Close();
+            fsOut.Close();
+        }
+
         public static void Auth(string usr, string pwd)
         {
             DataTable dt = new DataTable();
@@ -54,6 +222,7 @@ namespace AisInternalSystem.Controller
                 Data.user.Roles = dt.Rows[0][3].ToString();
                 Data.user.OwnerID = Convert.ToInt32(dt.Rows[0][4].ToString());
                 Data.user.OwnerName = dt.Rows[0][5].ToString();
+                Data.user.UserImage = dt.Rows[0][6].ToString();
                 RoleSwitcher(Data.user.Roles);
                 DoAuth();
             }

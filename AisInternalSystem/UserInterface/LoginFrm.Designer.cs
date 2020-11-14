@@ -165,6 +165,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_password);
             this.Controls.Add(this.txt_username);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "LoginFrm";
             this.Size = new System.Drawing.Size(1280, 611);

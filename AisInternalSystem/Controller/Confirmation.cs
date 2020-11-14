@@ -3,6 +3,8 @@ using AisInternalSystem.Properties;
 using Guna.UI2.WinForms.Suite;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +25,7 @@ namespace AisInternalSystem.Controller
 
         public enum onConfirmEnum
         {
-            Exit   
+            Exit   , Update
         }
         private static onConfirmEnum OnConfirm;
 
@@ -45,6 +47,13 @@ namespace AisInternalSystem.Controller
                     dialog.YesLabel = "Yes, let me go!";
                     dialog.NoLabel = "No, i misclicked it";
                     break;
+                case onConfirmEnum.Update:
+                    dialog.Title = "We've got an update for you!";
+                    dialog.Subtitle = "Yeah, we know... it's been awhile... so... you want to update the system or not?";
+                    dialog.ImageType = Resources.update;
+                    dialog.YesLabel = "Yes, give me that sweet update!";
+                    dialog.NoLabel = "Nah, just let me do my job";
+                    break;
                 default:
                     break;
             }
@@ -57,7 +66,11 @@ namespace AisInternalSystem.Controller
                 case onConfirmEnum.Exit:
                     Application.Exit();
                     break;
-             
+                case onConfirmEnum.Update:
+                    string workingdir = Directory.GetCurrentDirectory();
+                    Process.Start($@"{workingdir}\Updater.exe");
+                    Application.Exit();
+                    break;
                 default:
                     break;
             }
@@ -71,7 +84,8 @@ namespace AisInternalSystem.Controller
                     dialog.SendToBack();            
                     break;
                 default:
-                    
+                case onConfirmEnum.Update:
+                    dialog.SendToBack();
                     break;
             }
         }

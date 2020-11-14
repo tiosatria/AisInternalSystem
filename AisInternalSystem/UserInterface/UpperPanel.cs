@@ -30,6 +30,8 @@ namespace AisInternalSystem
             else
             {
                 InitializeComponent();
+                this.Visible = false;
+                UIController.Animate(this, Guna.UI2.AnimatorNS.AnimationType.VertSlide);
                 UIController.GetDragControl(panel_default);
             }
             isLoaded = true;
@@ -37,6 +39,7 @@ namespace AisInternalSystem
 
         private void BtnExit_Click(object sender, EventArgs e)
         {
+
             Confirmation.Fire(Confirmation.onConfirmEnum.Exit);
         }
     }

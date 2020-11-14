@@ -22,6 +22,7 @@ namespace AisInternalSystem
     public partial class LoginFrm : UserControl
     {
         private bool isLoaded = false;
+
         public LoginFrm()
         {
 
@@ -36,6 +37,8 @@ namespace AisInternalSystem
             else
             {
                 InitializeComponent();
+                this.Visible = false;
+                UIController.Animate(this, AnimationType.Transparent);
             }
             isLoaded = true;
         }

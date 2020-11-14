@@ -30,10 +30,6 @@ namespace AisInternalSystem
             DataTable dt = new DataTable();
             da.Fill(dt);
             ReportDataSource rds = new ReportDataSource("DataSet1", dt);
-            reportViewer1.LocalReport.ReportPath = @"C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\StudSummary.rdlc";
-            reportViewer1.LocalReport.DataSources.Clear();
-            reportViewer1.LocalReport.DataSources.Add(rds);
-            reportViewer1.RefreshReport();
         }
 
         private void openMasterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -42,6 +38,14 @@ namespace AisInternalSystem
             this.Controls.Add(master);
             this.Controls[Controls.IndexOf(master)].BringToFront();
             master.Dock = DockStyle.Fill;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i <= 10; i++)
+            {
+                MessageBox.Show(i.ToString());
+            }
         }
     }
 }

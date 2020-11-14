@@ -20,6 +20,14 @@ namespace AisInternalSystem.Module
             get { return "Password"; }
             set { _password = value; }
         }
+        private string _img;
+
+        public string UserImage
+        {
+            get { return _img; }
+            set { _img = value;  }
+        }
+        
         public string Roles { get; set ; }
         public int OwnerID { get; set; }
         public int UserID { get; set; }
