@@ -135,8 +135,12 @@
     <Compile Include="Controller\UIController.cs" />
     <Compile Include="Controller\Utilities.cs" />
     <Compile Include="Entities\ClassRoom.cs" />
+    <Compile Include="Entities\IndividualItem.cs" />
+    <Compile Include="Entities\Item.cs" />
+    <Compile Include="Entities\ItemCategories.cs" />
     <Compile Include="Entities\Relationship.cs" />
     <Compile Include="Entities\Student.cs" />
+    <Compile Include="Entities\Transaction.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
