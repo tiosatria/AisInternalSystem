@@ -27,7 +27,7 @@ namespace AisInternalSystem.UserInterface.Menu
         }
 
         #endregion
-        private bool isLoaded;
+        private bool isLoaded = false;
         public MenuContainer()
         {
             InitializeComponent();
@@ -37,47 +37,49 @@ namespace AisInternalSystem.UserInterface.Menu
             this.Location = new Point(640, 109);
 
         }
-        public void InitObject(MenuController.MenuType men)
+        public void InitObject(CategoryMenu men)
         {
+            if (isLoaded)
+            {
+
+            }
+            else
+            {
+                InitMenus();
+            }
             GetMenuItem(men);
+
+            isLoaded = true;
         }
 
-        private void GetMenuItem(MenuController.MenuType men)
+        private void GetMenuItem(CategoryMenu menu)
         {
-                    MenuController.GetContainerProperties(this, men);
-                    flowMenuItems.Controls.Clear();
-                    Menus.InitMenus();
-                    List<MenuItem> menuItems = Menus.ListMenu;
-                    if (menuItems.Count >= 1)
-                    {
-                        panelnotfound.Visible = false;
-                        flowMenuItems.Visible = true;
-                        MenuItem[] items = new MenuItem[menuItems.Count];
-                        foreach (MenuItem item in menuItems)
-                        {
-                            if (item.Category.Contains(men))
-                            {
-                                if (item.Accesor.Contains(Data.user._role))
-                                {
-                                    flowMenuItems.Controls.Add(item);
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        flowMenuItems.Visible = false;
-                        panelnotfound.Visible = true;
-                    }
-                    DefaultControls = flowMenuItems.Controls;
+            this.lblMenu.Text = menu.CategoryDescription;
+            foreach (MenuItem item in flowMenuItems.Controls)
+            {
+                if (item.Category == menu && item.Accessor.Contains(Data.user._role))
+                {
+                    item.Visible = true;
+                }
+                else
+                {
+                    item.Visible = false;
+                }
+            }
         }
+
+        private void InitMenus()
+        {
+            Menus.InitMenus();
+            for (int i = 0; i < Menus.ListOfMenus.Count; i++)
+            {
+                Menus.ListOfMenus[i].Item.Visible = false;
+                flowMenuItems.Controls.Add(Menus.ListOfMenus[i].Item);
+            }
+        }
+
 
         private ControlCollection DefaultControls;
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            UIController.ResetMenu() ;
-        }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
@@ -115,7 +117,6 @@ namespace AisInternalSystem.UserInterface.Menu
         {
             if ((keyData == Keys.Escape))
             {
-                UIController.ResetMenu();
                 //Do custom stuff
                 //true if key was processed by control, false otherwise
                 return true;

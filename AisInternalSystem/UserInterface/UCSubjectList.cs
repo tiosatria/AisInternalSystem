@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AisInternalSystem.Properties;
+using AisInternalSystem.Controller;
 using System.Runtime.Versioning;
 using System.Configuration;
 using System.Windows.Markup;

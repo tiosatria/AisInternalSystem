@@ -2,6 +2,7 @@
 using AisInternalSystem.Properties;
 using System;
 using System.Collections.Generic;
+using AisInternalSystem.Controller;
 using System.Drawing;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -26,43 +27,79 @@ namespace AisInternalSystem.UserInterface.Menu
         
         public static void InitMenus()
         {
-            AddMenu("Employee Directory", "Employee Directory Services", MenuItem.DoingWhatEnum.Reviewing, Resources.icons8_people_48px, new List<MenuController.MenuType> { MenuController.MenuType.Employee }, new List<User.RoleIdentifier> { User.RoleIdentifier.Accounting, User.RoleIdentifier.Teacher, User.RoleIdentifier.Admin }, MenuController.MenuDoes.EmployeeDirectoryService);
-            AddMenu("Record Employee", "Record new employee data", MenuItem.DoingWhatEnum.Working, Resources.icons8_add_60px, new List<MenuController.MenuType> { MenuController.MenuType.Employee }, new List<User.RoleIdentifier> { User.RoleIdentifier.Accounting, User.RoleIdentifier.Admin, User.RoleIdentifier.Management }, MenuController.MenuDoes.RecordEmployee);
-            AddMenu("Student Directory", "Student Directory Services", MenuItem.DoingWhatEnum.Reviewing, Resources.icons8_student_male_60px, new List<MenuController.MenuType> { MenuController.MenuType.SchoolAdministration }, new List<User.RoleIdentifier> { User.RoleIdentifier.Accounting, User.RoleIdentifier.Admin, User.RoleIdentifier.IT, User.RoleIdentifier.Management, User.RoleIdentifier.Teacher }, MenuController.MenuDoes.StudentDirectoryService);
-            AddMenu("Record Student Data", "Record new student data", MenuItem.DoingWhatEnum.Working, Resources.icons8_add_60px, new List<MenuController.MenuType> { MenuController.MenuType.SchoolAdministration }, new List<User.RoleIdentifier> { User.RoleIdentifier.Accounting, User.RoleIdentifier.Admin, User.RoleIdentifier.IT, User.RoleIdentifier.Management }, MenuController.MenuDoes.RecordNewStudentData);
-            AddMenu("Class Directory", "Class Directory Services", MenuItem.DoingWhatEnum.Reviewing, Resources.icons8_classroom_200px, new List<MenuController.MenuType> { MenuController.MenuType.SchoolAdministration }, new List<User.RoleIdentifier> { User.RoleIdentifier.Admin, User.RoleIdentifier.Accounting }, MenuController.MenuDoes.ClassDirectoryService);
-            AddMenu("Subject Directory", "Subject Directory Services", MenuItem.DoingWhatEnum.Reviewing, Resources.ReportCard, new List<MenuController.MenuType> { MenuController.MenuType.SchoolAdministration }, new List<User.RoleIdentifier> { User.RoleIdentifier.Admin }, MenuController.MenuDoes.SubjectDirectoryServices);
+            AddMenu(1, "Employee Directory", "Employee Directory Services", MenuItem.DoingWhatEnum.Reviewing, Resources.icons8_people_48px, Employee, new List<User.RoleIdentifier> { User.RoleIdentifier.Accounting, User.RoleIdentifier.Teacher, User.RoleIdentifier.Admin }, UIController.Controls.EmployeeDirectoryService);
+            AddMenu(2, "Record Employee", "Record new employee data", MenuItem.DoingWhatEnum.Working, Resources.icons8_add_60px, Employee, new List<User.RoleIdentifier> { User.RoleIdentifier.Accounting, User.RoleIdentifier.Admin, User.RoleIdentifier.Management }, UIController.Controls.RecordEmployee);
+            AddMenu(3, "Student Directory", "Student Directory Services", MenuItem.DoingWhatEnum.Reviewing, Resources.icons8_student_male_60px, SchoolAdministration, new List<User.RoleIdentifier> { User.RoleIdentifier.Accounting, User.RoleIdentifier.Admin, User.RoleIdentifier.IT, User.RoleIdentifier.Management, User.RoleIdentifier.Teacher }, UIController.Controls.StudentDirectoryService);
+            AddMenu(4, "Record Student Data", "Record new student data", MenuItem.DoingWhatEnum.Working, Resources.icons8_add_60px, SchoolAdministration, new List<User.RoleIdentifier> { User.RoleIdentifier.Accounting, User.RoleIdentifier.Admin, User.RoleIdentifier.IT, User.RoleIdentifier.Management }, UIController.Controls.RecordStudentData);
+            AddMenu(5, "Class Directory", "Class Directory Services", MenuItem.DoingWhatEnum.Reviewing, Resources.icons8_classroom_200px, SchoolAdministration, new List<User.RoleIdentifier> { User.RoleIdentifier.Admin, User.RoleIdentifier.Accounting }, UIController.Controls.ClassDirectoryService);
+            AddMenu(6, "Subject Directory", "Subject Directory Services", MenuItem.DoingWhatEnum.Reviewing, Resources.ReportCard, SchoolAdministration, new List<User.RoleIdentifier> { User.RoleIdentifier.Admin }, UIController.Controls.SubjectDirectoryServices);
+            AddMenu(7, "Inventory Directory", "Inventory Directory Services", MenuItem.DoingWhatEnum.Reviewing, Resources.icons8_Travel_Diary_32px, Inventory, new List<User.RoleIdentifier> { User.RoleIdentifier.Admin, User.RoleIdentifier.IT, User.RoleIdentifier.Accounting, User.RoleIdentifier.Management }, UIController.Controls.InventoryDirectory);
         }
 
-        private static int itemIndex = 0;
-        private static void AddMenu(string title, string description, MenuItem.DoingWhatEnum act, Image img, List<MenuController.MenuType> Categories, List<User.RoleIdentifier> Accessor, MenuController.MenuDoes does)
+        public static void InitCategories()
         {
-            if (ListMenu.Exists(o => o.Title == title))
-            {
-                //check to see whether the menu is existed
-                //do nothing
-            }
-            else
-            {
-                itemIndex++;
-                MenuItem menu = new MenuItem();
-                menu.Title = title;
-                menu.Index = itemIndex; 
-                menu.Subtitle = description;
-                menu.Image = img;
-                menu.Doing = act;
-                menu.Category = Categories;
-                menu.Does = does;
-                menu.Accesor = Accessor;
-                ListMenu.Add(menu);
-            }
+                
         }
+
+        private static void AddMenu(int id, string title, string description, MenuItem.DoingWhatEnum act, Image img, CategoryMenu category, List<User.RoleIdentifier> Accessor, UIController.Controls controls)
+        {
+            ItemMenu item = new ItemMenu();
+            item.IDItem = id;
+            item.ItemName = title;
+            item.ItemDescription = description;
+            item.TypeDoing = act;
+            item.ItemImage = img;
+            item.Category = category;
+            item.Accessor = Accessor;
+            item.Controls = controls;
+            item.Init();
+            ListOfMenus.Add(item);
+        }
+        public static List<ItemMenu> ListOfMenus = new List<ItemMenu>();
+        private static Size CategoryNormalSize = new Size(142, 57);
+
+        private static void MenuAdmin()
+        {
+            Generate = new CategoryMenu(1, "Generate", "things you can generate: ", CategoryNormalSize, new Point(672, 7));
+            SchoolAdministration = new CategoryMenu(2, "School Administration", "School Administration Menu", CategoryNormalSize, new Point(Generate.Location.X + 156, 7));
+            Employee = new CategoryMenu(3, "Employee", "Employee Menu", CategoryNormalSize, new Point(SchoolAdministration.Location.X + 156, 7));
+            Inventory = new CategoryMenu(4, "Inventory", "Inventory Menus: ", CategoryNormalSize, new Point(Employee.Location.X + 156, 7));
+            Category.AddRange(new List<CategoryMenu> { Generate, SchoolAdministration, Employee, Inventory});
+        }
+
+        public static List<CategoryMenu> GetCategory(User.RoleIdentifier roleIdentifier)
+        {
+            switch (roleIdentifier)
+            {
+                case User.RoleIdentifier.Management:
+
+                    break;
+                case User.RoleIdentifier.Admin:
+                    MenuAdmin();
+                    break;
+                case User.RoleIdentifier.IT:
+                    break;
+                case User.RoleIdentifier.Teacher:
+                    break;
+                case User.RoleIdentifier.Accounting:
+                    break;
+                default:
+                    break;
+            }
+            return Category;
+        }
+
         #region List of categories
-        private static List<MenuController.MenuType> Categories = new List<MenuController.MenuType>();
+        public static List<CategoryMenu> Category = new List<CategoryMenu>();
+        #region Admin
+        private static CategoryMenu SchoolAdministration = null;
+        private static CategoryMenu Inventory = null;
+        private static CategoryMenu Employee = null;
+        private static CategoryMenu Generate = null;
         #endregion
-        #region List of Menu
-        public static List<MenuItem> ListMenu = new List<MenuItem>();
-    #endregion
+
+
+        #endregion
 
 }
 }

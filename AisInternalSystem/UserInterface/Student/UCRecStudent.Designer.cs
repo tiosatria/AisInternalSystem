@@ -4880,8 +4880,8 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.ContainerSibling);
             this.Controls.Add(this.ContainerStudent);
+            this.Controls.Add(this.ContainerSibling);
             this.Controls.Add(this.ContainerRelationship);
             this.Controls.Add(this.btnSibling);
             this.Controls.Add(this.ContainerRelat);

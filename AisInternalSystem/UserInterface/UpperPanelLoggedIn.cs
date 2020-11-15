@@ -33,13 +33,23 @@ namespace AisInternalSystem
             else
             {
                 InitializeComponent();
+                GetCategory();
                 UIController.Animate(this, Guna.UI2.AnimatorNS.AnimationType.HorizSlide);
                 UIController.GetDragControl(panel_Upper_admin);
             }
             IsLoaded = true;
         }
         private Image imgUser;
-
+        List<CategoryMenu> Categories;
+        private void GetCategory()
+        {
+            Categories = Menus.GetCategory(Data.user._role);
+            for (int i = 0; i < Categories.Count; i++)
+            {
+                panel_Upper_admin.Controls.Add(Categories[i].CategoryHandler);
+                panel_Upper_admin.Controls.Add(Categories[i].separator);
+            }
+        }
         private string _img;
         public string imgLocation
         {
@@ -57,33 +67,12 @@ namespace AisInternalSystem
                 imgUser = value;
             }
         }
-        private MenuController.MenuType _menutype;
 
         private void BtnDashboardAdmin_Click(object sender, EventArgs e)
         {
             UIController.NavigateUI(UIController.Controls.UCDashboardAdmin);
         }
             
-        private void BtnSchoolAdmin_Click(object sender, EventArgs e)
-        {
-            UIController.MenuChoosed(MenuController.MenuType.SchoolAdministration, BtnSchoolAdmin);
-        }
-
-        private void BtnEmployeeAdmin_Click(object sender, EventArgs e)
-        {
-            UIController.MenuChoosed(MenuController.MenuType.Employee, BtnEmployeeAdmin);
-        }
-
-        private void dotter1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtnInventoryAdmin_Click(object sender, EventArgs e)
-        {
-            UIController.MenuChoosed(MenuController.MenuType.Inventory, BtnInventoryAdmin);
-        }
-
         private void picBtnExit_Click(object sender, EventArgs e)
         {
             Confirmation.Fire(Confirmation.onConfirmEnum.Exit);

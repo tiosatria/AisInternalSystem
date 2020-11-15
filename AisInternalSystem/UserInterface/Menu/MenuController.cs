@@ -23,135 +23,79 @@ namespace AisInternalSystem.UserInterface.Menu
         {
 
         }
-        public enum MenuType
-        {
-            Employee, SchoolAdministration, Inventory
-        }
-        private MenuType _menutype;
-        public enum MenuDoes
-        {
-            EmployeeDirectoryService, RecordEmployee, StudentDirectoryService, RecordNewStudentData, ClassAssignment, ClassInsight, ClassDirectoryService, SubjectDirectoryServices
-        }
-        public enum MenuItemsEmployee
-        {
-            EmployeeDirectoryService, RecordEmployee
-        }
-        private static MenuItemsEmployee menuItemsEmployee;
-        public enum MenuItemSchoolAdministration
-        {
-            StudentDirectoryService, RecordNewStudentData
-        }
         public static bool isOpen;
-        private static MenuType _memmnu;
-        public static MenuType Memmnu
-        {
-            get
-            {
-                    return _memmnu;
-            }
-            set { _memmnu = value; isOpen = true;  }
-        }
 
-        public static void GetContainerProperties(MenuContainer menu, MenuType menuType)
-        {
-            if (isOpen)
-            {
-                Memmnu = menuType;
-            }
-            switch (menuType)
-            {
-                case MenuType.Employee:
-                    menu.Title = "Employee menu";
-                    break;
-                case MenuType.SchoolAdministration:
-                    menu.Title = "You've opened School Administration";
-                    break;
-                case MenuType.Inventory:
-                    menu.Title = "Inventory Menus";
-                    break;
-                default:
+        //private static void AddToTask(MenuDoes does)
+        //{
+        //    if (Data.tasks.Exists(o => o.Does == does))
+        //    {
 
-                    break;
-            }
-        }
+        //        UIController.ResetMenu();
+        //        Data.taskExpanders[Data.taskExpanders.FindIndex(o => o.FromGroup == UIController.GetGroup())].Hide();
+        //    }
+        //    else
+        //    {
+        //        TasksUser newTask = new TasksUser();
+        //        newTask.TaskIndex = Data.tasks.Count + 1;
+        //        newTask.Sender = UIController.SenderButton();
+        //        newTask.Control = (Guna2ShadowPanel)newTask.Sender.Parent;
+        //        newTask.Location = new System.Drawing.Point(newTask.Sender.Location.X, newTask.Sender.Location.Y);
+        //        newTask.Group = UIController.GetGroup();
+        //        newTask.Does = does;
+        //        Data.tasks.Add(newTask);
+        //        UIController.ResetMenu();
+        //        UIController.InitTask(newTask.Group, newTask.Sender);
+        //        if (Data.taskExpanders.Exists(o=> o.FromGroup == UIController.GetGroup()))
+        //        {
+        //            Data.taskExpanders[Data.taskExpanders.FindIndex(o => o.FromGroup == UIController.GetGroup())].Hide();
+        //        }
+        //    }
+        //}
 
-        private static List<string> MenuCategories =  new List<string> 
-        {
-        
-        };
+        //public static void DoAction(MenuDoes does)
+        //{
+        //    switch (does)
+        //    {
+        //        case MenuDoes.EmployeeDirectoryService:
+        //            AddToTask(does);
 
-        public static void ExpandTask(MenuController.MenuType menu)
-        {
-            Data.taskExpanders[Data.taskExpanders.FindIndex(o => o.FromGroup== menu)].Expand();
-        }   
+        //            break;
+        //        case MenuDoes.RecordEmployee:
+        //            AddToTask(does);
 
-        private static void AddToTask(MenuDoes does)
-        {
-            if (Data.tasks.Exists(o => o.Does == does))
-            {
+        //            break;
+        //        case MenuDoes.StudentDirectoryService:
+        //            AddToTask(does);
 
-                UIController.ResetMenu();
-                Data.taskExpanders[Data.taskExpanders.FindIndex(o => o.FromGroup == UIController.GetGroup())].Hide();
-            }
-            else
-            {
-                TasksUser newTask = new TasksUser();
-                newTask.TaskIndex = Data.tasks.Count + 1;
-                newTask.Sender = UIController.SenderButton();
-                newTask.Control = (Guna2ShadowPanel)newTask.Sender.Parent;
-                newTask.Location = new System.Drawing.Point(newTask.Sender.Location.X, newTask.Sender.Location.Y);
-                newTask.Group = UIController.GetGroup();
-                newTask.Does = does;
-                Data.tasks.Add(newTask);
-                UIController.ResetMenu();
-                UIController.InitTask(newTask.Group, newTask.Sender);
-                if (Data.taskExpanders.Exists(o=> o.FromGroup == UIController.GetGroup()))
-                {
-                    Data.taskExpanders[Data.taskExpanders.FindIndex(o => o.FromGroup == UIController.GetGroup())].Hide();
-                }
-            }
-        }
+        //            break;
+        //        case MenuDoes.RecordNewStudentData:
+        //            AddToTask(does);
+        //            UIController.NavigateUI(UIController.Controls.RecordStudentData);
+        //            break;
+        //        case MenuDoes.ClassAssignment:
+        //            AddToTask(does);
 
-        public static void DoAction(MenuDoes does)
-        {
-            switch (does)
-            {
-                case MenuDoes.EmployeeDirectoryService:
-                    AddToTask(does);
-
-                    break;
-                case MenuDoes.RecordEmployee:
-                    AddToTask(does);
-
-                    break;
-                case MenuDoes.StudentDirectoryService:
-                    AddToTask(does);
-
-                    break;
-                case MenuDoes.RecordNewStudentData:
-                    AddToTask(does);
-                    UIController.NavigateUI(UIController.Controls.RecordStudentData);
-                    break;
-                case MenuDoes.ClassAssignment:
-                    AddToTask(does);
-
-                    break;
-                case MenuDoes.ClassInsight:
-                    AddToTask(does);
+        //            break;
+        //        case MenuDoes.ClassInsight:
+        //            AddToTask(does);
                     
-                    break;
-                case MenuDoes.ClassDirectoryService:
-                    AddToTask(does);
-                    UIController.NavigateUI(UIController.Controls.ClassDirectoryService);
-                    break;
-                case MenuDoes.SubjectDirectoryServices:
-                    AddToTask(does);
-                    UIController.NavigateUI(UIController.Controls.SubjectDirectoryServices);
-                    break;
-                default:
-                    break;
-            }
-        }
+        //            break;
+        //        case MenuDoes.ClassDirectoryService:
+        //            AddToTask(does);
+        //            UIController.NavigateUI(UIController.Controls.ClassDirectoryService);
+        //            break;
+        //        case MenuDoes.SubjectDirectoryServices:
+        //            AddToTask(does);
+        //            UIController.NavigateUI(UIController.Controls.SubjectDirectoryServices);
+        //            break;
+        //        case MenuDoes.InventoryDirectoryService:
+        //            AddToTask(does);
+        //            UIController.NavigateUI(UIController.Controls.InventoryDirectory);
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
 
     }
 }

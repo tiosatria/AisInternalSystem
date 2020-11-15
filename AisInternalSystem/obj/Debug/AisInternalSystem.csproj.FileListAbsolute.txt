@@ -430,5 +430,6 @@ C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisIntern
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Student.UCStudDirectory.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Student.UCRecStudent.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Menu.UCWaiter.resources
-C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.csprojAssemblyReference.cache
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.UCMessaging.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.PanelListModel.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.csprojAssemblyReference.cache

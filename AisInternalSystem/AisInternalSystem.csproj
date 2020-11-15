@@ -129,8 +129,10 @@
   <ItemGroup>
     <Compile Include="Controller\Confirmation.cs" />
     <Compile Include="Controller\Data.cs" />
+    <Compile Include="Controller\PublicProperties.cs" />
     <Compile Include="Controller\Query.cs" />
     <Compile Include="Controller\Startup.cs" />
+    <Compile Include="Controller\Task.cs" />
     <Compile Include="Controller\Threader.cs" />
     <Compile Include="Controller\UIController.cs" />
     <Compile Include="Controller\Utilities.cs" />
@@ -153,12 +155,14 @@
     <Compile Include="UserInterface\ClassHistory.Designer.cs">
       <DependentUpon>ClassHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserInterface\Menu\CategoryMenu.cs" />
     <Compile Include="UserInterface\Menu\Dotter.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserInterface\Menu\Dotter.Designer.cs">
       <DependentUpon>Dotter.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserInterface\Menu\ItemMenu.cs" />
     <Compile Include="UserInterface\Menu\Liner.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -185,6 +189,7 @@
     <Compile Include="UserInterface\Menu\MenuSchoolAdministration.Designer.cs">
       <DependentUpon>MenuSchoolAdministration.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserInterface\Menu\TaskContainer.cs" />
     <Compile Include="UserInterface\Menu\TaskExpander.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -197,12 +202,17 @@
     <Compile Include="UserInterface\Menu\TaskItem.Designer.cs">
       <DependentUpon>TaskItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\Menu\Tasks.cs" />
     <Compile Include="UserInterface\Menu\UCWaiter.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserInterface\Menu\UCWaiter.Designer.cs">
       <DependentUpon>UCWaiter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\PanelListModel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserInterface\PanelListModel.Designer.cs">
+      <DependentUpon>PanelListModel.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\Student\UCRecStudent.cs">
       <SubType>UserControl</SubType>
@@ -436,11 +446,11 @@
     <Compile Include="UserInterface\UpperPanel.Designer.cs">
       <DependentUpon>UpperPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\UpperPanelAdmin.cs">
+    <Compile Include="UserInterface\UpperPanelLoggedIn.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\UpperPanelAdmin.Designer.cs">
-      <DependentUpon>UpperPanelAdmin.cs</DependentUpon>
+    <Compile Include="UserInterface\UpperPanelLoggedIn.Designer.cs">
+      <DependentUpon>UpperPanelLoggedIn.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -471,6 +481,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\Menu\UCWaiter.resx">
       <DependentUpon>UCWaiter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\PanelListModel.resx">
+      <DependentUpon>PanelListModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\Student\UCRecStudent.resx">
       <DependentUpon>UCRecStudent.cs</DependentUpon>
@@ -592,8 +605,8 @@
     <EmbeddedResource Include="UserInterface\UpperPanel.resx">
       <DependentUpon>UpperPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UpperPanelAdmin.resx">
-      <DependentUpon>UpperPanelAdmin.cs</DependentUpon>
+    <EmbeddedResource Include="UserInterface\UpperPanelLoggedIn.resx">
+      <DependentUpon>UpperPanelLoggedIn.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\getStudstat_Result.datasource" />

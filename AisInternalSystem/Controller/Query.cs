@@ -243,7 +243,6 @@ namespace AisInternalSystem.Controller
                 }
                 catch (MySqlException ex)
                 {
-                    MessageBox.Show(ex.Message);
                     PopUp.Alert($"Oops something wrong\n({ex.Message})", frmAlert.AlertType.Error);
                     return false;
                 }

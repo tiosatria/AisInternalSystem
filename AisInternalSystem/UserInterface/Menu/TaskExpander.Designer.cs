@@ -32,9 +32,8 @@
             this.Elipser = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.btnClose = new System.Windows.Forms.PictureBox();
-            this.BtnLogin = new Guna.UI2.WinForms.Guna2Button();
             this.flowTasks = new System.Windows.Forms.FlowLayoutPanel();
-            this.lblTaskcount = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.guna2ShadowPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
             this.SuspendLayout();
@@ -46,16 +45,14 @@
             // guna2ShadowPanel1
             // 
             this.guna2ShadowPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2ShadowPanel1.Controls.Add(this.label1);
             this.guna2ShadowPanel1.Controls.Add(this.btnClose);
-            this.guna2ShadowPanel1.Controls.Add(this.BtnLogin);
             this.guna2ShadowPanel1.Controls.Add(this.flowTasks);
-            this.guna2ShadowPanel1.Controls.Add(this.lblTaskcount);
-            this.guna2ShadowPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2ShadowPanel1.FillColor = System.Drawing.Color.WhiteSmoke;
             this.guna2ShadowPanel1.Location = new System.Drawing.Point(0, 0);
             this.guna2ShadowPanel1.Name = "guna2ShadowPanel1";
             this.guna2ShadowPanel1.ShadowColor = System.Drawing.Color.Black;
-            this.guna2ShadowPanel1.Size = new System.Drawing.Size(138, 254);
+            this.guna2ShadowPanel1.Size = new System.Drawing.Size(160, 254);
             this.guna2ShadowPanel1.TabIndex = 0;
             // 
             // btnClose
@@ -63,7 +60,7 @@
             this.btnClose.BackColor = System.Drawing.Color.Transparent;
             this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClose.Image = global::AisInternalSystem.Properties.Resources.icons8_close_window_48px;
-            this.btnClose.Location = new System.Drawing.Point(119, 4);
+            this.btnClose.Location = new System.Drawing.Point(143, 3);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(14, 14);
             this.btnClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -71,43 +68,23 @@
             this.btnClose.TabStop = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // BtnLogin
-            // 
-            this.BtnLogin.Animated = true;
-            this.BtnLogin.AutoRoundedCorners = true;
-            this.BtnLogin.BorderRadius = 10;
-            this.BtnLogin.CheckedState.Parent = this.BtnLogin;
-            this.BtnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnLogin.CustomImages.Parent = this.BtnLogin;
-            this.BtnLogin.FillColor = System.Drawing.Color.Silver;
-            this.BtnLogin.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnLogin.ForeColor = System.Drawing.Color.Black;
-            this.BtnLogin.HoverState.FillColor = System.Drawing.Color.LightCoral;
-            this.BtnLogin.HoverState.Parent = this.BtnLogin;
-            this.BtnLogin.Location = new System.Drawing.Point(18, 221);
-            this.BtnLogin.Name = "BtnLogin";
-            this.BtnLogin.ShadowDecoration.Parent = this.BtnLogin;
-            this.BtnLogin.Size = new System.Drawing.Size(100, 22);
-            this.BtnLogin.TabIndex = 6;
-            this.BtnLogin.Text = "Mark all as done";
-            // 
             // flowTasks
             // 
             this.flowTasks.AutoScroll = true;
-            this.flowTasks.Location = new System.Drawing.Point(4, 36);
+            this.flowTasks.Location = new System.Drawing.Point(4, 39);
+            this.flowTasks.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
             this.flowTasks.Name = "flowTasks";
-            this.flowTasks.Size = new System.Drawing.Size(132, 178);
+            this.flowTasks.Size = new System.Drawing.Size(153, 200);
             this.flowTasks.TabIndex = 2;
             // 
-            // lblTaskcount
+            // label1
             // 
-            this.lblTaskcount.AutoSize = true;
-            this.lblTaskcount.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaskcount.Location = new System.Drawing.Point(11, 10);
-            this.lblTaskcount.Name = "lblTaskcount";
-            this.lblTaskcount.Size = new System.Drawing.Size(73, 13);
-            this.lblTaskcount.TabIndex = 1;
-            this.lblTaskcount.Text = "lblTaskCount";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(35, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 15);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Click to switch";
             // 
             // TaskExpander
             // 
@@ -116,7 +93,7 @@
             this.Controls.Add(this.guna2ShadowPanel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "TaskExpander";
-            this.Size = new System.Drawing.Size(138, 254);
+            this.Size = new System.Drawing.Size(160, 254);
             this.guna2ShadowPanel1.ResumeLayout(false);
             this.guna2ShadowPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
@@ -128,9 +105,8 @@
 
         private Guna.UI2.WinForms.Guna2Elipse Elipser;
         private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel1;
-        private System.Windows.Forms.Label lblTaskcount;
         private System.Windows.Forms.FlowLayoutPanel flowTasks;
-        private Guna.UI2.WinForms.Guna2Button BtnLogin;
         private System.Windows.Forms.PictureBox btnClose;
+        private System.Windows.Forms.Label label1;
     }
 }

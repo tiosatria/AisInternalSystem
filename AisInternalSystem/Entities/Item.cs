@@ -38,7 +38,7 @@ namespace AisInternalSystem.Entities
         }
         public static bool Update(Item item)
         {
-            if (Query.Insert("InsertInventory", new string[8] { "@_iditem", "@_ItemCategory", "@_logger", "@_nameItem", "@_descItem", "@_priceItem", "@_imgLocation", "@_primarystoragelocation" }, new MySql.Data.MySqlClient.MySqlDbType[8] { MySql.Data.MySqlClient.MySqlDbType.Int32 , MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.Int32, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.Text, MySql.Data.MySqlClient.MySqlDbType.Decimal, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.Text }, new string[8] { item.idItem , item.ItemCategory, item.Logger.ToString(), item.NameItem, item.DescriptionItem, item.PriceItem.ToString(), item.ImageLocation, item.PrimaryStorageLocation }))
+            if (Query.Insert("InsertInventory", new string[8] { "@_iditem", "@_ItemCategory", "@_logger", "@_nameItem", "@_descItem", "@_priceItem", "@_imgLocation", "@_primarystoragelocation" }, new MySql.Data.MySqlClient.MySqlDbType[8] { MySql.Data.MySqlClient.MySqlDbType.Int32 , MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.Int32, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.Text, MySql.Data.MySqlClient.MySqlDbType.Decimal, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.Text }, new string[8] { item.idItem.ToString() , item.ItemCategory, item.Logger.ToString(), item.NameItem, item.DescriptionItem, item.PriceItem.ToString(), item.ImageLocation, item.PrimaryStorageLocation }))
             {
 
                 return true;

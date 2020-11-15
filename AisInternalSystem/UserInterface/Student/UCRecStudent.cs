@@ -51,6 +51,7 @@ namespace AisInternalSystem.UserInterface.Student
             {
 
             }
+            isLoaded = true;
         }
 
         #region EventListener
@@ -341,18 +342,12 @@ namespace AisInternalSystem.UserInterface.Student
         }
         private void ButtonFocusLeft(Guna2Button button)
         {
-            UIController.NormalizeButton(BtnStud_, Color.White);
-            UIController.NormalizeButton(btnRelat1, Color.White);
-            UIController.NormalizeButton(btnSibling, Color.White);
-            UIController.HighlightButton(button, Color.Black);
+            UIController.HighlightButton(new List<Guna2Button> { BtnStud_, btnRelat1, btnSibling }, button);
         }
 
         private void ButtonFocusRight(Guna2Button button)
         {
-            UIController.NormalizeButton(btnNavDocs, Color.White);
-            UIController.NormalizeButton(btnNavMedical, Color.White);
-            UIController.NormalizeButton(btnNavSchool, Color.White);
-            UIController.HighlightButton(button, Color.Black);
+            UIController.HighlightButton(new List<Guna2Button> { btnNavDocs, btnNavMedical, btnNavSchool }, button);
         }
 
         private void SwitcherRight(NavRightEnum nav)

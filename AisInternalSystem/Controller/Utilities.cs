@@ -259,6 +259,12 @@ namespace AisInternalSystem.Controller
             }
         }
 
+        private static void AuthNext()
+        {
+            UIController.NavigateUI(UIController.Controls.UpperPanelAdmin);
+            UIController.NavigateUI(UIController.Controls.UCDashboardAdmin);
+        }
+
         private static void DoAuth()
         {
             switch (_role)
@@ -275,7 +281,7 @@ namespace AisInternalSystem.Controller
 
                     break;
                 case User.RoleIdentifier.Teacher:
-                    PopUp.Alert(PopUp.NotAuthorized, frmAlert.AlertType.Warning);
+                    AuthNext();
                     break;
 
                 case User.RoleIdentifier.Accounting:

@@ -30,7 +30,8 @@ namespace AisInternalSystem
             else
             {
                 InitializeComponent();
-
+                this.Visible = false;
+                UIController.Animate(this, Guna.UI2.AnimatorNS.AnimationType.Transparent);
             }
 
         }

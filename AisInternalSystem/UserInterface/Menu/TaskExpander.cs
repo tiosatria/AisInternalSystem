@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Data;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.ComponentModel.Design;
 using AisInternalSystem.Controller;
@@ -24,39 +23,31 @@ namespace AisInternalSystem.UserInterface.Menu
             get { return _taskcount; }
             set
             {
-                _taskcount = value; if (TaskCount == 1) { lblTaskcount.Text = $"{value.ToString()} Task"; }
-                else
-                {
-                    lblTaskcount.Text = $"{value.ToString()} Tasks\nClick to switch";
-                } }
-        }
-
-        private MenuController.MenuType _group;
-
-        public MenuController.MenuType FromGroup
-        {
-            get { return _group;  }
-            set { _group = value; }
-        }
-
-        public void InitObject(MenuController.MenuType m)
-        {
-            GetChild(m);
+                _taskcount = value; }
         }
 
         #endregion
-        public TaskExpander(MenuController.MenuType i)
+
+        public CategoryMenu Category { get; set;}
+
+        public TaskExpander()
         {
-            this.Hide();
-            if (isLoaded)
-            {
-                GetChild(i);
-            }
-            else
-            {
+                this.Hide();
                 InitializeComponent();
-                GetChild(i);
+        }
+
+        public void InitTask()
+        {
+            List<Task> task = Data.TaskContainers[Data.TaskContainers.FindIndex(o => o.Category == Category)].ListTask;
+            for (int i = 0; i < task.Count; i++)
+            {
+                flowTasks.Controls.Add(task[i].taskItem);
             }
+        }
+
+        public void Deletecontrol(UserControl control)
+        {
+            flowTasks.Controls.Remove(control);
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -68,20 +59,6 @@ namespace AisInternalSystem.UserInterface.Menu
         {
             this.Show();
             this.BringToFront();
-            GetChild(this.FromGroup);
         }
-
-        private void GetChild(MenuController.MenuType i)
-        {
-            foreach (TaskItem item in Data.tasksItems)
-            {
-                if (item.Group == i)
-                {
-                    this.flowTasks.Controls.Add(item);
-                }
-            }
-            this.TaskCount = flowTasks.Controls.Count;
-        }
-
     }
 }

@@ -99,22 +99,27 @@ namespace AisInternalSystem
         }
         private MenuSubject _menu;
         #region Function
+
+        private void FocusButton(Guna2Button button)
+        {
+            UIController.HighlightButton(new List<Guna2Button> { btnCreateSubject, btnEditSubject, btnAssignsubject }, button);
+        }
+
         private void MenuSwitcher(MenuSubject men_)
         {
             _menu = men_;
             switch (men_)
             {
                 case MenuSubject.Create:
-                    UIController.FocusButtonNoPanel(btnCreateSubject, this);
+                    FocusButton(btnCreateSubject);
                     PanelCreateSubject.BringToFront();
                     break;
                 case MenuSubject.Edit:
-                    UIController.FocusButtonNoPanel(btnEditSubject, this);
+                    FocusButton(btnEditSubject);
                     PanelEditSubject.BringToFront();
                     break;
                 case MenuSubject.Assign:
-                    UIController.FocusButtonNoPanel(btnAssignsubject, this);
-
+                    FocusButton(btnAssignsubject);
                     PanelAssign.BringToFront();
                     break;
             }   

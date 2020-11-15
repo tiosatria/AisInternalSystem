@@ -18,7 +18,7 @@ using Telerik.WinControls.FileDialogs;
 using Telerik.WinControls.UI;
 using MenuItem = AisInternalSystem.UserInterface.Menu.MenuItem;
 
-namespace AisInternalSystem.Entities
+namespace AisInternalSystem.Controller
 {
     public class UIController
     {
@@ -35,14 +35,31 @@ namespace AisInternalSystem.Entities
         private static UCRecStudent studUI = new UCRecStudent();
         private static Liner liner = new Liner();
         private static DialogControl dialogConfirmation = new DialogControl();
+        private static UCInventory InventoryDirectory = new UCInventory();
         private static UCClassDirectoryService classDirService = new UCClassDirectoryService();
         private static UCClassView classView = new UCClassView();
         private static UCSubject subjectDirectory = new UCSubject();
         private static List<UserControl> controls = new List<UserControl>();
-        private MenuController.MenuType _menutype;
         #endregion
 
         public static event EventHandler FinishedLoadingObject;
+
+        private static List<Guna2Button> CategoryButton()
+        {
+            List<Guna2Button> buttons = new List<Guna2Button>();
+            for (int i = 0; i < Menus.Category.Count; i++)
+            {
+                buttons.Add(Menus.Category[i].CategoryHandler);
+            }
+            return buttons;
+        }
+
+        public static void CategoryClicked(CategoryMenu menu)
+        {
+            HighlightButton(CategoryButton(), menu.CategoryHandler);
+            GetLiner(menu.CategoryHandler);
+            GetMenu(menu);
+        }
 
         private static void InitWorkerUI()
         {
@@ -85,9 +102,9 @@ namespace AisInternalSystem.Entities
             UpperPanel, UpperPanelAdmin, UpperPanelManagement, UpperPanelTeacher,
             UCDashboardAdmin, UCDashboardManagement, UCDashboardTeacher, UCDashboardAccounting,
             UCLogin,
-            MenuSchoolAdm, MenuEmployee, MenuContainer,
+            MenuSchoolAdm, EmployeeDirectoryService, MenuContainer, RecordEmployee, StudentDirectoryService,
             RecordStudentData, UpdateStudentData, ClassDirectoryService, ClassView, SubjectDirectoryServices,
-            DialogConfirmation
+            DialogConfirmation, InventoryDirectory
         }
 
         public static void Navigation(UserControl ctrl, DockStyle dock)
@@ -113,6 +130,7 @@ namespace AisInternalSystem.Entities
         {
 
         }
+
         #endregion
 
         #region Variable
@@ -122,6 +140,17 @@ namespace AisInternalSystem.Entities
         #endregion
 
         #region Function
+        public static void HighlightButton(List<Guna2Button> buttons, Guna2Button btnFocused)
+        {
+            foreach (Guna2Button item in buttons)
+            {
+                item.FillColor = PublicProperties.NavNormalColorButton;
+                item.ForeColor = PublicProperties.NavNormalForeColor;
+            }
+            btnFocused.FillColor = PublicProperties.NavFocusedColorButton;
+            btnFocused.ForeColor = PublicProperties.NavFocusedForeColor;
+        }
+
 
         public static void SendPanelBack(Guna2ShadowPanel panel)
         {
@@ -138,6 +167,12 @@ namespace AisInternalSystem.Entities
             panel.SendToBack();
         }
 
+        public static void AddControlToMainForm(UserControl ctrl, DockStyle dock)
+        {
+            mainform.Controls.Add(ctrl);
+            SetControl(ctrl, dock);
+        }
+
         public static void BringContainerFront(Panel panel)
         {
             panel.BringToFront();
@@ -152,86 +187,7 @@ namespace AisInternalSystem.Entities
             
         }
 
-        private static List<Dotter> dotters = new List<Dotter>();
-        private static List<TaskExpander> TaskExpander = new List<TaskExpander>();
-
-        public static void OpenDialog()
-        {
-            
-        }
-
-        public static void InitTask(MenuController.MenuType _men, Guna2Button sender)
-        {
-            if (dotters.Exists(o => o.FromGroup == _men))
-            {
-                dotters[dotters.FindIndex(o => o.FromGroup == _men)].TaskCount++;
-
-            }
-            else
-            {
-                Dotter dotter = new Dotter();
-                TaskExpander expander = new TaskExpander(_men);
-                dotter.TaskCount ++;
-                dotter.FromGroup = _men;
-                dotter.Location = new Point (sender.Location.X + 5, ((Guna2ShadowPanel)sender.Parent).Height - dotter.Height - 7);
-                expander.FromGroup = _men;
-                expander.Location = new Point(sender.Location.X, dotter.Location.Y + dotter.Height);
-                dotters.Add(dotter);
-                mainform.Controls.Add(dotter);
-                mainform.Controls.Add(expander);
-                Data.taskExpanders.Add(expander);
-                DotterLogic(_men, sender);
-                SetControl(expander, DockStyle.None);
-                SetControl(dotter, DockStyle.None);
-            }
-        }
-
-        private static List<Guna2Button> btnDotted = new List<Guna2Button>();
-
-        private static void DotterLogic(MenuController.MenuType _men, Guna2Button sender)
-        {
-            if (dotters[dotters.FindIndex(o => o.FromGroup == _men)].TaskCount >= 1)
-            {
-                btnDotted.Add(sender);
-            }
-            else
-            {
-                btnDotted.Remove(sender);
-            }
-            foreach (Guna2Button button in btnDotted)
-            {
-                button.FillColor = Color.LightCoral;
-            }
-        }
-
-        public static void ResetMenu()
-        {
-            ClearFocusButton((Guna2ShadowPanel)_membtn.Parent);
-            liner.Visible = false;
-            menuContainer.Visible = false;
-        }
-        private static MenuController.MenuType _memmenu;
-        private static Guna2Button _membtn;
-
-        public static MenuController.MenuType GetGroup()
-        {
-            return _memmenu;
-        }
-
-
-        public static Guna2Button SenderButton()
-        {
-            return _membtn;
-        }
-
-        public static void MenuChoosed(MenuController.MenuType menuType, Guna2Button button)
-        {
-            _membtn = button;
-            _memmenu = menuType;
-            UIController.FocusButton(button, (Guna2ShadowPanel)button.Parent);
-            UIController.GetLiner(button);
-            UIController.GetMenu(menuType);
-        }
+        public static List<Guna2Button> btnDotted = new List<Guna2Button>();
 
         public static void OverrideControl(System.Windows.Forms.UserControl uc, DockStyle dock)
         {
@@ -321,6 +277,7 @@ namespace AisInternalSystem.Entities
                     {
                         DisposeControl(upperdefault);
                         mainform.Controls.Add(upperPanelAdmin);
+                        mainform.Controls.Add(menuContainer);
                         upperPanelAdmin.InitializeObject();
                         upperPanelAdmin.imgLocation = Data.user.UserImage;
                         SetControl(upperPanelAdmin, DockStyle.Top);
@@ -383,7 +340,7 @@ namespace AisInternalSystem.Entities
                         SetControl(menuSchoolAdm, DockStyle.Fill);
                     }
                     break;
-                case Controls.MenuEmployee:
+                case Controls.MenuContainer:
                     if (IsLoaded(menuContainer))
                     {
                         SetControl(menuContainer, DockStyle.None);
@@ -411,6 +368,12 @@ namespace AisInternalSystem.Entities
                         mainform.Controls.Add(dialogConfirmation);
                         SetControl(dialogConfirmation, DockStyle.Fill);
                     }
+                    
+                    break;
+                case Controls.InventoryDirectory:
+                    AddNavigation(InventoryDirectory);
+                    SetControl(InventoryDirectory, DockStyle.Fill);
+                    InventoryDirectory.InitObject();
                     break;
                 default:
 
@@ -424,35 +387,6 @@ namespace AisInternalSystem.Entities
             button.ForeColor = Color.Black;
         }
 
-        public static void HighlightButton(Guna2Button button, Color color)
-        {
-            button.FillColor = color;
-            button.ForeColor = Color.White;
-        }
-
-        public static void FocusButtonNoPanel(Guna2Button btn, UserControl control)
-        {
-            foreach (var item in control.Controls)
-            {
-                if (item is Guna2Button)
-                {
-                    Guna2Button button = item as Guna2Button;
-                    if (button.FillColor == Color.Silver)
-                    {
-                        button.FillColor = Color.Silver;
-                        button.ForeColor = Color.Black;
-                    }
-                    else if (button.FillColor == Color.Black)
-                    {
-                        button.FillColor = Color.Silver;
-                        button.ForeColor = Color.Black;
-                    }
-                }
-
-            }
-            btn.FillColor = Color.Black;
-            btn.ForeColor = Color.White;
-        }
 
         public static void FocusButton(Guna2Button button, Guna2ShadowPanel panel)
         {
@@ -487,7 +421,7 @@ namespace AisInternalSystem.Entities
             }
         }
 
-        public static void GetMenu(MenuController.MenuType menu)
+        public static void GetMenu(CategoryMenu menu)
         {
             menuContainer.Visible = true;
             if (IsLoaded(menuContainer))
@@ -498,9 +432,9 @@ namespace AisInternalSystem.Entities
             }
             else
             {
-                mainform.Controls.Add(menuContainer);
-                SetControl(menuContainer, DockStyle.None);
                 menuContainer.InitObject(menu);
+                SetControl(menuContainer, DockStyle.None);
+
             }
         }
 

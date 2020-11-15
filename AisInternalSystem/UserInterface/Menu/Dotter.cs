@@ -16,10 +16,51 @@ namespace AisInternalSystem.UserInterface.Menu
         public Dotter()
         {
             InitializeComponent();
+            TaskItem.TaskRemoved += TaskItem_TaskRemoved1;
+            MenuItem.TaskChanged += MenuItem_TaskChanged;
         }
 
-        private int _taskcount;
+        private void MenuItem_TaskChanged(object sender, Controller.Task e)
+        {
+            try
+            {
+                TaskCount = Data.TaskContainers[Data.TaskContainers.FindIndex(o => o.Category == category)].ListTask.Count;
+            }
+            catch (Exception ex)
+            {
+                PopUp.Alert(ex.Message, frmAlert.AlertType.Error);
+            }
+            Expander.InitTask();
+            if (TaskCount >= 1)
+            {
+                this.Visible = true;
+                Expander.Visible = true;
+            }
+        }
 
+        private void TaskItem_TaskRemoved1(object sender, Controller.Task e)
+        {
+            if (e.taskItem.CategoryMenu == category)
+            {
+                if (TaskCount < 1)
+                {
+                    this.Visible = false;
+                    Expander.Visible = false;
+                }
+            }
+        }
+
+        public TaskExpander Expander = new TaskExpander();
+
+        private void InitTaskExpander()
+        {
+            Expander.Location = new Point(this.Location.X -30, this.Location.Y + 30);
+            Expander.Category = this.category;
+            UIController.AddControlToMainForm(Expander, DockStyle.None);
+        }
+
+
+        private int _taskcount;
         public int TaskCount
         {
             get { return _taskcount; }
@@ -32,20 +73,15 @@ namespace AisInternalSystem.UserInterface.Menu
                 {
                     lbltasks.Text = $"{value} Task";
                 }
+                InitTaskExpander();
             }
         }
 
-        private MenuController.MenuType _fromgroup;
-
-        public MenuController.MenuType FromGroup
-        {
-            get { return _fromgroup; }
-            set { _fromgroup = value; }
-        }
+        public CategoryMenu category { get; set; }
 
         private void btnShow_Click(object sender, EventArgs e)
         {
-            MenuController.ExpandTask(FromGroup);
+            Expander.Expand();
         }
 
         private void Dotter_MouseEnter(object sender, EventArgs e)

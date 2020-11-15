@@ -20,8 +20,7 @@ namespace AisInternalSystem.Controller
 
         #region Entities
         public static User user = new User();
-        public static List<TasksUser> tasks = new List<TasksUser>();
-        public static List<TaskItem> tasksItems = new List<TaskItem>();
+        public static List<TaskContainer> TaskContainers = new List<TaskContainer>();
         public static List<TaskExpander> taskExpanders = new List<TaskExpander>();
         public static List<Teacher> teachersList = Teacher.GetTeacherList();
         public static List<Grade> grades = Grade.GradeList();

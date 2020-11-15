@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Data;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using AisInternalSystem.Controller;
 
@@ -38,7 +37,9 @@ namespace AisInternalSystem.UserInterface.Menu
             set { _subtitle = value; lblsubtitle.Text = value; }
         }
 
-        private DateTime _taskstart = DateTime.Now; 
+        private DateTime _taskstart = DateTime.Now;
+
+        public UIController.Controls Control { get; set; }
 
         public DateTime TaskStart
         {
@@ -53,23 +54,6 @@ namespace AisInternalSystem.UserInterface.Menu
             get { return _taskfinish; }
             set { _taskfinish = value; }
         }
-
-        private MenuController.MenuDoes _does;
-
-        public MenuController.MenuDoes Does
-        {
-            get { return _does; }
-            set { _does = value;  }
-        }
-
-        private MenuController.MenuType _fromgroup;
-
-        public MenuController.MenuType Group
-        {
-            get { return _fromgroup; }
-            set { _fromgroup = value; }
-        }
-
 
         #endregion
 
@@ -87,19 +71,31 @@ namespace AisInternalSystem.UserInterface.Menu
             this.BackColor = Color.Gainsboro;
         }
 
+        public CategoryMenu CategoryMenu { get; set; }
+
         private void TaskItem_MouseLeave(object sender, EventArgs e)
         {
             this.BackColor = Color.WhiteSmoke;
         }
-
         private void TaskItem_MouseClick(object sender, MouseEventArgs e)
         {
+            Clicked();
+        }
+        public static event EventHandler<Task> TaskRemoved;
 
+        private void FinishTask()
+        {
+            TaskContainer container = Data.TaskContainers[Data.TaskContainers.FindIndex(o=>o.Category == CategoryMenu)];
+            Task task = container.ListTask[container.ListTask.FindIndex(o => o.TaskID == IndexItem)];
+            container.dotter.Expander.Deletecontrol(this);
+            container.ListTask.Remove(task);
+            container.dotter.TaskCount = container.ListTask.Count;
+            TaskRemoved?.Invoke(this, task);
         }
 
         private void btnMarkAsDone_Click(object sender, EventArgs e)
         {
-
+            FinishTask();
         }
 
         private void btnEnter_Click(object sender, EventArgs e)
@@ -126,10 +122,16 @@ namespace AisInternalSystem.UserInterface.Menu
         {
 
         }
+        
+        private void Clicked()
+        {
+            UIController.NavigateUI(Control);
+        }
 
         private void TaskItem_Click(object sender, EventArgs e)
         {
-            MenuController.DoAction(Does);
+            Clicked();
+
         }
     }
 }
