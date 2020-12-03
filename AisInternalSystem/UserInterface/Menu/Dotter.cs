@@ -34,7 +34,6 @@ namespace AisInternalSystem.UserInterface.Menu
             if (TaskCount >= 1)
             {
                 this.Visible = true;
-                Expander.Visible = true;
             }
         }
 

@@ -1,0 +1,157 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using AisInternalSystem.Module;
+using MySql.Data.MySqlClient;
+using AisInternalSystem.Properties;
+using Guna.UI2.WinForms;
+using AisInternalSystem.Controller; 
+using System.Numerics;
+using MediaFoundation.Alt;
+
+namespace AisInternalSystem
+{
+    public partial class UCClassView : UserControl
+    {
+        private bool isLoaded = false;
+
+        public UCClassView()
+        {
+
+        }
+
+        public void InitObject(int classid)
+        {
+            if (!isLoaded)
+            {
+                InitializeComponent();
+                Init();
+            }
+            isLoaded = true;
+        }
+
+        #region EventListener
+        private void btnBackto_Click(object sender, EventArgs e)
+        {
+            this.SendToBack();
+        }
+
+        private void btnOngoing_Click(object sender, EventArgs e)
+        {
+            Cswitcher(ClassViewEnum.Grading);
+        }
+
+        private void btnPastSchool_Click(object sender, EventArgs e)
+        {
+            Cswitcher(ClassViewEnum.Attendance);
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            Cswitcher(ClassViewEnum.SubjectTeacher);
+        }
+
+        private void guna2Button2_Click(object sender, EventArgs e)
+        {
+            Cswitcher(ClassViewEnum.Media);
+        }
+        #endregion
+
+        #region Function
+        void FocusButton(Guna2Button btn)
+        {
+            btnGrading.FillColor = Color.Silver;
+            btnGrading.ForeColor = Color.Black;
+            btnAttendance.FillColor = Color.Silver;
+            btnAttendance.ForeColor = Color.Black;
+            btnSubjectTeacher.FillColor = Color.Silver;
+            btnSubjectTeacher.ForeColor = Color.Black;
+            btnMedia.FillColor = Color.Silver;
+            btnMedia.ForeColor = Color.Black;
+            btn.FillColor = Color.Black;
+            btn.ForeColor = Color.White;
+        }
+        public void Cswitcher(ClassViewEnum u)
+        {
+            _enumclass = u;
+            switch (_enumclass)
+            {
+                case ClassViewEnum.Grading:
+                    FocusButton(btnGrading);
+                    PanelGrading.BringToFront();
+                    break;
+                case ClassViewEnum.Attendance:
+                    FocusButton(btnAttendance);
+                    PanelClassAttendance.BringToFront();
+                    break;
+                case ClassViewEnum.SubjectTeacher:
+                    FocusButton(btnSubjectTeacher);
+                    PanelSubjectTeacher.BringToFront();
+                    break;
+                case ClassViewEnum.Media:
+                    FocusButton(btnMedia);
+                    PanelClassMedia.BringToFront();
+                    break;
+            }
+        }
+        private void Init()
+        {
+            this.Cswitcher(UCClassView.ClassViewEnum.Grading);
+            LoadClassMember();
+            LoadClassInfo();
+        }
+        private void LoadClassMember()
+        {
+            Entities.ClassRoom currentClass = Entities.ClassRoom.CurrentClass;
+            if (currentClass != null)
+            {
+                if (currentClass.ListOfStudent.Count >= 1)
+                {
+                    List<Entities.Student> studentList = currentClass.ListOfStudent;
+                    UCClassMember[] classMembers = new UCClassMember[currentClass.ListOfStudent.Count];
+                    for (int i = 0; i < currentClass.ListOfStudent.Count; i++)
+                    {
+                        classMembers[i] = new UCClassMember();
+                        classMembers[i].StudentName = studentList[i].CertificateName;
+                        classMembers[i].StudentPicture = Image.FromFile(studentList[i].PhotoLocation);
+                        classMembers[i].Religion = studentList[i].Religion;
+                        classMembers[i].Birthdate = studentList[i].DateofBirth.ToString("d");
+                        classMembers[i].Mobile = studentList[i].MobileNumber;
+                        classMembers[i].EnglishProficiency = studentList[i].EnglishProficiency;
+                        classMembers[i].RowNumber = studentList.IndexOf(studentList[i]);
+                        flowStudentList.Controls.Add(classMembers[i]);
+
+                    }
+                }
+                else
+                {
+
+                }
+            }
+        }
+
+        private void LoadClassInfo()
+        {
+
+        }
+        #endregion
+
+        #region Properties
+        public enum ClassViewEnum
+        {
+            Grading, 
+            Attendance,
+            SubjectTeacher,
+            Media
+        };
+        private ClassViewEnum _enumclass;
+
+        #endregion
+    }
+}

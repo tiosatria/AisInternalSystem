@@ -38,6 +38,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -53,6 +55,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>favicon-2.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Guna.UI2">
@@ -83,6 +88,9 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -91,10 +99,22 @@
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.0\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
@@ -136,10 +156,14 @@
     <Compile Include="Controller\Threader.cs" />
     <Compile Include="Controller\UIController.cs" />
     <Compile Include="Controller\Utilities.cs" />
+    <Compile Include="Entities\Activities.cs" />
     <Compile Include="Entities\ClassRoom.cs" />
+    <Compile Include="Entities\Education.cs" />
+    <Compile Include="Entities\Grading.cs" />
     <Compile Include="Entities\IndividualItem.cs" />
-    <Compile Include="Entities\Item.cs" />
+    <Compile Include="Entities\Asset.cs" />
     <Compile Include="Entities\ItemCategories.cs" />
+    <Compile Include="Entities\Medical.cs" />
     <Compile Include="Entities\Relationship.cs" />
     <Compile Include="Entities\Student.cs" />
     <Compile Include="Entities\Transaction.cs" />
@@ -149,11 +173,46 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\ClassHistory.cs">
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\ClassView\ClassHistory.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\ClassHistory.Designer.cs">
+    <Compile Include="UserInterface\ClassView\ClassHistory.Designer.cs">
       <DependentUpon>ClassHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\Dashboard\RecentActivities.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserInterface\Dashboard\RecentActivities.Designer.cs">
+      <DependentUpon>RecentActivities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\Employee\EmployeeDirectory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserInterface\Employee\EmployeeDirectory.Designer.cs">
+      <DependentUpon>EmployeeDirectory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\Employee\EmployeeRec.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserInterface\Employee\EmployeeRec.Designer.cs">
+      <DependentUpon>EmployeeRec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\Inventory\ModelAsset.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserInterface\Inventory\ModelAsset.Designer.cs">
+      <DependentUpon>ModelAsset.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\Inventory\ModelCategory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserInterface\Inventory\ModelCategory.Designer.cs">
+      <DependentUpon>ModelCategory.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\Menu\CategoryMenu.cs" />
     <Compile Include="UserInterface\Menu\Dotter.cs">
@@ -214,6 +273,12 @@
     <Compile Include="UserInterface\PanelListModel.Designer.cs">
       <DependentUpon>PanelListModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserInterface\Settings\UserSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserInterface\Settings\UserSettings.Designer.cs">
+      <DependentUpon>UserSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserInterface\Student\UCRecStudent.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -226,28 +291,28 @@
     <Compile Include="UserInterface\Student\UCStudDirectory.Designer.cs">
       <DependentUpon>UCStudDirectory.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\UCDashboardAdmin.cs">
+    <Compile Include="UserInterface\Core\UCDashboard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\UCDashboardAdmin.Designer.cs">
-      <DependentUpon>UCDashboardAdmin.cs</DependentUpon>
+    <Compile Include="UserInterface\Core\UCDashboard.Designer.cs">
+      <DependentUpon>UCDashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\DialogControl.cs">
+    <Compile Include="UserInterface\Core\DialogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\DialogControl.Designer.cs">
+    <Compile Include="UserInterface\Core\DialogControl.Designer.cs">
       <DependentUpon>DialogControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\EmployeeSummary.cs">
+    <Compile Include="UserInterface\Employee\EmployeeSummary.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\EmployeeSummary.Designer.cs">
+    <Compile Include="UserInterface\Employee\EmployeeSummary.Designer.cs">
       <DependentUpon>EmployeeSummary.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\frmAlert.cs">
+    <Compile Include="UserInterface\Core\frmAlert.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserInterface\frmAlert.Designer.cs">
+    <Compile Include="UserInterface\Core\frmAlert.Designer.cs">
       <DependentUpon>frmAlert.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\LoginFrm.cs">
@@ -265,7 +330,7 @@
     <Compile Include="Entities\AcademicYear.cs" />
     <Compile Include="Module\AppVersion.cs" />
     <Compile Include="Module\Db.cs" />
-    <Compile Include="Controller\PopUp.cs" />
+    <Compile Include="PopUp.cs" />
     <Compile Include="Entities\Document.cs" />
     <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Grade.cs" />
@@ -275,22 +340,16 @@
     <Compile Include="Entities\Teacher.cs" />
     <Compile Include="Entities\Timetable.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="UserInterface\PanelMSqlCommand.cs">
+    <Compile Include="UserInterface\Core\PanelNotAvailable.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\PanelMSqlCommand.Designer.cs">
-      <DependentUpon>PanelMSqlCommand.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserInterface\PanelNotAvailable.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserInterface\PanelNotAvailable.Designer.cs">
+    <Compile Include="UserInterface\Core\PanelNotAvailable.Designer.cs">
       <DependentUpon>PanelNotAvailable.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\PanelSchoolInfo.cs">
+    <Compile Include="UserInterface\Student\PanelSchoolInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\PanelSchoolInfo.Designer.cs">
+    <Compile Include="UserInterface\Student\PanelSchoolInfo.Designer.cs">
       <DependentUpon>PanelSchoolInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\PleaseWait.cs">
@@ -308,64 +367,46 @@
     <Compile Include="Reporting\StudentSummary.Designer.cs">
       <DependentUpon>StudentSummary.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\StudSummary.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserInterface\StudSummary.Designer.cs">
-      <DependentUpon>StudSummary.cs</DependentUpon>
-    </Compile>
     <Compile Include="TestingState.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TestingState.Designer.cs">
       <DependentUpon>TestingState.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\UCClassAssignment.cs">
+    <Compile Include="UserInterface\ClassView\UCClassDirectoryService.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\UCClassAssignment.Designer.cs">
-      <DependentUpon>UCClassAssignment.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserInterface\UCClassDirectoryService.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserInterface\UCClassDirectoryService.Designer.cs">
+    <Compile Include="UserInterface\ClassView\UCClassDirectoryService.Designer.cs">
       <DependentUpon>UCClassDirectoryService.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\UCClassMember.cs">
+    <Compile Include="UserInterface\ClassView\UCClassMember.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\UCClassMember.Designer.cs">
+    <Compile Include="UserInterface\ClassView\UCClassMember.Designer.cs">
       <DependentUpon>UCClassMember.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\UCClassModel.cs">
+    <Compile Include="UserInterface\ClassView\UCClassModel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\UCClassModel.Designer.cs">
+    <Compile Include="UserInterface\ClassView\UCClassModel.Designer.cs">
       <DependentUpon>UCClassModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\UCClassView.cs">
+    <Compile Include="UserInterface\ClassView\UCClassView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\UCClassView.Designer.cs">
+    <Compile Include="UserInterface\ClassView\UCClassView.Designer.cs">
       <DependentUpon>UCClassView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\UCDocsList.cs">
+    <Compile Include="UserInterface\Document\UCDocsList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\UCDocsList.Designer.cs">
+    <Compile Include="UserInterface\Document\UCDocsList.Designer.cs">
       <DependentUpon>UCDocsList.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\UCEmployee.cs">
+    <Compile Include="UserInterface\Inventory\UCInventory.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\UCEmployee.Designer.cs">
-      <DependentUpon>UCEmployee.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserInterface\UCInventory.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserInterface\UCInventory.Designer.cs">
+    <Compile Include="UserInterface\Inventory\UCInventory.Designer.cs">
       <DependentUpon>UCInventory.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\UCMaster.cs">
@@ -374,17 +415,11 @@
     <Compile Include="UserInterface\UCMaster.Designer.cs">
       <DependentUpon>UCMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\UCMessaging.cs">
+    <Compile Include="UserInterface\Messaging\UCMessaging.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\UCMessaging.Designer.cs">
+    <Compile Include="UserInterface\Messaging\UCMessaging.Designer.cs">
       <DependentUpon>UCMessaging.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserInterface\UCRecStud.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserInterface\UCRecStud.Designer.cs">
-      <DependentUpon>UCRecStud.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\Student\UCSchoolAdm.cs">
       <SubType>UserControl</SubType>
@@ -392,41 +427,41 @@
     <Compile Include="UserInterface\Student\UCSchoolAdm.Designer.cs">
       <DependentUpon>UCSchoolAdm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\UCStudDetailed.cs">
+    <Compile Include="UserInterface\Student\UCStudDetailed.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\UCStudDetailed.Designer.cs">
+    <Compile Include="UserInterface\Student\UCStudDetailed.Designer.cs">
       <DependentUpon>UCStudDetailed.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\UCSubject.cs">
+    <Compile Include="UserInterface\Subject\UCSubject.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\UCSubject.Designer.cs">
+    <Compile Include="UserInterface\Subject\UCSubject.Designer.cs">
       <DependentUpon>UCSubject.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\UCSubjectList.cs">
+    <Compile Include="UserInterface\Subject\UCSubjectList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\UCSubjectList.Designer.cs">
+    <Compile Include="UserInterface\Subject\UCSubjectList.Designer.cs">
       <DependentUpon>UCSubjectList.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\UCSubjectTeacher.cs">
+    <Compile Include="UserInterface\Subject\UCSubjectTeacher.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\UCSubjectTeacher.Designer.cs">
+    <Compile Include="UserInterface\Subject\UCSubjectTeacher.Designer.cs">
       <DependentUpon>UCSubjectTeacher.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\UCTemplateDefault1.cs">
+    <Compile Include="UserInterface\UCFeedback.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\UCTemplateDefault1.Designer.cs">
-      <DependentUpon>UCTemplateDefault1.cs</DependentUpon>
+    <Compile Include="UserInterface\UCFeedback.Designer.cs">
+      <DependentUpon>UCFeedback.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\UCTemplateDefault2.cs">
+    <Compile Include="UserInterface\Employee\EmployeeDetailed.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\UCTemplateDefault2.Designer.cs">
-      <DependentUpon>UCTemplateDefault2.cs</DependentUpon>
+    <Compile Include="UserInterface\Employee\EmployeeDetailed.Designer.cs">
+      <DependentUpon>EmployeeDetailed.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\UCTimetable.cs">
       <SubType>UserControl</SubType>
@@ -440,23 +475,38 @@
     <Compile Include="UserInterface\UIMember_AcademicYear.Designer.cs">
       <DependentUpon>UIMember_AcademicYear.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\UpperPanel.cs">
+    <Compile Include="UserInterface\Core\UpperPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\UpperPanel.Designer.cs">
+    <Compile Include="UserInterface\Core\UpperPanel.Designer.cs">
       <DependentUpon>UpperPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\UpperPanelLoggedIn.cs">
+    <Compile Include="UserInterface\Core\UpperPanelLoggedIn.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserInterface\UpperPanelLoggedIn.Designer.cs">
+    <Compile Include="UserInterface\Core\UpperPanelLoggedIn.Designer.cs">
       <DependentUpon>UpperPanelLoggedIn.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\ClassHistory.resx">
+    <EmbeddedResource Include="UserInterface\ClassView\ClassHistory.resx">
       <DependentUpon>ClassHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\Dashboard\RecentActivities.resx">
+      <DependentUpon>RecentActivities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\Employee\EmployeeDirectory.resx">
+      <DependentUpon>EmployeeDirectory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\Employee\EmployeeRec.resx">
+      <DependentUpon>EmployeeRec.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\Inventory\ModelAsset.resx">
+      <DependentUpon>ModelAsset.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\Inventory\ModelCategory.resx">
+      <DependentUpon>ModelCategory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\Menu\Dotter.resx">
       <DependentUpon>Dotter.cs</DependentUpon>
@@ -485,22 +535,25 @@
     <EmbeddedResource Include="UserInterface\PanelListModel.resx">
       <DependentUpon>PanelListModel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\Settings\UserSettings.resx">
+      <DependentUpon>UserSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\Student\UCRecStudent.resx">
       <DependentUpon>UCRecStudent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\Student\UCStudDirectory.resx">
       <DependentUpon>UCStudDirectory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UCDashboardAdmin.resx">
-      <DependentUpon>UCDashboardAdmin.cs</DependentUpon>
+    <EmbeddedResource Include="UserInterface\Core\UCDashboard.resx">
+      <DependentUpon>UCDashboard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\DialogControl.resx">
+    <EmbeddedResource Include="UserInterface\Core\DialogControl.resx">
       <DependentUpon>DialogControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\EmployeeSummary.resx">
+    <EmbeddedResource Include="UserInterface\Employee\EmployeeSummary.resx">
       <DependentUpon>EmployeeSummary.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\frmAlert.resx">
+    <EmbeddedResource Include="UserInterface\Core\frmAlert.resx">
       <DependentUpon>frmAlert.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\LoginFrm.resx">
@@ -509,13 +562,10 @@
     <EmbeddedResource Include="UserInterface\ModuleInProgress.resx">
       <DependentUpon>ModuleInProgress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\PanelMSqlCommand.resx">
-      <DependentUpon>PanelMSqlCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\PanelNotAvailable.resx">
+    <EmbeddedResource Include="UserInterface\Core\PanelNotAvailable.resx">
       <DependentUpon>PanelNotAvailable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\PanelSchoolInfo.resx">
+    <EmbeddedResource Include="UserInterface\Student\PanelSchoolInfo.resx">
       <DependentUpon>PanelSchoolInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\PleaseWait.resx">
@@ -524,77 +574,60 @@
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="Reporting\StudSummary.rdlc" />
     <EmbeddedResource Include="Reporting\StudentSummary.resx">
       <DependentUpon>StudentSummary.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\StudSummary.resx">
-      <DependentUpon>StudSummary.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="TestingState.resx">
       <DependentUpon>TestingState.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UCClassAssignment.resx">
-      <DependentUpon>UCClassAssignment.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UCClassDirectoryService.resx">
+    <EmbeddedResource Include="UserInterface\ClassView\UCClassDirectoryService.resx">
       <DependentUpon>UCClassDirectoryService.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UCClassMember.resx">
+    <EmbeddedResource Include="UserInterface\ClassView\UCClassMember.resx">
       <DependentUpon>UCClassMember.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UCClassModel.resx">
+    <EmbeddedResource Include="UserInterface\ClassView\UCClassModel.resx">
       <DependentUpon>UCClassModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UCClassView.resx">
+    <EmbeddedResource Include="UserInterface\ClassView\UCClassView.resx">
       <DependentUpon>UCClassView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UCDocsList.resx">
+    <EmbeddedResource Include="UserInterface\Document\UCDocsList.resx">
       <DependentUpon>UCDocsList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UCEmployee.resx">
-      <DependentUpon>UCEmployee.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UCInventory.resx">
+    <EmbeddedResource Include="UserInterface\Inventory\UCInventory.resx">
       <DependentUpon>UCInventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\UCMaster.resx">
       <DependentUpon>UCMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UCMessaging.resx">
+    <EmbeddedResource Include="UserInterface\Messaging\UCMessaging.resx">
       <DependentUpon>UCMessaging.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UCRecStud.resx">
-      <DependentUpon>UCRecStud.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\Student\UCSchoolAdm.resx">
       <DependentUpon>UCSchoolAdm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UCStudDetailed.resx">
+    <EmbeddedResource Include="UserInterface\Student\UCStudDetailed.resx">
       <DependentUpon>UCStudDetailed.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UCSubject.resx">
+    <EmbeddedResource Include="UserInterface\Subject\UCSubject.resx">
       <DependentUpon>UCSubject.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UCSubjectList.resx">
+    <EmbeddedResource Include="UserInterface\Subject\UCSubjectList.resx">
       <DependentUpon>UCSubjectList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UCSubjectTeacher.resx">
+    <EmbeddedResource Include="UserInterface\Subject\UCSubjectTeacher.resx">
       <DependentUpon>UCSubjectTeacher.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UCTemplateDefault1.resx">
-      <DependentUpon>UCTemplateDefault1.cs</DependentUpon>
+    <EmbeddedResource Include="UserInterface\UCFeedback.resx">
+      <DependentUpon>UCFeedback.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UCTemplateDefault2.resx">
-      <DependentUpon>UCTemplateDefault2.cs</DependentUpon>
+    <EmbeddedResource Include="UserInterface\Employee\EmployeeDetailed.resx">
+      <DependentUpon>EmployeeDetailed.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\UCTimetable.resx">
       <DependentUpon>UCTimetable.cs</DependentUpon>
@@ -602,10 +635,10 @@
     <EmbeddedResource Include="UserInterface\UIMember_AcademicYear.resx">
       <DependentUpon>UIMember_AcademicYear.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UpperPanel.resx">
+    <EmbeddedResource Include="UserInterface\Core\UpperPanel.resx">
       <DependentUpon>UpperPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\UpperPanelLoggedIn.resx">
+    <EmbeddedResource Include="UserInterface\Core\UpperPanelLoggedIn.resx">
       <DependentUpon>UpperPanelLoggedIn.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -647,6 +680,7 @@
   <ItemGroup>
     <Folder Include="DataSet\" />
     <Folder Include="UserControl\" />
+    <Folder Include="UserInterface\Grading\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-help-1000.png" />
@@ -778,6 +812,14 @@
     <None Include="Properties\icons8_search_30px.png" />
     <None Include="Properties\upload-to-cloud_200_transparent.gif" />
     <None Include="Properties\Ellipsis-2s-604px.gif" />
+    <None Include="Properties\EDIT.png" />
+    <None Include="Properties\icons8_trolley_100px.png" />
+    <None Include="Properties\view-black.png" />
+    <None Include="Properties\down-arrow_200_transparent.gif" />
+    <None Include="Properties\icons8_male_30px.png" />
+    <None Include="Properties\icons8_female_26px_1.png" />
+    <None Include="Properties\chevronleft.png" />
+    <None Include="Properties\icons8_minimize_window_50px.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

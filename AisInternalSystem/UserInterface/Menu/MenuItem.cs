@@ -38,22 +38,16 @@ namespace AisInternalSystem.UserInterface.Menu
             {
                 case DoingWhatEnum.Reviewing:
                     return "Reviwing: ";
-                    break;
                 case DoingWhatEnum.Adding:
                     return "Adding: ";
-                    break;
                 case DoingWhatEnum.Working:
                     return "Working on: ";
-                    break;
                 case DoingWhatEnum.Checking:
                     return "Checking: ";
-                    break;
                 case DoingWhatEnum.Marking:
                     return "Marking: ";
-                    break;
                 default:
                     return "Not defined";
-                    break;
             }
         }
 
@@ -130,6 +124,7 @@ namespace AisInternalSystem.UserInterface.Menu
             PrepareTaskContainer();
             PrepareTask();
             UIController.NavigateUI(Cons);
+            UIController.ResetMenu();
         }
         private void MenuItem_Click(object sender, EventArgs e)
         {

@@ -28,17 +28,16 @@ namespace AisInternalSystem.Controller
             Exit   , Update
         }
         private static onConfirmEnum OnConfirm;
-
-        public static void Fire(Confirmation.onConfirmEnum @enum)
+        public static void Fire(Confirmation.onConfirmEnum ok)
         {
+            OnConfirm = ok;
             UIController.OverrideControl(dialog, DockStyle.Fill);
-            OnConfirm = @enum;
-            DialogProperties();
+            DialogProperties(ok);
         }
 
-        public static void DialogProperties()
+        public static void DialogProperties(onConfirmEnum ok)
         {
-            switch (OnConfirm)
+            switch (ok)
             {
                 case onConfirmEnum.Exit:
                     dialog.Title = "Taking a break?";
@@ -86,6 +85,7 @@ namespace AisInternalSystem.Controller
                 default:
                 case onConfirmEnum.Update:
                     dialog.SendToBack();
+                    UIController.NavigateUI(UIController.Controls.UCLogin);
                     break;
             }
         }

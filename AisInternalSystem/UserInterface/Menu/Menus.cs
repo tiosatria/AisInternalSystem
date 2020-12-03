@@ -55,27 +55,30 @@ namespace AisInternalSystem.UserInterface.Menu
             item.Init();
             ListOfMenus.Add(item);
         }
+
         public static List<ItemMenu> ListOfMenus = new List<ItemMenu>();
         private static Size CategoryNormalSize = new Size(142, 57);
 
-        private static void MenuAdmin()
+        private static void MenuAccounting()
         {
-            Generate = new CategoryMenu(1, "Generate", "things you can generate: ", CategoryNormalSize, new Point(672, 7));
-            SchoolAdministration = new CategoryMenu(2, "School Administration", "School Administration Menu", CategoryNormalSize, new Point(Generate.Location.X + 156, 7));
-            Employee = new CategoryMenu(3, "Employee", "Employee Menu", CategoryNormalSize, new Point(SchoolAdministration.Location.X + 156, 7));
-            Inventory = new CategoryMenu(4, "Inventory", "Inventory Menus: ", CategoryNormalSize, new Point(Employee.Location.X + 156, 7));
-            Category.AddRange(new List<CategoryMenu> { Generate, SchoolAdministration, Employee, Inventory});
+            Generate = new CategoryMenu(1, "Generate", "What do you want to create?", CategoryNormalSize, new Point(672, 7));
+            Employee = new CategoryMenu(2, "Employee", "Employee menu", CategoryNormalSize, new Point(672, 7));
+            Account = new CategoryMenu(3, "Account", "Account menu", CategoryNormalSize, new Point(672, 7));
+            Category.AddRange(new List<CategoryMenu> { Generate, Employee, Account });
         }
 
-        public static List<CategoryMenu> GetCategory(User.RoleIdentifier roleIdentifier)
+        public static List<string> Overview(User.RoleIdentifier role)
         {
-            switch (roleIdentifier)
+            List<string> lst = new List<string>();
+            switch (role)
             {
                 case User.RoleIdentifier.Management:
-
+                    lst.Add("Student Overview");
+                    lst.Add("Employee Overview");
+                    lst.Add("Accounting Overview");
                     break;
                 case User.RoleIdentifier.Admin:
-                    MenuAdmin();
+                    lst.Add("Student Overview");
                     break;
                 case User.RoleIdentifier.IT:
                     break;
@@ -84,6 +87,57 @@ namespace AisInternalSystem.UserInterface.Menu
                 case User.RoleIdentifier.Accounting:
                     break;
                 default:
+                    break;
+            }
+            return lst;
+        }
+
+
+        private static void MenuAdmin()
+        {
+            Generate = new CategoryMenu(1, "Create", "things you can generate: ", CategoryNormalSize, new Point(672, 7));
+            SchoolAdministration = new CategoryMenu(2, "School Administration", "School Administration Menu", CategoryNormalSize, new Point(Generate.Location.X + 156, 7));
+            Employee = new CategoryMenu(3, "Employee", "Employee Menu", CategoryNormalSize, new Point(SchoolAdministration.Location.X + 156, 7));
+            Inventory = new CategoryMenu(4, "Inventory", "Inventory Menus: ", CategoryNormalSize, new Point(Employee.Location.X + 156, 7));
+            Category.AddRange(new List<CategoryMenu> { Generate, SchoolAdministration, Employee, Inventory});
+        }
+
+        private static void MenuManagement()
+        {
+            Generate = new CategoryMenu(1, "Generate", "List of things that you can create: ", CategoryNormalSize, new Point(672, 7));
+            Employee = new CategoryMenu(2, "View", "Employee Administration Menu", CategoryNormalSize, new Point(Generate.Location.X + 156, 7));
+            Inventory = new CategoryMenu(3, "Inventory", "Inventory Menu", CategoryNormalSize, new Point(Employee.Location.X + 156, 7));
+            Category.AddRange(new List<CategoryMenu> { Generate, Employee, Inventory });
+        }
+
+        private static void MenuTeacher()
+        {
+            Generate = new CategoryMenu(1, "Create", "List of things that you can create", CategoryNormalSize, new Point(627, 7));
+            Grading = new CategoryMenu(2, "Grading", "Grading Menu", CategoryNormalSize, new Point(Generate.Location.X + 156, 7));
+            Category.AddRange(new List<CategoryMenu> { Generate, Grading });
+        }
+
+        public static List<CategoryMenu> GetCategory(User.RoleIdentifier roleIdentifier)
+        {
+            switch (roleIdentifier)
+            {
+                case User.RoleIdentifier.Management:
+                    MenuManagement();
+                    break;
+                case User.RoleIdentifier.Admin:
+                    MenuAdmin();
+                    break;
+                case User.RoleIdentifier.IT:
+
+                    break;
+                case User.RoleIdentifier.Teacher:
+
+                    break;
+                case User.RoleIdentifier.Accounting:
+                    MenuAccounting();
+                    break;
+                default:
+
                     break;
             }
             return Category;
@@ -96,6 +150,8 @@ namespace AisInternalSystem.UserInterface.Menu
         private static CategoryMenu Inventory = null;
         private static CategoryMenu Employee = null;
         private static CategoryMenu Generate = null;
+        private static CategoryMenu Account = null;
+        private static CategoryMenu Grading = null;
         #endregion
 
 

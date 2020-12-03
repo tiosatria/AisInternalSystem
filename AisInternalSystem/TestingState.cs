@@ -9,7 +9,6 @@ using System.Text;
 using MySql.Data.MySqlClient;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 using AisInternalSystem.Module;
 
 namespace AisInternalSystem

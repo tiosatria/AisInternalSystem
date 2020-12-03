@@ -28,9 +28,8 @@ namespace AisInternalSystem
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            Startup.Update();
             UIController.NavigateUI(UIController.Controls.UpperPanel);
-            UIController.NavigateUI(UIController.Controls.UCLogin);
+            Startup.Update();
         }
 
         private void UIController_FinishedLoadingObject(object sender, EventArgs e)

@@ -29,10 +29,20 @@ namespace AisInternalSystem.Controller
 {
     public class Utilities
     {
+        public static event EventHandler WorkerFinished;
+
         private static User.RoleIdentifier _role;
         public Utilities()
         {
             
+        }
+        public static void Clear(Control.ControlCollection controls, bool dispose)
+        {
+            for (int ix = controls.Count - 1; ix >= 0; --ix)
+            {
+                if (dispose) controls[ix].Dispose();
+                else controls.RemoveAt(ix);
+            }
         }
         private static int progressInt;
         private static string[] paramList;
@@ -45,10 +55,16 @@ namespace AisInternalSystem.Controller
             BackgroundWorker worker = new BackgroundWorker();
             worker.ProgressChanged += Worker_ProgressChanged;
             worker.DoWork += Worker_DoWork;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
             worker.WorkerReportsProgress = true;
             worker.WorkerSupportsCancellation = true;
             workerparam = worker;
             return worker;
+        }
+
+        private static void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            WorkerFinished?.Invoke(sender, EventArgs.Empty);
         }
 
         public static string GetSelectedDatagridValue(Guna2DataGridView datagrid, string targetHeader)
@@ -75,22 +91,45 @@ namespace AisInternalSystem.Controller
                 case LocationType.SubjectPhoto:
                     dbstring = $@"\\{Db.ServerIPAddress}\SysInternal\Img\SubjectPhoto\" + name + ext;
                     return dbstring;
-                    break;
                 case LocationType.StudentDocuments:
                     dbstring = $@"\\{Db.ServerIPAddress}\SysInternal\Docs\StudDocs\{ name}{ ext}";
                     return dbstring;
-                    break;
                 case LocationType.StudentPhoto:
                     dbstring = $@"\\{Db.ServerIPAddress}\SysInternal\Img\StudentPhoto\{name}{ext}";
                     return dbstring;
-                    break;
                 case LocationType.ParentPhoto:
                     dbstring = $@"\\{Db.ServerIPAddress}\SysInternal\Img\ParentsPhoto\{name}{ext}";
                     return dbstring;
-                    break;
+                case LocationType.InventoryPhoto:
+                    dbstring = $@"\\{Db.ServerIPAddress}\SysInternal\Img\InventoryPhoto\{name}{ext}";
+                    return dbstring;
+                case LocationType.EmployeePhoto:
+                    dbstring = $@"\\{Db.ServerIPAddress}\SysInternal\Img\EmployeePhoto\{name}{ext}";
+                    return dbstring;
+                case LocationType.EmployeeDocument:
+                    dbstring = $@"\\{Db.ServerIPAddress}\SysInternal\Docs\EmployeeDocs\{ name}{ ext}";
+                    return dbstring;
                 default:
                     return null;
-                    break;
+            }
+        }
+        public static void ClearInputOnPanel(Panel panel)
+        {
+            foreach (var control in panel.Controls)
+            {
+                if (control is Guna2TextBox)
+                {
+                    Guna2TextBox txtbox = control as Guna2TextBox;
+                    txtbox.Clear();
+                }
+                if (control is Guna2ComboBox)
+                {
+                    Guna2ComboBox combo = control as Guna2ComboBox;
+                    if (combo.Items.Count >=1)
+                    {
+                        combo.SelectedIndex = 0;
+                    }
+                }
             }
         }
         public static void RunInBackground()
@@ -109,7 +148,7 @@ namespace AisInternalSystem.Controller
         }
         public enum LocationType
         {
-            SubjectPhoto, StudentDocuments, StudentPhoto, ParentPhoto
+            SubjectPhoto, StudentDocuments, StudentPhoto, ParentPhoto, InventoryPhoto, EmployeePhoto, EmployeeDocument
 
         }
         public static void SetDoubleBuffer(Control ctl, bool DoubleBuffered)
@@ -122,7 +161,7 @@ namespace AisInternalSystem.Controller
         private static WorkerProcess _processEnum;
         public enum WorkerProcess
         {
-           CopyFile, GetClassList
+           CopyFile, GetClassList, OpenFileNewThread
         }
         public static void WorkerFire(WorkerProcess process, string[] listofParams)
         {
@@ -138,6 +177,9 @@ namespace AisInternalSystem.Controller
                     break;
                 case WorkerProcess.GetClassList:
 
+                    break;
+                case WorkerProcess.OpenFileNewThread:
+                    OpenFileDocs(paramList[0]);
                     break;
                 default:
                     break;
@@ -160,8 +202,10 @@ namespace AisInternalSystem.Controller
             return Data.user.OwnerID;
         }
 
+
         public static void OpenFileDocs(string path)
         {
+            
             Process.Start(path);
         }
 
@@ -171,14 +215,19 @@ namespace AisInternalSystem.Controller
             opf.Filter = ("Image Files(*.BMP; *.JPG; *.JPEG; *.PNG;)| *.BMP; *.JPG; *.JPEG; *.PNG; | All files(*.*) | *.*");
             if (opf.ShowDialog() == DialogResult.OK)
             {
-                Stream stream = File.Open(opf.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                picture.Image = Image.FromStream(stream);
+                using(Image im = Image.FromFile(opf.FileName))
+                {
+                    Bitmap bm = new Bitmap(im);
+                    picture.Image = bm;
+                    im.Dispose();
+                }
+                return opf;
             }
             else
             {
                 picture.Image = Resources.icons8_question_mark_480px;
+                return null;
             }
-            return opf;
 
         }
 
@@ -193,21 +242,26 @@ namespace AisInternalSystem.Controller
             return opf;
         }
 
-        public static void CopyToServer(string from, string to)
+        private static void CopyToServer(string from, string to)
         {
-            FileStream fsOut = new FileStream(to, FileMode.Create);
-            
-            FileStream fsIn = new FileStream(from, FileMode.Open, FileAccess.Read, FileShare.Read);
-            byte[] bt = new byte[10000];
-            int reaDbyte;
-
-            while ((reaDbyte = fsIn.Read(bt, 0, bt.Length)) > 0)
+            try
             {
-                fsOut.Write(bt, 0, reaDbyte);
-                workerparam.ReportProgress((int)(fsIn.Position * 100 / fsIn.Length));
+                FileStream fsOut = new FileStream(to, FileMode.Create);
+                FileStream fsIn = new FileStream(from, FileMode.Open, FileAccess.Read, FileShare.Read);
+                byte[] bt = new byte[10000];
+                int reaDbyte;
+                while ((reaDbyte = fsIn.Read(bt, 0, bt.Length)) > 0)
+                {
+                    fsOut.Write(bt, 0, reaDbyte);
+                    workerparam.ReportProgress((int)(fsIn.Position * 100 / fsIn.Length));
+                }
+                fsIn.Close();
+                fsOut.Close();
             }
-            fsIn.Close();
-            fsOut.Close();
+            catch (IOException)
+            {
+                MessageBox.Show("Error, file is being used, please try again!");
+            }
         }
 
         public static void Auth(string usr, string pwd)
@@ -223,6 +277,21 @@ namespace AisInternalSystem.Controller
                 Data.user.OwnerID = Convert.ToInt32(dt.Rows[0][4].ToString());
                 Data.user.OwnerName = dt.Rows[0][5].ToString();
                 Data.user.UserImage = dt.Rows[0][6].ToString();
+                Data.user.SecQuestion = dt.Rows[0][7].ToString();
+                Data.user.Answer = dt.Rows[0][8].ToString();
+                try
+                {
+                    using (Image img = Image.FromFile(Data.user.UserImage))
+                    {
+                        Bitmap bitmap = new Bitmap(img);
+                        Data.user.ImageUser = bitmap;
+                        img.Dispose();
+                    }
+                }
+                catch (Exception)
+                {
+                    Data.user.ImageUser = Resources.icons8_male_user_100;
+                }
                 RoleSwitcher(Data.user.Roles);
                 DoAuth();
             }
@@ -271,21 +340,25 @@ namespace AisInternalSystem.Controller
             {
                 case User.RoleIdentifier.Management:
                     PopUp.Alert("You're using the preview build!", frmAlert.AlertType.Info);
+                    PopUp.Alert(PopUp.MessageIntroduction(Data.user.OwnerName), frmAlert.AlertType.Info);
+                    AuthNext();
                     break;
                 case User.RoleIdentifier.Admin:
-                    UIController.NavigateUI(UIController.Controls.UpperPanelAdmin);
-                    UIController.NavigateUI(UIController.Controls.UCDashboardAdmin);
+                    AuthNext();
                     PopUp.Alert(PopUp.MessageIntroduction(Data.user.OwnerName), frmAlert.AlertType.Info);
                     break;
                 case User.RoleIdentifier.IT:
-
+                    AuthNext();
+                    PopUp.Alert(PopUp.MessageIntroduction(Data.user.OwnerName), frmAlert.AlertType.Info);
                     break;
                 case User.RoleIdentifier.Teacher:
                     AuthNext();
+                    PopUp.Alert(PopUp.MessageIntroduction(Data.user.OwnerName), frmAlert.AlertType.Info);
                     break;
 
                 case User.RoleIdentifier.Accounting:
-                    PopUp.Alert(PopUp.NotAuthorized, frmAlert.AlertType.Warning);
+                    AuthNext();
+                    PopUp.Alert(PopUp.MessageIntroduction(Data.user.OwnerName), frmAlert.AlertType.Info);
                     break;
 
                 default:

@@ -131,5 +131,10 @@ namespace AisInternalSystem.UserInterface.Menu
         {
             this.Focus();
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            UIController.ResetMenu();
+        }
     }
 }

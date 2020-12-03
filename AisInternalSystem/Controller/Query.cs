@@ -125,14 +125,12 @@ namespace AisInternalSystem.Controller
                     cmd.CommandType = CommandType.StoredProcedure;
                     Db.DataAdapter(cmd, dt);
                     return dt;
-                    break;
                 case Process.LoadStudent:
                     cmd = new MySqlCommand("LoadStudentData", Db.GetConnection());
                     cmd.Parameters.Add("@_aisid", MySqlDbType.Int32).Value = str[0];
                     cmd.CommandType = CommandType.StoredProcedure;
                     Db.DataAdapter(cmd, dt);
                     return dt;
-                    break;
                 case Process.GetAcademicYearList:
                     cmd = new MySqlCommand("GetAcademicYearList", Db.GetConnection());
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -144,7 +142,6 @@ namespace AisInternalSystem.Controller
                     cmd.CommandType = CommandType.StoredProcedure;
                     Db.DataAdapter(cmd, dt);
                     return dt;
-                    break;
                 case Process.GetClassMember:
                     cmd = new MySqlCommand("fetchmemberlist", Db.GetConnection());
                     cmd.Parameters.Add("@classid", MySqlDbType.Int32).Value = str[0];
@@ -167,7 +164,6 @@ namespace AisInternalSystem.Controller
                     return dt;
                 default:
                     return null;
-                    break;
             }
         }
 
@@ -223,6 +219,10 @@ namespace AisInternalSystem.Controller
             return dt;
         }
             
+        private void UpdateCategories()
+        {
+
+        }
 
         public static bool Insert(string query, string[] param, MySqlDbType[] type, string[] value)
         {
@@ -275,7 +275,6 @@ namespace AisInternalSystem.Controller
         public static int? GetRandomNumber(Process proc)
         {
             MySqlCommand cmd;
-            MySqlDataAdapter dataAdapter;
             DataTable table = new DataTable();
             MySqlDataReader reader;
 
@@ -292,10 +291,8 @@ namespace AisInternalSystem.Controller
                     }
                     reader.Close();
                     return UniqueNumber;
-                    break;
                 default:
                     return null;
-                    break;
             }
         }
         #endregion

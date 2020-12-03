@@ -20,12 +20,23 @@ namespace AisInternalSystem.Entities
         public string Unit { get; set; }
         #region Prop
         public static List<string> unit = new List<string>() { "GRAM", "KILOGRAM", "UNIT", "METER" };
+        public static List<string> CategoryList = new List<string>();
+        public static int CategoryQty = 0;
         #endregion
 
         #region Function
         public static DataTable GetDataSource()
         {
+            CategoryList.Clear();
             DataTable dt = Query.GetDataTable("FetchInventoryCategory", new string[1] { "@noparam" }, new MySql.Data.MySqlClient.MySqlDbType[1] { MySql.Data.MySqlClient.MySqlDbType.VarChar }, new string[1] { "" });
+            if (dt.Rows.Count >= 1)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    CategoryList.Add(dt.Rows[i][1].ToString());
+                }
+                CategoryQty = dt.Rows.Count;
+            }
             return dt;
         }
         public static bool Input(ItemCategories categories)

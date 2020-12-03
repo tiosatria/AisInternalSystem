@@ -49,6 +49,16 @@ namespace AisInternalSystem.Module
             grade.GradeDesc = dt.Rows[0][4].ToString();
             return grade;
         }
+        public static string GetGradeNameByID(string i)
+        {
+            string str = string.Empty;
+            DataTable dt = Query.GetDataTable("GetGradeNameByID", new string[1] { "@_glevel" }, new MySql.Data.MySqlClient.MySqlDbType[1] { MySql.Data.MySqlClient.MySqlDbType.Int32 }, new string[1] { i });
+            if (dt.Rows.Count >= 1)
+            {
+                str = dt.Rows[0][0].ToString();
+            }
+            return str;
+        }
         #endregion
     }
 }

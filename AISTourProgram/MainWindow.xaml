@@ -1,0 +1,22 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AISTourProgram"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="AISTourProgram.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1080" Width="1920" WindowStyle="None" WindowState="Maximized" FontFamily="Segoe UI" FontSize="24">
+    <Window.Background>
+        <VisualBrush>
+            <VisualBrush.Visual>
+                <MediaElement Source="C:\Users\it\source\repos\AisInternalSystem\AISTourProgram\bin\Debug\OMGBG4.mov"/>
+            </VisualBrush.Visual>
+        </VisualBrush>
+    </Window.Background>
+    <Grid>
+        <TextBlock Text="Hello and Welcome to" FontSize="80" HorizontalAlignment="Center" Margin="544,87,580,886" Width="788" Foreground="#FFE0C764"/>
+        <Image Source="AIS.png" Margin="357,129,421,195"/>
+        <telerik:RadButton x:Name="radButton" Content="Click here" CornerRadius="8" HorizontalAlignment="Left" Height="98" Margin="544,823,0,0" VerticalAlignment="Top" Width="266" RenderTransformOrigin="-3.247,1.632" telerik:StyleManager.Theme="Material" Click="radButton_Click" Background="#FFE0C764" FontFamily="Segoe UI" FontSize="24" Foreground="White"/>
+    </Grid>
+</Window>

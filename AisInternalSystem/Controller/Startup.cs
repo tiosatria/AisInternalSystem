@@ -16,21 +16,13 @@ namespace AisInternalSystem.Controller
 {
     public class Startup
     {
-        private static double Appver = 2.6;
-        private static BackgroundWorker worker;
+        private static double Appver = 2.8;
         public static string Apppath = string.Empty;
         private static double appver2 = 0;
         public Startup()
         {
 
         }
-
-        public enum Action
-        {
-            Update, InitStartupObject
-        }
-        private static Action _action;
-
         public static void Update()
         {
             DataTable dt = Query.GetDataTable("CheckForUpdate", new string[1] { "@noparam" }, new MySql.Data.MySqlClient.MySqlDbType[1] { MySql.Data.MySqlClient.MySqlDbType.VarChar }, new string[1] { "" });
@@ -39,13 +31,14 @@ namespace AisInternalSystem.Controller
             Apppath = dt.Rows[0][2].ToString();
             if (appver2 > Appver)
             {
+                PopUp.Alert("System is outdated, please update the system!", frmAlert.AlertType.Warning);
                 Confirmation.Fire(Confirmation.onConfirmEnum.Update);
             }
-        }
-
-        private static void workerProgress(object sender, ProgressChangedEventArgs eventArgs)
-        {
-
+            else
+            {
+                PopUp.Alert("System is up-to-date", frmAlert.AlertType.Info);
+                UIController.NavigateUI(UIController.Controls.UCLogin);
+            }
         }
     }
 }

@@ -113,6 +113,16 @@ namespace AisInternalSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap chevronleft {
+            get {
+                object obj = ResourceManager.GetObject("chevronleft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap disappointed_200_transparent {
             get {
                 object obj = ResourceManager.GetObject("disappointed_200_transparent", resourceCulture);
@@ -126,6 +136,26 @@ namespace AisInternalSystem.Properties {
         internal static System.Drawing.Bitmap Djuwita {
             get {
                 object obj = ResourceManager.GetObject("Djuwita", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap down_arrow_200_transparent {
+            get {
+                object obj = ResourceManager.GetObject("down_arrow_200_transparent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EDIT {
+            get {
+                object obj = ResourceManager.GetObject("EDIT", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -373,6 +403,16 @@ namespace AisInternalSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_female_26px_1 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_female_26px_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_finish_flag_60px {
             get {
                 object obj = ResourceManager.GetObject("icons8_finish_flag_60px", resourceCulture);
@@ -423,6 +463,16 @@ namespace AisInternalSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_male_30px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_male_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_male_user_100 {
             get {
                 object obj = ResourceManager.GetObject("icons8-male-user-100", resourceCulture);
@@ -436,6 +486,16 @@ namespace AisInternalSystem.Properties {
         internal static System.Drawing.Bitmap icons8_male_user_200px {
             get {
                 object obj = ResourceManager.GetObject("icons8_male_user_200px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_minimize_window_50px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_minimize_window_50px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -666,6 +726,16 @@ namespace AisInternalSystem.Properties {
         internal static System.Drawing.Bitmap icons8_triangle_arrow_24px {
             get {
                 object obj = ResourceManager.GetObject("icons8_triangle_arrow_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_trolley_100px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_trolley_100px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -956,6 +1026,16 @@ namespace AisInternalSystem.Properties {
         internal static System.Drawing.Bitmap upload_to_cloud_200_transparent {
             get {
                 object obj = ResourceManager.GetObject("upload-to-cloud_200_transparent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap view_black {
+            get {
+                object obj = ResourceManager.GetObject("view-black", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

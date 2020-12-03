@@ -53,15 +53,12 @@ namespace AisInternalSystem.Module
                         PopUp.Alert(ex.Message, frmAlert.AlertType.Error);
                     }
                     return table;
-                    break;
                 case Process.LoadStudent:
                         
                     return table;
-                    break;
                 case Process.Employee:
 
                     return table;
-                    break;
                 case Process.Class:
 
                     return table;
@@ -72,14 +69,11 @@ namespace AisInternalSystem.Module
                     cmd.Parameters.Add("");
 
                     return table;
-                    break;
                 case Process.Subject:
 
                     return table;
-                    break;
                 default:
                     return table;
-                    break;
                 case Process.Auth:
                     cmd = new MySqlCommand("Auth", Db.GetConnection());
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -88,7 +82,6 @@ namespace AisInternalSystem.Module
                     dataAdapter = new MySqlDataAdapter(cmd);
                     dataAdapter.Fill(table);
                     return table;
-                    break;
             }
         }
 

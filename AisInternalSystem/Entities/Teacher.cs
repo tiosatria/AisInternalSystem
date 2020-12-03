@@ -19,8 +19,47 @@ namespace AisInternalSystem.Module
         #region Properties
         public int TeacherID { get; set; }
         public string TeacherName { get; set; }
+        public string Contact { get; set; }
+        public string ImageLocation { get; set; }
+        public DateTime BirthDate { get; set; }
         #endregion
+        public static Teacher currentTeacher(int id)
+        {
+            Teacher tc = GetTeacherInfo(id);
+            return tc;
+        }
+        public static Teacher currentAssistantTeacher(int id)
+        {
+            Teacher asstc = GetTeacherInfo(id);
+            return asstc;
+        }
         #region Function
+        public static Teacher GetTeacherInfo(int id)
+        {
+            Teacher teacher = new Teacher();
+            DataTable dt = Query.GetDataTable("GetTeacherInfo", new string[1] { "@_employeeid" }, new MySql.Data.MySqlClient.MySqlDbType[1] { MySql.Data.MySqlClient.MySqlDbType.Int32 }, new string[1] { id.ToString() });
+            if (dt.Rows.Count >= 1)
+            {
+                try
+                {
+                    teacher.TeacherID = Convert.ToInt32(dt.Rows[0][0].ToString());
+                    teacher.TeacherName = dt.Rows[0][2].ToString();
+                    teacher.Contact = dt.Rows[0][3].ToString();
+                    teacher.ImageLocation = dt.Rows[0][4].ToString();
+                    teacher.BirthDate = Convert.ToDateTime(dt.Rows[0][5].ToString());
+                }
+                catch (Exception)
+                {
+                    PopUp.Alert("Error getting teacher information", frmAlert.AlertType.Warning);
+                }
+            }
+            else
+            {
+                teacher = null;
+            }
+            return teacher;
+        }
+
         public static List<Teacher> GetTeacherList()
         {
             List<Teacher> teachers = new List<Teacher>();
@@ -33,6 +72,9 @@ namespace AisInternalSystem.Module
                     teacher[i] = new Teacher();
                     teacher[i].TeacherID = Convert.ToInt32(dt.Rows[i][0].ToString());
                     teacher[i].TeacherName = dt.Rows[i][2].ToString();
+                    teacher[i].Contact = dt.Rows[i][3].ToString();
+                    teacher[i].ImageLocation = dt.Rows[i][4].ToString();
+                    teacher[i].BirthDate = Convert.ToDateTime(dt.Rows[i][5].ToString());
                     teachers.Add(teacher[i]);
                 }
             }

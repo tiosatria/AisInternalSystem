@@ -24,36 +24,306 @@ namespace AisInternalSystem.UserInterface.Student
 {
     public partial class UCRecStudent : UserControl
     {
-        bool isLoaded = false;
-        bool studIsSaved = false;
+        public static event EventHandler<Image> PictureStudentChanged;
+        private bool isLoaded = false;
+        private bool studIsSaved = false;
+        private bool isBusy = false;    
+
         public UCRecStudent()
         {
 
         }
         private void PrepObjectForEditing()
         {
-
+            InitClearFormStudent();
+            studIsSaved = true;
+            isBusy = true;
+            SwitcherLeft(NavLeftEnum.Student);
+            SwitcherRight(NavRightEnum.Document);
+            LoadStudentData();
         }
         private void PrepObjectForRecord()
         {
-
+            InitClearFormStudent();
+            isBusy = true;
+            studIsSaved = false;
+            SwitcherLeft(NavLeftEnum.Student);
+            SwitcherRight(NavRightEnum.Document);
+            DeLoadStudentData();
         }
-        public void InitObject()
+        private void InitClearFormStudent()
         {
+            studentImg = null;
+            picStud.Image = Resources.icons8_student_male_80px;
+            foreach (var item in panelStud1.Controls)
+            {
+                if (item is Guna2TextBox)
+                {
+                    Guna2TextBox textbox = item as Guna2TextBox;
+                    textbox.Clear();
+                }
+            }
+            foreach (var item in panelStud2.Controls)
+            {
+                if (item is Guna2TextBox)
+                {
+                    Guna2TextBox textbox = item as Guna2TextBox;
+                    textbox.Clear();
+                }
+                if (item is Guna2ComboBox)
+                {
+                    Guna2ComboBox combo = item as Guna2ComboBox;
+                    if (combo.Items.Count >=1)
+                    {
+                        combo.SelectedIndex = 0;
+                    }
+                }
+            }
+            dropIntake.Value = DateTime.Now;
+            dropDob.Value = Convert.ToDateTime("1/1/2018");
+            RadMale.Checked = true;
+            radFemale.Checked = false;
+            gender = "MALE";
+        }
+        private void InitClearFormParent()
+        {
+            foreach (var item in PanelRelat1.Controls)
+            {
+                if (item is Guna2TextBox)
+                {
+                    Guna2TextBox textbox = item as Guna2TextBox;
+                    textbox.Clear();
+                }
+                if (item is Guna2ComboBox)
+                {
+                    Guna2ComboBox combo = item as Guna2ComboBox;
+                    if (combo.Items.Count >= 1)
+                    {
+                        combo.SelectedIndex = 0;
+                    }
+                }
+            }
+            foreach (var item in PanelRelat2.Controls)
+            {
+                if (item is Guna2TextBox)
+                {
+                    Guna2TextBox textbox = item as Guna2TextBox;
+                    textbox.Clear();
+                }
+                if (item is Guna2ComboBox)
+                {
+                    Guna2ComboBox combo = item as Guna2ComboBox;
+                    if (combo.Items.Count >= 1)
+                    {
+                        combo.SelectedIndex = 0;
+                    }
+                }
+            }
+            RelatPhotoLocationStr = null;
+            picFather.Image = Resources.icons8_male_user_100;
+        }
+        private void DeLoadStudentData()
+        {
+            dgRelationshipList.DataSource = null;
+            dgDocs.DataSource = null;
+            Utilities.ClearInputOnPanel(PanelMedicalUp);
+            dgSchoolInfo.DataSource = null;
+            dgLinkSibling.DataSource = null;
+        }
+        private void LoadStudentData()
+        {
+            StudentBasicInfo();
+            StudentRelationship();
+            StudentDocument();
+            StudentMedical();
+            StudentSchool();
+            StudentSibling();
+        }
+        private void GenderF(string str)
+        {
+            if (str == "FEMALE")
+            {
+                radFemale.Checked = true;
+                RadMale.Checked = false;
+                gender = "FEMALE";
+            }
+            else
+            {
+                radFemale.Checked = false;
+                RadMale.Checked = true;
+                gender = "MALE";
+            }
+        }
+        private void StudentBasicInfo()
+        {
+            Utilities.ClearInputOnPanel(panelStud1);
+            Utilities.ClearInputOnPanel(panelStud2);
+            student = Entities.Student.GetStudent(Entities.Student.CurrentStudent.AisID);
+            SelectedIDStudent = student.AisID;
+            txtstudAisid.Text = student.AisID.ToString();
+            txtNisn.Text = student.NIS;
+            txtAsn.Text = student.ASN;
+            dropIntake.Value = student.Intake;
+            txtFamilyName.Text = student.FamilyName;
+            txtGivenName.Text = student.GivenName;
+            txtMiddleName.Text = student.MiddleName;
+            txtCertificateName.Text = student.CertificateName;
+            dropDob.Value = student.DateofBirth;
+            txtPlaceOfBirth.Text = student.PlaceOfBirth;
+            txtCountryOfBirth.Text = student.CountryOfBirth;
+            GenderF(student.Gender);
+            dropReligion.SelectedIndex = dropReligion.Items.IndexOf(student.Religion);
+            txtNationality.Text = student.Nationality;
+            txtHomeAddress.Text = student.HomeAddress;
+            txtHomeState.Text = student.HomeState;
+            txtSuburb.Text = student.Suburb;
+            txtPostCode.Text = student.PostCode;
+            txtHomeCountry.Text = student.HomeCountry;
+            txtPostalAddress.Text = student.PostalAddress;
+            txtPostalState.Text = student.PostalState;
+            txtPostalSuburb.Text = student.PostalSuburb;
+            txtPostalCode.Text = student.PostalCode;
+            txtPostalCountry.Text = student.PostalCountry;
+            txtHomePhone.Text = student.HomePhone;
+            txtMobileNumber.Text = student.HomePhone;
+            txtFFaxNumber.Text = student.FaxNumber;
+            txtLangSpoken.Text = student.LangSpoken;
+            dropSpokenEnglish.SelectedIndex = dropSpokenEnglish.Items.IndexOf(student.EnglishProficiency);
+            dropStudStat.SelectedIndex = dropStudStat.Items.IndexOf(student.StudentStatus);
+            photo = student.PhotoLocation;
+            try
+            {
+                using (Image img = Image.FromFile(photo))
+                {
+                    Bitmap b = new Bitmap(img);
+                    picStud.Image = b;
+                    img.Dispose();
+                }
+            }
+            catch (Exception)
+            {
+                picStud.Image = Resources.icons8_student_male_80px;
+            }
+            dropCurrGrade.SelectedIndex = dropCurrGrade.Items.IndexOf(student.CurrentGradeString);
+            dropPropGrade.SelectedIndex = dropPropGrade.Items.IndexOf(student.ProposedGrade);
+        }
+        private void StudentRelationship()
+        {
+            FillDgRelationshipList();
+        }
+        private void StudentDocument()
+        {
+            DocumentInit();
+        }
+        private void StudentMedical()
+        {
+            Utilities.ClearInputOnPanel(PanelMedicalUp);
+            int j = 0;
+            int i = 0; 
+            DataTable dt = Query.GetDataTable("stud_medical_info", new string[1] { "@_medicalofstud" }, new MySql.Data.MySqlClient.MySqlDbType[1] { MySql.Data.MySqlClient.MySqlDbType.Int32 }, new string[1] { SelectedIDStudent.ToString() });
+            if (dt.Rows.Count >= 1)
+            {
+                txtMedsDetails.Text = dt.Rows[i][j].ToString();
+                txtMEdsAllergies.Text = dt.Rows[i][j++].ToString();
+                txtMedsMedsAller.Text = dt.Rows[i][j++].ToString();
+                onRegularmeds(dt.Rows[i][j++].ToString());
+                txtMedsDose.Text = dt.Rows[i][j++].ToString();
+            }
+            else
+            {
+                Utilities.ClearInputOnPanel(PanelMedicalUp);
+            }
+        }
+        private void onRegularmeds(string stat)
+        {
+            if (stat == "YES")
+            {
+                chkMedsyes.Checked = true;
+                chkmedsNo.Checked = false;
+                bregularmed = true;
+            }
+            else
+            {
+                chkMedsyes.Checked = false;
+                chkmedsNo.Checked = true;
+                bregularmed = false;
+            }
+        }
+        private void StudentSchool()
+        {
+            InitSchoolInfo();
+        }
+        private void StudentSibling()
+        {
+            FetchLinkedSiblingInfo();
+        }
+        public void InitObject(EditMode edit)
+        {
+            _editMode = edit;
             if (!isLoaded)
             {
                 InitializeComponent();
-                SwitcherLeft(NavLeftEnum.Student);
-                SwitcherRight(NavRightEnum.Document);
+                PrepForm();
                 AutoFillInit();
+            }
+            else
+            {
+                PrepForm();
+            }
+            isLoaded = true;
+        }
+        private void initDrop()
+        {
+            //dropgradesch
+            if (!dropGradeSchLoaded)
+            {
+                dropGradeSchool.Items.Clear();
+                foreach (Grade item in Grade.GradeList())
+                {
+                    dropGradeSchool.Items.Add(item.GradeName);
+                }
+                dropGradeSchLoaded = true;
             }
             else
             {
 
             }
-            isLoaded = true;
-        }
 
+        }
+        private void PrepForm()
+        {
+            switch (_editMode)
+            {
+                case EditMode.Create:
+                    if (!isBusy)
+                    {
+                        PrepObjectForRecord();
+                        initDrop();
+                    }
+                    else
+                    {
+                        PopUp.Alert("You have ongoing recording session, please mark the session as finished to record or edit new data!", frmAlert.AlertType.Warning);
+                    }
+                    break;
+                case EditMode.Edit:
+                    if (!isBusy)
+                    {
+                        PrepObjectForEditing();
+                        initDrop();
+                    }
+                    else
+                    {
+                        PopUp.Alert("You have ongoing recording session, please mark the session as finished to record or edit new data!", frmAlert.AlertType.Warning);
+
+                    }
+                    break;
+            }
+        }
+        public enum EditMode
+        {
+            Create, Edit
+        }
+        private EditMode _editMode;
         #region EventListener
         private void FillDgRelationshipList()
         {
@@ -61,136 +331,175 @@ namespace AisInternalSystem.UserInterface.Student
             if (dt.Rows.Count < 1)
             {
                 lblnoparents.Visible = true;
-                dgParList.Visible = false;
-                dgParList.DataSource = dt;
+                dgRelationshipList.Visible = false;
+                dgRelationshipList.DataSource = dt;
             }
             else
             {
                 lblnoparents.Visible = false;
-                dgParList.Visible = true;
-                dgParList.DataSource = dt;
+                dgRelationshipList.Visible = true;
+                dgRelationshipList.DataSource = dt;
             }
         }
+        private Entities.Student student = null;
+
+        private string photo = null;
+
+
         private void InsertDataStudent()
         {
-            string photo;
-            if (studentImg == null)
-            {
-                photo = null;
-            }
-            else
-            {
-                photo = Utilities.GetFileDbLocationString(Utilities.LocationType.StudentPhoto, SelectedIDStudent.ToString(), studentImg);
-            }
-            if (
-            Entities.Student.InsertStudent(new string[34]
-                {
-                    txtstudAisid.Text,
-                    txtNisn.Text,
-                    txtAsn.Text,
-                    dropIntake.Value.ToString("yyyy-MM-dd"),
-                    txtFamilyName.Text,
-                    txtGivenName.Text,
-                    txtMiddleName.Text,
-                    txtCertificateName.Text,
-                    dropDob.Value.ToString("yyyy-MM-dd"),
-                    txtPlaceOfBirth.Text,
-                    txtCountryOfBirth.Text,
-                    gender,
-                    dropReligion.SelectedItem.ToString(),
-                    txtNationality.Text,
-                    txtHomeAddress.Text,
-                    txtHomeState.Text,
-                    txtSuburb.Text,
-                    txtPostCode.Text,
-                    txtHomeCountry.Text,
-                    txtPostalAddress.Text,
-                    txtPostalState.Text,
-                    txtPostalSuburb.Text,
-                    txtPostalCode.Text,
-                    txtPostalCountry.Text,
-                    txtHomePhone.Text,
-                    txtMobileNumber.Text,
-                    txtFaxNumber.Text,
-                    txtLangSpoken.Text,
-                    dropSpokenEnglish.SelectedItem.ToString(),
-                    dropStudStat.SelectedItem.ToString(),
-                    photo,
-                    Utilities.GetCurrentUserID().ToString(),
-                    Data.grades[Data.grades.FindIndex(o => o.GradeName == dropCurrGrade.SelectedItem.ToString())].GradeLevel.ToString(),
-                    dropPropGrade.SelectedItem.ToString()
-                }
-                ))
+            Utilities.WorkerFinished += Utilities_WorkerFinished;
+            student = new Entities.Student();
+            student.AisID = Convert.ToInt32(txtstudAisid.Text);
+            student.NIS = txtNisn.Text;
+            student.ASN = txtAsn.Text;
+            student.Intake = Convert.ToDateTime(dropIntake.Value.ToString(PublicProperties.DateFormat));
+            student.FamilyName = txtFamilyName.Text;
+            student.GivenName = txtGivenName.Text;
+            student.MiddleName = txtMiddleName.Text;
+            student.CertificateName = txtCertificateName.Text;
+            student.DateofBirth = Convert.ToDateTime(dropDob.Value.ToString("yyyy-MM-dd"));
+            student.PlaceOfBirth = txtPlaceOfBirth.Text;
+            student.CountryOfBirth = txtCountryOfBirth.Text;
+            student.Gender = gender;
+            student.Religion = dropReligion.SelectedItem.ToString();
+            student.Nationality = txtNationality.Text;
+            student.HomeAddress = txtHomeAddress.Text;
+            student.HomeState = txtHomeState.Text;
+            student.Suburb = txtSuburb.Text;
+            student.PostCode = txtPostCode.Text;
+            student.HomeCountry = txtHomeCountry.Text;
+            student.PostalAddress = txtPostalAddress.Text;
+            student.PostalState = txtPostalState.Text;
+            student.PostalSuburb = txtPostalSuburb.Text;
+            student.PostalCode = txtPostalCode.Text;
+            student.PostalCountry = txtPostalCountry.Text;
+            student.HomePhone = txtHomePhone.Text;
+            student.MobileNumber = txtMobileNumber.Text;
+            student.FaxNumber = txtFaxNumber.Text;
+            student.LangSpoken = txtLangSpoken.Text;
+            student.EnglishProficiency = dropSpokenEnglish.SelectedItem.ToString();
+            student.StudentStatus = dropStudStat.SelectedItem.ToString();
+            student.PhotoLocation = photo;
+            student.Maker = Utilities.GetCurrentUserID();
+            student.CurrentGrade = Data.grades[Data.grades.FindIndex(o => o.GradeName == dropCurrGrade.SelectedItem.ToString())].GradeLevel;
+            student.ProposedGrade = dropPropGrade.SelectedItem.ToString();
+            if (Entities.Student.InsertStudent(student))
             {
                 PopUp.Alert("Student record has been saved succesfully!", frmAlert.AlertType.Success);
+                if (studentImg != null && studentImg.FileName != "" && studentImg.FileName != null)
+                {
+                    picStud.Image.Dispose();
+                    btnFinalize.Enabled = false;
+                    Utilities.WorkerFire(Utilities.WorkerProcess.CopyFile, new string[2] { studentImg.FileName, photo });
+                }
                 SelectedIDStudent = Convert.ToInt32(txtstudAisid.Text);
                 studIsSaved = true;
                 studentImg = null;
+                student = null;
             }
             else
             {
                 PopUp.Alert("Failed to record student data!", frmAlert.AlertType.Error);
             }
         }
-        private void ReviseDataStudent()
+
+        private void Utilities_WorkerFinished(object sender, EventArgs e)
         {
-            string photo;
-            if (studentImg == null)
+            try
             {
-                photo = null;
-            }
-            else
-            {
-                photo = Utilities.GetFileDbLocationString(Utilities.LocationType.StudentPhoto, SelectedIDStudent.ToString(), studentImg);
-            }
-            if (
-            Entities.Student.ReviseStudent(new string[34]
+                using (Image img = Image.FromFile(photo))
                 {
-                 txtstudAisid.Text,
-                    txtNisn.Text,
-                    txtAsn.Text,
-                    dropIntake.Value.ToString("yyyy-MM-dd"),
-                    txtFamilyName.Text,
-                    txtGivenName.Text,
-                    txtMiddleName.Text,
-                    txtCertificateName.Text,
-                    dropDob.Value.ToString("yyyy-MM-dd"),
-                    txtPlaceOfBirth.Text,
-                    txtCountryOfBirth.Text,
-                    gender,
-                    dropReligion.SelectedItem.ToString(),
-                    txtNationality.Text,
-                    txtHomeAddress.Text,
-                    txtHomeState.Text,
-                    txtSuburb.Text,
-                    txtPostCode.Text,
-                    txtHomeCountry.Text,
-                    txtPostalAddress.Text,
-                    txtPostalState.Text,
-                    txtPostalSuburb.Text,
-                    txtPostalCode.Text,
-                    txtPostalCountry.Text,
-                    txtHomePhone.Text,
-                    txtMobileNumber.Text,
-                    txtFaxNumber.Text,
-                    txtLangSpoken.Text,
-                    dropSpokenEnglish.SelectedItem.ToString(),
-                    dropStudStat.SelectedItem.ToString(),
-                    photo,
-                    Utilities.GetCurrentUserID().ToString(),
-                    Data.grades[Data.grades.FindIndex(o => o.GradeName == dropCurrGrade.SelectedItem.ToString())].GradeLevel.ToString(),
-                    dropPropGrade.SelectedItem.ToString()
+                    Bitmap bitmap = new Bitmap(img);
+                    picStud.Image = bitmap;
+                    img.Dispose();
+                    PictureStudentChanged?.Invoke(sender, bitmap);
+                    btnFinalize.Enabled = true;
                 }
-                ))
-            {
-                PopUp.Alert("Student record has been Updated succesfully!", frmAlert.AlertType.Success);
-                studentImg = null;
             }
-            else
+            catch (Exception)
             {
-                PopUp.Alert("Failed to update student data!", frmAlert.AlertType.Error);
+                picStud.Image = Resources.icons8_student_male_80px;
+                btnFinalize.Enabled = true;
             }
         }
+
+        private void ReviseDataStudent()
+        {
+            Utilities.WorkerFinished += Utilities_WorkerFinished1;
+            student = new Entities.Student();
+            student.AisID = Convert.ToInt32(txtstudAisid.Text);
+            student.NIS = txtNisn.Text;
+            student.ASN = txtAsn.Text;
+            student.Intake = Convert.ToDateTime(dropIntake.Value.ToString(PublicProperties.DateFormat));
+            student.FamilyName = txtFamilyName.Text;
+            student.GivenName = txtGivenName.Text;
+            student.MiddleName = txtMiddleName.Text;
+            student.CertificateName = txtCertificateName.Text;
+            student.DateofBirth = Convert.ToDateTime(dropDob.Value.ToString("yyyy-MM-dd"));
+            student.PlaceOfBirth = txtPlaceOfBirth.Text;
+            student.CountryOfBirth = txtCountryOfBirth.Text;
+            student.Gender = gender;
+            student.Religion = dropReligion.SelectedItem.ToString();
+            student.Nationality = txtNationality.Text;
+            student.HomeAddress = txtHomeAddress.Text;
+            student.HomeState = txtHomeState.Text;
+            student.Suburb = txtSuburb.Text;
+            student.PostCode = txtPostCode.Text;
+            student.HomeCountry = txtHomeCountry.Text;
+            student.PostalAddress = txtPostalAddress.Text;
+            student.PostalState = txtPostalState.Text;
+            student.PostalSuburb = txtPostalSuburb.Text;
+            student.PostalCode = txtPostalCode.Text;
+            student.PostalCountry = txtPostalCountry.Text;
+            student.HomePhone = txtHomePhone.Text;
+            student.MobileNumber = txtMobileNumber.Text;
+            student.FaxNumber = txtFaxNumber.Text;
+            student.LangSpoken = txtLangSpoken.Text;
+            student.EnglishProficiency = dropSpokenEnglish.SelectedItem.ToString();
+            student.StudentStatus = dropStudStat.SelectedItem.ToString();
+            student.PhotoLocation = photo;
+            student.Revised = Utilities.GetCurrentUserID();
+            student.CurrentGrade = Data.grades[Data.grades.FindIndex(o => o.GradeName == dropCurrGrade.SelectedItem.ToString())].GradeLevel;
+            student.ProposedGrade = dropPropGrade.SelectedItem.ToString();
+            if (Entities.Student.ReviseStudent(student))
+            {
+                PopUp.Alert("Student record has been saved succesfully!", frmAlert.AlertType.Success);
+                if (studentImg != null && studentImg.FileName != "" && studentImg.FileName != null)
+                {
+                    btnFinalize.Enabled = false;
+                    Utilities.WorkerFire(Utilities.WorkerProcess.CopyFile, new string[2] { studentImg.FileName, photo });
+                }
+                SelectedIDStudent = Convert.ToInt32(txtstudAisid.Text);
+                studIsSaved = true;
+                student = null;
+            }
+            else
+            {
+                PopUp.Alert("Failed to record student data!", frmAlert.AlertType.Error);
+            }
+        }
+
+        private void Utilities_WorkerFinished1(object sender, EventArgs e)
+        {
+            try
+            {
+                using (Image img = Image.FromFile(photo))
+                {
+                    Bitmap bitmap = new Bitmap(img);
+                    picStud.Image = bitmap;
+                    img.Dispose();
+                    PictureStudentChanged?.Invoke(sender, bitmap);
+                    btnFinalize.Enabled = true;
+                }
+            }
+            catch (Exception)
+            {
+                picStud.Image = Resources.icons8_student_male_80px;
+                btnFinalize.Enabled = true;
+            }
+        }
+
         string gender = "MALE";
         private void SaveStudent()
         {
@@ -202,46 +511,20 @@ namespace AisInternalSystem.UserInterface.Student
             {
                 ReviseDataStudent();
             }
-            
+
         }
         private void btnStudOk_Click(object sender, EventArgs e)
         {
-            if (txtstudAisid.Text == "" || txtCertificateName.Text == "" || txtPlaceOfBirth.Text == "" || txtCountryOfBirth.Text == "" || txtNationality.Text == "" || txtHomeCountry.Text == "" || txtLangSpoken.Text == "")
-            {
-                PopUp.Alert("Cannot proceed, please complete the data\nbefore saving the record!", frmAlert.AlertType.Warning);
-            }
-            else
-            {
-                SaveStudent();    
-            }
-        }
-        private void btnStud1Next_Click(object sender, EventArgs e)
-        {
-            if (txtstudAisid.Text == "" || txtCertificateName.Text == "" || txtPlaceOfBirth.Text == "" || txtCountryOfBirth.Text == "" || txtNationality.Text == "" || txtHomeCountry.Text == "") 
-            {
-                PopUp.Alert("Cannot proceed, please complete the data\nbefore go to the next page!", frmAlert.AlertType.Warning);
-            }
-            else
-            {
-                UIController.SendPanelBack(panelStud1);
 
-            }
         }
-
         private void btnStudBack_Click(object sender, EventArgs e)
         {
             UIController.SendPanelBack(panelStud2);
         }
-
         OpenFileDialog studentImg;
         OpenFileDialog parentsImg;
         OpenFileDialog DocumentPath;
-        private void picStud_Click(object sender, EventArgs e)
-        {
-            studentImg = Utilities.OpenImage(picStud);
-        }
         #endregion
-
         #region Enumeration
         public enum StateEditing
         {
@@ -263,56 +546,66 @@ namespace AisInternalSystem.UserInterface.Student
         #region Properties
         private Entities.Student student1;
         #endregion
-
+        private bool autofillLoaded = false;
         #region Function
         private void AutoFillInit()
         {
-            foreach (var item in Data.grades)
+            if (!autofillLoaded)
             {
-                dropPropGrade.Items.Add(item.GradeName);
+                foreach (var item in Data.grades)
+                {
+                    dropPropGrade.Items.Add(item.GradeName);
+                }
+                dropPropGrade.SelectedIndex = 0;
+                foreach (string item in Data.StudentStatus)
+                {
+                    dropStudStat.Items.Add(item);
+                }
+                dropStudStat.SelectedIndex = 0;
+                foreach (string item in Data.Religion)
+                {
+                    dropReligion.Items.Add(item);
+                }
+                dropReligion.SelectedIndex = 0;
+                foreach (string item in Data.EnglishProficiency)
+                {
+                    dropSpokenEnglish.Items.Add(item);
+                }
+                dropSpokenEnglish.SelectedIndex = 0;
+                foreach (string item in Data.DocumentTypeStudent)
+                {
+                    dropDocsType.Items.Add(item);
+                }
+                dropDocsType.SelectedIndex = 0;
+                foreach (var item in Data.grades)
+                {
+                    dropCurrGrade.Items.Add(item.GradeName);
+                }
+                dropCurrGrade.SelectedIndex = 0;
+                txtAutoComplete(txtLangSpoken, Data.LanguageSpoken);
+                txtAutoComplete(txtHomeCountry, Data.Country);
+                txtAutoComplete(txtFHomeCountry, Data.Country);
+                txtAutoComplete(txtCountryOfBirth, Data.Country);
+                txtAutoComplete(txtFPostalCountry, Data.Country);
+                txtAutoComplete(txtSchoolCountry, Data.Country);
+                txtAutoComplete(txtPostalCountry, Data.Country);
+                txtAutoComplete(txtPostalCountry, Data.Country);
+                txtAutoComplete(txtFHomeState, Data.State);
+                txtAutoComplete(txtHomeState, Data.State);
+                txtAutoComplete(txtFPostalState, Data.State);
+                txtAutoComplete(txtPostalState, Data.State);
+                txtAutoComplete(txtFNationality, Data.Nationality);
+                txtAutoComplete(txtNationality, Data.Nationality);
+                txtAutoComplete(txtPlaceOfBirth, Data.PlaceOfBirth);
+                txtAutoComplete(txtFOccupation, Data.Occupation);
+                //father
+                txtAutoComplete(txtFNationality, Data.Nationality);
+                txtAutoComplete(txtFAuRes, Data.AustralianResidence);
+                txtAutoComplete(txtFAuAborigine, Data.AustralianAborigine);
+                txtAutoComplete(txtFNonSchoolEdu, Data.NonSchoolEducation);
+                txtAutoComplete(txtFOccupation, Data.Occupation);
+                txtAutoComplete(txtFHomeAddress, Data.Country);
             }
-            dropPropGrade.SelectedIndex = 0;
-            foreach (string item in Data.StudentStatus)
-            {
-                dropStudStat.Items.Add(item);
-            }
-            dropStudStat.SelectedIndex = 0;
-            foreach (string item in Data.Religion)
-            {
-                dropReligion.Items.Add(item);
-            }
-            dropReligion.SelectedIndex = 0;
-            foreach (string item in Data.EnglishProficiency)
-            {
-                dropSpokenEnglish.Items.Add(item);
-            }
-            dropSpokenEnglish.SelectedIndex = 0;
-            foreach (string item in Data.DocumentTypeStudent)
-            {
-                dropDocsType.Items.Add(item);
-            }
-            dropDocsType.SelectedIndex = 0;
-            foreach (var item in Data.grades)
-            {
-                dropCurrGrade.Items.Add(item.GradeName);
-            }
-            dropCurrGrade.SelectedIndex = 0;
-            txtAutoComplete(txtLangSpoken, Data.LanguageSpoken);
-            txtAutoComplete(txtHomeCountry, Data.Country);
-            txtAutoComplete(txtFHomeCountry, Data.Country);
-            txtAutoComplete(txtCountryOfBirth, Data.Country);
-            txtAutoComplete(txtFPostalCountry, Data.Country);
-            txtAutoComplete(txtSchoolCountry, Data.Country);
-            txtAutoComplete(txtPostalCountry, Data.Country);
-            txtAutoComplete(txtPostalCountry, Data.Country);
-            txtAutoComplete(txtFHomeState, Data.State);
-            txtAutoComplete(txtHomeState, Data.State);
-            txtAutoComplete(txtFPostalState, Data.State);
-            txtAutoComplete(txtPostalState, Data.State);
-            txtAutoComplete(txtFNationality, Data.Nationality);
-            txtAutoComplete(txtNationality, Data.Nationality);
-            txtAutoComplete(txtPlaceOfBirth, Data.PlaceOfBirth);
-            txtAutoComplete(txtFOccupation, Data.Occupation);
         }
         private void txtAutoComplete(Guna2TextBox textBox,  AutoCompleteStringCollection collection)
         {
@@ -401,7 +694,6 @@ namespace AisInternalSystem.UserInterface.Student
             {
                 DocumentPath = Utilities.OpenFile("Document Files(*.JPG; *.PNG; *.JPEG; *.PDF; *.DOCX; *.DOC; *.XLSX;) | *.JPG; *.PNG; *.JPEG; *.PDF; *.DOCX; *.DOC; *.XLSX; | All Files (*.*) | *.*");
                 txtDocsPath.Text = DocumentPath.FileName;
-
             }
 
         }
@@ -458,7 +750,7 @@ namespace AisInternalSystem.UserInterface.Student
 
         private void DocumentInit()
         {
-            DataTable dt = Document.GetDocumentbystudentid(SelectedIDStudent);
+            DataTable dt = Document.GetDocumentbyID(SelectedIDStudent, "student");
             if (dt.Rows.Count < 1)
             {
                 lblnodocs.Visible = true;
@@ -645,15 +937,15 @@ namespace AisInternalSystem.UserInterface.Student
             }
             else
             {
-                if (Query.Insert("DeAssignParent", new string[2] { "@_aisid", "@_parrelatid" }, new MySql.Data.MySqlClient.MySqlDbType[2] { MySql.Data.MySqlClient.MySqlDbType.Int32, MySql.Data.MySqlClient.MySqlDbType.Int32 }, new string[2] { SelectedIDStudent.ToString(), SelectedAssignParent.ToString() }))
+                if (Query.Delete("DeAssignParent", new string[2] { "@_aisid", "@_parrelatid" }, new MySql.Data.MySqlClient.MySqlDbType[2] { MySql.Data.MySqlClient.MySqlDbType.Int32, MySql.Data.MySqlClient.MySqlDbType.Int32 }, new string[2] { SelectedIDStudent.ToString(), SelectedDeassignParent.ToString() }))
                 {
                     FillDgRelationshipList();
-                    PopUp.Alert("Parent assigned succesfully!", frmAlert.AlertType.Success);
+                    PopUp.Alert("Parent unlinked succesfully!", frmAlert.AlertType.Success);
                     SelectedDeassignParent = 0;
                 }
                 else
                 {
-                    PopUp.Alert("Failed to de-assign parents!", frmAlert.AlertType.Success);
+                    PopUp.Alert("Failed to de-assign parents!", frmAlert.AlertType.Error);
 
                 }
             }
@@ -664,7 +956,9 @@ namespace AisInternalSystem.UserInterface.Student
             try
             {
                 SelectedAssignParent = Convert.ToInt32(Utilities.GetSelectedDatagridValue(dgParList, "id"));
-
+                relationship = new Relationship();
+                relationship.RelatinshipID = SelectedAssignParent;
+                relatID = SelectedAssignParent;
             }
             catch (Exception)
             {
@@ -731,12 +1025,98 @@ namespace AisInternalSystem.UserInterface.Student
 
         private void dgRelationshipList_SelectionChanged(object sender, EventArgs e)
         {
-            SelectedDeassignParent = Convert.ToInt32(Utilities.GetSelectedDatagridValue(dgRelationshipList, "ID"));
-        }
+            try
+            {
+                SelectedDeassignParent = Convert.ToInt32(Utilities.GetSelectedDatagridValue(dgRelationshipList, "ID"));
+                relationship = new Relationship();
+                relationship.RelatinshipID = SelectedDeassignParent;
+                relatID = SelectedDeassignParent;
+            }
+            catch (Exception)
+            {
 
+            }
+        }
+        public enum RelationshipEditMode
+        {
+            Create,
+            Edit
+
+        }
+        private RelationshipEditMode _relatmode;
+        private void LoadRelationshipData()
+        {
+            relationship = Relationship.GetRelationship(relationship);
+            txtFName.Text = relationship.RelationshipName;
+            txtFNationality.Text = relationship.Nationality;
+            txtFAuRes.Text = relationship.AustralianResidence;
+            txtFAuAborigine.Text = relationship.AustralianAborigin;
+            txtFSchoolEdu.Text = relationship.SchoolEducation;
+            txtFNonSchoolEdu.Text = relationship.NonSchoolEducation;
+            txtFOccupation.Text = relationship.Occupation;
+            txtFHomeAddress.Text = relationship.Homeaddress;
+            txtFHomeState.Text = relationship.Homestate;
+            txtFHomeCountry.Text = relationship.HomeCountry;
+            txtFSuburb.Text = relationship.Suburb;
+            txtFPostCode.Text = relationship.PostCode;
+            txtFPostalAdd.Text = relationship.PostalAddress;
+            txtFPostalState.Text = relationship.PostalState;
+            txtFPostalSuburb.Text = relationship.PostalSuburb;
+            txtFPostalCode.Text = relationship.PostalCode;
+            txtFPostalCountry.Text = relationship.PostalCountry;
+            txtFHomePhone.Text = relationship.HomephoneNo;
+            txtFMobileNumber.Text = relationship.MobileNumb;
+            txtFFaxNumber.Text = relationship.FaxNumber;
+            txtFEmailAddress.Text = relationship.EmailAddress;
+            txtFWhatsapp.Text = relationship.Whatsapp;
+            txtFMainLanguage.Text = relationship.MainLang;
+            txtFOtherThanEnglishSpoken.Text = relationship.OtherThanEnglish;
+            dropRelatWithChild.SelectedIndex = dropRelatWithChild.Items.IndexOf(relationship.RelationshipType);
+            if (!dropRelatWithChild.Items.Contains(relationship.RelationshipType))
+            {
+                dropRelatWithChild.SelectedIndex = dropRelatWithChild.Items.IndexOf("OTHER, PLEASE SPECIFY");
+                txtRelatWithChild.Text = relationship.RelationshipType;
+                txtRelatWithChild.Visible = true;
+                txtRelatWithChild.Enabled = true;
+                RelationshipType = relationship.RelationshipType;
+            }
+            try
+            {
+                using (Image imag = Image.FromFile(relationship.Photolocation))
+                {
+                    Bitmap bitmap = new Bitmap(imag);
+                    picFather.Image = bitmap;
+                    imag.Dispose();
+                }
+            }
+            catch (Exception)
+            {
+                picFather.Image = Resources.icons8_male_user_100; 
+            }
+            relatID = relationship.RelatinshipID;
+            this.RelationshipType = relationship.RelationshipType;
+            parentLoaded = true;
+        }
+        private void GoRelationship(RelationshipEditMode mode)
+        {
+            _relatmode = mode;
+            switch (mode)
+            {
+                case RelationshipEditMode.Create:
+                    btnSaveRelationship.Text = "Add Parent";
+                    clearControlParent();
+                    break;
+                case RelationshipEditMode.Edit:
+                    parentSaved = true;
+                    LoadRelationshipData();
+                    btnSaveRelationship.Text = "Revise Parent";
+                    break;
+            }
+            ContainerRelationship.BringToFront();
+        }
         private void btnCreateNewParent_Click(object sender, EventArgs e)
         {
-            ContainerRelationship.BringToFront();
+            GoRelationship(RelationshipEditMode.Create);
         }
         private string RelationshipTypeString = "";
         private void guna2ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -809,8 +1189,8 @@ namespace AisInternalSystem.UserInterface.Student
             }
             else
             {
-                Utilities.OpenFileDocs(path);
-
+                PopUp.Alert("We're finding the document on the server...", frmAlert.AlertType.Info);
+                Utilities.WorkerFire(Utilities.WorkerProcess.OpenFileNewThread, new string[1] { path });
             }
         }
         private void DeleteDocs()
@@ -856,14 +1236,22 @@ namespace AisInternalSystem.UserInterface.Student
         private string ExtraSupport = "NO";
         private void AddSchoolInfo()
         {
-            if (Query.Insert("InsertSchoolInfo", new string[8] { "@_of_student", "@_name_of_school", "@_country", "@_grade", "@_dateattended", "@_language_of_instruction", "@_extra_support", "@_curriculum" }, new MySql.Data.MySqlClient.MySqlDbType[8] { MySql.Data.MySqlClient.MySqlDbType.Int32, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.VarChar }, new string[8] { SelectedIDStudent.ToString(), txtNameOfSchool.Text, txtSchoolCountry.Text, dropGradeSchool.SelectedItem.ToString(), txtFromTo.Text, txtLangOfInstruction.Text, ExtraSupport, txtCurriculum.Text }))
+            if (dropGradeSchool.SelectedItem != null && dropprevschooldatefrom.SelectedItem != null && dropprevschooldateto.SelectedItem != null)
             {
-                PopUp.Alert("School information added!", frmAlert.AlertType.Success);
-                InitSchoolInfo();
+                if (Query.Insert("InsertSchoolInfo", new string[8] { "@_of_student", "@_name_of_school", "@_country", "@_grade", "@_dateattended", "@_language_of_instruction", "@_extra_support", "@_curriculum" }, new MySql.Data.MySqlClient.MySqlDbType[8] { MySql.Data.MySqlClient.MySqlDbType.Int32, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.VarChar }, new string[8] { SelectedIDStudent.ToString(), txtNameOfSchool.Text, txtSchoolCountry.Text, dropGradeSchool.SelectedItem.ToString(), dropprevschooldatefrom.SelectedItem.ToString() + "/" + dropprevschooldateto.SelectedItem.ToString(), txtLangOfInstruction.Text, ExtraSupport, txtCurriculum.Text }))
+                {
+                    PopUp.Alert("School information added!", frmAlert.AlertType.Success);
+                    InitSchoolInfo();
+                    Utilities.ClearInputOnPanel(PanelPrevSchoolinfoUp);
+                }
+                else
+                {
+                    PopUp.Alert("Failed to add school information", frmAlert.AlertType.Success);
+                }
             }
             else
             {
-                PopUp.Alert("Failed to add school information", frmAlert.AlertType.Success);
+                PopUp.Alert("Failed to record school information, make sure your data is valid!", frmAlert.AlertType.Warning);
             }
         }
         private void InitSchoolInfo()
@@ -876,8 +1264,8 @@ namespace AisInternalSystem.UserInterface.Student
             }
             else
             {
-                dgSchoolInfo.Columns[0].Visible = false;
                 dgSchoolInfo.DataSource = dt;
+                dgSchoolInfo.Columns[0].Visible = false;
                 dgSchoolInfo.Visible = true;
                 lblnoschoolinfo.Visible = false;
             }
@@ -891,7 +1279,6 @@ namespace AisInternalSystem.UserInterface.Student
             else
             {
                 AddSchoolInfo();
-
             }
         }
 
@@ -1113,20 +1500,71 @@ namespace AisInternalSystem.UserInterface.Student
         }
         private void AddSiblingInfo()
         {
-            if (Query.Insert("InsertNewSibling", new string[7] { "@_aisid", "@_siblingfname", "@_siblinglname", "@_currentschoolsibling", "@_dob", "@_gender", "@_maker" }, new MySql.Data.MySqlClient.MySqlDbType[7] { MySql.Data.MySqlClient.MySqlDbType.Int32, MySql.Data.MySqlClient.MySqlDbType.VarChar,MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.Date, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.Int32 }, new string[7] { SelectedIDStudent.ToString(), txtSiblingFname.Text, txtSiblingLname.Text, txtSiblingSchName.Text, dropdobSibling.Value.ToString("yyyy-MM-dd"), siblingGender, Utilities.GetCurrentUserID().ToString() }))
+            if (siblingIsEditing)
             {
-                PopUp.Alert("Sibling info added succesfully!", frmAlert.AlertType.Success);
-                FetchLinkedSiblingInfo();
+                if (Query.Insert("ReviseSibling", new string[7] { "@_id", "@_siblingfname", "@_siblinglname", "@_currentschoolsibling", "@_dob", "@_gender", "@_maker" }, 
+                    new MySql.Data.MySqlClient.MySqlDbType[7] { MySql.Data.MySqlClient.MySqlDbType.Int32, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.Date, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.Int32 }, 
+                    new string[7] { CurrentSelectedSiblingID.ToString(), txtSiblingFname.Text, txtSiblingLname.Text, txtSiblingSchName.Text, dropdobSibling.Value.ToString(PublicProperties.DateFormat), siblingGender, Data.user.UserID.ToString()  }))
+                {
+                    PopUp.Alert("Sibling edited succesfully!", frmAlert.AlertType.Success);
+                    siblingIsEditing = false;
+                    btnAddSibling.Text = "Add";
+                    siblingGender = "MALE";
+                    radMaleSibling.Checked = true;
+                    radFemaleSibling.Checked = false;
+                    txtSiblingFname.Clear(); txtSiblingLname.Clear(); txtSiblingSchName.Clear(); dropdobSibling.Value = DateTime.Now;
+                }
+                else
+                {
+                    PopUp.Alert("Failed to edit sibling, please try again!", frmAlert.AlertType.Error);
+                }
             }
             else
             {
-                PopUp.Alert("Failed to add sibling info!", frmAlert.AlertType.Error);
+                if (Query.Insert("InsertNewSibling", new string[7] { "@_aisid", "@_siblingfname", "@_siblinglname", "@_currentschoolsibling", "@_dob", "@_gender", "@_maker" }, new MySql.Data.MySqlClient.MySqlDbType[7] { MySql.Data.MySqlClient.MySqlDbType.Int32, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.Date, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.Int32 }, new string[7] { SelectedIDStudent.ToString(), txtSiblingFname.Text, txtSiblingLname.Text, txtSiblingSchName.Text, dropdobSibling.Value.ToString("yyyy-MM-dd"), siblingGender, Utilities.GetCurrentUserID().ToString() }))
+                {
+                    PopUp.Alert("Sibling info added succesfully!", frmAlert.AlertType.Success);
+                    FetchLinkedSiblingInfo();
+                }
+                else
+                {
+                    PopUp.Alert("Failed to add sibling info!", frmAlert.AlertType.Error);
 
+                }
+            }
+        }
+        private void FetchSiblingGender(string gender)
+        {
+            siblingGender = gender;
+
+            if (gender == "MALE")
+            {
+                radMaleSibling.Checked = true;
+                radFemaleSibling.Checked = false;
+            }
+            else
+            {
+                radFemaleSibling.Checked = true;
+                radMaleSibling.Checked = true;
+            }
+        }
+        private void FetchSiblingInfo()
+        {
+            btnAddSibling.Text = "Revise Sibling";
+            DataTable dt = Query.GetDataTable("FetchSiblingInfo", new string[1] { "@_siblingid" }, new MySql.Data.MySqlClient.MySqlDbType[1] { MySql.Data.MySqlClient.MySqlDbType.Int32 }, new string[1] { CurrentSelectedSiblingID.ToString() });
+            if (dt.Rows.Count >=1)
+            {
+                txtSiblingFname.Text = dt.Rows[0][1].ToString();
+                txtSiblingLname.Text = dt.Rows[0][2].ToString();
+                txtSiblingSchName.Text = dt.Rows[0][3].ToString();
+                FetchSiblingGender(dt.Rows[0][5].ToString());
+                dropdobSibling.Value = Convert.ToDateTime(dt.Rows[0][4].ToString());
             }
         }
         private void NormalizeSiblingInfo()
         {
             siblingIsEditing = true;
+            FetchSiblingInfo();
         }
         private void FetchLinkedSiblingInfo()
         {
@@ -1200,6 +1638,7 @@ namespace AisInternalSystem.UserInterface.Student
             if (Query.Insert("AssignSiblingToStudent", new string[2] { "@_aisid", "@_siblingid" }, new MySql.Data.MySqlClient.MySqlDbType[2] { MySql.Data.MySqlClient.MySqlDbType.Int32, MySql.Data.MySqlClient.MySqlDbType.Int32 }, new string[2] { SelectedIDStudent.ToString(), Utilities.GetSelectedDatagridValue(dgSearchSibling, "id")}))
             {
                 PopUp.Alert("Sibling linked succesfully!", frmAlert.AlertType.Success);
+                FetchLinkedSiblingInfo();
             }
             else
             {
@@ -1236,8 +1675,14 @@ namespace AisInternalSystem.UserInterface.Student
             {
                 if (CurrentSelectedSiblingID != 0)
                 {
-                    NormalizeSiblingInfo();
-
+                    if (siblingIsEditing)
+                    {
+                        PopUp.Alert("An ongoing sibling revise detected, please apply current record to edit new one!", frmAlert.AlertType.Warning);
+                    }
+                    else
+                    {
+                        NormalizeSiblingInfo();
+                    }
                 }
                 else
                 {
@@ -1247,23 +1692,13 @@ namespace AisInternalSystem.UserInterface.Student
 
         }
         private bool siblingIsEditing = false;
-        private void dgLinkSibling_SelectionChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                CurrentSelectedSiblingID = Convert.ToInt32(Utilities.GetSelectedDatagridValue(dgLinkSibling, "id"));
-            }
-            catch (Exception)
-            {
-
-            }
-        }
 
         private void dgSearchSibling_SelectionChanged(object sender, EventArgs e)
         {
             try
             {
                 CurrentSelectedSiblingID = Convert.ToInt32(Utilities.GetSelectedDatagridValue(dgSearchSibling, "id"));
+                btndeassign.Enabled = false;
             }
             catch (Exception)
             {
@@ -1271,8 +1706,24 @@ namespace AisInternalSystem.UserInterface.Student
             }
         }
         private void UnlinkSiblingFromStudent()
-        { 
-        
+        {
+            if (Query.Delete("DelinkSibling", new string[2] { "@_aisid", "@_siblingid" }, new MySql.Data.MySqlClient.MySqlDbType[2] { MySql.Data.MySqlClient.MySqlDbType.Int32, MySql.Data.MySqlClient.MySqlDbType.Int32 }, new string[2] { SelectedIDStudent.ToString(), CurrentSelectedSiblingID.ToString() }))
+            {
+                PopUp.Alert("Selected sibling has been unlinked", frmAlert.AlertType.Success);
+                FetchLinkedSiblingInfo();
+                if (dgLinkSibling.Rows.Count<1)
+                {
+                    btndeassign.Enabled = false;
+                }
+                else
+                {
+                    btndeassign.Enabled = true;
+                }
+            }
+            else
+            {
+                PopUp.Alert("Something error", frmAlert.AlertType.Error);
+            }
         }
         private void btndeassign_Click(object sender, EventArgs e)
         {
@@ -1284,6 +1735,310 @@ namespace AisInternalSystem.UserInterface.Student
             {
                 UnlinkSiblingFromStudent();
             }
+        }
+
+        private void txtMedsDose_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnStudBack_Click_1(object sender, EventArgs e)
+        {
+            panelStud2.SendToBack();
+        }
+
+        private void btnFinalize_Click(object sender, EventArgs e)
+        {
+            if (!studIsSaved)
+            {
+                PopUp.Alert("Failed to finalize data, please save the student data to finalize the record!", frmAlert.AlertType.Warning);
+            }
+            else
+            {
+                FinalizeRecord();
+            }
+        }
+        private void FinalizeRecord()
+        {
+            SaveStudent();
+            isBusy = false;
+            studIsSaved = false;
+            //go back to previous screen
+            UIController.NavigateUI(UIController.Controls.StudentDirectoryService); 
+        }
+
+        private void dropprevschooldatefrom_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            dropprevschooldateto.DataSource = PublicProperties.DropYearPickFirst(Convert.ToInt32(dropprevschooldatefrom.SelectedValue.ToString()) + 1);
+        }
+
+        private void dropprevschooldatefrom_Click(object sender, EventArgs e)
+        {
+            int dateprevious = Convert.ToInt32(DateTime.Now.Year) - 12;
+            dropprevschooldatefrom.DataSource = PublicProperties.DropYearPickFirst(dateprevious);
+        }
+        private bool dropGradeSchLoaded = false;
+        private void dropGradeSchool_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void dropGradeSchool_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgLinkSibling_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                CurrentSelectedSiblingID = Convert.ToInt32(Utilities.GetSelectedDatagridValue(dgLinkSibling, "id"));
+                btndeassign.Enabled = true;
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void btnFNext_Click_1(object sender, EventArgs e)
+        {
+            PanelRelat1.SendToBack();
+        }
+
+        private void btnFBack_Click_1(object sender, EventArgs e)
+        {
+            PanelRelat2.SendToBack();
+        }
+        private bool parentSaved = false;
+        private Entities.Relationship relationship = null;
+        private string RelationshipType = string.Empty;
+        private OpenFileDialog RelatPhotoLocationStr = null;
+        private int relatID = 0;
+        private void SaveParent()
+        {
+            //data here
+            if (relationship != null)
+            {
+                relationship.RelationshipType = this.RelationshipType;
+                relationship.RelationshipName = txtFName.Text;
+                relationship.Nationality = txtFNationality.Text;
+                relationship.AustralianResidence = txtFAuRes.Text;
+                relationship.AustralianAborigin = txtFAuAborigine.Text;
+                relationship.SchoolEducation = txtFSchoolEdu.Text;
+                relationship.NonSchoolEducation = txtFNonSchoolEdu.Text;
+                relationship.Occupation = txtFOccupation.Text;
+                relationship.Homeaddress = txtFHomeAddress.Text;
+                relationship.Homestate = txtHomeState.Text;
+                relationship.HomeCountry = txtFHomeCountry.Text;
+                relationship.Suburb = txtFSuburb.Text;
+                relationship.PostCode = txtFPostCode.Text;
+                relationship.PostalAddress = txtFPostalAdd.Text;
+                relationship.PostalState = txtFPostalState.Text;
+                relationship.PostalSuburb = txtFPostalSuburb.Text;
+                relationship.PostalCode = txtFPostalCode.Text;
+                relationship.PostalCountry = txtFPostalCountry.Text;
+                relationship.HomephoneNo = txtFHomePhone.Text;
+                relationship.MobileNumb = txtFMobileNumber.Text;
+                relationship.FaxNumber = txtFFaxNumber.Text;
+                relationship.EmailAddress = txtFEmailAddress.Text;
+                relationship.Whatsapp = txtFWhatsapp.Text;
+                relationship.MainLang = txtFMainLanguage.Text;
+                relationship.OtherThanEnglish = txtFOtherThanEnglishSpoken.Text;
+                if (RelatPhotoLocationStr == null)
+                {
+                    relatPhoto = null;
+                }
+                else
+                {
+                    relatPhoto = Utilities.GetFileDbLocationString(Utilities.LocationType.ParentPhoto, SelectedIDStudent.ToString() + relationship.RelationshipType, RelatPhotoLocationStr);
+                    relationship.Photolocation = relatPhoto;
+                    Utilities.WorkerFire(Utilities.WorkerProcess.CopyFile, new string[2] { RelatPhotoLocationStr.FileName, relatPhoto });
+                }
+                relationship.Maker = Data.user.OwnerID;
+                relationship.RelatinshipID = relatID;
+            }
+            else
+            {
+                relationship = new Relationship();
+                relationship.RelationshipType = this.RelationshipType;
+                relationship.RelationshipName = txtFName.Text;
+                relationship.Nationality = txtFNationality.Text;
+                relationship.AustralianResidence = txtFAuRes.Text;
+                relationship.AustralianAborigin = txtFAuAborigine.Text;
+                relationship.SchoolEducation = txtFSchoolEdu.Text;
+                relationship.NonSchoolEducation = txtFNonSchoolEdu.Text;
+                relationship.Occupation = txtFOccupation.Text;
+                relationship.Homeaddress = txtFHomeAddress.Text;
+                relationship.Homestate = txtHomeState.Text;
+                relationship.HomeCountry = txtFHomeCountry.Text;
+                relationship.Suburb = txtFSuburb.Text;
+                relationship.PostCode = txtFPostCode.Text;
+                relationship.PostalAddress = txtFPostalAdd.Text;
+                relationship.PostalState = txtFPostalState.Text;
+                relationship.PostalSuburb = txtFPostalSuburb.Text;
+                relationship.PostalCode = txtFPostalCode.Text;
+                relationship.PostalCountry = txtFPostalCountry.Text;
+                relationship.HomephoneNo = txtFHomePhone.Text;
+                relationship.MobileNumb = txtFMobileNumber.Text;
+                relationship.FaxNumber = txtFFaxNumber.Text;
+                relationship.EmailAddress = txtFEmailAddress.Text;
+                relationship.Whatsapp = txtFWhatsapp.Text;
+                relationship.MainLang = txtFMainLanguage.Text;
+                relationship.OtherThanEnglish = txtFOtherThanEnglishSpoken.Text;
+                if (RelatPhotoLocationStr == null)
+                {
+                    relatPhoto = null;
+                }
+                else
+                {
+                    relatPhoto = Utilities.GetFileDbLocationString(Utilities.LocationType.ParentPhoto, SelectedIDStudent.ToString() + relationship.RelationshipType, RelatPhotoLocationStr);
+                    relationship.Photolocation = relatPhoto;
+                    Utilities.WorkerFire(Utilities.WorkerProcess.CopyFile, new string[2] { RelatPhotoLocationStr.FileName, relatPhoto });
+                }
+                relationship.Maker = Data.user.OwnerID;
+
+            }
+            if (RelationshipType == "" || RelationshipType == null)
+            {
+                PopUp.Alert("Please specify the relationship type!", frmAlert.AlertType.Warning);
+            }
+            else
+            {
+                if (Entities.Relationship.SaveRelationship(parentSaved, relationship))
+                {
+
+                    PopUp.Alert("Parent record saved succesfully!", frmAlert.AlertType.Success);
+                    Utilities.ClearInputOnPanel(PanelRelat1);
+                    Utilities.ClearInputOnPanel(PanelRelat2);
+                    StudentRelationship();
+                    ContainerRelationship.SendToBack();
+                }
+                else
+                {
+                    PopUp.Alert("Failed to save parent record :(", frmAlert.AlertType.Error);
+                }
+            }
+        }
+        private void btnSaveRelationship_Click(object sender, EventArgs e)
+        {
+            if (txtFName.Text == "")
+            {
+                PopUp.Alert("Name cannot be null!", frmAlert.AlertType.Warning);
+            }
+            else if (txtFNationality.Text == "")
+            {
+                PopUp.Alert("Nationality cannot be null!", frmAlert.AlertType.Warning);
+            }
+            else
+            {
+                SaveParent();
+            }
+        }
+        private bool parentLoaded = false;
+        private void dropRelatWithChild_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (parentLoaded)
+            {
+                try
+                {
+                    if (dropRelatWithChild.SelectedItem.ToString() == "OTHER, PLEASE SPECIFY")
+                    {
+                        txtRelatWithChild.Visible = true;
+                        RelationshipType = txtRelatWithChild.Text;
+                        txtRelatWithChild.Enabled = true;
+                    }
+                    else
+                    {
+                        RelationshipType = dropRelatWithChild.SelectedItem.ToString();
+                        txtRelatWithChild.Enabled = false;
+                        txtRelatWithChild.Visible = false;
+                    }
+                }
+                catch (NullReferenceException)
+                {
+
+                }
+            }
+            else
+            {
+
+            }
+            
+        }
+
+        private void txtRelatWithChild_TextChanged_1(object sender, EventArgs e)
+        {
+            RelationshipType = txtRelatWithChild.Text;
+        }
+
+        private void picFather_Click_1(object sender, EventArgs e)
+        {
+            RelatPhotoLocationStr = Utilities.OpenImage(picFather);
+
+        }
+
+        private void dgParList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnEditParent_Click(object sender, EventArgs e)
+        {
+            if (relationship!=null)
+            {
+                GoRelationship(RelationshipEditMode.Edit);
+            }
+            else
+            {
+                PopUp.Alert("No relationship to edit, please select the relationship to edit first!", frmAlert.AlertType.Warning);
+            }
+        }
+
+        private void btnBacktoRelat_Click(object sender, EventArgs e)
+        {
+            ContainerRelationship.SendToBack();
+        }
+
+        private void dropPropGrade_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtHomeAddress_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private string relatPhoto = string.Empty;
+        private void picStud_Click_1(object sender, EventArgs e)
+        {
+            studentImg = Utilities.OpenImage(picStud);
+            if (studentImg == null)
+            {
+                photo = null;
+            }
+            else
+            {
+                photo = Utilities.GetFileDbLocationString(Utilities.LocationType.StudentPhoto, SelectedIDStudent.ToString(), studentImg);
+            }
+        }
+
+        private void btnStudOk_Click_1(object sender, EventArgs e)
+        {
+            if (txtstudAisid.Text == "" || txtCertificateName.Text == "" || txtPlaceOfBirth.Text == "" || txtCountryOfBirth.Text == "" || txtNationality.Text == "" || txtHomeCountry.Text == "" || txtLangSpoken.Text == "")
+            {
+                PopUp.Alert("Cannot proceed, please complete the data\nbefore saving the record!", frmAlert.AlertType.Warning);
+            }
+            else
+            {
+                SaveStudent();
+            }
+        }
+
+        private void btnStud1Next_Click(object sender, EventArgs e)
+        {
+            panelStud2.BringToFront();
         }
     }
 }
