@@ -36,6 +36,12 @@ namespace AisInternalSystem
                 GetCategory();
                 UIController.Animate(this, Guna.UI2.AnimatorNS.AnimationType.HorizSlide);
                 UIController.GetDragControl(panel_Upper_admin);
+                lblVer.Text = "Appver: " + "0."+Startup.Appver.ToString() + " (Latest)";
+                if (Startup.Appver < Startup.appver2)
+                {
+                    lblVer.Text = $"Appver: 0.{Startup.Appver.ToString()}, Please update!";
+                    lblVer.ForeColor = Color.Red;
+                }
                 UserInterface.Settings.UserSettings.PictureBeingChanged += UserSettings_PictureBeingChanged;
                 UserInterface.Settings.UserSettings.PictureChangedEvent += UserSettings_PictureChangedEvent;
             }
@@ -162,7 +168,21 @@ namespace AisInternalSystem
         }
 
         private int picThumb = 0;
-        private void picThumbUser_MouseEnter(object sender, EventArgs e)
+
+        private void picThumbUser_MouseLeave(object sender, EventArgs e)
+        {
+            UIController.ImageButtonZoom(picThumbUser, UIController.stateofControlEnum.Iddle);
+
+        }
+
+        private int picMinimize = 0;
+
+        private void guna2PictureBox1_Click(object sender, EventArgs e)
+        {
+            UIController.NavigateUI(UIController.Controls.UCDashboardAdmin);
+        }
+
+        private void picThumbUser_MouseHover(object sender, EventArgs e)
         {
             UIController.ImageButtonZoom(picThumbUser, UIController.stateofControlEnum.Focused);
             if (picThumb <= 2)
@@ -172,25 +192,13 @@ namespace AisInternalSystem
             }
         }
 
-        private void picThumbUser_MouseLeave(object sender, EventArgs e)
-        {
-            UIController.ImageButtonZoom(picThumbUser, UIController.stateofControlEnum.Iddle);
-
-        }
-
-        private int picMinimize = 0;
-        private void pictureBox1_MouseEnter(object sender, EventArgs e)
+        private void pictureBox1_MouseHover(object sender, EventArgs e)
         {
             if (picMinimize <= 2)
             {
                 PopUp.Alert("Click ('-') button to minimize the system!", frmAlert.AlertType.Info);
                 picMinimize++;
             }
-        }
-
-        private void guna2PictureBox1_Click(object sender, EventArgs e)
-        {
-            UIController.NavigateUI(UIController.Controls.UCDashboardAdmin);
         }
     }
 }

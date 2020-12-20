@@ -29,6 +29,7 @@ namespace AisInternalSystem
         private void MainForm_Shown(object sender, EventArgs e)
         {
             UIController.NavigateUI(UIController.Controls.UpperPanel);
+            //UIController.NavigateUI(UIController.Controls.TestMode);
             Startup.Update();
         }
 

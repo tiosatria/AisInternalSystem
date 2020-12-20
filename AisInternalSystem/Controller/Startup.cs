@@ -16,10 +16,10 @@ namespace AisInternalSystem.Controller
 {
     public class Startup
     {
-        private static double Appver = 2.8;
+        public static double Appver = 3.8;
         public static string Apppath = string.Empty;
-        private static double appver2 = 0;
-        public Startup()
+        public static double appver2 = 0;
+        public Startup()    
         {
 
         }

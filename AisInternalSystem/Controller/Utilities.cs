@@ -1,27 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Configuration;
-using System.Net.Security;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using AisInternalSystem.Module;
-using AisInternalSystem.Entities;
-using Microsoft.ReportingServices.Interfaces;
 using System.Windows.Forms;
-using Telerik.Charting;
 using System.IO;
 using System.ComponentModel;
 using Guna.UI2.WinForms;
-using System.Management;
 using System.Reflection;
-using System.Threading;
-using System.Runtime.CompilerServices;
 using System.Drawing;
-using Telerik.WinControls.UI;
 using AisInternalSystem.Properties;
 using System.Diagnostics;
 
@@ -47,7 +34,7 @@ namespace AisInternalSystem.Controller
         private static int progressInt;
         private static string[] paramList;
         private static bool ProcessFinished;
-        public static BackgroundWorker workerparam;
+        public static BackgroundWorker workerparam = null;
         private static BackgroundWorker InitWorker(WorkerProcess process, string[] listofParams)
         {
             paramList = listofParams;
@@ -190,23 +177,43 @@ namespace AisInternalSystem.Controller
             DateTime date = DateTime.Now;
             return date;
         }
-
         public static string GetTimeStamp()
         {
             string str = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             return str;
         }
-
         public static int GetCurrentUserID()
         {
             return Data.user.OwnerID;
         }
-
-
         public static void OpenFileDocs(string path)
         {
-            
-            Process.Start(path);
+            try
+            {
+                Process.Start(path);
+
+            }
+            catch (Exception)
+            {
+                PopUp.Alert("We coudldn't find the file you're looking for", frmAlert.AlertType.Error);
+            }
+        }
+
+        public static Image GetImage(string loc)
+        {
+            try
+            {
+                using (Image im = Image.FromFile(loc))
+                {
+                    Bitmap bm = new Bitmap(im);
+                    return bm;
+                    im.Dispose();
+                }
+            }
+            catch (Exception)
+            {
+                return Properties.Resources.icons8_question_mark_480px;
+            }
         }
 
         public static OpenFileDialog OpenImage(PictureBox picture)
@@ -365,7 +372,17 @@ namespace AisInternalSystem.Controller
                     break;
             }
         }
+        public static int GetAgeBasedOnDate(DateTime date)
+        {
+            int i = (int)Math.Floor((DateTime.Now - date).TotalDays / 365.25D);
+            return i;
+        }
+        public static string GetFullAgeBasedOnDate(DateTime date)
+        {
+            string age = "";
 
+            return age;
+        }
         public static void ClearControl(UserControl ctrl)
         {
             foreach (var item in ctrl.Controls)

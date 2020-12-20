@@ -3,16 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using System.Web.Services.Description;
 using System.Windows.Forms;
-using System.Windows.Markup;
-using System.Windows.Resources;
 using AisInternalSystem.Module;
 using MySql.Data.MySqlClient;
-using Telerik.WinControls.UI;
 
 namespace AisInternalSystem.Controller
 {

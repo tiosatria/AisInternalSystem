@@ -36,6 +36,7 @@
             this.Btn_Notif = new System.Windows.Forms.PictureBox();
             this.btnFeedback = new System.Windows.Forms.PictureBox();
             this.picThumbUser = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.lblVer = new System.Windows.Forms.Label();
             this.panel_Upper_admin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
@@ -49,6 +50,7 @@
             // panel_Upper_admin
             // 
             this.panel_Upper_admin.BackColor = System.Drawing.Color.Transparent;
+            this.panel_Upper_admin.Controls.Add(this.lblVer);
             this.panel_Upper_admin.Controls.Add(this.pictureBox1);
             this.panel_Upper_admin.Controls.Add(this.guna2PictureBox1);
             this.panel_Upper_admin.Controls.Add(this.btnMsg);
@@ -76,7 +78,7 @@
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            this.pictureBox1.MouseEnter += new System.EventHandler(this.pictureBox1_MouseEnter);
+            this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
             // 
             // guna2PictureBox1
             // 
@@ -159,8 +161,18 @@
             this.picThumbUser.TabIndex = 7;
             this.picThumbUser.TabStop = false;
             this.picThumbUser.Click += new System.EventHandler(this.picThumbUser_Click);
-            this.picThumbUser.MouseEnter += new System.EventHandler(this.picThumbUser_MouseEnter);
             this.picThumbUser.MouseLeave += new System.EventHandler(this.picThumbUser_MouseLeave);
+            this.picThumbUser.MouseHover += new System.EventHandler(this.picThumbUser_MouseHover);
+            // 
+            // lblVer
+            // 
+            this.lblVer.AutoSize = true;
+            this.lblVer.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVer.Location = new System.Drawing.Point(13, 86);
+            this.lblVer.Name = "lblVer";
+            this.lblVer.Size = new System.Drawing.Size(34, 15);
+            this.lblVer.TabIndex = 16;
+            this.lblVer.Text = "lblVer";
             // 
             // UpperPanelAdmin
             // 
@@ -169,6 +181,7 @@
             this.Name = "UpperPanelAdmin";
             this.Size = new System.Drawing.Size(1280, 109);
             this.panel_Upper_admin.ResumeLayout(false);
+            this.panel_Upper_admin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMsg)).EndInit();
@@ -190,5 +203,6 @@
         private System.Windows.Forms.PictureBox btnFeedback;
         public Guna.UI2.WinForms.Guna2CirclePictureBox picThumbUser;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lblVer;
     }
 }

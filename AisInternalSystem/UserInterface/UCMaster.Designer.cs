@@ -629,9 +629,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.btnBackto);
-            this.Controls.Add(this.PanelStartNewSchoolLastStep);
             this.Controls.Add(this.PanelHome);
             this.Controls.Add(this.PanelStartNewConfirm);
+            this.Controls.Add(this.PanelStartNewSchoolLastStep);
             this.Name = "UCMaster";
             this.Size = new System.Drawing.Size(1280, 611);
             this.guna2ShadowPanel1.ResumeLayout(false);

@@ -31,11 +31,21 @@ namespace AisInternalSystem.UserInterface.Student
 
         public UCRecStudent()
         {
-
+            Confirmation.CancelStudent += Confirmation_CancelStudent;
         }
+
+        private void Confirmation_CancelStudent(object sender, EventArgs e)
+        {
+            InitClearFormStudent();
+            isBusy = false;
+            txtSearchPar.Clear(); dgParList.DataSource = null; txtsiblingsearch.Clear(); dgSearchSibling.DataSource = null;
+            UIController.NavigateUI(UIController.Controls.StudentDirectoryService);
+        }
+
         private void PrepObjectForEditing()
         {
             InitClearFormStudent();
+            txtstudAisid.Enabled = false;
             studIsSaved = true;
             isBusy = true;
             SwitcherLeft(NavLeftEnum.Student);
@@ -45,16 +55,24 @@ namespace AisInternalSystem.UserInterface.Student
         private void PrepObjectForRecord()
         {
             InitClearFormStudent();
+            txtstudAisid.Enabled = true;
             isBusy = true;
             studIsSaved = false;
+            parentSaved = false;
             SwitcherLeft(NavLeftEnum.Student);
             SwitcherRight(NavRightEnum.Document);
             DeLoadStudentData();
         }
         private void InitClearFormStudent()
         {
+            isBusy = false;
+            siblingIsEditing = false;
             studentImg = null;
             picStud.Image = Resources.icons8_student_male_80px;
+            CurrentSelectedSiblingID = 0;
+            SelectedAssignParent = 0;
+            SelectedIDParents = 0;
+            SelectedDeassignParent = 0;
             foreach (var item in panelStud1.Controls)
             {
                 if (item is Guna2TextBox)
@@ -695,7 +713,6 @@ namespace AisInternalSystem.UserInterface.Student
                 DocumentPath = Utilities.OpenFile("Document Files(*.JPG; *.PNG; *.JPEG; *.PDF; *.DOCX; *.DOC; *.XLSX;) | *.JPG; *.PNG; *.JPEG; *.PDF; *.DOCX; *.DOC; *.XLSX; | All Files (*.*) | *.*");
                 txtDocsPath.Text = DocumentPath.FileName;
             }
-
         }
         private int _progressint = 0;
         private void UploadDocuments()
@@ -708,10 +725,10 @@ namespace AisInternalSystem.UserInterface.Student
             lblstat.Visible = true;
             lblpleasewait.Visible = true;
             picUploading.Visible = true;
-            string dbString = Utilities.GetFileDbLocationString(Utilities.LocationType.StudentDocuments, $"{SelectedIDStudent}_{dropDocsType.SelectedItem}", DocumentPath);
+            string dbString = Utilities.GetFileDbLocationString(Utilities.LocationType.StudentDocuments, $"{SelectedIDStudent}_{dropDocsType.SelectedItem}_{txtDocsDesc.Text}", DocumentPath);
             Utilities.WorkerFire(Utilities.WorkerProcess.CopyFile, new string[2] { DocumentPath.FileName, dbString });
             Utilities.workerparam.ProgressChanged += Workerparam_ProgressChanged;
-            if (Document.Insert(new string[5] {dbString , Utilities.GetCurrentUserID().ToString(), dropDocsType.SelectedItem.ToString(), txtDocsDesc.Text, SelectedIDStudent.ToString() }))
+            if (Document.Insert(Document.DocumentFor.Student, new string[5] {dbString , Utilities.GetCurrentUserID().ToString(), dropDocsType.SelectedItem.ToString(), txtDocsDesc.Text, SelectedIDStudent.ToString() }))
             {
                 PopUp.Alert("Data is valid\nnow we're writing data to the server", frmAlert.AlertType.Info);
             }
@@ -725,7 +742,15 @@ namespace AisInternalSystem.UserInterface.Student
             DocumentPath = null;
             txtDocsPath.Text = "";
             dropDocsType.Enabled = true;
-            dropDocsType.SelectedIndex += 1;
+            try
+            {
+                dropDocsType.SelectedIndex += 1;
+
+            }
+            catch (Exception)
+            {
+                
+            }
             txtDocsDesc.Text = "";
             btnUpload.Enabled = true;
             txtDocsDesc.Enabled = true;
@@ -1103,13 +1128,23 @@ namespace AisInternalSystem.UserInterface.Student
             switch (mode)
             {
                 case RelationshipEditMode.Create:
+                    RelatPhotoLocationStr = null;
+                    parentSaved = false;
+                    relationship = null;
+                    relatPhoto = null;
+                    picFather.Image = Properties.Resources.icons8_male_user_200px;
                     btnSaveRelationship.Text = "Add Parent";
                     clearControlParent();
+                    txtstudAisid.Enabled = true;
                     break;
                 case RelationshipEditMode.Edit:
+                    RelatPhotoLocationStr = null;
+                    relatPhoto = null;
+                    clearControlParent();
                     parentSaved = true;
                     LoadRelationshipData();
                     btnSaveRelationship.Text = "Revise Parent";
+                    txtstudAisid.Enabled = false;
                     break;
             }
             ContainerRelationship.BringToFront();
@@ -1202,7 +1237,7 @@ namespace AisInternalSystem.UserInterface.Student
             }
             else
             {
-                if (Query.Delete("DeleteSelectedDocument", new string[1] { "@_id_docs" }, new MySql.Data.MySqlClient.MySqlDbType[1] { MySql.Data.MySqlClient.MySqlDbType.Int32 }, new string[1] { idstring }))
+                if (Module.Document.Delete( Document.DocumentFor.Student, idstring)) 
                 {
                     PopUp.Alert("Document deleted succesfully!", frmAlert.AlertType.Success);
                     DocumentInit();
@@ -1763,6 +1798,7 @@ namespace AisInternalSystem.UserInterface.Student
             SaveStudent();
             isBusy = false;
             studIsSaved = false;
+            txtSearchPar.Clear();dgParList.DataSource = null; txtsiblingsearch.Clear();dgSearchSibling.DataSource = null;
             //go back to previous screen
             UIController.NavigateUI(UIController.Controls.StudentDirectoryService); 
         }
@@ -1822,6 +1858,10 @@ namespace AisInternalSystem.UserInterface.Student
             if (relationship != null)
             {
                 relationship.RelationshipType = this.RelationshipType;
+                if (relationship.RelationshipType == string.Empty)
+                {
+                    relationship.RelationshipType = dropRelatWithChild.Text;
+                }
                 relationship.RelationshipName = txtFName.Text;
                 relationship.Nationality = txtFNationality.Text;
                 relationship.AustralianResidence = txtFAuRes.Text;
@@ -1863,6 +1903,11 @@ namespace AisInternalSystem.UserInterface.Student
             {
                 relationship = new Relationship();
                 relationship.RelationshipType = this.RelationshipType;
+                if (relationship.RelationshipType == string.Empty)
+                {
+                    relationship.RelationshipType = dropRelatWithChild.Text;
+                    RelationshipType = relationship.RelationshipType;
+                }
                 relationship.RelationshipName = txtFName.Text;
                 relationship.Nationality = txtFNationality.Text;
                 relationship.AustralianResidence = txtFAuRes.Text;
@@ -1898,7 +1943,6 @@ namespace AisInternalSystem.UserInterface.Student
                     Utilities.WorkerFire(Utilities.WorkerProcess.CopyFile, new string[2] { RelatPhotoLocationStr.FileName, relatPhoto });
                 }
                 relationship.Maker = Data.user.OwnerID;
-
             }
             if (RelationshipType == "" || RelationshipType == null)
             {
@@ -1908,8 +1952,10 @@ namespace AisInternalSystem.UserInterface.Student
             {
                 if (Entities.Relationship.SaveRelationship(parentSaved, relationship))
                 {
-
                     PopUp.Alert("Parent record saved succesfully!", frmAlert.AlertType.Success);
+                    relationship = null;
+                    relatPhoto = null;
+                    RelationshipType = null;
                     Utilities.ClearInputOnPanel(PanelRelat1);
                     Utilities.ClearInputOnPanel(PanelRelat2);
                     StudentRelationship();
@@ -1979,10 +2025,6 @@ namespace AisInternalSystem.UserInterface.Student
 
         }
 
-        private void dgParList_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void btnEditParent_Click(object sender, EventArgs e)
         {
@@ -1998,6 +2040,11 @@ namespace AisInternalSystem.UserInterface.Student
 
         private void btnBacktoRelat_Click(object sender, EventArgs e)
         {
+            relatPhoto = null;
+            RelatPhotoLocationStr = null;
+            RelationshipType = null;
+            Utilities.ClearInputOnPanel(PanelRelat1);
+            Utilities.ClearInputOnPanel(PanelRelat2);
             ContainerRelationship.SendToBack();
         }
 
@@ -2039,6 +2086,31 @@ namespace AisInternalSystem.UserInterface.Student
         private void btnStud1Next_Click(object sender, EventArgs e)
         {
             panelStud2.BringToFront();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Confirmation.Fire(Confirmation.onConfirmEnum.CancelStudentRecord);
+        }
+
+        private void dgRelationshipList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+           
+        }
+
+        private void dgParList_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                SelectedAssignParent = Convert.ToInt32(Utilities.GetSelectedDatagridValue(dgParList, "id"));
+                relationship = new Relationship();
+                relationship.RelatinshipID = SelectedAssignParent;
+                relatID = SelectedAssignParent;
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }

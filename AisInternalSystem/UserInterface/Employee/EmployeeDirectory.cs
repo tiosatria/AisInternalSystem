@@ -204,7 +204,7 @@ namespace AisInternalSystem.UserInterface.Employee
             PrepSearch(SearchBy.Role);
 
         }
-        Entities.Employee employee = null;
+        public static Entities.Employee employee = null;
         private void FetchEmployeeInfo()
         {
             int i = 0;

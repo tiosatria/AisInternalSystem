@@ -20,7 +20,6 @@ C:\Users\it\source\repos\AisInternalSystem\AISTour\obj\Debug\AxInterop.WMPLib.dl
 C:\Users\it\source\repos\AisInternalSystem\AISTour\obj\Debug\AISTour.csproj.ResolveComReference.cache
 C:\Users\it\source\repos\AisInternalSystem\AISTour\obj\Debug\AISTour.exe.licenses
 C:\Users\it\source\repos\AisInternalSystem\AISTour\obj\Debug\AISTour.csproj.CopyComplete
-C:\Users\it\source\repos\AisInternalSystem\AISTour\bin\Debug\Guna.UI2.dll
 C:\Users\it\source\repos\AisInternalSystem\AISTour\bin\Debug\Telerik.WinControls.UI.dll
 C:\Users\it\source\repos\AisInternalSystem\AISTour\bin\Debug\Telerik.WinControls.UI.xml
 C:\Users\it\source\repos\AisInternalSystem\AISTour\obj\Debug\AISTour.UI.WelcomePage.resources

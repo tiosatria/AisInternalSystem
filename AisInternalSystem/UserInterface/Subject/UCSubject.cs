@@ -22,7 +22,7 @@ using System.Threading;
 using System.Net.Configuration;
 using MySql.Data.MySqlClient;
 using Data = AisInternalSystem.Controller.Data;
-using System.Management;
+using AisInternalSystem.Entities.Teacher.Subject;
 
 namespace AisInternalSystem
 {

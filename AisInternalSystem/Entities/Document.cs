@@ -58,15 +58,68 @@ namespace AisInternalSystem.Module
             DataTable dt = Query.GetDataTable("GetDocumentList", new string[2] { "@_owner_id", "@_object" }, new MySql.Data.MySqlClient.MySqlDbType[2] { MySql.Data.MySqlClient.MySqlDbType.Int32, MySql.Data.MySqlClient.MySqlDbType.VarChar}, new string[2] { id.ToString(), o });
             return dt;
         }
-        public static bool Insert(string[] val)
+        public enum DocumentFor
         {
-            if (Query.Insert("InsertDocument", new string[5] { "@_docspath", "@_maker", "@_docstype", "@_docsdesc", "@_owner_id" }, new MySql.Data.MySqlClient.MySqlDbType[5] { MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.Int32, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.Text, MySql.Data.MySqlClient.MySqlDbType.Int32 }, val))
+        Student, Employee
+        }
+        private static DocumentFor _docfor;
+        public static bool Insert(DocumentFor doc, string[] val)
+        {
+            _docfor = doc;
+            switch (doc)
             {
-                return true;
+                case DocumentFor.Student:
+                    if (Query.Insert("InsertDocumentStudent", new string[5] { "@_docspath", "@_maker", "@_docstype", "@_docsdesc", "@_owner_id" }, new MySql.Data.MySqlClient.MySqlDbType[5] { MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.Int32, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.Text, MySql.Data.MySqlClient.MySqlDbType.Int32 }, val))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    break;
+                case DocumentFor.Employee:
+                    if (Query.Insert("InsertDocumentEmployee", new string[5] { "@_docspath", "@_maker", "@_docstype", "@_docsdesc", "@_owner_id" }, new MySql.Data.MySqlClient.MySqlDbType[5] { MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.Int32, MySql.Data.MySqlClient.MySqlDbType.VarChar, MySql.Data.MySqlClient.MySqlDbType.Text, MySql.Data.MySqlClient.MySqlDbType.Int32 }, val))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                default:
+                    return false;
+                    break;
             }
-            else
+        }
+        public static bool Delete(DocumentFor documentFor, string id)
+        {
+            _docfor = documentFor;
+            switch (documentFor)
             {
-                return false;
+                case DocumentFor.Student:
+                    if (Query.Delete("DeleteDocumentStudent", new string[1] { "@_id_docs" }, new MySql.Data.MySqlClient.MySqlDbType[1] { MySql.Data.MySqlClient.MySqlDbType.Int32 }, new string[1] { id }))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    break;
+                case DocumentFor.Employee:
+                    if (Query.Delete("DeleteDocumentEmployee", new string[1] { "@_id_docs" }, new MySql.Data.MySqlClient.MySqlDbType[1] { MySql.Data.MySqlClient.MySqlDbType.Int32 }, new string[1] { id }))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    break;
+                default:
+                    return false;
+                    break;
             }
         }
         #endregion

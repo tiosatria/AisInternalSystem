@@ -213,6 +213,16 @@ namespace AisInternalSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap followupenq {
+            get {
+                object obj = ResourceManager.GetObject("followupenq", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Global {
             get {
                 object obj = ResourceManager.GetObject("Global", resourceCulture);
@@ -276,6 +286,16 @@ namespace AisInternalSystem.Properties {
         internal static System.Drawing.Bitmap icons8_Check_Mark_48px_1 {
             get {
                 object obj = ResourceManager.GetObject("icons8_Check_Mark_48px_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_checkmark_512px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_checkmark_512px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -493,9 +513,29 @@ namespace AisInternalSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_man_in_blue_jacket_information_500px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_man_in_blue_jacket_information_500px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_minimize_window_50px {
             get {
                 object obj = ResourceManager.GetObject("icons8_minimize_window_50px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_money_transfer_512px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_money_transfer_512px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -673,6 +713,16 @@ namespace AisInternalSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_student_male_500px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_student_male_500px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_student_male_60px {
             get {
                 object obj = ResourceManager.GetObject("icons8_student_male_60px", resourceCulture);
@@ -686,6 +736,16 @@ namespace AisInternalSystem.Properties {
         internal static System.Drawing.Bitmap icons8_student_male_80px {
             get {
                 object obj = ResourceManager.GetObject("icons8_student_male_80px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_survey_512px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_survey_512px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -763,6 +823,16 @@ namespace AisInternalSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_Warning_192px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Warning_192px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_Warning_48px {
             get {
                 object obj = ResourceManager.GetObject("icons8_Warning_48px", resourceCulture);
@@ -826,6 +896,16 @@ namespace AisInternalSystem.Properties {
         internal static System.Drawing.Bitmap Monte_Sienna {
             get {
                 object obj = ResourceManager.GetObject("Monte_Sienna", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap newenq {
+            get {
+                object obj = ResourceManager.GetObject("newenq", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

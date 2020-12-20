@@ -34,6 +34,8 @@ namespace AisInternalSystem.UserInterface.Menu
             AddMenu(5, "Class Directory", "Class Directory Services", MenuItem.DoingWhatEnum.Reviewing, Resources.icons8_classroom_200px, SchoolAdministration, new List<User.RoleIdentifier> { User.RoleIdentifier.Admin, User.RoleIdentifier.Accounting }, UIController.Controls.ClassDirectoryService);
             AddMenu(6, "Subject Directory", "Subject Directory Services", MenuItem.DoingWhatEnum.Reviewing, Resources.ReportCard, SchoolAdministration, new List<User.RoleIdentifier> { User.RoleIdentifier.Admin }, UIController.Controls.SubjectDirectoryServices);
             AddMenu(7, "Inventory Directory", "Inventory Directory Services", MenuItem.DoingWhatEnum.Reviewing, Resources.icons8_Travel_Diary_32px, Inventory, new List<User.RoleIdentifier> { User.RoleIdentifier.Admin, User.RoleIdentifier.IT, User.RoleIdentifier.Accounting, User.RoleIdentifier.Management }, UIController.Controls.InventoryDirectory);
+            AddMenu(8, "New Enquiries", "Add New Enquiry", MenuItem.DoingWhatEnum.Adding, Resources.newenq, Generate ,new List<User.RoleIdentifier> {User.RoleIdentifier.Admin, User.RoleIdentifier.Accounting, User.RoleIdentifier.IT, User.RoleIdentifier.Management}, UIController.Controls.Enquiries);
+            AddMenu(9, "Enquiry Services", "Follow up Enquiry", MenuItem.DoingWhatEnum.Reviewing, Resources.followupenq, SchoolAdministration, new List<User.RoleIdentifier> { User.RoleIdentifier.Admin, User.RoleIdentifier.Accounting, User.RoleIdentifier.Management }, UIController.Controls.ReviewEnquiries);
         }
 
         public static void InitCategories()
@@ -95,7 +97,7 @@ namespace AisInternalSystem.UserInterface.Menu
 
         private static void MenuAdmin()
         {
-            Generate = new CategoryMenu(1, "Create", "things you can generate: ", CategoryNormalSize, new Point(672, 7));
+            Generate = new CategoryMenu(1, "Generate", "things you can generate: ", CategoryNormalSize, new Point(672, 7));
             SchoolAdministration = new CategoryMenu(2, "School Administration", "School Administration Menu", CategoryNormalSize, new Point(Generate.Location.X + 156, 7));
             Employee = new CategoryMenu(3, "Employee", "Employee Menu", CategoryNormalSize, new Point(SchoolAdministration.Location.X + 156, 7));
             Inventory = new CategoryMenu(4, "Inventory", "Inventory Menus: ", CategoryNormalSize, new Point(Employee.Location.X + 156, 7));
@@ -148,6 +150,7 @@ namespace AisInternalSystem.UserInterface.Menu
         #region Admin
         private static CategoryMenu SchoolAdministration = null;
         private static CategoryMenu Inventory = null;
+        private static CategoryMenu Enquiries = null;
         private static CategoryMenu Employee = null;
         private static CategoryMenu Generate = null;
         private static CategoryMenu Account = null;

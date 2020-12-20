@@ -57,7 +57,6 @@ namespace AisInternalSystem.UserInterface.Student
                     dgStudList.DataSource = Entities.Student.GetDataSourceByName(SearchVal);
                     break;
                 case SearchBy.ID:
-                    txtSearchByName.Clear();
                     if (SearchVal == "")
                     {
                         dgStudList.DataSource = Entities.Student.GetDataSourceByName(SearchVal);

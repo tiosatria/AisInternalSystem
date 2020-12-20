@@ -540,7 +540,7 @@ namespace AisInternalSystem.Entities
                 "@_studentimg",
                 "@_current_grade",
                 "@_proposedgrade",
-                "@_revised" },
+                "@_maker" },
         new MySql.Data.MySqlClient.MySqlDbType[34]
         {
                     MySql.Data.MySqlClient.MySqlDbType.Int32,

@@ -20,25 +20,31 @@ namespace AisInternalSystem
 {
     public partial class UCStudDetailed : UserControl
     {
-
         public void FillRelationshipPanelData()
         {
 
         }
 
         private bool Isloaded = false;
-
         public UCStudDetailed()
         {
 
         }
         
-        private void InitObject()
+        public void InitObject()
         {
             if (!Isloaded)
             {
                 InitializeComponent();
+                Isloaded = true;
+            }
+            else
+            {
+                initData();
             }
         }
+        private void initData()
+        { |
+                }
     }
 }

@@ -3,6 +3,7 @@ using AisInternalSystem.UserInterface;
 using AisInternalSystem.UserInterface.Menu;
 using AisInternalSystem.UserInterface.Student;
 using AisInternalSystem.UserInterface.Employee;
+using AisInternalSystem.UserInterface.Enquiries;
 using Guna.UI2.WinForms;
 using System;
 using System.Collections.Generic;
@@ -33,11 +34,13 @@ namespace AisInternalSystem.Controller
         private static UCStudDetailed StudDetailed = new UCStudDetailed();
         private static EmployeeDirectory EmployeeDirectoryService = new EmployeeDirectory();
         private static EmployeeRec EmployeeDataRecUpdate = new EmployeeRec();
+        //private static AisInternalSystem.UserInterface.Core.TestCoreControl TextEditTest = new UserInterface.Core.TestCoreControl();
+        private static EnquiriesUC enquiries = new EnquiriesUC();
+        private static ReviewEnquiriesUC RevEnq = new ReviewEnquiriesUC();
         private static List<UserControl> controls = new List<UserControl>();
         #endregion
 
         public static event EventHandler FinishedLoadingObject;
-
         private static List<Guna2Button> CategoryButton()
         {
             List<Guna2Button> buttons = new List<Guna2Button>();
@@ -104,7 +107,8 @@ namespace AisInternalSystem.Controller
             UCLogin,
             EmployeeDirectoryService, MenuContainer, RecordEmployee, StudentDirectoryService, EditEmployee,
             RecordStudentData, UpdateStudentData, ClassDirectoryService, ClassView, SubjectDirectoryServices,
-            DialogConfirmation, InventoryDirectory, UserSettings, StudDetailed, EmployeeDetailed
+            DialogConfirmation, InventoryDirectory, UserSettings, StudDetailed, EmployeeDetailed, Enquiries, ReviewEnquiries,
+            TestMode
         }
 
         public static void Navigation(UserControl ctrl, DockStyle dock)
@@ -267,9 +271,20 @@ namespace AisInternalSystem.Controller
             _controls = controls;
             switch (controls)
             {
+                case Controls.TestMode:
+                    //AddNavigation(TextEditTest, DockStyle.Fill);
+                    break;
                 case Controls.EmployeeDirectoryService:
                     AddNavigation(EmployeeDirectoryService, DockStyle.Fill);
                     EmployeeDirectoryService.InitObject();
+                    break;
+                case Controls.ReviewEnquiries:
+                    AddNavigation(RevEnq, DockStyle.Fill);
+                    RevEnq.InitObject();
+                    break;
+                case Controls.Enquiries:
+                    AddNavigation(enquiries, DockStyle.Fill);
+                    enquiries.InitObject();
                     break;
                 case Controls.RecordEmployee:
                     AddNavigation(EmployeeDataRecUpdate, DockStyle.Fill);

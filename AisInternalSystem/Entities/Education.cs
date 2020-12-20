@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AisInternalSystem.Controller;
 using System.Data;
-using System.Threading.Tasks;
 
 namespace AisInternalSystem.Entities
 {
@@ -49,6 +49,27 @@ namespace AisInternalSystem.Entities
             {
                 return null;
             }
+        }
+        public static Education GetIndividiualEducation(List<Education> edu, int id)
+        {
+            try
+            {
+                Education education = edu[edu.FindIndex(o => o.ID == id)];
+                if (education != null)
+                {
+                    return education;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                PopUp.Alert("An error occured!", frmAlert.AlertType.Warning);
+                return null;
+            }
+            
         }
         public static bool Insert(Education education)
         {

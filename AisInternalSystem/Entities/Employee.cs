@@ -52,6 +52,26 @@ namespace AisInternalSystem.Entities
         #endregion
         public static Employee CurrentEmployee = null;
         #region Function
+        public static Int64 GenerateEmployeeID(DateTime date, int aca, int role, string personelnumber)
+        {
+            Int64 EmployeeID = 0;
+            int count = 0;
+            string empID = date.ToString("yyMMdd") + aca.ToString() + role.ToString() + "000";
+            DataTable dt = Controller.Query.GetDataTable("GetPersonelNumber", new string[1] { "@_emp_roles" }, new MySql.Data.MySqlClient.MySqlDbType[1] { MySql.Data.MySqlClient.MySqlDbType.VarChar }, new string[1] { personelnumber });
+            if (dt.Rows.Count >=1)
+            {
+                try
+                {
+                    count = Convert.ToInt32(dt.Rows[0][0].ToString()) + 1;
+                }
+                catch (Exception e)
+                {
+                    PopUp.Alert(e.Message, frmAlert.AlertType.Error);
+                }
+            }
+            EmployeeID = Convert.ToInt64(empID) + count;
+            return EmployeeID;
+        }
         public static DataTable GetDataSource()
         {
             DataTable dt = Controller.Query.GetDataTable("GetEmployeeDataSource", new string[1] { "@noparam" }, new MySql.Data.MySqlClient.MySqlDbType[1] { MySql.Data.MySqlClient.MySqlDbType.VarChar }, new string[1] { "" });
@@ -151,9 +171,9 @@ namespace AisInternalSystem.Entities
                 return false;
             }
         }
-        public static bool UpdatePhoto(int employeeid, string location)
+        public static bool UpdatePhoto(Int64 employeeid, string location)
         {
-            if (Controller.Query.Insert("UpdatePhotoEmployee", new string[2] { "@_employeeid", "@_photolocation" }, new MySql.Data.MySqlClient.MySqlDbType[2] { MySql.Data.MySqlClient.MySqlDbType.Int32, MySql.Data.MySqlClient.MySqlDbType.VarChar }, new string[2] { employeeid.ToString(), location }))
+            if (Controller.Query.Insert("UpdatePhotoEmployee", new string[2] { "@_emp_id", "@_photolocation" }, new MySql.Data.MySqlClient.MySqlDbType[2] { MySql.Data.MySqlClient.MySqlDbType.Int64, MySql.Data.MySqlClient.MySqlDbType.VarChar }, new string[2] { employeeid.ToString(), location }))
             {
                 return true;
             }
@@ -206,7 +226,7 @@ namespace AisInternalSystem.Entities
                     "@_created_by"
                     }, new MySql.Data.MySqlClient.MySqlDbType[33]
                     {
-                     MySql.Data.MySqlClient.MySqlDbType.Int32,
+                     MySql.Data.MySqlClient.MySqlDbType.Int64,
                      MySql.Data.MySqlClient.MySqlDbType.VarChar,
                      MySql.Data.MySqlClient.MySqlDbType.VarChar,
                      MySql.Data.MySqlClient.MySqlDbType.Date,
@@ -229,7 +249,7 @@ namespace AisInternalSystem.Entities
                      MySql.Data.MySqlClient.MySqlDbType.VarChar,
                      MySql.Data.MySqlClient.MySqlDbType.VarChar,
                      MySql.Data.MySqlClient.MySqlDbType.VarChar,
-                     MySql.Data.MySqlClient.MySqlDbType.Int32,
+                     MySql.Data.MySqlClient.MySqlDbType.VarChar,
                      MySql.Data.MySqlClient.MySqlDbType.VarChar,
                      MySql.Data.MySqlClient.MySqlDbType.VarChar,
                      MySql.Data.MySqlClient.MySqlDbType.Text,
@@ -328,7 +348,7 @@ namespace AisInternalSystem.Entities
                     }, new MySql.Data.MySqlClient.MySqlDbType[34]
                     {
                      MySql.Data.MySqlClient.MySqlDbType.Int32,
-                     MySql.Data.MySqlClient.MySqlDbType.Int32,
+                     MySql.Data.MySqlClient.MySqlDbType.Int64,
                      MySql.Data.MySqlClient.MySqlDbType.VarChar,
                      MySql.Data.MySqlClient.MySqlDbType.VarChar,
                      MySql.Data.MySqlClient.MySqlDbType.Date,
@@ -351,7 +371,7 @@ namespace AisInternalSystem.Entities
                      MySql.Data.MySqlClient.MySqlDbType.VarChar,
                      MySql.Data.MySqlClient.MySqlDbType.VarChar,
                      MySql.Data.MySqlClient.MySqlDbType.VarChar,
-                     MySql.Data.MySqlClient.MySqlDbType.Int32,
+                     MySql.Data.MySqlClient.MySqlDbType.VarChar,
                      MySql.Data.MySqlClient.MySqlDbType.VarChar,
                      MySql.Data.MySqlClient.MySqlDbType.VarChar,
                      MySql.Data.MySqlClient.MySqlDbType.Text,

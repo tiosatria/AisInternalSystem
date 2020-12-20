@@ -541,3 +541,7 @@ C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisIntern
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Employee.EmployeeDirectory.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Employee.EmployeeRec.resources
 C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.csprojAssemblyReference.cache
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Notification.UCNotification.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Notification.UCNotificationItem.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Enquiries.EnquiriesUC.resources
+C:\Users\it\source\repos\AisInternalSystem\AisInternalSystem\obj\Debug\AisInternalSystem.UserInterface.Enquiries.ReviewEnquiriesUC.resources

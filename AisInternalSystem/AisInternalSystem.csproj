@@ -92,6 +92,7 @@
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
@@ -159,13 +160,25 @@
     <Compile Include="Entities\Activities.cs" />
     <Compile Include="Entities\ClassRoom.cs" />
     <Compile Include="Entities\Education.cs" />
-    <Compile Include="Entities\Grading.cs" />
-    <Compile Include="Entities\IndividualItem.cs" />
+    <Compile Include="Entities\Accounting\Expenses.cs" />
+    <Compile Include="Entities\Enquiries\StudentTest.cs" />
+    <Compile Include="Entities\Teacher\Subject\CourseOutline.cs" />
+    <Compile Include="Entities\Teacher\Subject\Grading.cs" />
+    <Compile Include="Entities\Inventory\IndividualItem.cs" />
     <Compile Include="Entities\Asset.cs" />
-    <Compile Include="Entities\ItemCategories.cs" />
+    <Compile Include="Entities\Inventory\ItemCategories.cs" />
+    <Compile Include="Entities\Accounting\Loan.cs" />
+    <Compile Include="Entities\Master\Bill.cs" />
     <Compile Include="Entities\Medical.cs" />
+    <Compile Include="Entities\Accounting\Payroll.cs" />
     <Compile Include="Entities\Relationship.cs" />
+    <Compile Include="Entities\Accounting\StudentFee.cs" />
     <Compile Include="Entities\Student.cs" />
+    <Compile Include="Entities\Teacher\Subject\JudgingStandard.cs" />
+    <Compile Include="Entities\Teacher\Subject\Paperwork.cs" />
+    <Compile Include="Entities\Teacher\Subject\TeachingDocument.cs" />
+    <Compile Include="Entities\Teacher\Subject\WeeklyPlanner.cs" />
+    <Compile Include="Entities\Teacher\Subject\YearlyPlanner.cs" />
     <Compile Include="Entities\Transaction.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -173,6 +186,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Processor.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -201,6 +215,19 @@
     </Compile>
     <Compile Include="UserInterface\Employee\EmployeeRec.Designer.cs">
       <DependentUpon>EmployeeRec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Enquiries\Enquiries.cs" />
+    <Compile Include="UserInterface\Enquiries\EnquiriesUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserInterface\Enquiries\EnquiriesUC.Designer.cs">
+      <DependentUpon>EnquiriesUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\Enquiries\ReviewEnquiriesUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserInterface\Enquiries\ReviewEnquiriesUC.Designer.cs">
+      <DependentUpon>ReviewEnquiriesUC.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\Inventory\ModelAsset.cs">
       <SubType>UserControl</SubType>
@@ -266,6 +293,19 @@
     </Compile>
     <Compile Include="UserInterface\Menu\UCWaiter.Designer.cs">
       <DependentUpon>UCWaiter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\Notification\Notification.cs" />
+    <Compile Include="UserInterface\Notification\UCNotification.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserInterface\Notification\UCNotification.Designer.cs">
+      <DependentUpon>UCNotification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\Notification\UCNotificationItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserInterface\Notification\UCNotificationItem.Designer.cs">
+      <DependentUpon>UCNotificationItem.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\PanelListModel.cs">
       <SubType>UserControl</SubType>
@@ -336,7 +376,7 @@
     <Compile Include="Entities\Grade.cs" />
     <Compile Include="Module\Query.cs" />
     <Compile Include="Entities\School.cs" />
-    <Compile Include="Entities\Subject.cs" />
+    <Compile Include="Entities\Teacher\Subject\Subject.cs" />
     <Compile Include="Entities\Teacher.cs" />
     <Compile Include="Entities\Timetable.cs" />
     <Compile Include="Entities\User.cs" />
@@ -502,6 +542,12 @@
     <EmbeddedResource Include="UserInterface\Employee\EmployeeRec.resx">
       <DependentUpon>EmployeeRec.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\Enquiries\EnquiriesUC.resx">
+      <DependentUpon>EnquiriesUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\Enquiries\ReviewEnquiriesUC.resx">
+      <DependentUpon>ReviewEnquiriesUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\Inventory\ModelAsset.resx">
       <DependentUpon>ModelAsset.cs</DependentUpon>
     </EmbeddedResource>
@@ -531,6 +577,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\Menu\UCWaiter.resx">
       <DependentUpon>UCWaiter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\Notification\UCNotification.resx">
+      <DependentUpon>UCNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\Notification\UCNotificationItem.resx">
+      <DependentUpon>UCNotificationItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\PanelListModel.resx">
       <DependentUpon>PanelListModel.cs</DependentUpon>
@@ -679,7 +731,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataSet\" />
+    <Folder Include="Entities\Admin\" />
+    <Folder Include="Entities\HR\" />
     <Folder Include="UserControl\" />
+    <Folder Include="UserInterface\Editor\" />
     <Folder Include="UserInterface\Grading\" />
   </ItemGroup>
   <ItemGroup>
@@ -820,6 +875,14 @@
     <None Include="Properties\icons8_female_26px_1.png" />
     <None Include="Properties\chevronleft.png" />
     <None Include="Properties\icons8_minimize_window_50px.png" />
+    <None Include="Properties\icons8_checkmark_512px.png" />
+    <None Include="Properties\icons8_survey_512px.png" />
+    <None Include="Properties\icons8_man_in_blue_jacket_information_500px.png" />
+    <None Include="Properties\icons8_student_male_500px.png" />
+    <None Include="Properties\icons8_Warning_192px.png" />
+    <None Include="Properties\icons8_business_48px.png" />
+    <None Include="Properties\icons8_add_user_male_50px.png" />
+    <None Include="Properties\icons8_money_transfer_512px.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
